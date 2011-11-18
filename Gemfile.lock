@@ -94,7 +94,7 @@ GEM
       ruby-debug-base (~> 0.10.4.0)
     ruby-debug-base (0.10.4)
       linecache (>= 0.3)
-    sprockets (2.1.0)
+    sprockets (2.1.1)
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
@@ -115,6 +115,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   mysql2 (~> 0.3.10)
+  rack (= 1.3.5)
   rails (= 3.1.2)
   ruby-debug
   webrat
