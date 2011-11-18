@@ -5,35 +5,31 @@
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
-development:
+
+basics: &basics
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: makeyourlaws.org_development
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+
+development:
+  <<: *basics
+  database: myl_development
+  <%= file = File.join(RAILS_ROOT, "config", "database_keys_dev.yml")
+      IO.read(file) if File.exist?(file) %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: makeyourlaws.org_test
-  pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  <<: *basics
+  database: myl_test
+  <%= file = File.join(RAILS_ROOT, "config", "database_keys_test.yml")
+      IO.read(file) if File.exist?(file) %>
 
 production:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: makeyourlaws.org_production
-  pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  <<: *basics
+  database: myl_production
+  <%= file = File.join(RAILS_ROOT, "config", "database_keys_prod.yml")
+      IO.read(file) if File.exist?(file) %>
+
