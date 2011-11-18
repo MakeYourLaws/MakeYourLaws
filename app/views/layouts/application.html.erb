@@ -19,8 +19,15 @@
 						<%= yield %>		
 					</div><!-- primary -->
 				</div><!-- main -->
-					
+				
 				<div class="yui-b"><!--secondary-->
+					<h1>Make Your Laws</h1>
+					<bq>This is what democracy looks like.</bq>
+					<ul>
+						<% %w(main introduction principles strategy contact).each do |p| %>
+							<li><%= link_to_unless_current p.capitalize, url_for(:action => p, :controller => 'main') %></li>
+						<% end %>
+					</ul>
 					<%= render :partial => 'layouts/google_analytics' %>
 					<%= render :partial => 'layouts/addthis' %>
 				</div><!-- secondary -->
