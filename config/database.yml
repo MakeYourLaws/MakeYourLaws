@@ -15,7 +15,7 @@ basics: &basics
 development:
   <<: *basics
   database: myl_development
-  <%= file = File.join(RAILS_ROOT, "config", "database_keys_dev.yml")
+  <%= file = File.join(RAILS_ROOT, "config", "database_dev_keys.yml")
       IO.read(file) if File.exist?(file) %>
 
 # Warning: The database defined as "test" will be erased and
@@ -24,12 +24,12 @@ development:
 test:
   <<: *basics
   database: myl_test
-  <%= file = File.join(RAILS_ROOT, "config", "database_keys_test.yml")
+  <%= file = File.join(RAILS_ROOT, "config", "database_test_keys.yml")
       IO.read(file) if File.exist?(file) %>
 
 production:
   <<: *basics
   database: myl_production
-  <%= file = File.join(RAILS_ROOT, "config", "database_keys_prod.yml")
+  <%= file = File.join(RAILS_ROOT, "config", "database_prod_keys.yml")
       IO.read(file) if File.exist?(file) %>
 
