@@ -15,8 +15,15 @@ basics: &basics
 development:
   <<: *basics
   database: myl_development
-  <%= file = File.join(Rails.root, "config", "database_dev_keys.yml")
-      IO.read(file) if File.exist?(file) %>
+  username: myl_development
+  socket: <%= [
+      '/var/lib/mysql/mysql.sock',
+      '/var/run/mysqld/mysqld.sock',
+      '/tmp/mysqld.sock',
+      '/tmp/mysql.sock',
+    ].detect { |socket| File.exist?(socket) } %>
+  password: <%= file = File.join(Rails.root, "config", "keys", "database_dev")
+            IO.read(file) if File.exist?(file) %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,12 +31,21 @@ development:
 test:
   <<: *basics
   database: myl_test
-  <%= file = File.join(Rails.root, "config", "database_test_keys.yml")
-      IO.read(file) if File.exist?(file) %>
+  username: myl_test
+  socket: <%= [
+      '/var/lib/mysql/mysql.sock',
+      '/var/run/mysqld/mysqld.sock',
+      '/tmp/mysqld.sock',
+      '/tmp/mysql.sock',
+    ].detect { |socket| File.exist?(socket) } %>
+  password: <%= file = File.join(Rails.root, "config", "keys", "database_test")
+          IO.read(file) if File.exist?(file) %>
 
 production:
   <<: *basics
   database: myl_production
-  <%= file = File.join(Rails.root, "config", "database_prod_keys.yml")
-      IO.read(file) if File.exist?(file) %>
+  username: myl_production
+  password: <%= file = File.join(Rails.root, "config", "keys", "database_prod")
+        IO.read(file) if File.exist?(file) %>
+  host: mysql.makeyourlaws.org
 
