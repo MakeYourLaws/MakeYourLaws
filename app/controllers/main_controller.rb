@@ -13,5 +13,7 @@ class MainController < ApplicationController
 
   def strategy
   end
-
+  
+  def help
+  end
 end
