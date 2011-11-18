@@ -4,7 +4,7 @@
 		<%= stylesheet_link_tag :all, :cache => true, :recursive => true %>
 		<%= javascript_include_tag :all, :cache => true, :recursive => true %>
 		<%= csrf_meta_tag %>
-		<link rel="shortcut icon" href="favicon.ico">
+		<%= favicon_link_tag %>
 		<meta name="title" content="Make Your Laws" />
 		<meta name="robots" content="all" />
 		<title>Make Your Laws</title>
@@ -22,7 +22,7 @@
 					
 				<div class="yui-b"><!--secondary-->
 					<h1>Make Your Laws</h1>
-					<bq>This is what democracy looks like.</bq>
+					<i><b>This</b> is what democracy looks like.</i>
 					<ul>
 						<li><%= link_to_unless_current "Main", root_path %></li>
 						<li><%= link_to_unless_current "Introduction", introduction_path %></li>
