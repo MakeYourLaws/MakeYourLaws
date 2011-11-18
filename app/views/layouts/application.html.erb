@@ -19,14 +19,16 @@
 						<%= yield %>		
 					</div><!-- primary -->
 				</div><!-- main -->
-				
+					
 				<div class="yui-b"><!--secondary-->
 					<h1>Make Your Laws</h1>
 					<bq>This is what democracy looks like.</bq>
 					<ul>
-						<% %w(main introduction principles strategy contact).each do |p| %>
-							<li><%= link_to_unless_current p.capitalize, url_for(:action => p, :controller => 'main') %></li>
-						<% end %>
+						<li><%= link_to_unless_current "Main", root_path %></li>
+						<li><%= link_to_unless_current "Introduction", introduction_path %></li>
+						<li><%= link_to_unless_current "Principles", principles_path %></li>
+						<li><%= link_to_unless_current "Strategy", strategy_path %></li>
+						<li><%= link_to_unless_current "Contact", contact_path %></li>
 					</ul>
 					<%= render :partial => 'layouts/google_analytics' %>
 					<%= render :partial => 'layouts/addthis' %>
