@@ -3,6 +3,7 @@ MakeyourlawsOrg::Application.routes.draw do
   match "introduction" => "main#introduction", :via => :get
   match "principles" => "main#principles", :via => :get
   match "strategy" => "main#strategy", :via => :get
+  match "help" => "main#help", :via => :get
   match "contact" => "main#contact", :via => :get
   
   # The priority is based upon order of creation:
