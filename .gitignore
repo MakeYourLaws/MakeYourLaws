@@ -3,7 +3,4 @@ db/*.sqlite3
 log/*.log
 tmp/
 config/keys/*
-config/*keys.rb
-config/*keys.yml
-config/initializers/*keys.yml
-config/initializers/*keys.rb
+!config/keys/PASSWORDS_GO_HERE
