@@ -2,3 +2,7 @@
 db/*.sqlite3
 log/*.log
 tmp/
+config/*keys.rb
+config/*keys.yml
+config/initializers/*keys.yml
+config/initializers/*keys.rb
