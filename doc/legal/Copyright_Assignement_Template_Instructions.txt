@@ -1,0 +1,23 @@
+This is a template contract closely based on the FSF's. 
+
+Signing it is required of *all* code and design contributors to the Make Your Laws project.
+
+Alternately, you can create an independent project (e.g. a library or plugin), release it under any AGPL-compatible license you like, and let us know.
+
+
+To do so:
+1. Pick the correct version, based on the employer release required:
+a) you have no employer with competing interest to your work whose permission you need to execute the assignment yourself
+b) you do, but they can't PGP sign, so you are swearing that they gave you permission
+c) you do, and they're PGP signing their own part
+
+2. Make a copy of it into /doc/legal/yourname_assignment.asc
+
+3. Search for all instances of a [[KEYWORD]] and replace them as appropriate. Please note that a legal name can be a "doing business as", "fictitious business name", or common-law name, not necessarily only the name on government ID - but it must be a name that you can use to legally sign contracts.
+
+4. versions A & B: Clear sign (ASCII armored) the entire document.
+version C: Clear sign the assignment portion and have the employer's representative clearsign that portion.
+
+If you have more than one employer who may have a competing interest, repeat the employer release for each.
+
+5. Commit the assignment as part of your first pull request. An appropriate MYL rep will countersign it.
