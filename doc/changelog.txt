@@ -1,0 +1,1 @@
+28Nov11: Basic Rails skeleton project w/ text; AGPL, copyright, and assignment documents. -- Sai <makeyourlaws@saizai.com>; website text coauthored w/ Paula Rizzuto & Stutter.
