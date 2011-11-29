@@ -53,7 +53,11 @@ MakeyourlawsOrg::Application.configure do
     :domain => 'makeyourlaws.org',
     :authentication => :login,
     :user_name => Keys.get("mail_user"),
-    :password => Keys.get("mail_password")
+    :password => Keys.get("mail_password"),
+    :enable_starttls_auto => false 
+    # FIXME: disabling TLS is a horrible but effective way to fix
+    #  OpenSSL::SSL::SSLError (hostname was not match with the server certificate)
+    # There has to be something we can do to make DreamHost's SSL certs not crap out.    
   }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
