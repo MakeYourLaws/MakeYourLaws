@@ -45,10 +45,20 @@ MakeyourlawsOrg::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
 
-  # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'www.makeyourlaws.org' }
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => 'mail.makeyourlaws.org',
+    :port => 587,
+    :domain => 'makeyourlaws.org',
+    :authentication => :login,
+    :user_name => Keys.get("mail_user"),
+    :password => Keys.get("mail_password")
+  }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_charset = 'utf-8'
+  
   # Enable threaded mode
   # config.threadsafe!
 
