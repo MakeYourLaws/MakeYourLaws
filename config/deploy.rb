@@ -1,3 +1,6 @@
+require "bundler/capistrano"
+
+
 # No need for mongrel cluster if using Phusion Passenger
 # require 'mongrel_cluster/recipes'
 
@@ -25,6 +28,8 @@ ssh_options[:forward_agent] = true # make sure you have an SSH agent running loc
 # ssh_options[:keys] = %w(~/.ssh/myl_deploy)
 # ssh_options[:port] = 25
 
+default_environment['PATH'] = "/home/#{user}/.gems/bin/:/usr/local/bin:/usr/bin:/bin"
+
 #set :ip, '##.##.##.##' # IP of repository. Better than using DNS lookups, if it's static
 
 # :no_release => true means that no code will be deployed to that box (but non-code tasks may run on it)
@@ -47,7 +52,7 @@ namespace (:deploy) do
   
   # Use a shared config directory. Run cap deploy:configs:setup first.
   after "deploy:update_code", "deploy:configs:symlink"
-  after "deploy:update_code", "deploy:files:symlink"
+  # after "deploy:update_code", "deploy:files:symlink"
   # after "deploy:restart", "deploy:restart_mail_fetcher"
   
   task :restart_mail_fetcher, :roles => :app do
