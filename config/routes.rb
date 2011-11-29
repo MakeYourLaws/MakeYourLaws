@@ -1,4 +1,12 @@
 MakeyourlawsOrg::Application.routes.draw do
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
+      :registrations => "users/registrations" } do
+    get "login", :to => "devise/sessions#new"
+    delete "logout", :to => "devise/sessions#destroy"
+    get "signup", :to => "users/registrations#new"
+    get "signup_from_id", :to => "users/registrations#new_from_id"
+  end
+    
 #  match "main" => "main#index", :via => :get  # this is root
   match "introduction" => "main#introduction", :via => :get
   match "principles" => "main#principles", :via => :get

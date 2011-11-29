@@ -1,0 +1,51 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= resource.changes %>
+<%= debug resource %>
+
+
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+	<table>
+		<tr>
+			<td><b><%= f.label :name %></b></td>
+			<td><%= f.text_field :name %></td>
+		</tr>
+		<tr>
+			<td><b><%= f.label :email %></b></td>
+			<td><%= f.email_field :email %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :password %></td>
+			<td><%= f.password_field :password %></td>
+			<% if resource.encrypted_password? %>
+				<td><i>Leave blank if you don't want to change it.</i></td>
+			<% else %>
+				<td><i>You currently have no password. Create one here if you want.</i></td>
+			<% end %>
+		</tr>
+		<tr>
+			<td><%= f.label :password_confirmation %></td>
+			<td><%= f.password_field :password_confirmation %></td>
+		</tr>
+		<% if resource.password_required? %>
+			<tr>
+				<td><b><%= f.label :current_password %></b></td>
+				<td><%= f.password_field :current_password %></td>
+				<td><i>We need your current password to confirm your changes.</i></td>
+			</tr>
+		<% end %>
+		<tr>
+			<td/>
+			<td><%= f.submit "Update" %></td>
+		</tr>
+	</table>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>

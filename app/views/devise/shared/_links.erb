@@ -1,0 +1,12 @@
+<p>… or sign in with:</p>
+<ul>
+  <%- User.omniauth_providers.each do |provider| %>
+    <li style="float:left;">
+		<%= link_to omniauth_authorize_path(resource_name, provider) do %>
+			<%= image_tag("authbuttons/#{provider.to_s.downcase.gsub(/[^a-z]/,'')}_64.png", 
+					:alt => "#{provider.to_s.camelcase}") %><br/>
+			<center><%= provider.to_s.camelcase %></center>
+		<% end %>
+	</li>
+  <% end -%>
+</ul>

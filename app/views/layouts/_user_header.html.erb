@@ -1,0 +1,9 @@
+<div id='header'>
+	<% if user_signed_in? %>
+		Welcome back, <%= current_user.name %>!  
+		<%= link_to 'Edit profile', edit_user_registration_path %>
+		<%= link_to 'Log out', logout_path, :method => :delete %>?
+	<% else %>
+		Would you like to <%= link_to 'log in', login_path %> or <%= link_to 'sign up', signup_path %>?
+	<% end %>
+</div>
