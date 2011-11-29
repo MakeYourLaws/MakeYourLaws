@@ -25,7 +25,7 @@ class Identity < ActiveRecord::Base
         end
     end
     
-    id.nickname ||= id.email.split('@').first
+    id.nickname ||= id.email.split('@').first if id.email
     
     id.save
     
