@@ -1,18 +1,27 @@
+<!DOCTYPE html>
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
 	<head>
 		<meta http-equiv="Content-Type" Content="text/html;charset=UTF-8">
-		<%= stylesheet_link_tag :all, :cache => true, :recursive => true %>
-		<%= javascript_include_tag :all, :cache => true, :recursive => true %>
-		<%= csrf_meta_tag %>
+		<%= stylesheet_link_tag "application" %>
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tags %>
 		<%= favicon_link_tag %>
 		<meta name="title" content="Make Your Laws" />
 		<meta name="robots" content="all" />
+		<link href="https://plus.google.com/100183759660923071401" rel="publisher" />
 		<title>Make Your Laws</title>
 	</head>
 	<body>
 		<div id="doc" class="yui-t1">
-			<!-- <div id="header" role="banner">
-			</div> -->
+			<div id="hd" role="banner"><!--header / masthead-->
+				<noscript>
+					<div style="font-size: 1.5em;" class="flash error">
+						Please turn on JavaScript!
+					</div>
+				</noscript>
+				<%= render :partial => '/layouts/user_header' %>
+				<%= render :partial => '/layouts/flashes' -%>
+			</div> 
 			<div id="bd"><!--body-->
 				<div id="yui-main"> 
 					<div class="yui-b" id="content"  role="main"><!--primary-->
@@ -32,7 +41,7 @@
 						<li><%= link_to_unless_current "Contact", contact_path %></li>
 					</ul>
 					<%= render :partial => 'layouts/google_analytics' %>
-					<%= render :partial => 'layouts/addthis' %>
+					<%= render :partial => 'layouts/outlinks' %>
 				</div><!-- secondary -->
 			</div><!-- bd -->
 		</div><!--doc -->

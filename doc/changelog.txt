@@ -1,1 +1,2 @@
+29Nov11: Devise w/ multi-Omniauth. Can create users based on a variety of 3rd party identifiers. TODO: add new 3rd party IDs to current user, display IDs, not look like crap. -- Sai
 28Nov11: Basic Rails skeleton project w/ text; AGPL, copyright, and assignment documents. -- Sai <makeyourlaws@saizai.com>; website text coauthored w/ Paula Rizzuto & Stutter.

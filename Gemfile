@@ -6,7 +6,11 @@ gem 'rails', '3.1.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2', '~> 0.3.10'
+gem 'mysql2', '>= 0.3.10'
+gem 'json'
+
+# To use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '>= 3.0.0'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -19,6 +23,24 @@ gem 'capistrano'
 # gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
+
+gem "acts_as_audited", ">= 2.0.0"
+
+gem "devise", ">= 1.5.1"
+gem "omniauth", ">= 1.0.0"
+gem "omniauth-facebook"
+gem "omniauth-github"
+gem "omniauth-google-oauth2"
+gem "omniauth-openid"
+gem "omniauth-twitter"
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'uglifier', '>= 1.0.3'
+end
+
+gem 'jquery-rails'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

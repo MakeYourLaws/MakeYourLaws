@@ -22,8 +22,7 @@ development:
       '/tmp/mysqld.sock',
       '/tmp/mysql.sock',
     ].detect { |socket| File.exist?(socket) } %>
-  password: <%= file = File.join(Rails.root, "config", "keys", "database_dev")
-            IO.read(file) if File.exist?(file) %>
+  password: <%= Keys.get "database_dev" %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -38,14 +37,12 @@ test:
       '/tmp/mysqld.sock',
       '/tmp/mysql.sock',
     ].detect { |socket| File.exist?(socket) } %>
-  password: <%= file = File.join(Rails.root, "config", "keys", "database_test")
-          IO.read(file) if File.exist?(file) %>
+  password: <%= Keys.get "database_test" %>
 
 production:
   <<: *basics
   database: myl_production
   username: myl_production
-  password: <%= file = File.join(Rails.root, "config", "keys", "database_prod")
-        IO.read(file) if File.exist?(file) %>
+  password: <%= Keys.get "database_prod" %>
   host: mysql.makeyourlaws.org
 

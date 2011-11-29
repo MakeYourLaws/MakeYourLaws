@@ -1,0 +1,37 @@
+<h2>Finish your registration</h2>
+
+<p>We received some information from <%= resource.identities.first.provider.camelcase %>, but we need you to confirm
+	that you want to use what they gave us, and to fill in the rest.</p>
+	
+<p>Please note that adding a password is <b>optional</b>. You can always log in using <%= resource.identities.first.provider.camelcase %>. Providing a password just gives you the alternative to also log in directly, and provides extra security for your account.</p>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+	<%= devise_error_messages! %>
+
+	<table>
+		<tr>
+			<td><b><%= f.label :name %></b></td>
+			<td><%= f.text_field :name %></td>
+		</tr>
+		<tr>
+			<td><b><%= f.label :login %></b></td>
+			<td><%= f.text_field :login %></td>
+		</tr>
+		<tr>
+			<td><b><%= f.label :email %></b></td>
+			<td><%= f.email_field :email %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :password %></td>
+			<td><%= f.password_field :password %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :password_confirmation %></td>
+			<td><%= f.password_field :password_confirmation %></td>
+		</tr>
+		<tr>
+			<td/>
+			<td><%= f.submit "Sign up" %></td>
+		</tr>
+	</table>
+<% end %>
