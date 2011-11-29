@@ -2,7 +2,11 @@
 	<% if user_signed_in? %>
 		Welcome back, <%= current_user.name %>!  
 		<%= link_to 'Edit profile', edit_user_registration_path %>
-		<%= link_to 'Log out', logout_path, :method => :delete %>?
+		<%= link_to 'Log out', logout_path, :method => :delete %>?<br/>
+		
+		<div class="flash info">Howdy. This is EARLY ALPHA software under active development.
+			There's really not much to see here yet, sorry; we're still working on making the platform. 
+			If you're impatient, you should consider joining the MYL team. ;-)</div>
 	<% else %>
 		Would you like to <%= link_to 'log in', login_path %> or <%= link_to 'sign up', signup_path %>?
 	<% end %>
