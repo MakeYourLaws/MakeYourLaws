@@ -5,3 +5,4 @@ tmp/
 config/keys/*
 !config/keys/PASSWORDS_GO_HERE
 .sass-cache/
+vendor/cache/*.*
