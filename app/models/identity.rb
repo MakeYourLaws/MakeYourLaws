@@ -2,6 +2,7 @@ class Identity < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
+  strip_attributes
   
   # Find or create an identity based on an Omniauth response
   # Identities can belong to users (once claimed and confirmed) but might not always
