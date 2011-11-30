@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name, :login
   
+  strip_attributes
+  
   def self.find_for_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login_or_email)
