@@ -1,0 +1,168 @@
+body { font-family: arial,helvetica,clean,sans-serif; }
+
+a {text-decoration: none;
+	&:hover { text-decoration:underline;}
+	&.close {
+		color:				#f00;
+		text-decoration:	none;
+	}
+}
+
+q {
+	&:before { content: open-quote; }	
+	&:after  { content: close-quote; }
+}
+
+cite:before { content: "\2014 "; }
+
+#toc {
+	float: left;
+	padding-right: 15px;
+	margin-left: 1em;
+	height: 100%;
+}
+
+hr {
+	width:25%;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.c { text-align: center; }
+
+.r { text-align: right; }
+
+.j { text-align: justify; }
+
+.small { font-size: smaller; }
+
+ul { list-style: none; 
+	li { list-style: none; }
+	&.bullet { list-style: disc outside; 
+		li { list-style: disc outside; }
+	}
+	&.flush {
+		margin: 0 0 1ex 0;
+		padding: 0;
+		li {
+			margin: 0 0 0.5ex; 
+			padding: 0;
+		}
+		ul { margin: 0 1em;
+			li { margin: 0; }
+		}
+	}
+	&.menu { margin: 0 0 1em;
+		li {
+			list-style: none;
+			min-height:	18px;
+			&.first {
+				margin-top:	1em;
+				border-top: thin solid #d3d3d3;
+			}
+		}
+	}
+	&.inline {
+		display: inline;
+		margin: 0;
+		padding: 0;
+		li {
+			list-style: none;
+			display: inline;
+			&:after { content: ", "; }
+			&:last-child:after { content: ""; }
+		}
+	}
+}
+
+img { 
+	border: none;
+	vertical-align: bottom;
+}
+
+table { margin-bottom: 0; }
+
+th, td {
+	border: none;
+	padding: 0.1em 0.8em 0.1em 0;
+}
+
+tr.even { background: #F5FFFF; }
+
+ol li { list-style: decimal; }
+
+#header {
+	text-align: right;
+	margin: 1em;
+	padding-bottom: 0.5em;
+}
+
+textarea {
+	display: block;
+	padding: 0.75%;
+	width: 98%;
+	border: 1px solid #BDC7D8;
+	height: 5em;
+}
+
+blockquote {
+	border-left: 2px solid #ccc;
+	margin: 0;
+	padding: 0 0.3em;
+}
+
+.tooltip {
+	position: relative; /*this is the key*/
+	cursor: help;
+	span { display: none }
+	&:hover span { /*the span will display just on :hover state*/
+		z-index:		1; 
+	    display:		block;
+	    position:		absolute;
+	    top:			1em; /* 1.6em; is prettier a bit, but 1em allows user to mouse in to it easily and thus click links etc */
+		left:			0;
+		border:			thin solid grey;
+		background:		#FFF;
+	  	padding:		.3em .6em;
+		text-align:		left;
+		white-space:	nowrap;
+	}
+	&.left:hover span {
+		left:			auto;
+		right:			0;
+	}
+}
+
+.highlight { background-color: #ffa;
+	&:hover{ background-color: #ff6; 
+		span { background-color: #ffe; }
+	}
+}
+
+.flash {
+	text-align: center;
+	padding:	.3em .4em;
+	margin:		0 auto .5em;
+	clear:		both;
+	max-width:	46.923em; /* 610/13 */  
+	*max-width:	45.750em; /* 610/13.3333 - for IE */
+	&.error {
+		border: thin solid #8b0000;
+		background: #ffc0cb;
+	}
+	&.notice, &.info {
+		border: thin solid #ff0;
+		background: #ffe;
+	}
+	&.warning {
+		border: thin solid #b8860b;
+		background: #ff0;
+	}
+	.close {
+		float:	right;
+		 a {
+			color:				#f00;
+			text-decoration:	none;
+		}
+	}
+}

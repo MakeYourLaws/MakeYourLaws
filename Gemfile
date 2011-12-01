@@ -40,21 +40,27 @@ group :assets do
   gem 'execjs'
   gem 'therubyracer'
   gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails', '>= 3.1.5.rc.2'
+  gem 'coffee-rails', '>= 3.1.1'
 end
 
 gem 'jquery-rails'
 
-gem "strip_attributes"
+gem "strip_attributes", ">= 1.0"
 
+gem 'exception_notification', '>= 2.5.2', :require => 'exception_notifier'
+# gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
-  gem 'ruby-debug' # currently on ruby 1.8.7
-  # gem 'ruby-debug19', :require => 'ruby-debug'
-
+  case RUBY_VERSION
+    when '1.8.7'
+      gem 'ruby-debug'
+    when '1.9.2', '1.9.3'
+      gem 'ruby-debug19', :require => 'ruby-debug'
+  end
+  
   gem 'webrat'
 end
