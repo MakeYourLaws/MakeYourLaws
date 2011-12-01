@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name, :login, :email
   validates_uniqueness_of :login, :email
-  validates_format_of :login, :with => /^[\w\d]+$/i, :message => "must only contain letters and digits"
+  validates_format_of :login, :with => /^[\w\d]+$/i, :message => "can only have letters & digits"
   validates :email, :email => true
   
   strip_attributes
