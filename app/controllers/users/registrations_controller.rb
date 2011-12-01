@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def new_from_id
-    if identity = Identity.find(session["identity"])
+    if session["devise.identity"] and identity = Identity.find(session["devise.identity"])
       resource = build_resource({:email => identity.email, :name => identity.name,
                                   :login => identity.nickname})
       resource.identities << identity
@@ -14,7 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
      build_resource
      
-     if identity = Identity.find(session["identity"])
+     if session["devise.identity"] and identity = Identity.find(session["devise.identity"])
        resource.identities << identity
      end
      
@@ -31,7 +31,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
      else
        clean_up_passwords(resource)
        respond_with_navigational(resource) do
-          if session["identity"]
+          if session["devise.identity"]
             render_with_scope :new_from_id
           else
             render_with_scope :new 

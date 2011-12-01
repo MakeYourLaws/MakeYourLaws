@@ -10,7 +10,10 @@ class User < ActiveRecord::Base
   attr_accessor :login_or_email
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :login, :login_or_email
   
-  validates_presence_of :name, :login
+  validates_presence_of :name, :login, :email
+  validates_uniqueness_of :login, :email
+  validates_format_of :login, :with => /^[\w\d]+$/i, :message => "must only contain letters and digits"
+  validates :email, :email => true
   
   strip_attributes
   
