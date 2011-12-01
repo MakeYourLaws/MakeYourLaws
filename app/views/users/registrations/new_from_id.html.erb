@@ -5,7 +5,8 @@
 	
 <p>Please note that adding a password is <b>optional</b>. You can always log in using <%= resource.identities.first.provider.camelcase %>. Providing a password just gives you the alternative to also log in directly, and provides extra security for your account.</p>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name),
+						:validate => true) do |f| %>
 	<%= devise_error_messages! %>
 
 	<table>
