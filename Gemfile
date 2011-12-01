@@ -34,6 +34,8 @@ gem "omniauth-google-oauth2"
 gem "omniauth-openid"
 gem "omniauth-twitter"
 
+gem "rails_email_validator"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -47,6 +49,7 @@ end
 gem 'jquery-rails'
 
 gem "strip_attributes", ">= 1.0"
+gem 'client_side_validations', ">= 3.1.3"
 
 gem 'exception_notification', '>= 2.5.2', :require => 'exception_notifier'
 # gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
