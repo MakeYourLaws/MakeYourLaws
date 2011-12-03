@@ -28,6 +28,13 @@ hr {
 	margin-bottom:20px;
 }
 
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+
 .c { text-align: center; }
 
 .r { text-align: right; }

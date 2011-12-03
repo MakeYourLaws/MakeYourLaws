@@ -12,11 +12,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to login_path and return
     end
     
-    if @user = id.user # 3a. Log them in if they're already a user
-      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => kind
-      sign_in_and_redirect @user, :event => :authentication # or back to request.env["omniauth.origin"]
+    if user_signed_in? # 3a. Add this identity to the logged in user
+      @user = current_user
+      @user.identities << id
+      if @user.save
+        flash[:notice] = "#{kind.to_s.camelcase} identity successfully added!"
+      else
+        flash[:error] = "Error adding your #{kind.to_s.camelcase} identity. Please try again."
+      end
+      redirect_to edit_user_registration_path
+    elsif @user = id.user # 3b. Log them in if they're already a user
+        flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => kind
+        sign_in_and_redirect @user, :event => :authentication # or back to request.env["omniauth.origin"]
     else
-      session["identity"] = id.id # 3b. Validate info & create user account
+      session["devise.identity"] = id.id # 3c. Validate info & create user account
       redirect_to signup_from_id_path
     end
   end
