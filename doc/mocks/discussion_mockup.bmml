@@ -61,6 +61,7 @@
     </control>
     <control controlID="17" controlTypeID="com.balsamiq.mockups::Arrow" x="535" y="210" w="111" h="60" measuredW="150" measuredH="100" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
+        <leftArrow>false</leftArrow>
         <text>Mousover</text>
       </controlProperties>
     </control>
@@ -90,6 +91,7 @@
     <control controlID="23" controlTypeID="com.balsamiq.mockups::Arrow" x="436" y="173" w="40" h="106" measuredW="150" measuredH="100" zOrder="16" locked="false" isInGroup="-1">
       <controlProperties>
         <direction>bottom</direction>
+        <rightArrow>false</rightArrow>
         <text>Click</text>
       </controlProperties>
     </control>
@@ -99,7 +101,7 @@
         <text>Discussion%20about%20parallel%20lines</text>
       </controlProperties>
     </control>
-    <control controlID="25" controlTypeID="com.balsamiq.mockups::CallOut" x="919" y="247" w="167" h="53" measuredW="164" measuredH="39" zOrder="18" locked="false" isInGroup="-1">
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::CallOut" x="919" y="247" w="167" h="53" measuredW="164" measuredH="37" zOrder="18" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Hovercard%20summary%20of%20%0Aanother%20conversation</text>
       </controlProperties>
@@ -117,7 +119,7 @@
         <vLines>true</vLines>
       </controlProperties>
     </control>
-    <control controlID="28" controlTypeID="com.balsamiq.mockups::CallOut" x="878" y="36" w="-1" h="-1" measuredW="150" measuredH="37" zOrder="20" locked="false" isInGroup="-1">
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::CallOut" x="878" y="36" w="-1" h="-1" measuredW="150" measuredH="39" zOrder="20" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Summary%20moderation</text>
       </controlProperties>
