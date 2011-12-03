@@ -1,10 +1,5 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= resource.changes %>
-<%= debug resource %>
-
-
-
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
 
@@ -44,8 +39,23 @@
 	</table>
 <% end %>
 
+<h3>Identities</h3>
+
+<% unless resource.identities.empty? %>
+	<div class="identities">
+		<% for identity in resource.identities %>
+			<%= identity_card identity, :medium %>
+		<% end %>
+		<div class="clear"></div>
+	</div>
+<% end %>
+
+<h3>Add a new identity:</h4>
+
+<div><%= render :partial => "identities/links" %>
+	<div class="clear"></div>
+</div>
+
 <h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
-
-<%= link_to "Back", :back %>
+	
+<p><%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>

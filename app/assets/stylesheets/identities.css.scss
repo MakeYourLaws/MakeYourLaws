@@ -1,0 +1,68 @@
+// adapted from http://railscasts.com/episodes/235-omniauth-part-1
+
+.identities {
+  margin-bottom: 30px;
+}
+
+.identity.medium {
+  width: 130px;
+  float: left;
+  background-color: #EEE;
+  border: solid 1px #999;
+  padding: 5px 10px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  position: relative;
+  margin-right: 10px;
+  .remove {
+    text-decoration: none;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    color: #333;
+    padding: 2px 4px;
+    font-size: 10px;
+    &:hover {
+      color: #CCC;
+      background-color: #777;
+      -moz-border-radius: 6px;
+      -webkit-border-radius: 6px;
+    }
+  }
+  img {
+    float: left;
+    margin-right: 10px;
+  }
+  .provider {
+    font-weight: bold;
+  }
+  .uid {
+    color: #666;
+    font-size: 11px;
+  }
+}
+
+.identity.slim {
+  display: inline;
+  // margin-right: 1em;
+  img {
+    display: inline;
+    margin: 0.2em 0;
+    height: 16px;
+    width: 16px;
+  }
+  .uid {
+    display: inline;
+  }
+}
+
+.provider {
+  float: left;
+  text-decoration: none;
+  margin-right: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+  img {
+    display: block;
+  }
+}

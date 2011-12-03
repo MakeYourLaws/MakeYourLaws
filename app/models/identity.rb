@@ -19,11 +19,19 @@ class Identity < ActiveRecord::Base
     case auth.provider
       when "open_id"
         id.nickname ||= auth.uid.match(/:\/\/([^.]*)./)[1] if auth.uid.include? "livejournal"
+        id.url = id.uid
       when "google"
-        if id.name =~ /@/
+        if id.name =~ /@/ # don't accept email addresses as a "name"
           id.nickname ||= id.name.split('@').first
-          id.name = ''
+          id.name = nil
         end
+        id.url = auth.extra["raw_info"]["link"]
+      when "github"
+        id.url = id.urls["GitHub"] if id.urls
+      when "facebook"
+        id.url = id.urls["Facebook"] if id.urls
+      when "twitter"
+        id.url = id.urls["Twitter"] if id.urls
     end
     
     id.nickname ||= id.email.split('@').first if id.email
@@ -31,5 +39,13 @@ class Identity < ActiveRecord::Base
     id.save
     
     id
+  end
+  
+  def display_name
+    if name
+      nickname ? "#{name} (#{nickname})" : name
+    else
+      email || uid
+    end
   end
 end
