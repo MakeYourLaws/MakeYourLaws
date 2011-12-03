@@ -372,7 +372,7 @@
         <textOrientation>right</textOrientation>
       </controlProperties>
     </control>
-    <control controlID="91" controlTypeID="com.balsamiq.mockups::Arrow" x="1501" y="625" w="102" h="574" measuredW="150" measuredH="100" zOrder="65" locked="false" isInGroup="-1">
+    <control controlID="91" controlTypeID="com.balsamiq.mockups::Arrow" x="1501" y="625" w="102" h="627" measuredW="150" measuredH="100" zOrder="65" locked="false" isInGroup="-1">
       <controlProperties>
         <rightArrow>false</rightArrow>
         <text/>
@@ -383,9 +383,9 @@
         <text>Add%20to%20database%20and%20show%20user%20their%20new%20translation</text>
       </controlProperties>
     </control>
-    <control controlID="93" controlTypeID="com.balsamiq.mockups::StickyNote" x="29" y="97" w="416" h="183" measuredW="109" measuredH="123" zOrder="67" locked="false" isInGroup="-1">
+    <control controlID="93" controlTypeID="com.balsamiq.mockups::StickyNote" x="29" y="97" w="424" h="183" measuredW="109" measuredH="123" zOrder="67" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>TODO%3A%20%0A%20%0A*%20Give%20alternate%20seed%20translations%20to%20translator%20where%20available%0A*%20Show%20translation%20credits%20on%20user%20profile%0A*%20Make%20icon%20for%20original%20translation</text>
+        <text>TODO%3A%20%0A%20%0A*%20Give%20alternate%20seed%20translations%20to%20translator%20where%20available%0A*%20Show%20translation%20credits%20on%20user%20profile%0A*%20Make%20icon%20for%20original%20translation%0A*%20Allow%20editing%20own%20translation%0A*%20Support%20translations%20for%20versioned%20text</text>
       </controlProperties>
     </control>
     <control controlID="94" controlTypeID="com.balsamiq.mockups::Label" x="537" y="228" w="137" h="18" measuredW="119" measuredH="21" zOrder="68" locked="false" isInGroup="-1">
