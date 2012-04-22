@@ -1,7 +1,5 @@
 source 'http://rubygems.org'
 
-gem 'rvm-capistrano'
-
 gem 'rack', '1.3.5'
 gem 'rails', '3.1.2'
 
@@ -19,6 +17,7 @@ gem 'bcrypt-ruby', '>= 3.0.0'
 
 # Deploy with Capistrano
 gem 'capistrano'
+gem 'rvm-capistrano'
 
 # Bundle the extra gems:
 # gem 'bj'
