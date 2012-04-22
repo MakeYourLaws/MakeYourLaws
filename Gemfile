@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'rvm-capistrano'
+
 gem 'rack', '1.3.5'
 gem 'rails', '3.1.2'
 
