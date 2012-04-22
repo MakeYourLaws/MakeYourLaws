@@ -42,6 +42,8 @@ default_environment['PATH'] = "/home/#{user}/.gems/bin/:/usr/local/bin:/usr/bin:
 
 server 'makeyourlaws.org', :app, :db, :web, :primary => true # We have no access to DB server directly
 
+load 'deploy/assets'
+
 # Choose your default deploy methods
 namespace (:deploy) do
   task :restart, :roles => :app do
@@ -51,7 +53,7 @@ namespace (:deploy) do
   end
   
   # Use a shared config directory. Run cap deploy:configs:setup first.
-  after "deploy:update_code", "deploy:configs:symlink"
+  after "deploy:finalize_update", "deploy:configs:symlink"
   # after "deploy:update_code", "deploy:files:symlink"
   # after "deploy:restart", "deploy:restart_mail_fetcher"
   
