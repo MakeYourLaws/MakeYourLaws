@@ -4,6 +4,9 @@ require "bundler/capistrano"
 # No need for mongrel cluster if using Phusion Passenger
 # require 'mongrel_cluster/recipes'
 
+set :rvm_ruby_string, 'ruby-1.9.3'
+require "rvm/capistrano" 
+
 # Application
 set :application, "makeyourlaws"  # Required
 # deploy_to must be path from root
