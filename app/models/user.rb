@@ -24,7 +24,11 @@ class User < ActiveRecord::Base
   end
   
   def password_required?
-    (password.blank? and encrypted_password_was.blank? and !identities.empty?) ? false : true
+    # uses _was because on editing a user to add a new password, the crypted password is generated even
+    #  if the password confirmation fails - which means that, when the errors are shown, the user's required
+    #  to enter their (non-existent) "old" password
+    # FIXME: make Devise validatable not add a new crypted password to the user model unless it passes validations
+    (identities.empty? or !encrypted_password_was.blank?) and super
   end
   
   def update_with_password(params, *options)
