@@ -46,19 +46,19 @@ MakeyourlawsOrg::Application.configure do
   # config.assets.precompile += %w( search.js )
 
   config.action_mailer.default_url_options = { :host => 'www.makeyourlaws.org' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address => 'mail.makeyourlaws.org',
-    :port => 587,
-    :domain => 'makeyourlaws.org',
-    :authentication => :login,
-    :user_name => Keys.get("mail_user"),
-    :password => Keys.get("mail_password"),
-    :enable_starttls_auto => false 
-    # FIXME: disabling TLS is a horrible but effective way to fix
-    #  OpenSSL::SSL::SSLError (hostname was not match with the server certificate)
-    # There has to be something we can do to make DreamHost's SSL certs not crap out.    
-  }
+  config.action_mailer.delivery_method = :sendmail # :smtp
+  # config.action_mailer.smtp_settings = {
+  #   :address => 'mail.makeyourlaws.org',
+  #   :port => 587,
+  #   :domain => 'makeyourlaws.org',
+  #   :authentication => :login,
+  #   :user_name => Keys.get("mail_user"),
+  #   :password => Keys.get("mail_password"),
+  #   :enable_starttls_auto => false 
+  #   # FIXME: disabling TLS is a horrible but effective way to fix
+  #   #  OpenSSL::SSL::SSLError (hostname was not match with the server certificate)
+  #   # There has to be something we can do to make DreamHost's SSL certs not crap out.    
+  # }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
   
