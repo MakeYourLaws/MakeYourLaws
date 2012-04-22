@@ -46,7 +46,7 @@ set :ip, '173.255.252.140' # IP of repository. Better than using DNS lookups, if
 
 server '173.255.252.140', :app, :db, :web, :primary => true # We have no access to DB server directly
 
-load 'deploy/assets'
+# load 'deploy/assets' # executed by default as deploy:assets:precompile
 
 # Choose your default deploy methods
 namespace (:deploy) do
