@@ -203,7 +203,9 @@ Devise.setup do |config|
   
   config.omniauth :facebook, Keys.get("facebook_id"), Keys.get("facebook_secret"), :display => "popup", :scope => "email,user_location,user_religion_politics,offline_access,user_hometown"
   config.omniauth :github, Keys.get("github_id"), Keys.get("github_secret") # no need for user write access
-  config.omniauth :google_oauth2, Keys.get("google_id"), Keys.get("google_secret"), :name => "google"#, :scope => "userinfo.email,userinfo.profile" # TODO: add plus.me to scope
+  # FIXME: google_oauth2 :scope is broken. See https://github.com/zquestz/omniauth-google-oauth2/issues/8
+  # TODO: add plus.me to scope
+  config.omniauth :google_oauth2, Keys.get("google_id"), Keys.get("google_secret"), :name => "google"#, :scope => "userinfo.email,userinfo.profile"
   config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'), :require => 'omniauth-openid'  # TODO: use :identifier => "http://standardprefix/" + :name to make presets for LJ et al
   config.omniauth :twitter, Keys.get("twitter_key"), Keys.get("twitter_secret")
 
