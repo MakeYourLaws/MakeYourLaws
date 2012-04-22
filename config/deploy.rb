@@ -6,6 +6,7 @@ require "bundler/capistrano"
 
 set :rvm_ruby_string, 'ruby-1.9.3'
 require "rvm/capistrano" 
+set :rvm_type, :system # using system level, not userspace, install of rvm
 
 # Application
 set :application, "makeyourlaws"  # Required
@@ -20,12 +21,12 @@ set :git_enable_submodules, 1
 
 # Server
 # set :gateway, "gate.host.com"  # default to no gateway
-set :user, "makelaws"
+set :user, "makeyourlaws"
 set :runner, "#{user}"
 set :deploy_to, "/home/#{user}/makeyourlaws.org/" # defaults to "/u/apps/#{application}"
 set :deploy_via, :remote_cache
 # set :mongrel_conf, "#{deploy_to}/current/config/mongrel_cluster.yml"
-# default_run_options[:pty] = true  # Uncomment if on SunOS (eg Joyent) - http://groups.google.com/group/capistrano/browse_thread/thread/13b029f75b61c09d
+default_run_options[:pty] = true  # Uncomment if on SunOS (eg Joyent) - http://groups.google.com/group/capistrano/browse_thread/thread/13b029f75b61c09d
 set :use_sudo, false # sudo is false on DreamHost
 ssh_options[:forward_agent] = true # make sure you have an SSH agent running locally
 # ssh_options[:keys] = %w(~/.ssh/myl_deploy)
@@ -33,7 +34,7 @@ ssh_options[:forward_agent] = true # make sure you have an SSH agent running loc
 
 default_environment['PATH'] = "/home/#{user}/.gems/bin/:/usr/local/bin:/usr/bin:/bin"
 
-#set :ip, '##.##.##.##' # IP of repository. Better than using DNS lookups, if it's static
+set :ip, '173.255.252.140' # IP of repository. Better than using DNS lookups, if it's static
 
 # :no_release => true means that no code will be deployed to that box (but non-code tasks may run on it)
 # :primary => true is currently unused, but could eg be for primary vs slave db servers
@@ -43,7 +44,7 @@ default_environment['PATH'] = "/home/#{user}/.gems/bin/:/usr/local/bin:/usr/bin:
 #role :web, "your web-server here"
 #role :db,  "your db-server here", :primary => true
 
-server 'makeyourlaws.org', :app, :db, :web, :primary => true # We have no access to DB server directly
+server '173.255.252.140', :app, :db, :web, :primary => true # We have no access to DB server directly
 
 load 'deploy/assets'
 

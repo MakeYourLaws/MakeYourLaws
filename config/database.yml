@@ -44,5 +44,5 @@ production:
   database: myl_production
   username: myl_production
   password: <%= Keys.get "database" %>
-  host: mysql.makeyourlaws.org
+  host: localhost
 
