@@ -37,6 +37,7 @@ gem "omniauth-openid", '>= 1.0.1'
 gem "omniauth-twitter", '>= 0.0.10'
 
 gem "rails_email_validator", '>= 0.1.4'
+gem "it", ">= 0.2.3"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -60,11 +61,14 @@ gem 'exception_notification', '>= 2.6.1', :require => 'exception_notifier'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem 'thin'
+  
   case RUBY_VERSION
     when '1.8.7'
       gem 'ruby-debug'
     when '1.9.2', '1.9.3'
-      gem 'ruby-debug19', '>= 0.11.6', :require => 'ruby-debug'
+# there's an error with this; cf http://stackoverflow.com/questions/6438116/rails-with-ruby-debugger-throw-symbol-not-found-ruby-current-thread-loaderro
+#      gem 'ruby-debug19', '>= 0.11.6', :require => 'ruby-debug'
   end
   
   gem 'webrat', '>= 0.7.3'

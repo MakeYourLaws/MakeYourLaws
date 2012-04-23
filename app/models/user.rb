@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable, :encryptable, :confirmable, 
-         :lockable, :timeoutable, :omniauthable
+         :lockable, :timeoutable, :omniauthable, :authentication_keys => [:login]
 
   has_many :identities
 
@@ -17,10 +17,10 @@ class User < ActiveRecord::Base
   
   strip_attributes
   
-  def self.find_for_authentication(warden_conditions)
+  def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login_or_email)
-    where(conditions).where(["lower(login) = :value OR lower(email) = :value", { :value => :login_or_email.downcase }]).first
+    where(conditions).where(["lower(login) = :value OR lower(email) = :value", { :value => login.downcase }]).first
   end
   
   def password_required?
