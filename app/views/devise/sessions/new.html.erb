@@ -1,23 +1,67 @@
-<h2>Sign in</h2>
+<div style="float:left; margin-right: 20px;">
+	<h2>Sign in</h2>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :login_or_email %>
-	  <%= link_to "Resend email confirmation?", new_confirmation_path(resource_name) %><br />
-  <%= f.text_field :email %></div>
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+	  <div><%= f.label :login_or_email %><br />
+	  <%= f.text_field :email %></div>
 
-  <div><%= f.label :password %>   
-		<%= link_to "Forgot it?", new_password_path(resource_name) %><br />
-  <%= f.password_field :password %></div>
+	  <div><%= f.label :password %>   
+			<%= link_to "Forgot it?", new_password_path(resource_name) %><br />
+	  <%= f.password_field :password %></div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+	  <% if devise_mapping.rememberable? -%>
+	    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+	  <% end -%>
 
-  <div><%= f.submit "Sign in" %></div>
+	  <div><%= f.submit "Sign in" %></div>
+	<% end %>
+</div>
+
+<div style="float:left; margin-right: 20px;">
+	<h2>Sign up</h2>
+
+	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name),
+	 						:validate => true) do |f| %>
+	  <%= devise_error_messages! %>
+
+		<table>
+			<tr>
+				<td><b><%= f.label :name %></b></td>
+				<td><%= f.text_field :name %></td>
+			</tr>
+			<tr>
+				<td><b><%= f.label :login %></b></td>
+				<td><%= f.text_field :login %></td>
+			</tr>
+			<tr>
+				<td><b><%= f.label :email %></b></td>
+				<td><%= f.email_field :email %></td>
+			</tr>
+			<tr>
+				<td><b><%= f.label :password %></b></td>
+				<td><%= f.password_field :password %></td>
+			</tr>
+			<tr>
+				<td><b><%= f.label :password_confirmation, "… again:" %></b></td>
+				<td><%= f.password_field :password_confirmation %></td>
+			</tr>
+			<tr>
+				<td/>
+				<td><%= f.submit "Sign up" %></td>
+			</tr>
+		</table>
+	<% end %>
+	
+</div>
+
+<% if false 
+	# TODO: ensure this in flash
+%> 
+	<%= link_to "Resend email confirmation?", new_confirmation_path(resource_name) %>
 <% end %>
 
-<%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %>
+<div style="float:left">
+	<h2>… or sign in with:</h2>
 
-<p>… or sign in with:</p>
-
-<%= render :partial => "identities/links" %>
+	<%= render :partial => "identities/links" %>
+</div>

@@ -7,4 +7,4 @@ config/keys/*
 .sass-cache/
 vendor/cache/*.*
 .project
-
+*.sql

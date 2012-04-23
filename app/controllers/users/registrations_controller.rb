@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource = build_resource({:email => identity.email, :name => identity.name,
                                   :login => identity.nickname})
       resource.identities << identity
-      respond_with_navigational(resource){ render_with_scope :new_from_id }
+      respond_with_navigational(resource){ render :new_from_id }
     else
       flash[:error] = "Something's wrong with your session. Please try again and ensure cookies are on."
       redirect_to signup_path
@@ -32,9 +32,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
        clean_up_passwords(resource)
        respond_with_navigational(resource) do
           if session["devise.identity"]
-            render_with_scope :new_from_id
+            render :new_from_id
           else
-            render_with_scope :new 
+            render :new 
           end
         end
      end
