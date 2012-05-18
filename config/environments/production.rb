@@ -51,6 +51,10 @@ MakeyourlawsOrg::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'www.makeyourlaws.org' }
   config.action_mailer.delivery_method = :sendmail # :smtp
+  # defaults to -i -t. However, Mail::Sendmail actually puts recipients on the command line, so
+  #  if -t gets them from the headers, it screws things up. Thus, no -t.
+  config.action_mailer.sendmail_settings = {:arguments => '-i '} 
+  
   # config.action_mailer.smtp_settings = {
   #   :address => 'mail.makeyourlaws.org',
   #   :port => 587,
