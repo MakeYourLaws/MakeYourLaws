@@ -7,6 +7,7 @@ MakeyourlawsOrg::Application.configure do
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+
   
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
@@ -14,21 +15,30 @@ MakeyourlawsOrg::Application.configure do
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
-  # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
-
   # Generate digests for assets URLs
   config.assets.digest = true
+
+  # Don't fallback to assets pipeline if a precompiled asset is missed
+  # This is mainly a speed optimization; we save even having to check. The assets should be precompiled during deployment.
+  config.assets.compile = false
+
+  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+  # config.assets.precompile += %w( search.js )
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server
+  # config.action_controller.asset_host = "http://assets.example.com"
+
+
   # Specifies the header that your server uses for sending files
-  config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+  # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
+
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
@@ -38,12 +48,6 @@ MakeyourlawsOrg::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
-
-  # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
-
-  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
 
   config.action_mailer.default_url_options = { :host => 'www.makeyourlaws.org' }
   config.action_mailer.delivery_method = :sendmail # :smtp
