@@ -217,4 +217,13 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+
+  # ==> Devise Google Authenticator Extension
+  # How long should the user have to enter their token. To change the default, uncomment and change the below:
+  # config.ga_timeout = 3.minutes
+
+  # Change time drift settings for valid token values. To change the default, uncomment and change the below:
+  # config.ga_timedrift = 3
+
+
 end
