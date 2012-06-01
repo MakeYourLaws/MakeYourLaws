@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
 gem 'rake', '>= 0.9.2.2'
-gem 'rack', '1.4.1'
-gem 'rails', '3.2.3'
+gem 'rack', '>= 1.4.1'
+gem 'rails', '>= 3.2.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -26,6 +26,8 @@ gem 'rvm-capistrano', '>= 1.1.0'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
+
+gem 'Empact-activerecord-import', '>= 0.4.1' # zdennis hasn't yet imported the import profiling fix; this is a bugfix tracking fork
 gem "acts_as_audited", ">= 2.1.0"
 
 gem "devise", ">= 2.0.4"
