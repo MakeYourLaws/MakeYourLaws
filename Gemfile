@@ -31,6 +31,7 @@ gem 'Empact-activerecord-import', '>= 0.4.1' # zdennis hasn't yet imported the i
 gem "acts_as_audited", ">= 2.1.0"
 
 gem "devise", ">= 2.0.4"
+gem "devise-encryptable", ">= 0.1.1c"
 gem "omniauth", ">= 1.1.0"
 gem "omniauth-facebook", '>= 1.2.0'
 gem "omniauth-github", '>= 1.0.1'
