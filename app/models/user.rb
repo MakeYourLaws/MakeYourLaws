@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login_or_email)
-    where(conditions).where(["lower(login) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    where(conditions).where(login ? ["lower(login) = :value OR lower(email) = :value", { :value => login.downcase }] : nil).first
   end
   
   def password_required?
