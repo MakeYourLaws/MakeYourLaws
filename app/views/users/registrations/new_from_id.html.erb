@@ -5,4 +5,4 @@
 	
 <p>Please note that adding a password is <b>optional</b>. You can always log in using <%= resource.identities.first.provider.camelcase %>. Providing a password just gives you the alternative to also log in directly, and provides extra security for your account.</p>
 
-<%= render :partial => 'users/registrations/signup_form', :passwords_optional => true %>
+<%= render :partial => 'users/registrations/signup_form', :locals => {:passwords_optional => true} %>
