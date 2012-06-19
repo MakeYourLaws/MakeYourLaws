@@ -75,7 +75,7 @@ namespace :deploy do
     task :symlink, :roles => :app do
       run "rm -rf #{release_path}/public/files"
       run "mkdir -p #{shared_path}/public_files"
-      run "chmod 777 #{shared_path}/public_files"
+      run "chmod 775 #{shared_path}/public_files"
       run "ln -nfs #{shared_path}/public_files #{release_path}/public/files"
       
       run "rm -rf #{release_path}/db/data"
@@ -85,7 +85,7 @@ namespace :deploy do
     end
   end
   
-  namespace :config do
+  namespace :configs do
     desc "Override config files w/ whatever's in the shared/config path (e.g. passwords, api keys)"
     task :symlink, :roles => :app do         
       # Be extra careful about exposing these
