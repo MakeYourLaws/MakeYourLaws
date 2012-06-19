@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   # rescue_from Exception, :with => :log_exception_handler 
   
   protect_from_forgery
-  
+  include Mixpanel
   
 end
