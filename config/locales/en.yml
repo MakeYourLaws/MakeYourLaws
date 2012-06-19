@@ -6,3 +6,4 @@ en:
     attributes:
       user:  
         login_or_email: "Username or email"
+        login: "Username"
