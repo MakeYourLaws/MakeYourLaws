@@ -38,9 +38,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       respond_with_navigational(resource) do
          if session["devise.identity"]
-           render :new_from_id
+           render :new_from_id # capture any user info the provider didn't give & confirm the rest
          else
-           render :new 
+           render :new  # some validation error; show just-signup form to clear and complete
          end
        end
     end

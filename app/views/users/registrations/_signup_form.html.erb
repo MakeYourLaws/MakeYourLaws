@@ -1,0 +1,32 @@
+<% passwords_optional ||= false %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name),
+      :validate => true) do |f| %>
+  <%= devise_error_messages! %>
+
+  <table>
+    <tr>
+      <td><%= f.label :name, :class => 'required' %></td>
+      <td><%= f.text_field :name, :'x-autocompletetype' => 'name-full' %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :login, :class => 'required' %></td>
+      <td><%= f.text_field :login %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :email, :class => 'required' %></td>
+      <td><%= f.email_field :email, :'x-autocompletetype' => 'email' %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :password, :class => ('required' unless passwords_optional) %></td>
+      <td><%= f.password_field :password %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :password_confirmation, "… again:",  :class => ('required' unless passwords_optional) %></td>
+      <td><%= f.password_field :password_confirmation %></td>
+    </tr>
+    <tr>
+      <td/>
+      <td><%= f.submit "Sign up" %></td>
+    </tr>
+  </table>
+<% end %>
