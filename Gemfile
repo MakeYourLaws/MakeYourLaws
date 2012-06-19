@@ -59,6 +59,7 @@ gem 'client_side_validations', ">= 3.1.4"
 
 gem 'exception_notification', '>= 2.6.1', :require => 'exception_notifier'
 # gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
+gem 'newrelic_rpm', ">= 3.4.0"
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
