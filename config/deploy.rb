@@ -1,5 +1,5 @@
 require "bundler/capistrano"
-
+require 'new_relic/recipes'
 
 # No need for mongrel cluster if using Phusion Passenger
 # require 'mongrel_cluster/recipes'
@@ -58,6 +58,7 @@ namespace :deploy do
   after "deploy:finalize_update", "deploy:configs:symlink"
   after "deploy:finalize_update", "deploy:files:symlink"
   # after "deploy:restart", "deploy:restart_mail_fetcher"
+  after "deploy:finalize_update", "newrelic:notice_deployment"
   
   task :restart_mail_fetcher, :roles => :app do
     run "cd #{release_path} && RAILS_ENV=#{fetch(:rails_env, "production")} script/mail_fetcher restart"
