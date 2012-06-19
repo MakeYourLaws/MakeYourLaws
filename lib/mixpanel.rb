@@ -15,7 +15,10 @@ module Mixpanel
   # See http://mixpanel.com/api/ for further detail.
   def track!(event, properties={})
     properties['ip'] = request.remote_ip rescue nil
-    properties['mp_name_tag'] = current_user.login if user_signed_in?
+    if user_signed_in?
+      properties['mp_name_tag'] = current_user.login 
+      properties['distinct_id'] = current_user.id
+    end
     properties['rails env'] = Rails.env
     logger.info "Tracked: #{event} #{properties}"
     
