@@ -1,3 +1,5 @@
+<% require Rails.root.join 'lib', 'keys.rb' %>
+
 # MySQL.  Versions 4.1 and 5.0 are recommended.
 #
 # Install the MySQL driver:
