@@ -6,4 +6,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include Mixpanel
   
+  
+  before_filter :security_headers
+
+  private
+  
+  # Note: Strict-Transport-Security is already set to 1 year through config.force_ssl (i.e. Rack:SSL)
+  def security_headers
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+  end
 end
