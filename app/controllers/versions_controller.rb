@@ -3,6 +3,8 @@ class VersionsController < ApplicationController
   # def revert
   #   @version = Version.find(params[:id])
   #   if @version.reify
+# FIXME: this is incompatible with optimistic locking.
+# See https://github.com/airblade/paper_trail/issues/163
   #     @version.reify.save!
   #   else
   #     @version.item.destroy
