@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   attr_accessor :login_or_email, :strength_mock
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :login, :login_or_email
   
+  has_paper_trail
+  
   validates_presence_of :name, :login, :email
   validates_uniqueness_of :login, :email
   validates :email, :email => true

@@ -28,7 +28,7 @@ gem 'rvm-capistrano', '>= 1.1.0'
 
 
 gem 'Empact-activerecord-import', '>= 0.4.1' # zdennis hasn't yet imported the import profiling fix; this is a bugfix tracking fork
-gem "acts_as_audited", ">= 2.1.0"
+gem "paper_trail", '>= 2.6.3'
 
 gem "devise", ">= 2.0.4"
 gem "devise-encryptable", ">= 0.1.1c"

@@ -1,4 +1,6 @@
 class SsnDeathRecord < ActiveRecord::Base
+  has_paper_trail
+  
   def self.new_from_line line
     self.new :change_type => (line[0].blank? ? nil : line[0]),
       :ssn => line[1..9].to_i,

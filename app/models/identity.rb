@@ -4,6 +4,8 @@ class Identity < ActiveRecord::Base
   validates_uniqueness_of :uid, :scope => :provider
   strip_attributes
   
+  has_paper_trail
+  
   # Find or create an identity based on an Omniauth response
   # Identities can belong to users (once claimed and confirmed) but might not always
   def self.by_omniauth(auth)
