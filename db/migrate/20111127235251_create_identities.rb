@@ -16,7 +16,6 @@ class CreateIdentities < ActiveRecord::Migration
       t.text :raw_info  # might be anything, should mainly be JSON or the like
       
       t.integer :lock_version, :default => 0
-      
       t.timestamps
     end
     
