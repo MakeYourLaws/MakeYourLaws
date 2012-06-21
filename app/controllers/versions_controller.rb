@@ -1,4 +1,4 @@
-def VersionsController < ApplicationController
+class VersionsController < ApplicationController
 # TODO: Requires authorization
   # def revert
   #   @version = Version.find(params[:id])
