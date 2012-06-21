@@ -1,4 +1,7 @@
-<% require Rails.root.join 'lib', 'keys.rb' %>
+<% # sometimes it thinks we're in root rather than /config
+  file =  File.join File.dirname(__FILE__), '..', 'lib', 'keys.rb'   
+  File.exists?(file) ? require(file) : require(File.join(File.dirname(__FILE__), 'lib', 'keys.rb'))
+%>
 
 # MySQL.  Versions 4.1 and 5.0 are recommended.
 #
