@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120423131431) do
+ActiveRecord::Schema.define(:version => 20120618065618) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -33,6 +33,72 @@ ActiveRecord::Schema.define(:version => 20120423131431) do
   add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
   add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
   add_index "audits", ["user_id", "user_type"], :name => "user_index"
+
+  create_table "fec_candidates", :force => true do |t|
+    t.string   "fec_id",                       :limit => 9,                 :null => false
+    t.string   "name",                         :limit => 38,                :null => false
+    t.string   "party",                        :limit => 3
+    t.string   "party_2",                      :limit => 3
+    t.string   "incumbent_challenger",         :limit => 1
+    t.string   "status",                       :limit => 1
+    t.string   "street_1",                     :limit => 34
+    t.string   "street_2",                     :limit => 34
+    t.string   "city",                         :limit => 18
+    t.string   "state",                        :limit => 2
+    t.string   "zip",                          :limit => 5
+    t.string   "principal_campaign_committee", :limit => 9
+    t.string   "year",                         :limit => 2
+    t.string   "district",                     :limit => 2
+    t.integer  "last_update_year"
+    t.integer  "lock_version",                               :default => 0
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+  end
+
+  add_index "fec_candidates", ["district"], :name => "index_fec_candidates_on_district"
+  add_index "fec_candidates", ["fec_id"], :name => "index_fec_candidates_on_fec_id", :unique => true
+  add_index "fec_candidates", ["incumbent_challenger"], :name => "index_fec_candidates_on_incumbent_challenger"
+  add_index "fec_candidates", ["name"], :name => "index_fec_candidates_on_name"
+  add_index "fec_candidates", ["party"], :name => "index_fec_candidates_on_party"
+  add_index "fec_candidates", ["party_2"], :name => "index_fec_candidates_on_party_2"
+  add_index "fec_candidates", ["principal_campaign_committee"], :name => "index_fec_candidates_on_principal_campaign_committee"
+  add_index "fec_candidates", ["state", "city"], :name => "index_fec_candidates_on_state_and_city"
+  add_index "fec_candidates", ["status"], :name => "index_fec_candidates_on_status"
+  add_index "fec_candidates", ["updated_at"], :name => "index_fec_candidates_on_updated_at"
+  add_index "fec_candidates", ["year"], :name => "index_fec_candidates_on_year"
+
+  create_table "fec_committees", :force => true do |t|
+    t.string   "fec_id",                      :limit => 9,                 :null => false
+    t.string   "name",                        :limit => 90,                :null => false
+    t.string   "treasurer_name",              :limit => 38
+    t.string   "street_1",                    :limit => 34
+    t.string   "street_2",                    :limit => 34
+    t.string   "city",                        :limit => 18
+    t.string   "state",                       :limit => 2
+    t.string   "zip",                         :limit => 5
+    t.string   "designation",                 :limit => 1
+    t.string   "type",                        :limit => 1
+    t.string   "party",                       :limit => 3
+    t.string   "filing_frequency",            :limit => 1
+    t.string   "interest_group_category",     :limit => 1
+    t.string   "connected_organization_name", :limit => 38
+    t.string   "candidate_id",                :limit => 9
+    t.integer  "last_update_year"
+    t.integer  "lock_version",                              :default => 0
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+  end
+
+  add_index "fec_committees", ["candidate_id"], :name => "index_fec_committees_on_candidate_id"
+  add_index "fec_committees", ["connected_organization_name"], :name => "index_fec_committees_on_connected_organization_name"
+  add_index "fec_committees", ["designation"], :name => "index_fec_committees_on_designation"
+  add_index "fec_committees", ["fec_id"], :name => "index_fec_committees_on_fec_id", :unique => true
+  add_index "fec_committees", ["interest_group_category"], :name => "index_fec_committees_on_interest_group_category"
+  add_index "fec_committees", ["name"], :name => "index_fec_committees_on_name"
+  add_index "fec_committees", ["party"], :name => "index_fec_committees_on_party"
+  add_index "fec_committees", ["state", "city"], :name => "index_fec_committees_on_state_and_city"
+  add_index "fec_committees", ["treasurer_name"], :name => "index_fec_committees_on_treasurer_name"
+  add_index "fec_committees", ["updated_at"], :name => "index_fec_committees_on_updated_at"
 
   create_table "identities", :force => true do |t|
     t.integer  "user_id"
@@ -98,11 +164,11 @@ ActiveRecord::Schema.define(:version => 20120423131431) do
     t.string   "name",                                    :null => false
     t.string   "login",                                   :null => false
     t.integer  "lock_version",           :default => 0
-    t.string   "unconfirmed_email"
     t.string   "gauth_secret"
     t.string   "gauth_enabled",          :default => "f"
     t.string   "gauth_tmp"
     t.datetime "gauth_tmp_datetime"
+    t.string   "unconfirmed_email"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
