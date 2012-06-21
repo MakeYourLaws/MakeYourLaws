@@ -90,12 +90,12 @@ class Fec::Committee < ActiveRecord::Base
     # New years' "master" files may or may not include previous years' orgs. Bah.
     %w(80 82 84 86 88 90 92 94 96 98 00 02 04 06 08 10 12).each do |year|
       prev_mtime = Rails.root.join('db', 'data', "cm#{year}.zip").mtime rescue nil
-      `cd #{Rails.root.join 'db', 'data')} && wget -N ftp://ftp.fec.gov/FEC#{"/19#{year}" if year.to_i >= 80}/cm#{year}.zip`
+      `cd #{Rails.root.join('db', 'data')} && wget -N ftp://ftp.fec.gov/FEC#{"/19#{year}" if year.to_i >= 80}/cm#{year}.zip`
       mtime = Rails.root.join('db', 'data', "cm#{year}.zip").mtime # -N preserves the ftp server's date
       next unless !prev_mtime or !last_updated or last_updated < mtime or prev_mtime < mtime
     
       filename = Rails.root.join('db', 'data', "fec_commitees_#{year}_#{mtime.to_date}.dta")
-      `cd #{Rails.root.join 'db', 'data')} && unzip -u -j -o #{Rails.root.join 'db', 'data', "cm#{year}.zip"}`
+      `cd #{Rails.root.join('db', 'data')} && unzip -u -j -o #{Rails.root.join 'db', 'data', "cm#{year}.zip"}`
       dataname = case year.to_i
         when 80..87 then "FOIACM.D#{year}"
         when 88..97 then "FOIACM.DTA"
