@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :identities
 
+  extend FriendlyId
+  friendly_id :login
+  
   # Setup accessible (or protected) attributes for your model
   attr_accessor :login_or_email, :strength_mock
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :login, :login_or_email
@@ -16,6 +19,7 @@ class User < ActiveRecord::Base
   
   validates_format_of :login, :with => /\A[a-zA-Z0-9_]+\z/i, :message => "can only have letters a-z, digits and underscores"
   validates_format_of :login, :with => /\A[a-zA-Z0-9].*\z/i, :message => "must start with letter or digit"
+  validates_format_of :login, :with => /\A.*[a-zA-Z0-9]\z/i, :message => "must end with letter or digit"
   
   validates_format_of :password, :with => /\A.*[[:alpha:]].*\z/, :message => "must contain at least one letter", :allow_nil => true
   # Note: :punct: is supposed to match all punctuation, but misses =`~$^+|<>> - see http://stackoverflow.com/questions/11130490/why-does-ruby-punct-miss-some-punctuation-characters
