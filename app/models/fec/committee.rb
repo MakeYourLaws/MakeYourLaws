@@ -2,6 +2,8 @@ class Fec::Committee < ActiveRecord::Base
   set_table_name "fec_committees" # use namespaced table
   self.inheritance_column = :_type_disabled # disable STI
   
+  has_paper_trail
+  
   # source: ftp://ftp.fec.gov/FEC/cm12.zip - updated weekly
                                                                           # length start end
   validates_uniqueness_of :fec_id                                         #  9   0    8

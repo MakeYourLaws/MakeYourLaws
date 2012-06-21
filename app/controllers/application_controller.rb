@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include Mixpanel
   
+  def info_for_paper_trail
+    { :ip => request.remote_ip }
+  end
   
   before_filter :security_headers
 

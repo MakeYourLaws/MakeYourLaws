@@ -16,6 +16,8 @@ MakeyourlawsOrg::Application.routes.draw do
   match "help" => "main#help", :via => :get
   match "contact" => "main#contact", :via => :get
   
+  post "versions/:id/revert" => "versions#revert", :as => "revert_version"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
