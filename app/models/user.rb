@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
+         :recoverable, :rememberable, :trackable, # :validatable, # do it better ourselves
          :token_authenticatable, :encryptable, :confirmable, 
-         :lockable, :timeoutable, :omniauthable, :authentication_keys => [:login]
+         :lockable, :timeoutable, :omniauthable, :authentication_keys => [:login_or_email]
 
   has_many :identities
 
@@ -57,12 +57,19 @@ class User < ActiveRecord::Base
     true
   end
   
-  def self.find_first_by_auth_conditions(warden_conditions)
+  def self.find_first_by_auth_conditions warden_conditions
     conditions = warden_conditions.dup
     login = conditions.delete(:login_or_email)
-    where(conditions).where(login ? ["lower(login) = :value OR lower(email) = :value", { :value => login.downcase }] : nil).first
+    if login
+      if login =~ /@/
+        conditions[:email] = login.strip.downcase
+      else
+        conditions[:login] = login.strip.downcase
+      end
+    end
+    super conditions
   end
-  
+    
   def password_required?
     # uses _was because on editing a user to add a new password, the crypted password is generated even
     #  if the password confirmation fails - which means that, when the errors are shown, the user's required

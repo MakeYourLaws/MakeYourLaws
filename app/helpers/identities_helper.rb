@@ -1,13 +1,18 @@
 module IdentitiesHelper
   def provider_image provider, size = 32
+    if [:aol, :basecamp, :campfire, :facebook, :github, :google, :linkedin, :myspace, :open_id, :presently, :twitter, :yahoo].include? provider
     image_tag("authbuttons/#{provider.to_s.downcase.gsub(/[^a-z]/,'')}_#{size}.png", 
-        :alt => "#{provider.to_s.camelcase}", :size => "#{size}x#{size}")
+        :alt => "#{OmniAuth::Utils.camelize provider}", :size => "#{size}x#{size}")
+    else
+      image_tag("#{provider.to_s.downcase.gsub(/[^a-z]/,'')}_#{size}.png", 
+          :alt => "#{OmniAuth::Utils.camelize provider}", :size => "#{size}x#{size}")
+    end
   end
   
   def identity_card identity, size = :slim
     div_for identity, :class => size do
       content = provider_image identity.provider #, ((size == :slim) ? 16 : 32)
-      content += content_tag :div, identity.provider.to_s.camelcase, :class => "provider_name" if size != :slim
+      content += content_tag :div, OmniAuth::Utils.camelize(provider), :class => "provider_name" if size != :slim
       if identity.url
         content += content_tag :div, link_to(identity.display_name, identity.url), :class => "uid"
       else
