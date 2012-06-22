@@ -1,5 +1,7 @@
-<p>Welcome <%= @resource.email %>!</p>
+<p>Welcome, <%= @resource.name %>!</p>
 
-<p>You can confirm your account through the link below:</p>
+<p>Please confirm your account by <%= link_to 'clicking here', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %>.</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p>Thanks,</p>
+
+<p>Make Your Laws team</p>

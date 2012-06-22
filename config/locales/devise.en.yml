@@ -16,18 +16,18 @@ en:
       already_authenticated: 'You are already signed in.'
       unauthenticated: 'You need to sign in or sign up before continuing.'
       unconfirmed: "You need to confirm your email account before continuing. Please check your email for a confirmation link (it's already been sent)."
-      locked: "Your account is locked for failing to log in too many times in a row. Wait a couple hours or check your email for an unlock link (it's already been sent)."
-      invalid: 'Invalid email or password.'
+      locked: "Your account is locked for entering the wrong password too many times in a row. Wait a couple hours or check your email for an unlock link (it's already been sent)."
+      invalid: 'Invalid login/email or password.'
       invalid_token: 'Invalid authentication token.'
-      timeout: 'Your session expired, please sign in again to continue.'
-      inactive: 'Your account was not activated yet.'
+      timeout: 'Your session has expired. Please sign in again to continue.'
+      inactive: 'Your account has not been activated yet.'
     sessions:
       signed_in: 'Signed in successfully.'
       signed_out: 'Signed out successfully.'
     passwords:
       send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
       updated: 'Your password was changed successfully. You are now signed in.'
-      updated_not_active: 'Your password was changed successfully.'
+      updated_not_active: 'Your password was changed successfully. Please sign in.'
       send_paranoid_instructions: "If your e-mail exists on our database, you will receive a password recovery link on your e-mail"
     confirmations:
       send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
@@ -42,7 +42,7 @@ en:
       destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
     unlocks:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
-      unlocked: 'Your account was successfully unlocked. You are now signed in.'
+      unlocked: 'Your account was successfully unlocked. You can now sign in.'
       send_paranoid_instructions: 'If your account exists, you will receive an email with instructions about how to unlock it in a few minutes.'
     omniauth_callbacks:
       success: 'Successfully authorized from %{kind} account.'
