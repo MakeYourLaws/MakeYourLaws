@@ -12,7 +12,7 @@ class Fec::CommitteeType
       # Individuals or groups (other than PACs) making independent expenditures over $250 in a year must disclose those expenditures
     'N' => 'PAC - nonqualified',
       # PACs that have not yet been in existence for six months and received contributions from 50 people and made contributions to five federal candidates. These committees have lower limits for their contributions to candidates.
-    'O' => 'Independent Expenditure-Only (Super PACs)',
+    'O' => 'Independent Expenditure-Only (Super PAC)',
       # Political Committee that has filed a statement consistent with AO 2010-09 or AO 2010-11. For more information about independent expenditures
     'P' => 'Presidential',
       # Campaign committee for candidate for President
