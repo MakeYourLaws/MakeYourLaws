@@ -32,6 +32,8 @@ class Fec::Candidate < ActiveRecord::Base
     # Year of the election for which the candidate is running for office.
   validates_length_of :district, :maximum => 2                            #  2  163 164
     # District in which the candidate is running. For presidential and senate candidates this field will be missing or have a value of zero (00).
+    
+  belongs_to :committee, :foreign_key => "principal_campaign_committee", :primary_key => 'fec_id', :class_name => 'Fec::Committee'
   
   attr_protected :id, :created_at, :fec_id
   before_validation do
