@@ -1,5 +1,5 @@
 class Fec::Committee < ActiveRecord::Base
-  set_table_name "fec_committees" # use namespaced table
+  self.table_name = "fec_committees" # use namespaced table
   self.inheritance_column = :_type_disabled # disable STI
   
   has_paper_trail
@@ -16,32 +16,14 @@ class Fec::Committee < ActiveRecord::Base
   validates_length_of :city, :maximum => 18                               # 18  205 222
   validates_length_of :state, :maximum => 2                               #  2  223 224
   validates_length_of :zip, :maximum => 5                                 #  5  225 229
-  validates_inclusion_of :designation, :in => %W(A B D J P U),            #  1  230 230
+  validates_inclusion_of :designation, :in => Fec::CommitteeDesignation::TYPES.keys,  #  1  230 230
    :allow_nil => true
-    # A = AUTHORIZED BY A CANDIDATE
-    # B = LOBBYIST/REGISTRANT PAC
-    # D = LEADERSHIP PAC
-    # J = JOINT FUND RAISER
-    # P = PRINCIPAL CAMPAIGN COMMITTEE OF A CANDIDATE
-    # U = UNAUTHORIZED
   validates_inclusion_of :type, :in => Fec::CommitteeType::TYPES.keys     #  1  231 231
   validates_length_of :party, :maximum => 3                               #  3  232 234
-  validates_inclusion_of :filing_frequency, :in => %W(A D M Q T W),       #  1  235 235
-  :allow_nil => true
-    # A = ADMINISTRATIVELY TERMINATED
-    # D = DEBT
-    # M = MONTHLY FILER
-    # Q = QUARTERLY FILER
-    # T = TERMINATED
-    # W = WAIVED
-  validates_inclusion_of :interest_group_category, :in => %W(C L M T V W O), #  1  236 236
+  validates_inclusion_of :filing_frequency, :in => Fec::CommitteeFilingFrequency::TYPES.keys, #  1  235 235
     :allow_nil => true
-    # C = CORPORATION
-    # L = LABOR ORGANIZATION
-    # M = MEMBERSHIP ORGANIZATION
-    # T = TRADE ASSOCIATION
-    # V = COOPERATIVE
-    # W = CORPORATION WITHOUT CAPITAL STOCK
+  validates_inclusion_of :interest_group_category, :in => Fec::CommitteeInterestGroupCategory::TYPES.keys, #  1  236 236
+    :allow_nil => true
   validates_length_of :connected_organization_name, :maximum => 38        # 38  237 274
   validates_length_of :candidate_id, :is => 9, :allow_nil => true         #  9  275 283 (if committee type H S or P)
   

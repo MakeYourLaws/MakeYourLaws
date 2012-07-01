@@ -1,5 +1,5 @@
 class Fec::Candidate < ActiveRecord::Base
-  set_table_name "fec_candidates" # use namespaced table
+  self.table_name = "fec_candidates" # use namespaced table
   self.inheritance_column = :_type_disabled # disable STI
   
   has_paper_trail
@@ -15,15 +15,11 @@ class Fec::Candidate < ActiveRecord::Base
   # filler                                                                #  3   50  52
   validates_length_of :party_2, :maximum => 3                             #  3   53  55
     # Party 2 may have a value if no statement of candidacy was received. This information is taken from any other available source (e.g. state ballot lists, published information, etc.)
-  validates_inclusion_of :incumbent_challenger, :in => %W(C I O),         #  1   56  56
+  validates_inclusion_of :incumbent_challenger, :in => Fec::CandidateIncumbent::TYPES.keys,  #  1   56  56
     :allow_nil => true
       # C = Challenger I = Incumbent O = Open Seat is used to indicate an open seat. Open seats are defined as seats where the incumbent never sought re-election. There can be cases where an incumbent is defeated in the primary election. In these cases there will be two or more challengers in the general election.
   # filler                                                                #  1   57  57
-  validates_inclusion_of :status, :in => %W(C F N P Q), :allow_nil => true  #  1   58  58
-    # C = Statutory candidate
-    # F = Statutory candidate for future election
-    # N = Not yet a statutory candidate
-    # P = Statutory candidate in prior cycle
+  validates_inclusion_of :status, :in => Fec::CandidateStatus::TYPES.keys, :allow_nil => true  #  1   58  58
   validates_length_of :street_1, :street_2, :maximum => 34                # 34   59  92 street 1
                                                                           # 34   93 126 street 2
   validates_length_of :city, :maximum => 18                               # 18  127 144
@@ -50,7 +46,7 @@ class Fec::Candidate < ActiveRecord::Base
     end - [nil]).inject({}) {|h,(k,v)| h[k]=v; h} # an ugly version of to_hash
         
     self.attributes = clean_attribs # will only update the changed ones
-p attributes
+# p attributes
   end
   
   def self.new_from_line line, year = nil
@@ -58,10 +54,10 @@ p attributes
     rec = self.find_or_initialize_by_fec_id line[0..8]
     rec.name                        = line[9..46]
     rec.party                       = line[47..49]
-    raise 'Filler not blank' if year.to_i > 10 and !line[50..52].strip.blank?
+    # raise 'Filler not blank' if year.to_i > 10 and !line[50..52].strip.blank?
     rec.party_2                     = line[53..55]
     rec.incumbent_challenger        = line[56..56]
-    raise 'Filler not blank' if year.to_i > 10 and !line[57..57].strip.blank?
+    # raise 'Filler not blank' if year.to_i > 10 and !line[57..57].strip.blank?
     rec.status                      = line[58..58]
     rec.street_1                    = line[59..92]
     rec.street_2                    = line[93..126]
@@ -77,7 +73,7 @@ p attributes
   end
   
   def self.update_from_line! line, year = nil
-p line
+# p line
     return nil if line.strip.blank?
     self.new_from_line(line, year).save!
   end
