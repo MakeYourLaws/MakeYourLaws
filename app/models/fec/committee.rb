@@ -27,6 +27,10 @@ class Fec::Committee < ActiveRecord::Base
   validates_length_of :connected_organization_name, :maximum => 38        # 38  237 274
   validates_length_of :candidate_id, :is => 9, :allow_nil => true         #  9  275 283 (if committee type H S or P)
   
+  # not very reliable, since the name is often partial
+  belongs_to :connected_organization, :foreign_key => 'connected_organization_name', :primary_key => 'name', :class_name => 'Fec::Committee'
+  belongs_to :candidate, :primary_key => 'fec_id', :class_name => 'Fec::Candidate'  
+  
   attr_protected :id, :created_at, :fec_id
   before_validation do
     clean_attribs = (self.attributes.map do |k,v| 
