@@ -80,9 +80,10 @@ group :development, :test do
       gem 'ruby-debug'
     when '1.9.2', '1.9.3'
 # there's an error with the standard ruby-debug19 library; cf http://stackoverflow.com/questions/6438116/rails-with-ruby-debugger-throw-symbol-not-found-ruby-current-thread-loaderro
-	gem 'linecache19', '0.5.13', :path => "~/.rvm/gems/ruby-1.9.3-p#{RUBY_PATCHLEVEL}/gems/linecache19-0.5.13/"
-	gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-p#{RUBY_PATCHLEVEL}/gems/ruby-debug-base19-0.11.26/"
-	gem 'ruby-debug19', :require => 'ruby-debug'
+# uncomment the below on local version - it creates a hardlink to the local rvm directory in Gemfile.lock
+	# gem 'linecache19', '0.5.13', :path => "~/.rvm/gems/ruby-1.9.3-p#{RUBY_PATCHLEVEL}/gems/linecache19-0.5.13/"
+	# gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-p#{RUBY_PATCHLEVEL}/gems/ruby-debug-base19-0.11.26/"
+	# gem 'ruby-debug19', :require => 'ruby-debug'
   end
   
   gem 'webrat', '>= 0.7.3'
