@@ -220,7 +220,7 @@ Devise.setup do |config|
   config.omniauth :google_oauth2, Keys.get("google_id"), Keys.get("google_secret"), :name => "google"#, :scope => "userinfo.email,userinfo.profile"
   config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'), :require => 'omniauth-openid'  # TODO: use :identifier => "http://standardprefix/" + :name to make presets for LJ et al
   config.omniauth :twitter, Keys.get("twitter_key"), Keys.get("twitter_secret")
-  # config.omniauth :paypal , Keys.get("paypal_app_id"), Keys.get("paypal_secret")
+  config.omniauth :paypal , Keys.get("paypal_oauth2_key"), Keys.get("paypal_oauth2_secret")
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

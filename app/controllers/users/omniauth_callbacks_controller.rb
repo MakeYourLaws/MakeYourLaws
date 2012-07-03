@@ -16,9 +16,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user = current_user
       @user.identities << id
       if @user.save
-        flash[:notice] = "#{kind.to_s.camelcase} identity successfully added!"
+        flash[:notice] = "#{OmniAuth::Utils.camelize kind} identity successfully added!"
       else
-        flash[:error] = "Error adding your #{kind.to_s.camelcase} identity. Please try again."
+        flash[:error] = "Error adding your #{OmniAuth::Utils.camelize kind} identity. Please try again."
       end
       redirect_to edit_user_registration_path
     elsif @user = id.user # 3b. Log them in if they're already a user

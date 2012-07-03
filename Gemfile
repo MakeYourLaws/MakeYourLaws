@@ -30,6 +30,9 @@ gem 'rvm-capistrano', '>= 1.1.0'
 gem 'Empact-activerecord-import', '>= 0.4.1' # zdennis hasn't yet imported the import profiling fix; this is a bugfix tracking fork
 gem "paper_trail", '>= 2.6.3'
 
+gem 'money', '>= 5.0.0'
+gem "active_paypal_adaptive_payment"
+
 gem "devise", ">= 2.0.4"
 gem "devise-encryptable", ">= 0.1.1c"
 gem "omniauth", ">= 1.1.0"
@@ -38,6 +41,10 @@ gem "omniauth-github", '>= 1.0.1'
 gem "omniauth-google-oauth2", '>= 0.1.9'
 gem "omniauth-openid", '>= 1.0.1'
 gem "omniauth-twitter", '>= 0.0.10'
+gem "omniauth-paypal", '>= 0.1.0', :git => 'git://github.com/surferdwa/omniauth-paypal.git'
+
+gem 'cancan', '>= 1.6.8'
+# gem 'cantango', '>= 0.9.4.7'
 
 gem "rails_email_validator", '>= 0.1.4'
 gem "it", ">= 0.2.3"
@@ -72,8 +79,10 @@ group :development, :test do
     when '1.8.7'
       gem 'ruby-debug'
     when '1.9.2', '1.9.3'
-# there's an error with this; cf http://stackoverflow.com/questions/6438116/rails-with-ruby-debugger-throw-symbol-not-found-ruby-current-thread-loaderro
-#      gem 'ruby-debug19', '>= 0.11.6', :require => 'ruby-debug'
+# there's an error with the standard ruby-debug19 library; cf http://stackoverflow.com/questions/6438116/rails-with-ruby-debugger-throw-symbol-not-found-ruby-current-thread-loaderro
+	gem 'linecache19', '0.5.13', :path => "~/.rvm/gems/ruby-1.9.3-p#{RUBY_PATCHLEVEL}/gems/linecache19-0.5.13/"
+	gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-p#{RUBY_PATCHLEVEL}/gems/ruby-debug-base19-0.11.26/"
+	gem 'ruby-debug19', :require => 'ruby-debug'
   end
   
   gem 'webrat', '>= 0.7.3'

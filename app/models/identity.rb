@@ -4,6 +4,8 @@ class Identity < ActiveRecord::Base
   validates_uniqueness_of :uid, :scope => :provider
   strip_attributes
   
+  attr_accessible :provider, :uid
+  
   has_paper_trail
   
   # Find or create an identity based on an Omniauth response
@@ -34,6 +36,8 @@ class Identity < ActiveRecord::Base
         id.url = id.urls["Facebook"] if id.urls
       when "twitter"
         id.url = id.urls["Twitter"] if id.urls
+      when "paypal"
+        id.nickname = id.email
     end
     
     id.nickname ||= id.email.split('@').first if id.email
