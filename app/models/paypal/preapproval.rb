@@ -1,4 +1,4 @@
-class Paypal::Preapproval
+class Paypal::Preapproval < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
   def details get_billing_address = true
