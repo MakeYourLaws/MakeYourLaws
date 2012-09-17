@@ -20,17 +20,16 @@ class InitiativesController < ApplicationController
   def index
   end
   
-  def search
-  end
-  
-  def destroy
-  end
+  # def search
+  # end
+  # 
+  # def destroy
+  # end
   
   def edit
   end
   
   def update
-p 'update'
     if @initiative.update_attributes params[:initiative]
       redirect_to @initiative
     else
