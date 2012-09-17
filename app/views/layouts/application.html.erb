@@ -34,8 +34,10 @@
 					<%= image_tag "myl_165.png", :alt => "Make Your Laws logo", :width => 165, :height => 120 %>
 					<center><i><b>This</b> is what democracy looks like.</i></center>
 					<ul>
-						<li><%= link_to_unless_current "Initiatives", initiatives_path %></li>
-						<hr>
+						<% if used_signed_in? %>
+							<li><%= link_to_unless_current "Initiatives", initiatives_path %></li>
+							<hr>
+						<% end %>
 						<li><%= link_to_unless_current "Main", root_path %></li>
 						<li><%= link_to_unless_current "Introduction", introduction_path %></li>
 						<li><%= link_to_unless_current "Principles", principles_path %></li>
