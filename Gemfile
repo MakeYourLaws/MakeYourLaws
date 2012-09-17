@@ -30,7 +30,11 @@ gem 'rvm-capistrano', '>= 1.1.0'
 gem 'Empact-activerecord-import', '>= 0.4.1' # zdennis hasn't yet imported the import profiling fix; this is a bugfix tracking fork
 gem "paper_trail", '>= 2.6.3'
 
+# use MYL's fork of NYT's Fech gem, since it has bugfixes and other features that NYT hasn't committed
+gem 'myl-fech', '>= 1.0.2', :require => 'fech'
+
 gem 'money', '>= 5.0.0'
+gem 'money-rails'
 gem "active_paypal_adaptive_payment"
 
 gem "devise", ">= 2.0.4"
@@ -74,13 +78,15 @@ gem 'newrelic_rpm', ">= 3.4.0"
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'thin'
-  
+  gem 'ruby-prof'
+
   case RUBY_VERSION
     when '1.8.7'
       gem 'ruby-debug'
     when '1.9.2', '1.9.3'
 # there's an error with the standard ruby-debug19 library; cf http://stackoverflow.com/questions/6438116/rails-with-ruby-debugger-throw-symbol-not-found-ruby-current-thread-loaderro
-# uncomment the below on local version - it creates a hardlink to the local rvm directory in Gemfile.lock
+# uncomment the below on local version & bundle install
+# it creates a hardlink to the local rvm directory in Gemfile.lock, which shouldn't be committed to server
 	# gem 'linecache19', '0.5.13', :path => "~/.rvm/gems/ruby-1.9.3-p#{RUBY_PATCHLEVEL}/gems/linecache19-0.5.13/"
 	# gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-p#{RUBY_PATCHLEVEL}/gems/ruby-debug-base19-0.11.26/"
 	# gem 'ruby-debug19', :require => 'ruby-debug'

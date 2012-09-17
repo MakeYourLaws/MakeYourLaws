@@ -17,7 +17,7 @@
 			<div id="hd" role="banner"><!--header / masthead-->
 				<noscript>
 					<div style="font-size: 1.5em;" class="flash error">
-						Please turn on JavaScript!
+						Please turn on JavaScript! We actually do need it to function properly.
 					</div>
 				</noscript>
 				<%= render :partial => '/layouts/user_header' %>
@@ -38,6 +38,7 @@
 						<li><%= link_to_unless_current "Introduction", introduction_path %></li>
 						<li><%= link_to_unless_current "Principles", principles_path %></li>
 						<li><%= link_to_unless_current "Strategy", strategy_path %></li>
+						<li><%= link_to_unless_current "FAQ", faq_path %></li>
 						<li><%= link_to_unless_current "Help us", help_path %></li>
 						<li><%= link_to_unless_current "Contact", contact_path %></li>
 					</ul>

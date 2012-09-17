@@ -1,0 +1,45 @@
+<%= link_to "PayPal transactions list", paypal_transactions_path %>
+
+<h3>Summary</h3>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>source</th>
+		<th>amount</th>
+		<th>status</th>
+		<th>memo</th>
+		<th>updated</th>
+	</tr>
+   <tr>
+    <td><%= @transaction.correlation_id %></td>
+    <td><%= @transaction.source %></td>
+    <td><%= humanized_money_with_symbol @transaction.amount %></td>
+    <td><%= @transaction.status %></td>
+	<td><%= @transaction.memo %>
+    <td><%= l @transaction.updated_at, :format => :short if @transaction.updated_at %></td>
+    <td><%= button_to "Update", refresh_paypal_transaction_path(@transaction), :method => :put %></td>
+	<% unless @transaction.status == 'REFUNDED' %>
+	    <td><%= button_to "Refund", paypal_transaction_path(@transaction), :method => :delete %></td>
+	<% end %>
+   </tr>
+</table>
+
+<h3>Components</h3>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>transaction status</th>
+		<th>receiver</th>
+		<th>amount</th>
+		<th>pending refund</th>
+	</tr>
+	<% @transaction.details['paymentInfoList']['paymentInfo'].each do |subtransaction| %>
+	   <tr>
+	    <td><%= subtransaction['transactionId'] %></td>
+	    <td><%= subtransaction['transactionStatus'] %></td>
+	    <td><%= subtransaction['receiver']['email'] %></td>
+	    <td><%= humanized_money_with_symbol subtransaction['receiver']['amount'] %></td>
+	    <td><%= subtransaction['pendingRefund'] %></td>
+	   </tr>
+	<% end %>
+</table>

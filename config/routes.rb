@@ -10,11 +10,35 @@ MakeyourlawsOrg::Application.routes.draw do
   end
     
 #  match "main" => "main#index", :via => :get  # this is root
-  match "introduction" => "main#introduction", :via => :get
-  match "principles" => "main#principles", :via => :get
-  match "strategy" => "main#strategy", :via => :get
-  match "help" => "main#help", :via => :get
-  match "contact" => "main#contact", :via => :get
+  get "introduction" => "main#introduction"
+  get "principles" => "main#principles"
+  get "strategy" => "main#strategy"
+  get "faq" => "main#faq"
+  get "help" => "main#help"
+  get "contact" => "main#contact"
+  
+  namespace :paypal do
+    resources :transactions do
+      member do
+        put 'refresh'
+      end
+    end
+    resources :notifications, :only => :create
+     # , :only => [:show, :create, :destroy, :update] do 
+      # member do
+      #   get 'completed', :action => :show, :status => 'completed'
+      #   get 'canceled', :action => :show, :status => 'canceled'
+      #   get 'failed', :action => :show, :status => 'failed'
+      # end
+    # end
+    resources :preapprovals # , :only => [:show, :create, :destroy, :update] do
+      # member do
+      #   get 'completed'
+      #   get 'canceled'
+      #   get 'failed'
+      # end
+    # end
+  end
   
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
   

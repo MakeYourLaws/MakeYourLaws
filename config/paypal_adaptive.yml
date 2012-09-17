@@ -1,0 +1,27 @@
+<% # sometimes it thinks we're in root rather than /config
+  file =  File.join File.dirname(__FILE__), '..', 'lib', 'keys.rb'   
+  File.exists?(file) ? require(file) : require(File.join(File.dirname(__FILE__), 'lib', 'keys.rb'))
+%>
+
+basics: &basics
+  login:  <%= Keys.get 'paypal_login' %>
+  password:  <%= Keys.get 'paypal_password' %>
+  signature: <%= Keys.get 'paypal_signature' %>
+  appid: <%= Keys.get 'paypal_app_id' %>
+  <%= cert = "paypal_cert_key_pem.#{Rails.env}"; File.exists?(cert) ? "ssl_cert_file: '#{cert}'" : ''  %>
+  
+development:
+  <<: *basics
+  test: true
+  myl_c3: myl_1340293142_biz@saizai.com
+  myl_c4: myla_1340554564_biz@saizai.com
+  
+test:
+  <<: *basics
+  test: true
+  
+production:
+  <<: *basics
+  myl_c3: c3@makeyourlaws.org
+  myl_c4: c4@makeyourlaws.org
+  myl_pac: pac@makeyourlaws.org
