@@ -6,5 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require rails.validations
+//= require jquery.bettertabs.min
 //= require_tree .

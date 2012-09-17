@@ -1,8 +1,7 @@
 <h2>PayPal transaction</h2>
 
-<%= form_for(:paypal_transaction, :url => paypal_transactions_path) do |f| %>
-  <div><%= f.label :amount %><br />
-  $<%= f.text_field :amount %></div>
+<%= form_for(:paypal_transaction, :url => paypal_transactions_path, :validate => true) do |f| %>
+  <div><%= f.label :amount %> $<%= f.text_field :amount %></div>
 
   <div><%= f.submit "Pay" %></div>
 <% end %>

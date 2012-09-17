@@ -1,4 +1,6 @@
 MakeyourlawsOrg::Application.routes.draw do
+  resources :initiatives
+
   resources :identities
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
