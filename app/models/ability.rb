@@ -15,7 +15,7 @@ class Ability
       if user.id == 1 # admin? 
         can :manage, :all
       else
-        can :create, Initiative
+        can :manage, Initiative
         can :manage, User, :id => user.id
         can :manage, [Paypal::Transaction], #Paypal::Preapproval], 
           :user_id => user.id

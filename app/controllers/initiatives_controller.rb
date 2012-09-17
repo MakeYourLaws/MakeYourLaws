@@ -30,5 +30,12 @@ class InitiativesController < ApplicationController
   end
   
   def update
+p 'update'
+    if @initiative.update_attributes params[:initiative]
+      redirect_to @initiative
+    else
+      flash[:error] = "Error saving initiative"
+      render :edit
+    end
   end
 end
