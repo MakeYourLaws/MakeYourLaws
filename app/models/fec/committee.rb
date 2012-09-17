@@ -1,6 +1,7 @@
 class Fec::Committee < ActiveRecord::Base
   self.table_name = "fec_committees" # use namespaced table
   self.inheritance_column = :_type_disabled # disable STI
+  FILES_DIR = Rails.root.join('db', 'data', 'fec', 'committee_master_files')
   
   has_paper_trail
   
@@ -77,19 +78,19 @@ class Fec::Committee < ActiveRecord::Base
   def self.update!
     # New years' "master" files may or may not include previous years' orgs. Bah.
     %w(80 82 84 86 88 90 92 94 96 98 00 02 04 06 08 10 12).each do |year|
-      prev_mtime = Rails.root.join('db', 'data', "cm#{year}.zip").mtime rescue nil
-      `cd #{Rails.root.join('db', 'data')} && wget -N ftp://ftp.fec.gov/FEC#{"/19#{year}" if year.to_i >= 80}/cm#{year}.zip`
-      mtime = Rails.root.join('db', 'data', "cm#{year}.zip").mtime # -N preserves the ftp server's date
+      prev_mtime = File.join(FILES_DIR, "cm#{year}.zip").mtime rescue nil
+      `cd #{FILES_DIR} && wget -N ftp://ftp.fec.gov/FEC#{"/19#{year}" if year.to_i >= 80}/cm#{year}.zip`
+      mtime = File.join(FILES_DIR, "cm#{year}.zip").mtime # -N preserves the ftp server's date
       next unless !prev_mtime or !last_updated or last_updated < mtime or prev_mtime < mtime
     
-      filename = Rails.root.join('db', 'data', "fec_commitees_#{year}_#{mtime.to_date}.dta")
-      `cd #{Rails.root.join('db', 'data')} && unzip -u -j -o #{Rails.root.join 'db', 'data', "cm#{year}.zip"}`
+      filename = File.join(FILES_DIR, "fec_commitees_#{year}_#{mtime.to_date}.dta")
+      `cd #{FILES_DIR} && unzip -u -j -o #{File.join(FILES_DIR, "cm#{year}.zip")}`
       dataname = case year.to_i
         when 80..87 then "FOIACM.D#{year}"
         when 88..97 then "FOIACM.DTA"
         else 'foiacm.dta'
       end
-      File.rename Rails.root.join('db', 'data', dataname), filename
+      File.rename File.join(FILES_DIR, dataname), filename
     
       begin
         file = File.open(filename, 'r')

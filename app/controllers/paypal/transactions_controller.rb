@@ -1,0 +1,72 @@
+class Paypal::TransactionsController < ApplicationController
+  include ActiveMerchant::Billing::Integrations::Paypal
+  load_and_authorize_resource :class => Paypal::Transaction
+  
+  def index
+  end
+  
+  def new
+  end
+  
+  def show
+    # @transaction = Paypal::Transaction.find params[:id]
+    # @transaction.update_details! # IPN should take care of this
+  end
+  
+  def create
+    # Possible options for setup_purchase:
+    #   :action_type => 'PAY'
+    #   :preapproval_key, :sender_email, :memo, :custom, :fees_payer, :pin, :tracking_id  
+    #   :receiver_list => [ {
+    #     :email, :amount,  # required
+      # payment types: DIGITALGOODS
+    #     :primary, :payment_type, :invoice_id} 
+    #   }]
+    
+    @transaction = Paypal::Transaction.create params[:paypal_transaction]
+    data = urls.merge!({
+      # :tracking_id => @transaction.id,
+      :reverse_all_parallel_payments_on_error => 'true',
+      :receiver_list => [
+        # {:email => PAYPAL.options[:myl_c3], :amount => (@transaction.amount), :currency_code => @transaction.currency},
+        {:email => PAYPAL.options[:myl_c4], :amount => (@transaction.amount), :currency_code => @transaction.currency},
+      ],
+    })
+    pay_response = PAYPAL.setup_purchase data
+    @transaction.pay_key = pay_response.pay_key
+    @transaction.user_id = current_user.id if user_signed_in?
+    @transaction.update_details!
+    if pay_response.success?
+      redirect_to PAYPAL.redirect_url_for @transaction.pay_key
+    else
+      puts pay_response.errors.first['message']
+      redirect_to paypal_transaction_url(@transaction), :status => 'failed'
+    end
+  end
+  
+  def refresh
+    @transaction.update_details!
+    redirect_to paypal_transaction_url(@transaction)
+  end
+  
+  def destroy # refund
+    # @transaction = Paypal::Transaction.find params[:id]
+    response = @transaction.refund!
+    if response.success?
+      flash[:notice] = "Transaction successfully refunded!"
+      redirect_to @transaction
+    else
+      flash[:notice] = "Transaction refund failed - #{response.errors.first['message']}"
+      redirect_to paypal_transaction_url(@transaction), :status => 'failed'
+    end
+  end
+  
+  private
+  
+  def urls
+    {:return_url => paypal_transaction_url(@transaction, :status => 'completed'),
+    :cancel_url => paypal_transaction_url(@transaction, :status => 'canceled'),
+    :ipn_notification_url => paypal_notifications_url,
+    }
+  end
+end

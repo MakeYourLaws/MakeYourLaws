@@ -1,0 +1,33 @@
+<%= link_to "Make new payment", new_paypal_transaction_path %>
+
+<table>
+	<tr>
+		<th>ID</th>
+		<th>source</th>
+		<th>amount</th>
+		<th>status</th>
+		<th>memo</th>
+		<th>updated</th>
+	</tr>
+<% if @transactions.present? %>
+  <% @transactions.each do |transaction| %>
+   <tr>
+    <td><%= transaction.correlation_id %></td>
+    <td><%= transaction.source %></td>
+    <td><%= humanized_money_with_symbol transaction.amount %></td>
+    <td><%= transaction.status %></td>
+	<td><%= transaction.memo %>
+    <td><%= l transaction.updated_at, :format => :short if transaction.updated_at %></td>
+    <td><%= link_to 'Details', transaction %></td>
+    <td><%= button_to "Update", refresh_paypal_transaction_path(transaction), :method => :put %></td>
+	<% unless transaction.status == 'REFUNDED' %>
+	    <td><%= button_to "Refund", paypal_transaction_path(transaction), :method => :delete %></td>
+	<%end %>
+   </tr>
+ <% end %>
+<% else %>
+ <tr>
+   <td colspan=4>You don't have any transactions yet.</td>
+ </tr>
+<% end %>
+</table>

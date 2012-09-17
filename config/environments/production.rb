@@ -49,6 +49,9 @@ MakeyourlawsOrg::Application.configure do
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
 
+  config.after_initialize do
+    Rails.application.routes.default_url_options[:host] = 'www.makeyourlaws.org'
+  end
   config.action_mailer.default_url_options = { :host => 'www.makeyourlaws.org' }
   config.action_mailer.delivery_method = :sendmail # :smtp
   # defaults to -i -t. However, Mail::Sendmail actually puts recipients on the command line, so

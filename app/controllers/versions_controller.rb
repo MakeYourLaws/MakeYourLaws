@@ -1,4 +1,6 @@
 class VersionsController < ApplicationController
+  load_and_authorize_resource
+  
 # TODO: Requires authorization
   # def revert
   #   @version = Version.find(params[:id])
