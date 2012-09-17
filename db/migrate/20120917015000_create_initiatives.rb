@@ -14,6 +14,7 @@ class CreateInitiatives < ActiveRecord::Migration
       t.string :initiative_name  # e.g. 11-0035
       t.string :proposition_name # e.g. Proposition 34
       t.string :title, :null => false  # e.g. Death Penalty Repeal
+      t.string :informal_title 
       t.text :short_summary   # these are all official by LAO / AG / SoS
       t.text :summary
       t.text :analysis

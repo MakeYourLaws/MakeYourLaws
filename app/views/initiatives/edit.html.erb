@@ -1,0 +1,9 @@
+<%= form_for(@initiative, :url => initiative_path(@initiative), :method => :put, :validate => true) do |f| %>
+  <table>
+	<%= render :partial => "initiative_edit", :locals => {:f => f} %>
+    <tr>
+      <td/>
+      <td><%= f.submit "Update initiative" %></td>
+    </tr>
+  </table>
+<% end %>

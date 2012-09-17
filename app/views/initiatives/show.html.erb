@@ -1,5 +1,7 @@
-<h3><%= @initiative.jurisdiction %> <%= @initiative.proposition_name || @initiative.initiative_name %>: <%= @initiative.title %></h3>
+<%= link_to "Edit this initiative", edit_initiative_path(@initiative) %>
 
+<h3><%= @initiative.jurisdiction %> <%= @initiative.proposition_name || @initiative.initiative_name %>: <%= @initiative.title %></h3>
+<% if @initiative.informal_title %><h3><%= @initiative.informal_title %></h3><% end %>
 <h4><%= @initiative.initiator_type %> initiated <%= "indirect" if @initiative.indirect %> <%= @initiative.initiative_type %> — 
 <%= l @initiative.election_date, :format => :long %> <%= @initiative.election_type %> election 
 <%= link_to image_tag("wikipedia_16.png"), @initiative.wikipedia_url if @initiative.wikipedia_url %>
