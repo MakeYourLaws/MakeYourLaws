@@ -31,7 +31,7 @@ MakeyourlawsOrg::Application.routes.draw do
       #   get 'failed', :action => :show, :status => 'failed'
       # end
     # end
-    resources :preapprovals # , :only => [:show, :create, :destroy, :update] do
+    # resources :preapprovals # , :only => [:show, :create, :destroy, :update] do
       # member do
       #   get 'completed'
       #   get 'canceled'
