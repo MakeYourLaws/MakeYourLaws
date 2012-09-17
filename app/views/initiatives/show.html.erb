@@ -1,0 +1,20 @@
+<h3><%= @initiative.jurisdiction %> <%= @initiative.proposition_name || @initiative.initiative_name %>: <%= @initiative.title %></h3>
+
+<h4><%= @initiative.initiator_type %> initiated <%= "indirect" if @initiative.indirect %> <%= @initiative.initiative_type %> — 
+<%= l @initiative.election_date, :format => :long %> <%= @initiative.election_type %> election 
+<%= link_to image_tag("wikipedia_16.png"), @initiative.wikipedia_url if @initiative.wikipedia_url %>
+<%= link_to image_tag("ballotpedia_16.png"), @initiative.ballotpedia_url if @initiative.ballotpedia_url %>
+</h4>
+
+<%= bettertabs :tabs do |tab| %>
+	<%= tab.static :summary do %>
+		<%= m @initiative.short_summary %>
+	<% end if @initiative.short_summary %>
+	<%= tab.static :analysis do %>
+		<p><%= m @initiative.summary %></p>
+		<p><%= m @initiative.analysis %></p>
+	<% end if @initiative.summary or @initiative.analysis %>
+	<%= tab.static :full_text do %>
+		<%= m @initiative.text %>
+	<% end if @initiative.text %>
+<% end if  @initiative.short_summary or @initiative.summary or @initiative.analysis or @initiative.text %>

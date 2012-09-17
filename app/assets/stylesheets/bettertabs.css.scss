@@ -1,0 +1,51 @@
+div.bettertabs {
+  margin: 1em;
+  width: 500px;
+
+  ul.tabs {
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    li {
+      background-color: #ccc;
+      border: 1px solid #999;
+      display: inline;
+      float: left;
+      height: 24px;
+      line-height: 24px;
+      list-style: none outside none;
+      margin-right: .5em;
+      padding-right: .5em;
+      padding-left: .5em;
+      position: relative;
+      top: 1px;
+
+      &.active {
+        height: 25px;
+        background-color: #eee;
+        border-bottom: none;
+	  }
+      
+	  a {
+        font-size: 80%;
+        text-decoration: none;
+        float: left;
+        &.active { color: black }
+        &:link, &:visited { color: #444 }
+        &:hover { color: #000 }
+        &:active { color: #933 }
+        &.ajax-loading { color: #666 }
+	  }
+    }
+  }
+
+  div.content {
+    padding: 1em;
+    border: 1px solid #999;
+    background-color: #eee;
+    clear: left;
+
+    &.hidden { display: none }
+  }
+}

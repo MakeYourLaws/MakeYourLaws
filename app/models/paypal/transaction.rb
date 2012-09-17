@@ -9,6 +9,8 @@ class Paypal::Transaction < ActiveRecord::Base
   
   STATUSES = %W( CREATED COMPLETED INCOMPLETE ERROR REVERSALERROR PROCESSING PENDING )
   
+  validates_numericality_of :amount, :greater_then => 0
+  
   monetize :amount_cents
   attr_accessible :amount, :currency # TODO: remove this after testing
   

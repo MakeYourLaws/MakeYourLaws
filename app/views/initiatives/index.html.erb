@@ -1,0 +1,16 @@
+<%= link_to "Add new", new_initiative_path %>
+
+<table>
+	<tr>
+		<th>Jurisdiction</th>
+		<th>Proposition</th>
+		<th>Title</th>
+	</tr>
+	<% @initiatives.each do |initiative| %>
+	<tr>
+		<td><%= initiative.jurisdiction %></td>
+		<td><%= initiative.proposition_name || initiative.initiative_name %></td>
+		<td><%= link_to initiative.title, initiative %></td>
+	</tr>
+	<% end %>
+</table>

@@ -56,6 +56,9 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bettertabs (1.4)
+      jquery-rails
+      rails (>= 3.1.0)
     builder (3.0.0)
     cancan (1.6.8)
     capistrano (2.12.0)
@@ -101,6 +104,7 @@ GEM
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
+    jquery_datepicker (0.4)
     json (1.7.3)
     jwt (0.1.4)
       json (>= 1.2.4)
@@ -199,6 +203,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (0.9.2.2)
+    rdiscount (1.6.8)
     rdoc (3.12)
       json (~> 1.4)
     ruby-openid (2.2.0)
@@ -245,6 +250,7 @@ DEPENDENCIES
   Empact-activerecord-import (>= 0.4.1)
   active_paypal_adaptive_payment
   bcrypt-ruby (>= 3.0.1)
+  bettertabs
   cancan (>= 1.6.8)
   capistrano (>= 2.12.0)
   client_side_validations (>= 3.1.4)
@@ -256,6 +262,7 @@ DEPENDENCIES
   friendly_id
   it (>= 0.2.3)
   jquery-rails (>= 2.0.2)
+  jquery_datepicker
   json (>= 1.6.6)
   money (>= 5.0.0)
   money-rails
@@ -274,6 +281,7 @@ DEPENDENCIES
   rails (>= 3.2.5)
   rails_email_validator (>= 0.1.4)
   rake (>= 0.9.2.2)
+  rdiscount
   ruby-prof
   rvm-capistrano (>= 1.1.0)
   sass-rails (>= 3.2.5)

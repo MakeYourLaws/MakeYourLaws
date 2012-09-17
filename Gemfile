@@ -26,7 +26,6 @@ gem 'rvm-capistrano', '>= 1.1.0'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
-
 gem 'Empact-activerecord-import', '>= 0.4.1' # zdennis hasn't yet imported the import profiling fix; this is a bugfix tracking fork
 gem "paper_trail", '>= 2.6.3'
 
@@ -64,6 +63,11 @@ group :assets do
 end
 
 gem 'jquery-rails', '>= 2.0.2'
+
+gem 'jquery_datepicker'
+gem 'bettertabs'
+
+gem 'rdiscount' # or maybe bluecloth? TBD
 
 gem "strip_attributes", ">= 1.1.0"
 gem 'client_side_validations', ">= 3.1.4"

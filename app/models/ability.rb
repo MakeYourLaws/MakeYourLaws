@@ -7,7 +7,7 @@ class Ability
     # resource: :all or class name
     # final: conditions hash
     
-    can :read, [User, Fec::Candidate, Fec::Committee]
+    can :read, [User, Fec::Candidate, Fec::Committee, Initiative]
     can :create, [Paypal::Transaction]#, Paypal::Preapproval]
     
     # user ||= User.new # guest user (not logged in)
@@ -15,6 +15,7 @@ class Ability
       if user.id == 1 # admin? 
         can :manage, :all
       else
+        can :create, Initiative
         can :manage, User, :id => user.id
         can :manage, [Paypal::Transaction], #Paypal::Preapproval], 
           :user_id => user.id
