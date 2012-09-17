@@ -91,7 +91,7 @@ namespace :deploy do
     task :symlink, :roles => :app do         
       # Be extra careful about exposing these
       run "chmod -R go-rwx #{shared_path}/config"
-    
+      
       # For all files in the shared config path, symlink in the shared config
       # For some reason, this Dir actually runs on the *local* system rather than the remote. Lame.
       #    Dir[File.join(shared_path, 'config', '**', '*.rb')].each do |c|
