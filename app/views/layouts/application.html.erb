@@ -13,6 +13,9 @@
 		<%= render :partial => '/layouts/mixpanel' %>
 	</head>
 	<body>
+		<script>if (top!= self)  // frame breaker
+		 if (location) top.location.replace(self.location.href) 
+		 else top.document.location.replace(self.document.location.href);</script>
 		<div id="doc" class="yui-t1">
 			<div id="hd" role="banner"><!--header / masthead-->
 				<noscript>

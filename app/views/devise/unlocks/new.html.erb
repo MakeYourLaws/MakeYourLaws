@@ -6,5 +6,5 @@
   <div><%= f.label :login_or_email %><br />
   <%= f.text_field :login_or_email %></div>
 
-  <div><%= f.submit "Resend unlock instructions" %></div>
+  <div><%= f.submit "Resend unlock instructions", :disable_with => "Processing…" %></div>
 <% end %>

@@ -34,7 +34,7 @@
 		<% end %>
 		<tr>
 			<td/>
-			<td><%= f.submit "Update" %></td>
+			<td><%= f.submit "Update", :disable_with => "Processing…" %></td>
 		</tr>
 	</table>
 <% end %>

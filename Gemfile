@@ -66,6 +66,7 @@ gem 'jquery-rails', '>= 2.0.2'
 
 gem 'jquery_datepicker'
 gem 'bettertabs'
+gem 'phone', :git => 'git://github.com/carr/phone.git'
 
 gem 'rdiscount' # or maybe bluecloth? TBD
 

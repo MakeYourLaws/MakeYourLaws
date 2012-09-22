@@ -1,0 +1,9 @@
+<%= form_for(@committee, :url => committees_path, :validate => true) do |f| %>
+  <table>
+	<%= render :partial => "committee_edit", :locals => {:f => f} %>
+    <tr>
+      <td/>
+      <td><%= f.submit "Add committee", :disable_with => "Processing…" %></td>
+    </tr>
+  </table>
+<% end %>

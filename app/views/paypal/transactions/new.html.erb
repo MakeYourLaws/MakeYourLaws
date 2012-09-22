@@ -1,7 +1,32 @@
 <h2>PayPal transaction</h2>
 
-<%= form_for(:paypal_transaction, :url => paypal_transactions_path, :validate => true) do |f| %>
+<%= form_for(@transaction, :url => paypal_transactions_path, :validate => true, :remote => true) do |f| %>
   <div><%= f.label :amount %> $<%= f.text_field :amount %></div>
 
-  <div><%= f.submit "Pay" %></div>
+  <div><%= f.submit "Pay", :disable_with => "Processing…" %></div>
 <% end %>
+<div id='loading' style="display:none;">loading...</div>
+
+<script>
+	jQuery(function($) {
+	  // create a convenient toggleLoading function
+	  var toggleLoading = function() { $("#loading").toggle() };
+	
+	  $("#new_paypal_transaction")
+		 .bind('ajax:beforeSend', function(xhr, settings) {
+			console.log('beforeSend'); console.log(xhr); console.log(settings);
+		})
+		 .bind('ajax:success',    function(xhr, data, status) {
+			console.log('success'); console.log(xhr); console.log(data); console.log(status);
+		})
+		 .bind('ajax:complete', function(xhr, status) {
+			console.log('complete'); console.log(xhr); console.log(status);
+			console.log(status.responseText);
+		})
+		 .bind('ajax:error', function(xhr, data, status) {
+			console.log('error'); console.log(xhr); console.log(data); console.log(status);
+		})
+	});
+</script>
+
+<div id="lightbox_holder"></div>
