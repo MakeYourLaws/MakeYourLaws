@@ -1,3 +1,11 @@
+<% if params[:status] %>
+	<script>
+		dgFlow = top.dgFlow || top.opener.top.dgFlow; 
+		dgFlow.closeFlow(); 
+		top.close();
+	</script>
+<% end %>
+
 <%= link_to "PayPal transactions list", paypal_transactions_path %>
 
 <h3>Summary</h3>

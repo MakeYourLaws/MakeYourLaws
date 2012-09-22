@@ -3,7 +3,7 @@
 	<%= render :partial => "initiative_edit", :locals => {:f => f} %>
     <tr>
       <td/>
-      <td><%= f.submit "Add initiative" %></td>
+      <td><%= f.submit "Add initiative", :disable_with => "Processing…" %></td>
     </tr>
   </table>
 <% end %>

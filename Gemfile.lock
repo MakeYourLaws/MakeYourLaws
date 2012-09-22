@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/carr/phone.git
+  revision: 388c50f95df5dd687509f786173d327cb10fd8b4
+  specs:
+    phone (1.0)
+
+GIT
   remote: git://github.com/surferdwa/omniauth-paypal.git
   revision: e9ebe9de949e2bdd4eb66321e4e4fd902672da54
   specs:
@@ -277,6 +283,7 @@ DEPENDENCIES
   omniauth-paypal (>= 0.1.0)!
   omniauth-twitter (>= 0.0.10)
   paper_trail (>= 2.6.3)
+  phone!
   rack (>= 1.4.1)
   rails (>= 3.2.5)
   rails_email_validator (>= 0.1.4)

@@ -1,0 +1,6 @@
+$('#lightbox_holder').html("<form id='lightbox-form' style='display:none;' action='https://www.<%= 'sandbox.' if Rails.env.development? %>paypal.com/webapps/adaptivepayment/flow/pay' target='PPDGFrame'><input id='type' type='hidden' name='expType' value='light'><% if @transaction.pay_key %><input id='paykey' type='hidden' name='paykey' value='<%= @transaction.pay_key %>'><% end %><% if @preapproval_key %><input id='preapprovalkey' type='hidden' name='preapprovalkey' value='<% @preapproval_key %>'><% end %><input type='submit' id='submitBtn' value='Pay with PayPal'></form><iframe id='PPDGFrame' name='PPDGFrame' src='https://www.<%= 'sandbox.' if Rails.env.development? %>paypal.com/webapps/adaptivepayment/flow/pay?expType=light&paykey=<%= @transaction.pay_key %>&autoredirectondone=' scrolling='no' frameborder='0' style='border: none; height: 550px; width: 385px;' allowtransparency='true'></iframe>");
+
+var dgFlow = new PAYPAL.apps.DGFlow({ trigger: 'submitBtn' });
+$('#lightbox-form').submit();
+
+

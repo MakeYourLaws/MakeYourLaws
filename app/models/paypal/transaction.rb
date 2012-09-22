@@ -57,10 +57,13 @@ class Paypal::Transaction < ActiveRecord::Base
       transaction_status.join(', ')
     end
     self.source = details['senderEmail']
-    self.correlation_id = details['responseEnvelope']['correlationId']
-    self.memo = details['memo']
-    update_subtransactions!
-    self.amount_cents = subtransactions.sum :amount_cents
+    
+    if pay_key
+      self.correlation_id = details['responseEnvelope']['correlationId']
+      self.memo = details['memo']
+      update_subtransactions! 
+      self.amount_cents = subtransactions.sum :amount_cents 
+    end
     save!
   end
   
