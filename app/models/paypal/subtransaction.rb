@@ -5,6 +5,7 @@ class Paypal::Subtransaction < ActiveRecord::Base
   
   belongs_to :transaction
   belongs_to :user
+  has_many :transaction_notifications
   
   monetize :amount_cents
   
