@@ -69,10 +69,12 @@ class Paypal::Transaction < ActiveRecord::Base
   
   def update_subtransactions!
     details['paymentInfoList']['paymentInfo'].each do |subhash|
-      subtx = subtransactions.find_or_initialize_by_paypal_transaction_id(subhash['transactionId'])
-      subtx.set_from_hash subhash
-      subtx.user_id = self.user_id
-      subtx.save!
+      unless subhash['transactionId'].blank?
+        subtx = subtransactions.find_or_initialize_by_paypal_transaction_id(subhash['transactionId'])
+        subtx.set_from_hash subhash
+        subtx.user_id = self.user_id
+        subtx.save! 
+      end
     end
   end
   
