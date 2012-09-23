@@ -25,7 +25,8 @@ MakeyourlawsOrg::Application.routes.draw do
         put 'refresh'
       end
     end
-    resources :notifications, :only => :create
+    resources :notifications, :only => :create  # IPN
+    resources :transaction_notifications, :only => :create # PDT
      # , :only => [:show, :create, :destroy, :update] do 
       # member do
       #   get 'completed', :action => :show, :status => 'completed'
