@@ -9,7 +9,7 @@
 	</tr>
   <% transactions.each do |transaction| %>
    <tr>
-    <td><%= transaction.correlation_id %></td>
+    <td><%= transaction.id %></td>
     <td><%= transaction.source %></td>
     <td><%= humanized_money_with_symbol transaction.amount %></td>
     <td><%= transaction.status %></td>
