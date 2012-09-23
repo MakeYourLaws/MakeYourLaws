@@ -11,6 +11,8 @@ class Committee < ActiveRecord::Base
   COMMITTEE_TYPES = ["General purpose", "Small contributor", "Independent expenditure", "Non-contribution"]
   CORPORATION_TYPES = ["501(c)3", "501(c)4", "527 PAC", "527 multicandidate PAC", "527 Super PAC IEOC", "527 Hybrid Super PAC", "527 Non-PAC", "527 SSF", "527 Leadership PAC"]
   
+  attr_accessible :jurisdiction, :legal_id, :acronym, :short_name, :full_name, :type, :foreign_contributions_okay, :corporation_full_name, :corporation_acronym, :corporation_type, :corporation_ein, :contact_name, :contact_title, :email, :phone, :url, :party, :address, :paypal_email, :notes
+  
   validates :email, :email => true
   validates :paypal_email, :email => true
   validates :url, :uri => true
