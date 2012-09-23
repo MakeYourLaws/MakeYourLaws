@@ -1,3 +1,5 @@
+# This is for the PDT type IPN. It's what's triggered by the IPN setting in the paypal website, as opposed to the IPN callback set in the payment request itself.
+# PDTs are more detail about a particular subtransaction, as opposed to the general IPN which is about the whole lump.
 class Paypal::TransactionNotificationsController < ApplicationController
   include ActiveMerchant::Billing::Integrations::Paypal
   skip_before_filter :verify_authenticity_token # API call
