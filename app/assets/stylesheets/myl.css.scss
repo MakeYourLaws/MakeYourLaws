@@ -13,6 +13,8 @@ q {
 	&:after  { content: close-quote; }
 }
 
+outlinks img { border:0; width:32px; height:32px; }
+
 cite:before { content: "\2014 "; }
 
 #toc {
