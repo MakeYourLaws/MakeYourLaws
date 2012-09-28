@@ -46,7 +46,7 @@
 						<li><%= link_to_unless_current "Principles", principles_path %></li>
 						<li><%= link_to_unless_current "Strategy", strategy_path %></li>
 						<li><%= link_to_unless_current "FAQ", faq_path %></li>
-						<li><%= link_to_unless_current "Help us", help_path %></li>
+						<li><%= link_to_unless_current "Help us", help_path %> - <%= link_to_unless_current "legal", help_legal_path %></li>
 						<li><%= link_to_unless_current "Contact", contact_path %></li>
 					</ul>
 					<%= render :partial => 'layouts/google_analytics' %>
