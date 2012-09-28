@@ -9,3 +9,4 @@ vendor/cache/
 .project
 *.sql
 db/data/
+public/files/

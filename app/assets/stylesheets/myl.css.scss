@@ -49,7 +49,7 @@ hr {
 ul { list-style: none; 
 	li { list-style: none; }
 	&.bullet { list-style: disc outside; 
-		li { list-style: disc outside; }
+		li { list-style: disc outside; margin-bottom: 0.5em; }
 	}
 	&.flush {
 		margin: 0 0 1ex 0;
