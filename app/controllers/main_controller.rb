@@ -22,4 +22,8 @@ class MainController < ApplicationController
   def help
     track! 'page load', :page => 'help'
   end
+  
+  def help_legal
+    track! 'page load', :page => 'help_legal'
+  end
 end

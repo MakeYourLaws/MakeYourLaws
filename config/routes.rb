@@ -18,6 +18,7 @@ MakeyourlawsOrg::Application.routes.draw do
   get "faq" => "main#faq"
   get "help" => "main#help"
   get "contact" => "main#contact"
+  get "help/legal" => "main#help_legal"
   
   namespace :paypal do
     resources :transactions do
