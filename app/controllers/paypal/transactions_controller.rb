@@ -23,11 +23,9 @@ class Paypal::TransactionsController < ApplicationController
     #     :primary, :payment_type, :invoice_id} 
     #   }]
     
-p'create'
     @transaction = Paypal::Transaction.create params[:paypal_transaction]
-p @transaction
     data = urls.merge!({
-      # :tracking_id => @transaction.id,
+      :tracking_id => @transaction.id,
       :reverse_all_parallel_payments_on_error => 'true',
       :receiver_list => [
         # {:email => PAYPAL.options[:myl_c3], :amount => (@transaction.amount), :currency_code => @transaction.currency},
@@ -35,14 +33,10 @@ p @transaction
       ],
     })
     pay_response = PAYPAL.setup_purchase data
-p pay_response
-    @transaction.pay_key = pay_response.pay_key
-    @transaction.user_id = current_user.id if user_signed_in?
-p @transaction
-    @transaction.update_details!
-p @transaction
-p 'formatting'
     if pay_response.success?
+      @transaction.pay_key = pay_response.pay_key
+      @transaction.user_id = current_user.id if user_signed_in?
+      @transaction.update_details!
       respond_to do |format|
         format.html { redirect_to PAYPAL.embedded_flow_url_for @transaction.pay_key }
           # redirect_to PAYPAL.redirect_url_for @transaction.pay_key }

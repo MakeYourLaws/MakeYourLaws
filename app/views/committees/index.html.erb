@@ -1,25 +1,14 @@
-<p>Howdy! This is totally not ready for prime time yet.</p>
-
-<p>However, you can help! Go <a href="http://www.ballotpedia.org/wiki/index.php/2012_ballot_measures">here</a> for a list of all the ballot measures on the November ballot, and start adding them into the system below. It's OK if you don't have it 100% accurate; I'll review 'em anyway.</p>
-
-<p>Be sure to use only the official title, summary, etc.</p>
-
-<p>Thanks! - Sai</p>
-
-
-<%= link_to "Add new", new_initiative_path %>
+<%= link_to "Add new", new_committee_path %>
 
 <table>
 	<tr>
 		<th>Jurisdiction</th>
-		<th>Proposition</th>
-		<th>Title</th>
+		<th>Name</th>
 	</tr>
-	<% @initiatives.each do |initiative| %>
+	<% @committees.each do |committee| %>
 	<tr>
-		<td><%= initiative.jurisdiction %></td>
-		<td><%= initiative.proposition_name || initiative.initiative_name %></td>
-		<td><%= link_to initiative.title, initiative %></td>
+		<td><%= committee.jurisdiction %></td>
+		<td><%= link_to committee.short_name, committee %></td>
 	</tr>
 	<% end %>
 </table>
