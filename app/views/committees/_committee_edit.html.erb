@@ -1,35 +1,3 @@
-t.references :legal_committee, :polymorphic => true # eg an Fec::Committee, etc
-t.string :jurisdiction # e.g. "California", "United States"
-t.string :acronym
-t.string :short_name # e.g. "No on 29"
-t.string :full_name # full formal name, e.g. "No on 29—Californians Against Out-of-Control Taxes and Spending, a coalition of taxpayers, small businesses, law enforcement and labor"
-t.string :type 
-t.string :legal_id # according to the state campaign finance regulator
-
-# TODO: normalize out
-# This is the corporation owning the committee, if any
-t.string :corporation_acronym
-t.string :corporation_full_name
-t.string :corporation_type # 501(c)3, 501(c)4, 527 PAC, 527 multicandidate PAC, 527 Super PAC, 527 Hybrid Super PAC, 527 Non-PAC, 527 SSF, 527 Leadership PAC, etc
-t.string :corporation_ein
-
-t.string :contact_name # i.e. the main human in charge
-t.string :contact_title
-t.string :email
-t.string :phone
-t.string :url
-t.string :party # if affiliated
-
-t.string :address # for sending checks; will be made out to the full name
-t.string :paypal_email
-
-t.string :status
-t.text :notes # for admins only
-
-t.boolean :foreign_contributions_okay, :default => false
-
-
-
 <tr>
 	<td><%= f.label :jurisdiction, :class => 'required' %></td>
 	<td><%= f.select :jurisdiction, JURISDICTIONS, {:include_blank => true } %></td>
@@ -59,7 +27,7 @@ t.boolean :foreign_contributions_okay, :default => false
 	<td><%= f.label :foreign_contributions_okay %></td>
 	<td><%= f.check_box :foreign_contributions_okay %></td>
 	<td><i>leave false until we get FEC advice</i></td>
-<hr>
+<tr><td colspan=2><hr></td></tr>
 <tr>
 	<td><%= f.label :corporation_full_name %></td>
 	<td><%= f.text_field :corporation_full_name %></td>
@@ -78,7 +46,7 @@ t.boolean :foreign_contributions_okay, :default => false
 	<td><%= f.label :corporation_ein %></td>
 	<td><%= f.text_field :corporation_ein %></td>
 </tr>
-<hr>
+<tr><td colspan=2><hr></td></tr>
 <tr>
 	<td><%= f.label :contact_name %></td>
 	<td><%= f.text_field :contact_name %></td>
@@ -104,7 +72,7 @@ t.boolean :foreign_contributions_okay, :default => false
 	<td><%= f.text_field :party %></td>
 	<td><i>if affiliated, de facto or official</i></td>
 </tr>
-<hr>
+<tr><td colspan=2><hr></td></tr>
 <tr>
 	<td><%= f.label :address %></td>
 	<td><%= f.text_field :address %></td>
@@ -114,7 +82,7 @@ t.boolean :foreign_contributions_okay, :default => false
 	<td><%= f.label :paypal_email %></td>
 	<td><%= f.text_field :paypal_email %></td>
 </tr>
-<hr>
+<tr><td colspan=2><hr></td></tr>
 <tr>
 	<td><%= f.label :notes %></td>
 	<td><%= f.text_area :notes %></td>
