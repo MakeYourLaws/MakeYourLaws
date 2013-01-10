@@ -29,6 +29,12 @@ gem 'rvm-capistrano', '>= 1.1.0'
 gem 'Empact-activerecord-import', '>= 0.4.1' # zdennis hasn't yet imported the import profiling fix; this is a bugfix tracking fork
 gem "paper_trail", '>= 2.6.3'
 
+# NoMethodError: undefined method `[]' for #<ActiveRecord::Reflection::AssociationReflection:0x007fe9a2743860>
+# gem 'has_many_polymorphs', :git => 'git://github.com/jystewart/has_many_polymorphs.git'
+
+gem 'apotomo'
+gem 'state_machine'
+
 # use MYL's fork of NYT's Fech gem, since it has bugfixes and other features that NYT hasn't committed
 gem 'myl-fech', '>= 1.0.2', :require => 'fech'
 
