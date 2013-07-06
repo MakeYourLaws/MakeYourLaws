@@ -17,6 +17,7 @@ en:
       unauthenticated: 'You need to sign in or sign up before continuing.'
       unconfirmed: "You need to confirm your email account before continuing. Please check your email for a confirmation link (it's already been sent)."
       locked: "Your account is locked for entering the wrong password too many times in a row. Wait a couple hours or check your email for an unlock link (it's already been sent)."
+      not_found_in_database: 'Invalid email or password.'
       invalid: 'Invalid login/email or password.'
       invalid_token: 'Invalid authentication token.'
       timeout: 'Your session has expired. Please sign in again to continue.'

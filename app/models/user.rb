@@ -5,13 +5,13 @@ class User < ActiveRecord::Base
          :lockable, :timeoutable, :omniauthable, :authentication_keys => [:login_or_email]
   
   has_many :identities
-
+  has_many :carts
+  has_one :current_cart, :class_name => 'Cart', :conditions => {:state => [:empty, :filled, :checked_out]}
+  
   extend FriendlyId
   friendly_id :login
   
-  # Setup accessible (or protected) attributes for your model
   attr_accessor :login_or_email, :strength_mock
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :login, :login_or_email
   
   has_paper_trail
   strip_attributes

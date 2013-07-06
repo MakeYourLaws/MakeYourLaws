@@ -5,5 +5,5 @@ class Version < ActiveRecord::Base
     PaperTrail.whodunnit = "#{`whoami`.strip}: rake #{ARGV.join ' '}"
   end
   
-  attr_accessible :ip
+  # attr_accessible :ip
 end

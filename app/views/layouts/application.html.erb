@@ -2,9 +2,10 @@
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
 	<head>
 		<meta http-equiv="Content-Type" Content="text/html;charset=UTF-8">
-		<%= stylesheet_link_tag "application" %>
-		<%= javascript_include_tag "application" %>
+		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 		<%= csrf_meta_tags %>
+		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 		<%= favicon_link_tag %>
 		<meta name="title" content="Make Your Laws" />
 		<meta name="robots" content="all" />
@@ -24,9 +25,18 @@
 					</div>
 				</noscript>
 				<%= render :partial => '/layouts/user_header' %>
+				<%= # render_widget :cart, :show, :user => current_user 
+				%>
 				<%= render :partial => '/layouts/flashes' -%>
 			</div> 
 			<div id="bd"><!--body-->
+
+				<% if user_signed_in? %>
+				<div class="flash info">Howdy. This is EARLY ALPHA software under active development.
+					There's really not much to see here yet, sorry; we're still working on making the platform. 
+					If you're impatient, you should consider joining the MYL team. ;-)</div>
+				<% end %>
+				
 				<div id="yui-main"> 
 					<div class="yui-b" id="content"  role="main"><!--primary-->
 						<%= yield %>		
@@ -38,6 +48,7 @@
 					<center><i><b>This</b> is what democracy looks like.</i></center>
 					<ul>
 						<% if user_signed_in? %>
+							<li><%= link_to_unless_current "Committees", committees_path %></li>
 							<li><%= link_to_unless_current "Initiatives", initiatives_path %></li>
 							<hr>
 						<% end %>

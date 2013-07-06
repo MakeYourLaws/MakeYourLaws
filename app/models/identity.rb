@@ -4,7 +4,7 @@ class Identity < ActiveRecord::Base
   validates_uniqueness_of :uid, :scope => :provider
   strip_attributes
   
-  attr_accessible :provider, :uid
+  # attr_accessible :provider, :uid
   
   has_paper_trail
   

@@ -4,6 +4,9 @@ class Committee < ActiveRecord::Base
   strip_attributes
   
   belongs_to :legal_committee, :polymorphic => true
+  has_many :cart_items
+  has_many :carts, :through => :cart_items
+  
   validates_associated :legal_committee
   validates_inclusion_of :jurisdiction, :in => JURISDICTIONS
   validates_presence_of :jurisdiction, :full_name
