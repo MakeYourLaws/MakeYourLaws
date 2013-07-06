@@ -1,0 +1,29 @@
+<%= render_widget :cart_item, :new, :committee => @committee, :user => current_user %>
+
+<%= link_to "Edit this committee", edit_committee_path(@committee) %>
+
+<h3><%= @committee.short_name || @committee.full_name %> <%= "(#{@committee.acronym})" if @committee.acronym %> <%= link_to "website", @committee.url if @committee.url %></h3>
+<% if @committee.short_name and @committee.full_name %><h4><%= @committee.full_name %></h4><% end %>
+<h4>
+	<%= @committee.jurisdiction %> <%= @committee.type %> committee, ID#<%= @committee.legal_id %> <%= "(#{@committee.party})" if @committee.party %>
+</h4>
+
+<i>This committee <b><%= @committee.foreign_contributions_okay ? "can" : "cannot" %></b> accept foreign national contributions.</i>
+
+<% if @committee.corporation_full_name %>
+	<p>Run by <%= @committee.corporation_ful_name %> <%= "(#{@committee.corporation_acronym})" if @committee.corporation_acronym %> 	
+	<%= @committee.corporation_type %> <%= "EIN #{@committee.corporation_ein }" if @committee.corporation_ein %></p>
+<% end %>
+
+<p>
+	<%= @committee.contact_name %> <%= "(#{@committee.contact_title})" if @committee.contact_title %>
+	<%= link_to @committee.email if @committee.email %>
+	<%= @committee.address %>
+</p>
+
+<% if user_signed_in? and current_user.id == 1 %>
+	<p>Status: <%= @committee.status %></p>
+	<p>Notes: <%= @commitee.notes %></p>
+<% end %>
+
+<%= link_to @committee.legal_commmittee if @committee.legal_committee %>

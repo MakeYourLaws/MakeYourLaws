@@ -16,7 +16,7 @@
 	<td><%= transaction.memo %>
     <td><%= l transaction.updated_at, :format => :short if transaction.updated_at %></td>
     <td><%= link_to 'Details', transaction %></td>
-    <td><%= button_to "Update", refresh_paypal_transaction_path(transaction), :method => :put %></td>
+    <td><%= button_to "Update", refresh_paypal_transaction_path(transaction), :method => :patch %></td>
 	<% unless transaction.status == 'REFUNDED' %>
 	    <td><%= button_to "Refund", paypal_transaction_path(transaction), :method => :delete %></td>
 	<%end %>

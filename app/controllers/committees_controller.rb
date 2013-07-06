@@ -37,4 +37,12 @@ class CommitteesController < ApplicationController
       render :edit
     end
   end
+  
+  private
+  
+  def committee_params
+    # attr_protected :id, :created_at, :fec_id
+    params.require(:committee)
+  end
+  
 end

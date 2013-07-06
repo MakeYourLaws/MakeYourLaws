@@ -1,0 +1,8 @@
+<%= widget_div do %>
+	<% if !@present %>
+		<%= button_to 'Add to cart', url_for_event(:create, :committee_id => @committee.id), :remote => true %>
+	<% else %>
+		Added to cart
+		<%= link_to 'Check out', @cart %>
+	<% end %>
+<% end %>

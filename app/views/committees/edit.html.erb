@@ -1,4 +1,4 @@
-<%= form_for(@committee, :url => committee_path(@committee), :method => :put, :validate => true) do |f| %>
+<%= form_for(@committee, :url => committee_path(@committee), :method => :patch, :validate => true) do |f| %>
   <table>
 	<%= render :partial => "committee_edit", :locals => {:f => f} %>
     <tr>

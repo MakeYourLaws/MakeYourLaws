@@ -1,0 +1,130 @@
+<h2>Stripe transaction</h2>
+
+
+<%= form_for(:charge, url: stripe_charges_path, remote: true, html: {novalidate: true, auotcomplete: 'on', id: 'stripe_form'}) do |f| %>
+  	<span class="payment-errors errors"></span>
+
+	<table>
+		<tr>
+			<td>Card number</td>
+			<td>
+				<input type="text" id="cc-number" pattern="\d*" x-autocompletetype="cc-number" placeholder="Card number" required="" data-stripe="number">
+				<span class="inline_validation">
+					<% [ 'amex', 'dinersclub', 'discover', 'jcb', 'maestro', 'mastercard', 'visa' ].each do |card| %>
+						<%= image_tag "#{card}_16.png" %>
+					<% end %>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td>Expiration</td>
+			<td>
+				<input type="text" id="cc-exp" pattern="\d*" x-autocompletetype="cc-exp" placeholder="Expires MM/YY" required="" maxlength="9">
+				<span class="inline_validation"></span>
+				<input id="cc-exp-month" type="hidden" data-stripe="exp-month"/>
+				<input id="cc-exp-year" type="hidden" data-stripe="exp-year"/>
+			</td>
+		</tr>
+		<tr>
+			<td>CVC</td>
+			<td>
+				<input type="text" id="cc-cvc" pattern="\d*" x-autocompletetype="cc-csc" placeholder="Security code" required="" maxlength="4" autocomplete="off" data-stripe="cvc">
+				<span class="inline_validation"></span>
+				<span class="help"></span>
+			</td>
+		</tr>
+	</table>
+	
+	<input type="hidden" id="stripe_token" name="stripe_id">
+	
+	<div><%= f.submit "Pay", :disable_with => "Processing…" %></div>
+<% end %>
+
+
+<script>
+	Stripe.setPublishableKey('<%= Keys.get "stripe_public_pac" %>');
+
+	var acceptedCards = [ 'amex', 'dinersclub', 'discover', 'jcb', 'maestro', 'mastercard', 'visa' ]
+	
+	$('#cc-number').payment('formatCardNumber');
+	$('#cc-number').change(function() { 
+		var cardType = $.payment.cardType($('#cc-number').val());
+		var valid = $.payment.validateCardNumber($(this).val());
+		if (valid && ($.inArray(cardType, acceptedCards) > -1)) {
+			$(this).nextAll('.inline_validation').html("<img src='/assets/" + cardType + "_16.png' />");
+		} else if (valid) {
+			$(this).nextAll('.inline_validation').text("Card not accepted. Please use American Express, Diners Club, Discover, JCB, Maestro, MasterCard, or Visa.")
+		} else {
+			$(this).nextAll('.inline_validation').text("Card invalid.")
+		}
+		
+		$(this).toggleClass('invalid', !valid);
+		$(this).toggleClass('valid', valid);
+	});
+	$('#cc-exp').payment('formatCardExpiry');
+	$('#cc-exp').change(function() { 
+		var expiry = $(this).payment('cardExpiryVal');
+		var valid = $.payment.validateCardExpiry(expiry);
+		$(this).toggleClass('invalid', !valid);
+		$(this).toggleClass('valid', valid);
+		$('#cc-exp-month').val(expiry['month']);
+		$('#cc-exp-year').val(expiry['year']);
+	});
+	$('#cc-cvc').payment('formatCardCVC');
+	$('#cc-cvc').change(function() {
+		var cardType = $.payment.cardType($('#cc-number').val());
+		var valid = $.payment.validateCardCVC($(this).val(), cardType);
+		$(this).toggleClass('invalid', !valid);
+		$(this).toggleClass('valid', valid);
+	});
+	
+	$('#cc-cvc').focus(function() {
+		var cardType = $.payment.cardType($('#cc-number').val());
+		$(this).nextAll('.help').html("<img src='/assets/cvc_"  + (cardType == 'amex' ? 'amex' : 'normal') + "_128.png' style='float:right;' />");
+		$(this).nextAll('.help').show();
+	});
+
+	$('#cc-cvc').blur(function() {
+		$(this).nextAll('.help').hide();
+	});
+	
+	var stripeResponseHandler = function(status, response) {
+	  var form = $('#stripe_form');
+	  if (response.error) {
+	    // Show the errors on the form
+	    form.find('.payment-errors').text(response.error.message);
+	    form.find('button').prop('disabled', false);
+	  } else {
+
+	    // token contains id, last4, and card type
+	    var token = response.id;
+	    // Insert the token into the form so it gets submitted to the server
+	    $('#stripe_token').val(token);
+	    // and submit
+// form.find('button').prop('disabled', false);
+	    // form.get(0).ajaxSubmit();
+		
+		$.ajax({
+	      type: form.attr('method'),
+	      url: form.attr('action'),
+	      data: form.serialize()
+	    }).done(function(data, textStatus, jqXHR) {
+		console.log(data);
+	      // Optionally alert the user of success here...
+	    }).fail(function(jqXHR, textStatus, errorThrown) {
+	      // Optionally alert the user of an error here...
+	    });
+	  }
+	};
+
+	$('#stripe_form').submit(function(e){
+		e.preventDefault();
+		
+		var form = $(this);
+	    // Disable the submit button to prevent repeated clicks
+	    form.find('button').prop('disabled', true);
+	    Stripe.createToken(form, stripeResponseHandler);
+	    // Prevent the form from submitting with the default action
+	    return false;
+	});
+</script>

@@ -101,7 +101,8 @@ tr.even { background: #F5FFFF; }
 
 ol li { list-style: decimal; }
 
-#header {
+.header {
+	float: right;
 	text-align: right;
 	margin: 1em;
 	padding-bottom: 0.5em;
@@ -175,4 +176,24 @@ blockquote {
 			text-decoration:	none;
 		}
 	}
+}
+
+.invalid {
+	border: 2px solid red;
+	+ .inline_validation {
+		color: red;
+	/*	content: '✘';*/
+	}
+}
+
+.valid {
+	border: 1px solid blue;
+	 + .inline_validation {
+		color: green;
+	/*    content: '✔';*/
+	}
+}
+
+.errors {
+	color: red;
 }

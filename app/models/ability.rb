@@ -9,6 +9,7 @@ class Ability
     
     can :read, [User, Fec::Candidate, Fec::Committee, Initiative]
     can :create, [Paypal::Transaction]#, Paypal::Preapproval]
+    can :create, [Stripe::Charge]#, Paypal::Preapproval]
     
     # user ||= User.new # guest user (not logged in)
     if user
@@ -17,7 +18,9 @@ class Ability
       else
         can :manage, [Initiative, Committee]
         can :manage, User, :id => user.id
-        can :manage, [Paypal::Transaction], #Paypal::Preapproval], 
+        can :manage, [Paypal::Transaction, Cart], #Paypal::Preapproval], 
+          :user_id => user.id
+        can :manage, [Stripe::Charge, Cart],
           :user_id => user.id
       end
     end

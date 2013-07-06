@@ -32,7 +32,6 @@ class Fec::Committee < ActiveRecord::Base
   belongs_to :connected_organization, :foreign_key => 'connected_organization_name', :primary_key => 'name', :class_name => 'Fec::Committee'
   belongs_to :candidate, :primary_key => 'fec_id', :class_name => 'Fec::Candidate'  
   
-  attr_protected :id, :created_at, :fec_id
   before_validation do
     clean_attribs = (self.attributes.map do |k,v| 
       if v.is_a?(String)

@@ -1,0 +1,7 @@
+<%= widget_div :class => 'header' do %>
+	<% if @cart.new_record? %>
+		Cart empty
+	<% else %>
+		<%= link_to 'Cart', @cart %>: <%= @cart.cart_items_count %> items
+	<% end %>
+<% end %>
