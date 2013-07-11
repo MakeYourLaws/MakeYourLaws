@@ -13,4 +13,11 @@ class CartsController < ApplicationController
   def destroy 
     
   end  
+  
+  private
+  
+  def cart_params
+    params.require(:cart).permit(:total_cents, :currency)
+  end
+  
 end

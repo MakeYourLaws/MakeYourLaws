@@ -12,7 +12,6 @@ class Paypal::Transaction < ActiveRecord::Base
   validates_numericality_of :amount, :greater_then => 0
   
   monetize :amount_cents
-  attr_accessible :amount, :currency # TODO: remove this after testing
   
   # response:
   # ack / success?, timestamp, build, correlation_id, request, response

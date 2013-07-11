@@ -5,6 +5,8 @@ class Fec::Candidate < ActiveRecord::Base
   
   has_paper_trail
   
+  # attr_protected :id, :created_at, :fec_id
+  
   # source: ftp://ftp.fec.gov/FEC/cn12.zip - updated weekly
                                                                           # length start end
   validates_uniqueness_of :fec_id                                         #  9   0    8
@@ -36,7 +38,6 @@ class Fec::Candidate < ActiveRecord::Base
     
   belongs_to :committee, :foreign_key => "principal_campaign_committee", :primary_key => 'fec_id', :class_name => 'Fec::Committee'
   
-  attr_protected :id, :created_at, :fec_id
   before_validation do
     clean_attribs = (self.attributes.map do |k,v|
       if v.is_a?(String)

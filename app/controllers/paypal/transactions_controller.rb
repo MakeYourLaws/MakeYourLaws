@@ -9,7 +9,7 @@ class Paypal::TransactionsController < ApplicationController
   end
   
   def show
-    # @transaction = Paypal::Transaction.find params[:id]
+    # @transaction = Paypal::Transaction.find transaction_params
     # @transaction.update_details! # IPN should take care of this
   end
   
@@ -23,7 +23,7 @@ class Paypal::TransactionsController < ApplicationController
     #     :primary, :payment_type, :invoice_id} 
     #   }]
     
-    @transaction = Paypal::Transaction.create params[:paypal_transaction]
+    @transaction = Paypal::Transaction.create transaction_params
     data = urls.merge!({
       :tracking_id => @transaction.id,
       :reverse_all_parallel_payments_on_error => 'true',
@@ -54,7 +54,7 @@ class Paypal::TransactionsController < ApplicationController
   end
   
   def destroy # refund
-    # @transaction = Paypal::Transaction.find params[:id]
+    # @transaction = Paypal::Transaction.find transaction_params
     response = @transaction.refund!
     if response.success?
       flash[:notice] = "Transaction successfully refunded!"
@@ -73,4 +73,10 @@ class Paypal::TransactionsController < ApplicationController
     :ipn_notification_url => paypal_notifications_url,
     }
   end
+  
+  def transaction_params
+    # attr_accessible :amount, :currency # TODO: remove this after testing
+    params.require(:paypal_transaction).permit(:amount, :currency)
+  end
+  
 end

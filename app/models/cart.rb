@@ -7,7 +7,6 @@ class Cart < ActiveRecord::Base
   has_many :cart_items
   has_many :committees, :through => :cart_items
   
-  attr_accessible :total_cents, :currency
   has_paper_trail
   
   

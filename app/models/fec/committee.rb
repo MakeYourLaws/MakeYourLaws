@@ -4,6 +4,7 @@ class Fec::Committee < ActiveRecord::Base
   FILES_DIR = Rails.root.join('db', 'data', 'fec', 'committee_master_files')
   
   has_paper_trail
+  # attr_protected :id, :created_at, :fec_id
   
   # source: ftp://ftp.fec.gov/FEC/cm12.zip - updated weekly
                                                                           # length start end
