@@ -41,8 +41,10 @@ class CommitteesController < ApplicationController
   private
   
   def committee_params
-    # attr_protected :id, :created_at, :fec_id
-    params.require(:committee)
+    params.require(:committee).permit(:jurisdiction, :legal_id, :acronym, :short_name, :full_name, 
+      :type, :foreign_contributions_okay, :corporation_full_name, :corporation_acronym, :corporation_type, 
+      :corporation_ein, :contact_name, :contact_title, :email, :phone, :url, :party, :address, 
+      :paypal_email, :notes)
   end
   
 end

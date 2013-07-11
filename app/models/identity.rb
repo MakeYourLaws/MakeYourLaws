@@ -3,9 +3,7 @@ class Identity < ActiveRecord::Base
   validates_presence_of :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
   strip_attributes
-  
-  # attr_accessible :provider, :uid
-  
+    
   has_paper_trail
   
   # Find or create an identity based on an Omniauth response
