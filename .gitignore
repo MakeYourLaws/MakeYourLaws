@@ -10,3 +10,5 @@ vendor/cache/
 *.sql
 db/data/
 public/files/
+doc/wallet-instantbuy-quickstart-ruby
+
