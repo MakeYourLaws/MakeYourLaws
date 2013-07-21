@@ -100,11 +100,6 @@ MakeyourlawsOrg::Application.configure do
   
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
-
-  config.middleware.use ExceptionNotifier,
-    :email_prefix => "[MYL] ",
-    :sender_address => %{"MYL Exception Notifier" <noreply@makeyourlaws.org>},
-    :exception_recipients => %w{makeyourlaws+exceptions@saizai.com}
     
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new

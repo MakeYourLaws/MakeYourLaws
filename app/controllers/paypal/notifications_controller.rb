@@ -6,8 +6,8 @@ class Paypal::NotificationsController < ApplicationController
   def create
     notify = ActiveMerchant::Billing::Integrations::PaypalAdaptivePayment::Notification.new(request.raw_post)
     
-    @transaction = Paypal::Transaction.find_by_pay_key notify.params['pay_key']
-    @notification = Paypal::Notification.new
+    @transaction = Payments::Paypal::Transaction.find_by_pay_key notify.params['pay_key']
+    @notification = Payments::Paypal::Notification.new
     @notification.details_json = notify.params.to_json
     
     # Common keys: action_type cancel_url charset fees_payer ipn_notification_url log_default_shipping_address_in_transaction notify_version pay_key payment_request_date return_url reverse_all_parallel_payments_on_error sender_email status transaction_type verify_sign

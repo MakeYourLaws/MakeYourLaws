@@ -1,4 +1,4 @@
-class Stripe::Customer < ActiveRecord::Base
+class Payments::Stripe::Customer < ActiveRecord::Base
   self.table_name = "stripe_customers" # use namespaced table
   include Rails.application.routes.url_helpers
   has_paper_trail

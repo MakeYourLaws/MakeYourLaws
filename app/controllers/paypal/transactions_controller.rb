@@ -1,6 +1,6 @@
 class Paypal::TransactionsController < ApplicationController
   include ActiveMerchant::Billing::Integrations::Paypal
-  load_and_authorize_resource :class => Paypal::Transaction
+  load_and_authorize_resource :class => Payments::Paypal::Transaction
   
   def index
   end
@@ -9,7 +9,7 @@ class Paypal::TransactionsController < ApplicationController
   end
   
   def show
-    # @transaction = Paypal::Transaction.find transaction_params
+    # @transaction = Payments::Paypal::Transaction.find transaction_params
     # @transaction.update_details! # IPN should take care of this
   end
   
@@ -23,7 +23,7 @@ class Paypal::TransactionsController < ApplicationController
     #     :primary, :payment_type, :invoice_id} 
     #   }]
     
-    @transaction = Paypal::Transaction.create transaction_params
+    @transaction = Payments::Paypal::Transaction.create transaction_params
     data = urls.merge!({
       :tracking_id => @transaction.id,
       :reverse_all_parallel_payments_on_error => 'true',
@@ -54,7 +54,7 @@ class Paypal::TransactionsController < ApplicationController
   end
   
   def destroy # refund
-    # @transaction = Paypal::Transaction.find transaction_params
+    # @transaction = Payments::Paypal::Transaction.find transaction_params
     response = @transaction.refund!
     if response.success?
       flash[:notice] = "Transaction successfully refunded!"

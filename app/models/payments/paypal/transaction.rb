@@ -1,4 +1,4 @@
-class Paypal::Transaction < ActiveRecord::Base
+class Payments::Paypal::Transaction < ActiveRecord::Base
   self.table_name = "paypal_transactions" # use namespaced table
   include Rails.application.routes.url_helpers
   has_paper_trail
