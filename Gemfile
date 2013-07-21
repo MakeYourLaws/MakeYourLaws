@@ -19,7 +19,7 @@ gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 # Bundle edge Rails instead:
 # gem 'rails', github: 'rails/rails'
 
-gem 'mysql2', '>= 0.3.11'
+gem 'mysql2', '>= 0.3.13'
 gem 'json', '>= 1.6.6'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '>= 1.2'
@@ -106,7 +106,7 @@ gem 'client_side_validations', github: 'bcardarella/client_side_validations', br
 gem 'friendly_id'
 
 # gem 'exception_notification', '>= 2.6.1', :require => 'exception_notifier'
-gem 'exception_notification', '>= 4.0.0.rc1', github: 'smartinez87/exception_notification'
+gem 'exception_notification', '>= 4.0.0', github: 'smartinez87/exception_notification'
 
 # gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
 gem 'newrelic_rpm', ">= 3.4.0"

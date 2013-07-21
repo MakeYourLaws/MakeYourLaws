@@ -1,4 +1,4 @@
-class Stripe::Charge < ActiveRecord::Base
+class Payments::Stripe::Charge < ActiveRecord::Base
   self.table_name = "stripe_charges" # use namespaced table
   include Rails.application.routes.url_helpers
   has_paper_trail

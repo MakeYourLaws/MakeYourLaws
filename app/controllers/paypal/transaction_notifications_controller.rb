@@ -1,6 +1,6 @@
 # This is for the PDT type IPN. It's what's triggered by the IPN setting in the paypal website, as opposed to the IPN callback set in the payment request itself.
 # PDTs are more detail about a particular subtransaction, as opposed to the general IPN which is about the whole lump.
-class Paypal::TransactionNotificationsController < ApplicationController
+class Payments::Paypal::TransactionNotificationsController < ApplicationController
   include ActiveMerchant::Billing::Integrations::Paypal
   skip_before_filter :verify_authenticity_token # API call
   skip_authorization_check # can't use CanCan for this; authorized via IPN acknowledgement
@@ -8,8 +8,8 @@ class Paypal::TransactionNotificationsController < ApplicationController
   def create
     notify = ActiveMerchant::Billing::Integrations::PaypalAdaptivePayment::Notification.new(request.raw_post)
     
-    @subtransaction = Paypal::Subtransaction.find_by_paypal_transaction_id(notify.params['txn_id']) || Paypal::Subtransaction.find_by_paypal_transaction_id(notify.params['parent_txn_id'])
-    @transaction_notification = Paypal::TransactionNotification.new
+    @subtransaction = Payments::Paypal::Subtransaction.find_by_paypal_transaction_id(notify.params['txn_id']) || Payments::Paypal::Subtransaction.find_by_paypal_transaction_id(notify.params['parent_txn_id'])
+    @transaction_notification = Payments::Paypal::TransactionNotification.new
     @transaction_notification.details_json = notify.params.to_json
     
     # keys from IPN transaction[0]:  amount id id_for_sender_txn is_primary_receiver paymentType pending_reason receiver refund_account_charged refund_amount refund_id status status_for_sender_txn

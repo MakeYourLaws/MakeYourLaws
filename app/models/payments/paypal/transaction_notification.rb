@@ -1,4 +1,4 @@
-class Paypal::TransactionNotification < ActiveRecord::Base
+class Payments::Paypal::TransactionNotification < ActiveRecord::Base
   self.table_name = "paypal_transaction_notifications" # use namespaced table
   
   belongs_to :subtransaction

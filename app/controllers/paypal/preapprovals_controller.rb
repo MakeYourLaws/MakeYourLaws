@@ -1,6 +1,6 @@
-class Paypal::PreapprovalsController < ApplicationController
+class Payments::Paypal::PreapprovalsController < ApplicationController
+  load_and_authorize_resource :class => Payments::Paypal::Preapproval
   include ActiveMerchant::Billing::Integrations
-  load_and_authorize_resource :class => Paypal::Preapproval
   
   def create
   # :cancel_url, :return_url # required
