@@ -1,5 +1,15 @@
 body { font-family: arial,helvetica,clean,sans-serif; }
 
+#ft {
+	margin-top: 1em;
+	 div {
+		float: right;
+	}
+	#disclaimer {
+		font-size: 80%;
+	}
+}
+
 a {text-decoration: none;
 	&:hover { text-decoration:underline;}
 	&.close {
