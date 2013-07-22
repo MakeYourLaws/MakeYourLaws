@@ -4,7 +4,7 @@ require 'new_relic/recipes'
 # No need for mongrel cluster if using Phusion Passenger
 # require 'mongrel_cluster/recipes'
 
-set :rvm_ruby_string, 'ruby-1.9.3'
+set :rvm_ruby_string, '2.0.0'
 require "rvm/capistrano" 
 set :rvm_type, :system # using system level, not userspace, install of rvm
 
