@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
   def tor?
     request.host =~ /onion$/
   end
+  helper_method :tor?
   
   private
   
