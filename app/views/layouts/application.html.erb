@@ -3,26 +3,32 @@
 	<head>
 		<meta http-equiv="Content-Type" Content="text/html;charset=UTF-8">
 		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-		<%= csrf_meta_tags %>
-		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+		<% unless tor? %>
+			<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+			<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+			<%= csrf_meta_tags %>
+		<% end %>
 		<%= favicon_link_tag %>
 		<meta name="title" content="Make Your Laws" />
 		<meta name="robots" content="all" />
 		<link href="https://plus.google.com/100183759660923071401" rel="publisher" />
 		<title>Make Your Laws</title>
-		<%= render :partial => '/layouts/mixpanel' %>
+		<%= render :partial => '/layouts/mixpanel' unless tor? %>
 	</head>
 	<body>
-		<script>if (top!= self)  // frame breaker
-		 if (location) top.location.replace(self.location.href) 
-		 else top.document.location.replace(self.document.location.href);</script>
+		<% unless tor? %>
+			<script>if (top!= self)  // frame breaker
+			 if (location) top.location.replace(self.location.href) 
+			 else top.document.location.replace(self.document.location.href);</script>
+		<% end %>
 		<div id="doc" class="yui-t1">
 			<div id="hd" role="banner"><!--header / masthead-->
 				<% unless tor? # tor users have JS turned off %>
 					<noscript>
 						<div style="font-size: 1.5em;" class="flash error">
-							Please turn on JavaScript! We actually do need it to function properly.
+							Please turn on JavaScript! We actually do need it to function properly.<br/>
+							<%= image_tag "tor-off_16.png", alt: "Tor?", width: 16, height: 16 %>
+							If you're paranoid, go visit our <a href="http://7fx2vpbv4wj47cht.onion/">Tor hidden service</a> instead.
 						</div>
 					</noscript>
 				<% end %>
@@ -62,7 +68,7 @@
 						<li><%= link_to_unless_current "Help us", help_path %> - <%= link_to_unless_current "legal", help_legal_path %></li>
 						<li><%= link_to_unless_current "Contact", contact_path %></li>
 					</ul>
-					<%= render :partial => 'layouts/google_analytics' %>
+					<%= render :partial => 'layouts/google_analytics' unless tor? %>
 					<%= render :partial => 'layouts/outlinks' %>
 				</div><!-- secondary -->
 			</div><!-- bd -->
