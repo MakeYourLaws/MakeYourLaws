@@ -9,7 +9,7 @@ class Identity < ActiveRecord::Base
   # Find or create an identity based on an Omniauth response
   # Identities can belong to users (once claimed and confirmed) but might not always
   def self.by_omniauth(auth)
-    id = Identity.find_or_initialize_by_provider_and_uid(:provider => auth.provider, :uid => auth.uid)
+    id = Identity.find_or_initialize_by(:provider => auth.provider, :uid => auth.uid)
     
     %w(name email nickname first_name last_name location description image phone urls).each do |x|
       id.send "#{x}=", auth.info[x]
