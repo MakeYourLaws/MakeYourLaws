@@ -33,10 +33,14 @@ class ApplicationController < ActionController::Base
   
   force_ssl if: :ssl_configured?
   
+  def tor?
+    request.host =~ /onion$/
+  end
+  
   private
   
   def ssl_configured?
-    Rails.env.production? and !(request.host =~ /onion$/)
+    Rails.env.production? and !tor?
   end
 
   # Note: Strict-Transport-Security is already set to 1 year through config.force_ssl (i.e. Rack:SSL)

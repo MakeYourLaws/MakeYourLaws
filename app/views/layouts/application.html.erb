@@ -19,11 +19,13 @@
 		 else top.document.location.replace(self.document.location.href);</script>
 		<div id="doc" class="yui-t1">
 			<div id="hd" role="banner"><!--header / masthead-->
-				<noscript>
-					<div style="font-size: 1.5em;" class="flash error">
-						Please turn on JavaScript! We actually do need it to function properly.
-					</div>
-				</noscript>
+				<% unless tor? # tor users have JS turned off %>
+					<noscript>
+						<div style="font-size: 1.5em;" class="flash error">
+							Please turn on JavaScript! We actually do need it to function properly.
+						</div>
+					</noscript>
+				<% end %>
 				<%= render :partial => '/layouts/user_header' %>
 				<%= # render_widget :cart, :show, :user => current_user 
 				%>
