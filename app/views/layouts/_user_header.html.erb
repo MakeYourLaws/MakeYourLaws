@@ -6,4 +6,8 @@
 	<% else %>
 		Would you like to <%= link_to 'log in or sign up', login_path %>?
 	<% end %>
+	
+	<% if tor? %>
+		<%= image_tag "tor_on_16.png", alt: "Tor!", width: 16, height: 16 %>
+	<% end %>
 </div>
