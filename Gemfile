@@ -59,7 +59,10 @@ gem "active_paypal_adaptive_payment"
 
 gem 'stripe', github: 'stripe/stripe-ruby'
 gem 'stripe_event'
+
 gem 'jwt' # for Google Wallet
+
+gem 'amazon_flex_pay'
 
 # gem "devise", ">= 2.0.4"
 gem 'devise', '3.0.0.rc' # rails 4 version
@@ -103,7 +106,8 @@ gem 'rdiscount' # or maybe bluecloth? TBD
 gem "strip_attributes", ">= 1.1.0"
 # gem 'client_side_validations', ">= 3.1.4" # rails 4 incompatible
 gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '4-0-beta'
-gem 'friendly_id'
+# gem 'friendly_id' # rails 4 incompatible
+gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'rails4'
 
 # gem 'exception_notification', '>= 2.6.1', :require => 'exception_notifier'
 gem 'exception_notification', '>= 4.0.0', github: 'smartinez87/exception_notification'
