@@ -31,8 +31,14 @@ class ApplicationController < ActionController::Base
   #   root << widget(:cart_item, :user => current_user)
   # end
   
+  force_ssl if: :ssl_configured?
+  
   private
   
+  def ssl_configured?
+    Rails.env.production? and !(request.host =~ /onion$/)
+  end
+
   # Note: Strict-Transport-Security is already set to 1 year through config.force_ssl (i.e. Rack:SSL)
   def security_headers
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
