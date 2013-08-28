@@ -18,7 +18,7 @@ class Govt::SsnDeathRecord < ActiveRecord::Base
       :birth_date => sanitize_date(line[73..80])[0],
       :birth_date_noday => (sanitize_date(line[73..80])[1] == :nodate),
       :birth_date_badleap => (sanitize_date(line[73..80])[1] == :badleap),
-      :age_in_days => (sanitize_date(line[65..72])[0] - sanitize_date(line[73..80])[0]).to_i
+      :age_in_days => ((sanitize_date(line[65..72])[0] - sanitize_date(line[73..80])[0]).to_i rescue nil)
   end
   
   
