@@ -1,6 +1,4 @@
-class SsnDeathRecord < ActiveRecord::Base
-  has_paper_trail
-  
+class Govt::SsnDeathRecord < ActiveRecord::Base
   def self.new_from_line line
     self.new :change_type => (line[0].blank? ? nil : line[0]),
       :ssn => line[1..9].to_i,
@@ -30,10 +28,8 @@ class SsnDeathRecord < ActiveRecord::Base
     [Date.new(date[4..7].to_i, date[0..1].to_i, date[2..3].to_i), nil]
   rescue ArgumentError
     if date[2..3].to_i > 28
-      p date
       [Date.new(date[4..7].to_i, date[0..1].to_i + 1, 1), :badleap]
     elsif (date[2..3].to_i == 0) and (date[0..1].to_i == 0)
-      p date
       [nil, :nodate]
     elsif date[2..3].to_i == 0
       [Date.new(date[4..7].to_i, date[0..1].to_i, 1), :nodate]
@@ -49,13 +45,13 @@ class SsnDeathRecord < ActiveRecord::Base
     batch = []
     while line = file.gets
       raise 'Unknown data' unless line[81..-1].blank?
-      batch << SsnDeathRecord.new_from_line(line)
+      batch << self.new_from_line(line)
       if batch.size > 1000
-        SsnDeathRecord.import batch 
+        self.import batch 
         batch = []
       end
     end
-    SsnDeathRecord.import batch 
+    self.import batch 
     batch = []
     file.close
   end
