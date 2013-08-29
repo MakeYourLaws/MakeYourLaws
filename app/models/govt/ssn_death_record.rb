@@ -41,7 +41,7 @@ class Govt::SsnDeathRecord < ActiveRecord::Base
       month = 1
     end
     
-    date = Date.new(year, month, day)
+    date = Date.new(year, month, day) rescue nil
     [date, error]
   end
   
