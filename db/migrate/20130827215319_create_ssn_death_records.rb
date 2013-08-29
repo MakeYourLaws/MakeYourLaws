@@ -15,10 +15,10 @@ class CreateSsnDeathRecords < ActiveRecord::Migration
       t.integer :age_in_days
     end
     
-    add_index :ssn_death_records, :ssn
-    add_index :ssn_death_records, [:first_name, :change_type]
-    add_index :ssn_death_records, [:last_name, :first_name, :change_type], :name => "last_first"
-    add_index :ssn_death_records, [:death_date, :change_type]
-    add_index :ssn_death_records, [:birth_date, :death_date, :change_type], :name => "birth_death"
+    add_index :ssn_death_records, [:ssn, :change_type], :unique => true
+    add_index :ssn_death_records, :first_name
+    add_index :ssn_death_records, [:last_name, :first_name]
+    add_index :ssn_death_records, :death_date
+    add_index :ssn_death_records, [:birth_date, :death_date]
   end
 end
