@@ -26,20 +26,23 @@ class Govt::SsnDeathRecord < ActiveRecord::Base
     return [nil, nil] if date.to_i == 0 or date.blank? or date.to_i == 1900
 
     # Format: MMDDYYYY
-    if date[2..3].to_i > 28
-      [Date.new(date[4..7].to_i, date[0..1].to_i + 1, 1), :badleap]
-    elsif date[4..7].to_i < 1800
-      [nil, :nodate]
-    elsif (date[2..3].to_i == 0) and (date[0..1].to_i == 0)
-      [nil, :nodate]
+    error, month, day, year = nil, date[0..1].to_i, date[2..3].to_i, date[4..7].to_i
+    if day > 28 and month == 2
+      day = 28 # meh leap years
+      error = :badleap
+    elsif year < 1800
+      return [nil, :nodate]
+    elsif (day == 0) and (month == 0)
+      return [nil, :nodate]
     # some dates have DD '00', so treat that as DD 01 and set a flag instead
-    elsif date[2..3].to_i == 0
-      [Date.new(date[4..7].to_i, date[0..1].to_i, 1), :nodate]
-    elsif date[0..1].to_i == 0
-      [Date.new(date[4..7].to_i, 1, date[2..3].to_i), :nodate]
-    else
-      [Date.new(date[4..7].to_i, date[0..1].to_i, date[2..3].to_i), nil]
+    elsif day == 0
+      day = 1
+    elsif month == 0
+      month = 1
     end
+    
+    date = Date.new(year, month, day)
+    [date, error]
   end
   
   def self.import_from_file filename
