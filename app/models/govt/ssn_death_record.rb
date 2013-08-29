@@ -53,7 +53,7 @@ class Govt::SsnDeathRecord < ActiveRecord::Base
         batch = []
       end
     end
-    self.import batch 
+    self.import batch, :on_duplicate_key_update => []  # ignore duplicates
     batch = []
     file.close
   end
