@@ -1,0 +1,83 @@
+<h1>Privacy policy</h1>
+
+<p>We collect information on our users that can be categorized in a few basic ways:</p>
+
+<ol>
+	<li>
+		<p>Information mandated to be public by law, or that is clearly public your use of it</p>
+		<p>For instance, when we ask for your name, address, employer, etc., when you make
+			a campaign finance contribution through MYL PAC, we are required by Federal law
+			to disclose that information publicly, and we will. Moreover, lying to us about
+			these questions is itself a violation of Federal law, and we will fully cooperate
+			with any legitimate government investigation thereof.</p>
+		<p>We will always clearly signal when information you enter is public.</p>
+		<p>Similarly, if you post comments under your username, the text of those comments is public,
+			as is its association with your username.</p>
+	</li>
+	<li>
+		<p>Information that is not personally identifiable</p>
+		<p>For instance, this includes aggregated statistics across multiple MYL users,
+			such as "what is the distribution of a contributor's job title vs their 
+			contribution amount".</p>
+		<p>We will share this data publicly and/or with individual researchers, to the extent
+			that we believe it would be beneficial to do so, and to the extent we are sure that
+			any such disclosures will not harm the privacy of any individual user.</p>
+	</li>
+	<li>
+		<p>Information that is personally identifiable and not covered by mandated reporting law</p>
+		<p>For instance, this includes your email address, specific responses to any polling questions,
+			forward proxy relationships (outside of a campaign finance context), IP address(es),
+			account recovery and identity verification information, the association between your username
+			and your legal name, etc.</p>
+		<p>Unless you authorize us to disclose this information, we will not do so
+			unless required by due process of law, and we will try to ensure that you are able
+			to contest any court process (e.g. subpoena or warrant) that in our opinion is at all
+			questionable.</p>
+		<p>We may disclose some of this information where it is necessary for the operation of the site;
+			for instance, we use Google Analytics, which collects IP address, page viewing history,
+			etc.</p>
+	</li>
+	<li>
+		<p>Information that we cannot access by design</p>
+		<p>For instance, we do not store your password in plain text; instead, we store it using
+			industry standard cryptographic methods (i.e. salted hashes).</p>
+		<p>Even if we wanted to, there is no way for us to access this information, and we will
+			oppose any effort to force us to install any "backdoors" in our code to bypass these
+			security measures.</p>
+		<p><a href="http://github.com/MakeYourLaws"</a>Our code</a> is publicly available for 
+			review. What you see there is what is actually running on this server.</p>
+	</li>
+</ol>
+
+<h2>Privacy-hardened version of MYL</h2>
+
+<p>In parallel to our regular website (<a href="https://makeyourlaws.org">https://makeyourlaws.org</a>),
+	we maintain a Tor hidden service (<a href="http://<%= Keys.get 'tor_hostname' %>">http://<%= Keys.get
+	tor_hostname%></a>). This can be accessed via the Tor anonymizing proxy system; we strongly recommend that
+	you use the <a href="https://www.torproject.org/projects/torbrowser.html.en">Tor Browser Bundle</a> to
+	do so.</p>
+	
+<p>The Tor website functions differently in a few ways:
+	<ol>
+		<li>Javascript, Google Analytics, and all other tracking is disabled (though our own cookies are not, 
+			as they are necessary for secure logins and sessions)</li>
+		<li>all functionality that would implicate a legally mandated disclosure requirement is disabled
+			(e.g. you cannot send us campaign contributions via the Tor website*)</li>
+		<li>more aggressive measures are taken against abuse such as denial of service, sockpuppeting,
+			etc (e.g. new Tor based accounts may have any comments automatically moderated until
+			they have proven themselves trustworthy)</li>
+		<li>Tor based user accounts will be labeled as such</li>
+	</ol>
+</p>
+
+<p>If you have serious privacy concerns, we strongly encourage you to use the Tor website instead,
+	and to take careful precautions not to disclose anything that would link your Tor account to
+	any identifying information (e.g. IP address, legal name, username used elsewhere, etc).</p>
+	
+<p>* We are currently thinking through how we can permit anonymous users to participate in MYL.
+	In the future, this may include accepting Bitcoin contributions in some limited ways, allowing
+	anonymous users to act as proxies, etc. However, as we are subject to extensive legal regulation,
+	we will not do so without first obtaining approval from the FEC, IRS, and/or FinCEN (as appropriate).</p>
+	
+<p>If you have questions or concerns about our privacy policy, please <%= link_to "contact", contact_path %> 
+	the core team.</p>
