@@ -12,10 +12,10 @@ MakeyourlawsOrg::Application.routes.draw do
     :registrations => "users/registrations" }
 
   devise_scope :user do
-    get "login", :to => "devise/sessions#new"
-    delete "logout", :to => "devise/sessions#destroy"
-    get "signup", :to => "users/registrations#new"
-    get "signup_from_id", :to => "users/registrations#new_from_id"
+    get "login" => "devise/sessions#new"
+    delete "logout" => "devise/sessions#destroy"
+    get "signup" => "users/registrations#new"
+    get "signup_from_id" => "users/registrations#new_from_id"
   end
     
 #  get "main" => "main#index"  # this is root
@@ -26,6 +26,8 @@ MakeyourlawsOrg::Application.routes.draw do
   get "help" => "main#help"
   get "contact" => "main#contact"
   get "help/legal" => "main#help_legal"
+  get "tos" => "main#tos"
+  get "privacy" => "main#privacy"
   
   namespace :paypal do
     resources :transactions do
