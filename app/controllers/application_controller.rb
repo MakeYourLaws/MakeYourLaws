@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   def cleanup
     flash[:timedout] = nil # added by Devise, redundant
   end
-
+  
   protected
 
   def configure_permitted_parameters
@@ -66,6 +66,7 @@ class ApplicationController < ActionController::Base
     # attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :login, :login_or_email
     
     # Modify them:
-    # devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:username, :email) }
+    # devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login_or_email) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :login, :name, :password, :password_confirmation) }
   end
 end
