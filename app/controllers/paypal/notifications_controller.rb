@@ -1,4 +1,4 @@
-class Paypal::NotificationsController < ApplicationController
+class Payments::Paypal::NotificationsController < ApplicationController
   include ActiveMerchant::Billing::Integrations::Paypal
   skip_before_filter :verify_authenticity_token # API call
   skip_authorization_check # can't use CanCan for this; authorized via IPN acknowledgement

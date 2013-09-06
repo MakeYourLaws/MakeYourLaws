@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :tor?
   
+  def deny_tor_users
+    redirect_to root_path, alert: 'Tor users may not use that functionality.' if tor?
+  end
+  
   private
   
   def ssl_configured?

@@ -1,5 +1,6 @@
-class Stripe::ChargesController < ApplicationController
+class Payments::Stripe::ChargesController < ApplicationController
   # load_and_authorize_resource :class => Stripe::Charge
+  before_filter :deny_tor_users
       
   def new
     # puts @charge.inspect
