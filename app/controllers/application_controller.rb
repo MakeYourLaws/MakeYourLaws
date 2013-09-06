@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
   
+  before_filter :log_additional_data
   before_filter :security_headers
   before_filter :cleanup
 
@@ -59,6 +60,12 @@ class ApplicationController < ActionController::Base
   end
   
   protected
+  
+  def log_additional_data
+    request.env["exception_notifier.exception_data"] = {
+      :user => current_user
+    }
+  end
 
   def configure_permitted_parameters
     # Defaults (see https://github.com/plataformatec/devise/tree/rails4):
