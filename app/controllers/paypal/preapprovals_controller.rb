@@ -1,6 +1,7 @@
 class Payments::Paypal::PreapprovalsController < ApplicationController
   load_and_authorize_resource :class => Payments::Paypal::Preapproval
   include ActiveMerchant::Billing::Integrations
+  before_filter :deny_tor_users
   
   def create
   # :cancel_url, :return_url # required

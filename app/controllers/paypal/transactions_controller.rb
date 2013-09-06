@@ -1,6 +1,7 @@
 class Paypal::TransactionsController < ApplicationController
   include ActiveMerchant::Billing::Integrations::Paypal
   load_and_authorize_resource :class => Payments::Paypal::Transaction
+  before_filter :deny_tor_users
   
   def index
   end
@@ -14,6 +15,7 @@ class Paypal::TransactionsController < ApplicationController
   end
   
   def create
+    
     # Possible options for setup_purchase:
     #   :action_type => 'PAY'
     #   :preapproval_key, :sender_email, :memo, :custom, :fees_payer, :pin, :tracking_id  
