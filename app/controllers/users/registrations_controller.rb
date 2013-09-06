@@ -14,8 +14,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
   
+  
   def create
-    build_resource
+    build_resource(sign_up_params)
 
     if session["devise.identity"] and identity = Identity.find(session["devise.identity"])
       resource.identities << identity
@@ -45,4 +46,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
        end
     end
   end
+  
 end

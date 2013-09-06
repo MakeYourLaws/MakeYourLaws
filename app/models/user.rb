@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, # :validatable, # do it better ourselves
          :token_authenticatable, :encryptable, :confirmable, 
-         :lockable, :timeoutable, :omniauthable, :authentication_keys => [:login_or_email]
+         :lockable, :timeoutable, :omniauthable, 
+         :authentication_keys => [:login_or_email] #, :email, :login, :name]
   
   has_many :identities
   has_many :carts
@@ -59,8 +60,8 @@ class User < ActiveRecord::Base
     true
   end
   
-  def self.find_first_by_auth_conditions warden_conditions
-    conditions = warden_conditions.dup
+  def self.find_first_by_auth_conditions(tainted_conditions, opts={})
+    conditions = tainted_conditions.dup
     login = conditions.delete(:login_or_email)
     if login
       if login =~ /@/
@@ -69,7 +70,7 @@ class User < ActiveRecord::Base
         conditions[:login] = login.strip.downcase
       end
     end
-    super conditions
+    super conditions, opts
   end
     
   def password_required?
