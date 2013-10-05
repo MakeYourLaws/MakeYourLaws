@@ -1,7 +1,7 @@
 <div id="omniauth_links">
 	<ul>
 		<%- User.omniauth_providers.each do |provider| %>
-			<% next if unavailable_providers.include?(provider) and !admin %>
+			<% next if unavailable_providers.include?(provider) and !admin? %>
 			<li style="float:left;">
 			<%= link_to omniauth_authorize_path(resource_name, provider), :class => "provider" do %>
 				<%= provider_image provider, 64 %>
