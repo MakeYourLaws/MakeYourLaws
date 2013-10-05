@@ -54,6 +54,7 @@ server '173.255.252.140', :app, :db, :web, :primary => true # We have no access 
 namespace :deploy do
   task :restart, :roles => :app do
     deploy.passenger.restart
+    run "curl https://makeyourlaws.org" # Make the server boot up
   end
   
   task :down do
