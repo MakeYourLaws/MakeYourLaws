@@ -32,6 +32,8 @@ ssh_options[:forward_agent] = true # make sure you have an SSH agent running loc
 # ssh_options[:keys] = %w(~/.ssh/myl_deploy)
 # ssh_options[:port] = 25
 
+set :shared_children,  %w(public/system log tmp/pids public/files db/data config/keys)
+
 default_environment['PATH'] = "/home/#{user}/.gems/bin/:/usr/local/bin:/usr/bin:/bin"
 
 set :ip, '173.255.252.140' # IP of repository. Better than using DNS lookups, if it's static
@@ -62,8 +64,6 @@ namespace :deploy do
   end
   
   # Use a shared config directory. Run cap deploy:configs:setup first.
-  after "deploy:finalize_update", "deploy:configs:symlink"
-  after "deploy:finalize_update", "deploy:files:symlink"
   # after "deploy:restart", "deploy:restart_mail_fetcher"
   after "deploy:finalize_update", "newrelic:notice_deployment"
   
@@ -75,43 +75,6 @@ namespace :deploy do
     desc "Restart using Passenger" 
     task :restart, :roles => :app do
       run "touch #{current_path}/tmp/restart.txt" 
-    end
-  end
-  
-  namespace :files do
-    desc "Creates symlinked shared public-files and private-data folders in shared folder"
-    task :symlink, :roles => :app do
-      run "rm -rf #{release_path}/public/files"
-      run "mkdir -p #{shared_path}/public_files"
-      run "chmod 775 #{shared_path}/public_files"
-      run "ln -nfs #{shared_path}/public_files #{release_path}/public/files"
-      
-      run "rm -rf #{release_path}/db/data"
-      run "mkdir -p #{shared_path}/data"
-      run "chmod 770 #{shared_path}/data"
-      run "ln -nfs #{shared_path}/data #{release_path}/db/data"
-    end
-  end
-  
-  namespace :configs do
-    desc "Override config files w/ whatever's in the shared/config path (e.g. passwords, api keys)"
-    task :symlink, :roles => :app do         
-      # Be extra careful about exposing these
-      run "chmod -R go-rwx #{shared_path}/config"
-      
-      # For all files in the shared config path, symlink in the shared config
-      # For some reason, this Dir actually runs on the *local* system rather than the remote. Lame.
-      #    Dir[File.join(shared_path, 'config', '**', '*.rb')].each do |c|
-      # So here's a hack w/ find to do it the ugly way :(
-      config_files = ''
-      # Find all regular files (not directories) in the shared config path
-      run("find #{shared_path}/config -type f") do |channel, stream, data| 
-       config_files << data
-      end
-      # Extract the names of all config files
-      config_files.strip.split("\n").map{|f| f.sub("#{shared_path}/config/", '').strip}.each do |c|
-        run "ln -sf #{shared_path}/config/#{c} #{release_path}/config/#{c}" # And symlink in the server's version, overwriting (-f) whatever was there
-      end
     end
   end
 end
