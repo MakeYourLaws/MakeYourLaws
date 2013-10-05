@@ -3,6 +3,15 @@ class ApplicationController < ActionController::Base
   # include ExceptionLogger::ExceptionLoggable
   # rescue_from Exception, :with => :log_exception_handler 
   
+  before_filter :down_for_maintenance?
+  def down_for_maintenance?
+    path = "#{Rails.public_path}/maintenance.html"
+    if File.exist?(File.join(RAILS_ROOT, "tmp", "down")) and File.exist?(path) and
+      params[:s] != Keys.get("maintenance_code"
+      render :file => path, :status => 503, :content_type => Mime::HTML
+    end
+  end
+  
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   # Prevent CSRF attacks by raising an exception.
