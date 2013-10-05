@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :down_for_maintenance?
   def down_for_maintenance?
     path = "#{Rails.public_path}/maintenance.html"
-    if (File.exist?(File.join(RAILS_ROOT, "tmp", "down")) and File.exist?(path) and
+    if (File.exist?(File.join(Rails.root, "tmp", "down")) and File.exist?(path) and
       (params[:s] != Keys.get("maintenance_code")))
       render :file => path, :status => 503, :content_type => Mime::HTML
     end
