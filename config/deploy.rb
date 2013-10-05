@@ -54,6 +54,13 @@ namespace :deploy do
     deploy.passenger.restart
   end
   
+  task :down do
+    run "touch #{current_path}/tmp/down" 
+  end
+  task :up do
+    run "rm #{current_path}/tmp/down" 
+  end
+  
   # Use a shared config directory. Run cap deploy:configs:setup first.
   after "deploy:finalize_update", "deploy:configs:symlink"
   after "deploy:finalize_update", "deploy:files:symlink"
