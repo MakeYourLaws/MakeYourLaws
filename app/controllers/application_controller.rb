@@ -48,6 +48,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :tor?
   
+  def admin?
+    current_user && (current_user.id == 1)
+  end
+  
   def deny_tor_users
     redirect_to root_path, alert: 'Tor users may not use that functionality.' if tor?
   end
