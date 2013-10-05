@@ -1,4 +1,8 @@
 module IdentitiesHelper
+  def unavailable_providers
+    [:facebook]
+  end
+  
   def provider_image provider, size = 32
     if [:aol, :basecamp, :campfire, :facebook, :github, :google, :linkedin, :myspace, :open_id, :presently, :twitter, :yahoo].include? provider.to_sym
       image_tag("authbuttons/#{provider.to_s.downcase.gsub(/[^a-z]/,'')}_#{size}.png", 
