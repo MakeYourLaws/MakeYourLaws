@@ -91,7 +91,8 @@ gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '>= 4.0.0' # Use CoffeeScript for .js.coffee assets and views
 gem 'sass-rails', '>= 4.0.0' # Use SCSS for stylesheets
 
-gem 'turbo-sprockets-rails3' # speed up asset compilation
+# https://github.com/ndbroadbent/turbo-sprockets-rails3/issues/78
+# gem 'turbo-sprockets-rails3' # speed up asset compilation 
 
 gem 'jquery-rails', '>= 2.0.2'
 gem 'jquery-ui-rails'
