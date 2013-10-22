@@ -27,6 +27,19 @@ outlinks img { border:0; width:32px; height:32px; }
 
 cite:before { content: "\2014 "; }
 
+.light { font-style: italic; font-weight: lighter; font-size: 70%; }
+
+img.gray {
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+       -moz-filter: grayscale(100%);
+         -o-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+            filter: grayscale(100%); /* IE6-9 */
+    filter: alpha(opacity=40); /* msie */
+    opacity: 0.4;
+    zoom: 1;  /* needed to trigger "hasLayout" in IE if no width or height is set */ 
+}
+
 #toc {
 	float: left;
 	padding-right: 15px;
@@ -207,3 +220,49 @@ blockquote {
 .errors {
 	color: red;
 }
+
+// These are for use together with footnotes.js.
+#footnotediv { // floating footnote div
+	position:absolute;
+	width:400px;
+	overflow:visible;
+}
+#footnotediv div {
+	background-color:white;
+	padding:3px;
+	padding-left:12px;
+	padding-right:12px;
+	border:1px solid #CDBBB5;
+	box-shadow:#555 0 0 10px;
+	-webkit-box-shadow:#555 0 0 10px;
+	-moz-box-shadow:0 0 10px #555;
+}
+a.footnotebacklink {
+	border-bottom:none;
+}
+// end footnotes
+
+
+.primary-1 { background-color: #009D91 }
+.primary-2 { background-color: #1D766F }
+.primary-3 { background-color: #00665E }
+.primary-4 { background-color: #33CEC3 }
+.primary-5 { background-color: #5DCEC6 }
+
+.secondary-a-1 { background-color: #1144AA }
+.secondary-a-2 { background-color: #29467F }
+.secondary-a-3 { background-color: #05296E }
+.secondary-a-4 { background-color: #4575D4 }
+.secondary-a-5 { background-color: #6B8FD4 }
+
+.secondary-b-1 { background-color: #14D100 }
+.secondary-b-2 { background-color: #329D27 }
+.secondary-b-3 { background-color: #0D8800 }
+.secondary-b-4 { background-color: #4AE83A }
+.secondary-b-5 { background-color: #74E868 }
+
+.complement-1 { background-color: #FF6F00 }
+.complement-2 { background-color: #BF6E30 }
+.complement-3 { background-color: #A64800 }
+.complement-4 { background-color: #FF9340 }
+.complement-5 { background-color: #FFB073 }
