@@ -33,20 +33,17 @@
 					</noscript>
 				<% end %>
 				<%= render :partial => '/layouts/user_header' %>
-				<%= # render_widget :cart, :show, :user => current_user 
-				%>
-				<%= render :partial => '/layouts/flashes' -%>
+				<%= render :partial => '/carts/cart_banner' %>
 			</div> 
 			<div id="bd"><!--body-->
-
-				<% if user_signed_in? %>
-				<div class="flash info">Howdy. This is EARLY ALPHA software under active development.
-					There's really not much to see here yet, sorry; we're still working on making the platform. 
-					If you're impatient, you should consider joining the MYL team. ;-)</div>
-				<% end %>
-				
 				<div id="yui-main"> 
 					<div class="yui-b" id="content"  role="main"><!--primary-->
+						<%= render :partial => '/layouts/flashes' -%>
+						<% if user_signed_in? %>
+						<div class="flash info">Howdy. This is EARLY ALPHA software under active development.
+							There's really not much to see here yet, sorry; we're still working on making the platform. 
+							If you're impatient, you should consider joining the MYL team. ;-)</div>
+						<% end %>
 						<%= yield %>		
 					</div><!-- primary -->
 				</div><!-- main -->
