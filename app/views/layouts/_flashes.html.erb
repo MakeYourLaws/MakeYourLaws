@@ -1,7 +1,7 @@
 <div id="flashes">
-	<% flash.each do |key, value| -%>
-		<div class="flash <%= key %>">
-			<%=h value %>
+	<% [:notice, :error, :alert].each do |level| -%>
+		<div class="flash <%= level %>">
+			<%=h flash[level] %>
 		</div>
 	<% end -%>
 </div>
