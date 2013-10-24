@@ -1,7 +1,9 @@
 <div id="flashes">
 	<% [:notice, :error, :alert].each do |level| -%>
-		<div class="flash <%= level %>">
-			<%=h flash[level] %>
-		</div>
+		<% if !flash[level].blank? -%>
+			<div class="flash <%= level %>">
+				<%=h flash[level] %>
+			</div>
+		<% end -%>
 	<% end -%>
 </div>
