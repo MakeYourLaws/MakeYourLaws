@@ -4,7 +4,7 @@
   <%= devise_error_messages! %>
 
   <div><%= f.label :login_or_email %><br />
-  <%= f.text_field :login_or_email %></div>
+  <%= f.text_field :login_or_email, :autofocus => true %></div>
 
-  <div><%= f.submit "Resend confirmation instructions", :disable_with => "Processing…" %></div>
+  <div><%= f.submit "Resend confirmation instructions", data: { disable_with: "Processing…"} %></div>
 <% end %>
