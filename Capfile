@@ -17,13 +17,13 @@ require 'capistrano/deploy'
 #
 require 'capistrano/rvm'
 # require 'rvm1/capistrano3'
-require 'capistrano/rbenv'
+# require 'capistrano/rbenv'
 # require 'capistrano/chruby'
 require 'capistrano/bundler'
 require 'capistrano/rails'
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
-require 'new_relic/recipes'
+# require 'new_relic/recipes' # not cap 3 compatible yet
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
