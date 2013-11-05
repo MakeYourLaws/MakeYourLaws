@@ -10,6 +10,6 @@ vendor/cache/
 .project
 *.sql
 db/data/
+!db/data/DATA_DUMPS_GO_HERE
 public/files/
 doc/wallet-instantbuy-quickstart-ruby
-

@@ -113,7 +113,7 @@ gem 'rdiscount' # or maybe bluecloth? TBD
 
 gem "strip_attributes", ">= 1.1.0"
 # gem 'client_side_validations', ">= 3.1.4" # rails 4 incompatible
-gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '4-0-useable'
+# gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '4-0-useable'
 gem 'friendly_id', github: 'norman/friendly_id'
 
 # gem 'exception_notification', '>= 2.6.1', :require => 'exception_notifier'
