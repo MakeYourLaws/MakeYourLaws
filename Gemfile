@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '>= 4.0.0'
+gem 'rails', '>= 4.0.1'
 gem 'rake', '>= 0.9.2.2'
 gem 'rack', '>= 1.4.1'
 
@@ -10,11 +10,12 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'dalli' # or Redis?
+gem 'redis-rails' # switching out for dalli/memcached
 
 gem 'rack-cache'
 
-gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+# Deprecated in favor of redis store
+# gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
 # Bundle edge Rails instead:
 # gem 'rails', github: 'rails/rails'
@@ -31,8 +32,11 @@ gem 'bcrypt-ruby', '>= 3.0.1'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano', '>= 2.12.0'
-gem 'rvm-capistrano', '>= 1.1.0'
+gem 'capistrano', '>= 3.0.1', require: false, group: :development
+gem 'capistrano-rails'
+gem 'capistrano-bundler'
+# gem 'rvm1-capistrano3', require: false # cap 3.x
+# gem 'rvm-capistrano', '>= 1.1.0' # from cap 2.x
 
 # Bundle the extra gems:
 # gem 'bj'
@@ -64,8 +68,7 @@ gem 'jwt' # for Google Wallet
 
 gem 'amazon_flex_pay'
 
-# gem "devise", ">= 2.0.4"
-gem 'devise', '3.0.0.rc' # rails 4 version
+gem "devise", ">= 3.1.1"
 gem "devise-encryptable", ">= 0.1.1c"
 gem "omniauth", ">= 1.1.0"
 gem "omniauth-facebook", '>= 1.2.0'

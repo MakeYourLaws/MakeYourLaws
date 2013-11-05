@@ -1,6 +1,6 @@
 <p>Welcome, <%= @resource.name %>!</p>
 
-<p>Please confirm your account by <%= link_to 'clicking here', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %>.</p>
+<p>Please confirm your account by <%= link_to 'clicking here', confirmation_url(@resource, :confirmation_token => @token) %>.</p>
 
 <p>Thanks,</p>
 

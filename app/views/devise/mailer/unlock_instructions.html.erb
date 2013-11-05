@@ -2,7 +2,7 @@
 
 <p>Your account has been locked due to an excessive amount of unsuccessful sign in attempts.</p>
 
-<p><%= link_to 'Click here', unlock_url(@resource, :unlock_token => @resource.unlock_token) %> to unlock your account, and then <%= link_to 'click here', new_password_url %> if you need to reset your password.</p>
+<p><%= link_to 'Click here', unlock_url(@resource, :unlock_token => @token) %> to unlock your account, and then <%= link_to 'click here', new_password_url %> if you need to reset your password.</p>
 
 <p>If you do <i>not</i> recognize this activity, please contact us <a href="mailto:core@makeyourlaws.org">core@makeyourlaws.org</a>, as this may be a sign that someone is trying to break into your account. We automatically locked your account to prevent brute force attempts to guess your password.</p>
 
