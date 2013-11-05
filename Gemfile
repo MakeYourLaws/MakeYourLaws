@@ -35,6 +35,8 @@ gem 'bcrypt-ruby', '>= 3.0.1'
 gem 'capistrano', '>= 3.0.1', require: false, group: :development
 gem 'capistrano-rails'
 gem 'capistrano-bundler'
+gem 'capistrano-rvm', github: 'capistrano/rvm'
+# gem 'capistrano-rbenv', github: "capistrano/rbenv"
 # gem 'rvm1-capistrano3', require: false # cap 3.x
 # gem 'rvm-capistrano', '>= 1.1.0' # from cap 2.x
 
@@ -46,7 +48,7 @@ gem 'capistrano-bundler'
 
 gem 'Empact-activerecord-import', '>= 0.4.1' # zdennis hasn't yet imported the import profiling fix; this is a bugfix tracking fork
 # gem "paper_trail", '>= 2.6.3'
-gem "paper_trail", github: 'airblade/paper_trail', branch: 'rails4'
+gem "paper_trail", '>= 3.0.0.rc1', github: 'airblade/paper_trail'
 
 # NoMethodError: undefined method `[]' for #<ActiveRecord::Reflection::AssociationReflection:0x007fe9a2743860>
 # gem 'has_many_polymorphs', github => 'jystewart/has_many_polymorphs'
@@ -111,9 +113,8 @@ gem 'rdiscount' # or maybe bluecloth? TBD
 
 gem "strip_attributes", ">= 1.1.0"
 # gem 'client_side_validations', ">= 3.1.4" # rails 4 incompatible
-gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '4-0-beta'
-# gem 'friendly_id' # rails 4 incompatible
-gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'rails4'
+gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '4-0-useable'
+gem 'friendly_id', github: 'norman/friendly_id'
 
 # gem 'exception_notification', '>= 2.6.1', :require => 'exception_notifier'
 gem 'exception_notification', '>= 4.0.0', github: 'smartinez87/exception_notification'

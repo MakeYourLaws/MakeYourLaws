@@ -1,25 +1,24 @@
 GIT
-  remote: git://github.com/FriendlyId/friendly_id.git
-  revision: c49ce30ff2b370669ccf1708e99fb08ab51435d9
-  branch: rails4
-  specs:
-    friendly_id (4.1.0.beta.2)
-
-GIT
   remote: git://github.com/airblade/paper_trail.git
-  revision: c441a5de2d61042126bb042c3c18012fca3af32b
-  branch: rails4
+  revision: 7c9f9b8953f76dd046fbcbfab1a933853f99e87b
   specs:
-    paper_trail (2.7.2)
-      activerecord (~> 4.0)
-      railties (~> 4.0)
+    paper_trail (3.0.0.rc1)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
 
 GIT
   remote: git://github.com/bcardarella/client_side_validations.git
-  revision: 9461cb92e1dfb64895d590c6d435cdf48fcede45
-  branch: 4-0-beta
+  revision: 659846af18ca1dcaf9070aea1053a82b61c39430
+  branch: 4-0-useable
   specs:
-    client_side_validations (3.2.2)
+    client_side_validations (3.2.6)
+
+GIT
+  remote: git://github.com/capistrano/rvm.git
+  revision: 454ad9b7356ae262200e8f8472e3895771301c66
+  specs:
+    capistrano-rvm (0.0.3)
+      capistrano
 
 GIT
   remote: git://github.com/carr/phone.git
@@ -33,6 +32,13 @@ GIT
   specs:
     omniauth-paypal (1.2.1)
       omniauth-oauth2 (~> 1.1.0)
+
+GIT
+  remote: git://github.com/norman/friendly_id.git
+  revision: 59dbe5e8326af74093e215ec62411e8d6e83d948
+  specs:
+    friendly_id (5.0.1)
+      activerecord (~> 4.0.0)
 
 GIT
   remote: git://github.com/smartinez87/exception_notification.git
@@ -343,6 +349,7 @@ DEPENDENCIES
   capistrano (>= 3.0.1)
   capistrano-bundler
   capistrano-rails
+  capistrano-rvm!
   client_side_validations!
   coffee-rails (>= 4.0.0)
   debugger
@@ -369,7 +376,7 @@ DEPENDENCIES
   omniauth-openid (>= 1.0.1)
   omniauth-paypal (>= 0.1.0)!
   omniauth-twitter (>= 0.0.10)
-  paper_trail!
+  paper_trail (>= 3.0.0.rc1)!
   phone!
   rack (>= 1.4.1)
   rack-cache
