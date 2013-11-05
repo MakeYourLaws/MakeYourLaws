@@ -7,13 +7,6 @@ GIT
       activesupport (>= 3.0, < 5.0)
 
 GIT
-  remote: git://github.com/bcardarella/client_side_validations.git
-  revision: 659846af18ca1dcaf9070aea1053a82b61c39430
-  branch: 4-0-useable
-  specs:
-    client_side_validations (3.2.6)
-
-GIT
   remote: git://github.com/capistrano/rvm.git
   revision: 454ad9b7356ae262200e8f8472e3895771301c66
   specs:
@@ -350,7 +343,6 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rvm!
-  client_side_validations!
   coffee-rails (>= 4.0.0)
   debugger
   devise (>= 3.1.1)
