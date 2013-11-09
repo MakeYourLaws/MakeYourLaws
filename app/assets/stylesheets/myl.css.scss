@@ -10,11 +10,39 @@ body { font-family: arial,helvetica,clean,sans-serif; }
 	}
 }
 
+/* i.e. first element of actual content */
 #flashes + * {
 	margin-top: 0;
 }
 
-a {text-decoration: none;
+div {
+  &.field, &.actions {
+    margin-bottom: 0.5em;
+  }
+}
+
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  border: 1px solid red;
+  padding: 0.4em;
+  padding-bottom: 0;
+  margin-bottom: 1.2em;
+  background-color: #f0f0f0;
+}
+
+a { text-decoration: none;
+	color: #0645ad;
+	&:visited { color: #0b0080; }
+	&:active { color: #faa700; }
 	&:hover { text-decoration:underline;}
 	&.close {
 		color:				#f00;
@@ -26,6 +54,14 @@ q {
 	&:before { content: open-quote; }	
 	&:after  { content: close-quote; }
 }
+
+pre {
+  background-color: #eee;
+  padding: 0.5em;
+  font-size: 80%;
+}
+
+
 
 outlinks img { border:0; width:32px; height:32px; }
 
@@ -71,13 +107,33 @@ hr {
 
 .j { text-align: justify; }
 
+.b { font-weight: bold; }
+
+.i { font-style: italic; }
+
+.mb-n { margin-bottom: 0; }
+
 .small { font-size: smaller; }
 
-ul { list-style: none; 
-	li { list-style: none; }
-	&.bullet { list-style: disc outside; 
-		li { list-style: disc outside; margin-bottom: 0.5em; }
+ol, ul { 
+	/* For setting the first part of list elements, e.g. when they each have multiple paragraphs */
+	&.italic { 
+		li *:first-child { font-style: italic; }
 	}
+	&.bold {
+		li *:first-child { font-weight: bold; }
+	}
+}
+
+ol { list-style: decimal; 
+	&.alpha { list-style: lower-alpha; 
+		li  { list-style: lower-alpha; }
+	}
+}
+
+ul { list-style: none; 
+	li { margin-bottom: 0.5em; }
+	&.bullet { list-style: disc outside; }
 	&.flush {
 		margin: 0 0 1ex 0;
 		padding: 0;
@@ -89,12 +145,11 @@ ul { list-style: none;
 			li { margin: 0; }
 		}
 	}
-	&.menu { margin: 0 0 1em;
+	&.menu { margin: 1em 0;
 		li {
 			list-style: none;
-			min-height:	18px;
+			margin-bottom: 0.2em;
 			&.first {
-				margin-top:	1em;
 				border-top: thin solid #d3d3d3;
 			}
 		}
@@ -125,8 +180,6 @@ th, td {
 }
 
 tr.even { background: #F5FFFF; }
-
-ol li { list-style: decimal; }
 
 .header {
 	float: right;
