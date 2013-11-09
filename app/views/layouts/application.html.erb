@@ -33,13 +33,14 @@
 					</noscript>
 				<% end %>
 				<%= render :partial => '/layouts/user_header' %>
+				<%= render :partial => '/carts/cart_banner' %>
 			</div> 
 			<div id="bd"><!--body-->
 				<div id="yui-main"> 
 					<div class="yui-b" id="content"  role="main"><!--primary-->
 						<%= render :partial => '/layouts/flashes' -%>
 						<% if user_signed_in? %>
-						<div class="flash info">Howdy. This is EARLY ALPHA software under active development.
+							<div class="flash info">Howdy. This is EARLY ALPHA software under active development.
 							There's really not much to see here yet, sorry; we're still working on making the platform. 
 							If you're impatient, you should consider joining the MYL team. ;-)</div>
 						<% end %>
@@ -49,8 +50,8 @@
 					
 				<div class="yui-b"><!--secondary-->
 					<%= image_tag "myl_165.png", :alt => "Make Your Laws logo", :width => 165, :height => 120 %>
-					<center><i><b>This</b> is what democracy looks like.</i></center>
-					<ul>
+					<div class="c i"><strong>This</strong> is what democracy looks like.</div>
+					<ul class="menu">
 						<% if user_signed_in? %>
 							<li><%= link_to_unless_current "Committees", committees_path %></li>
 							<li><%= link_to_unless_current "Initiatives", initiatives_path %></li>
@@ -65,7 +66,6 @@
 						<li><%= link_to_unless_current "Help us", help_path %> - <%= link_to_unless_current "legal", help_legal_path %></li>
 						<li><%= link_to_unless_current "Contact", contact_path %></li>
 					</ul>
-					<%= render :partial => 'layouts/google_analytics' unless tor? %>
 					<%= render :partial => 'layouts/outlinks' %>
 				</div><!-- secondary -->
 			</div><!-- bd -->
@@ -73,5 +73,7 @@
 				<div id="disclaimer">makeyourlaws.org is paid for by Make Your Laws PAC, Inc. (MYL PAC) and not authorized by any candidate or candidate's committee. Contributions or gifts to MYL PAC and/or Make Your Laws Advocacy, Inc. (MYL C4) are not deductible as charitable contributions for Federal income tax purposes. Contributions to Make Your Laws, Inc. (MYL C3) are tax-deductible.</div>
 			</div>
 		</div><!--doc -->
+		
+		<%= render :partial => 'layouts/google_analytics' unless tor? %>
 	</body>
 </html>
