@@ -11,15 +11,14 @@ set :branch, "master"
 set :git_enable_submodules, 1
 
 # set :gateway, "gate.host.com"  # default to no gateway
-set :user, "makeyourlaws"
-set :runner, "#{user}"
-set :ip, '173.255.252.140' # IP of server. Better than using DNS lookups, if it's static
-role :all, '173.255.252.140' # again, IP > DNS
-set :deploy_to, "/home/#{user}/makeyourlaws.org/" # must be path from root
+set :runner, "makeyourlaws"
+set :deploy_to, "/home/makeyourlaws/makeyourlaws.org/" # must be path from root
 set :deploy_via, :remote_cache
-default_run_options[:pty] = true  # Uncomment if on SunOS (eg Joyent) - http://groups.google.com/group/capistrano/browse_thread/thread/13b029f75b61c09d
+# default_run_options[:pty] = true  # Uncomment if on SunOS (eg Joyent) - http://groups.google.com/group/capistrano/browse_thread/thread/13b029f75b61c09d
 # set :use_sudo, false # sudo is false on DreamHost
 set :ssh_options, {
+  user: "makeyourlaws",
+  compression: false,
   # keys:  %w(~/.ssh/myl_deploy),
   forward_agent: true, # make sure you have an SSH agent running locally
   # auth_methods: %w(password)
@@ -33,14 +32,16 @@ set :ssh_options, {
 # set :linked_files, %w{config/database.yml}
 set :linked_dirs,  %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/files db/data config/keys) # formerly shared_children
 
-set :default_env, { path: "/home/#{user}/.gems/bin/:/usr/local/bin:/usr/bin:/bin:$PATH" }
-# set :keep_releases, 5
+set :default_env, { path: "/home/makeyourlaws/.gems/bin/:/usr/local/bin:/usr/bin:/bin:$PATH" }
+set :keep_releases, 15
 
 namespace :deploy do
-  task :restart, :roles => :app do
+  task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      deploy.passenger.restart
-      run "curl -s https://makeyourlaws.org > /dev/null" # Make the server boot up
+      within fetch(:release_path) do
+        execute :touch, "tmp/restart.txt" 
+        execute "curl -s https://makeyourlaws.org > /dev/null" # Make the server boot up
+      end
     end
   end
   
@@ -64,27 +65,30 @@ namespace :deploy do
   # set :normalize_asset_timestamps, %{public/images public/javascripts public/stylesheets}
   
   task :down do
-    run "touch #{current_path}/tmp/down" 
+    on roles(:app) do
+      within fetch(:release_path) do
+        execute :touch, "tmp/down" 
+      end
+    end
   end
   task :up do
-    run "rm #{current_path}/tmp/down" 
-  end
-  
-  # after "deploy:restart", "deploy:restart_mail_fetcher"
-  after "deploy:finalize_update", "newrelic:notice_deployment"
-  
-  task :restart_mail_fetcher, :roles => :app do
-    within fetch(:latest_release_directory) do
-      with rails_env: fetch(:rails_env) do
-        run "script/mail_fetcher restart"
+    on roles(:app) do
+      within fetch(:release_path) do
+        execute :rm, "tmp/down" 
       end
     end
   end
   
-  namespace :passenger do
-    desc "Restart using Passenger" 
-    task :restart, :roles => :app do
-      run "touch #{current_path}/tmp/restart.txt" 
+  # after :restart, "deploy:restart_mail_fetcher"
+  # after :finishing, "newrelic:notice_deployment" # newrelic isn't cap 3 compatible yet
+  
+  task :restart_mail_fetcher do
+    on roles(:app) do
+      within fetch(:release_path) do
+        with rails_env: fetch(:rails_env) do
+          execute "script/mail_fetcher restart"
+        end
+      end
     end
   end
 end
