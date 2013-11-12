@@ -8,6 +8,10 @@ set :stage, :production
 # role :app, %w{deploy@example.com}
 # role :web, %w{deploy@example.com}
 # role :db,  %w{deploy@example.com}
+set :ip, '173.255.252.140' # IP of server. Better than using DNS lookups, if it's static
+role :app, '173.255.252.140'
+role :web, '173.255.252.140'
+role :db, '173.255.252.140'
 
 # Extended Server Syntax
 # ======================

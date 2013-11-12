@@ -6,6 +6,7 @@ MakeyourlawsOrg::Application.routes.draw do
   resources :carts do
     resources :cart_items, :path => 'items'
   end
+  resources :cart_items # in case there isn't a cart
 
   devise_for :users, :controllers => { 
     :omniauth_callbacks => "users/omniauth_callbacks",
@@ -23,11 +24,16 @@ MakeyourlawsOrg::Application.routes.draw do
   get "principles" => "main#principles"
   get "strategy" => "main#strategy"
   get "faq" => "main#faq"
+  get "fec" => "main#fec"
   get "help" => "main#help"
   get "contact" => "main#contact"
   get "help/legal" => "main#help_legal"
   get "tos" => "main#tos"
   get "privacy" => "main#privacy"
+  
+  namespace :facebook do
+    resources :payments, :only => :create
+  end
   
   namespace :paypal do
     resources :transactions do
