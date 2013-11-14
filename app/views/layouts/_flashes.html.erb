@@ -6,4 +6,5 @@
 			</div>
 		<% end -%>
 	<% end -%>
+	<%= render :partial => "/layouts/notifications/fec_bitcoin" unless request.path == fec_path %>
 </div>
