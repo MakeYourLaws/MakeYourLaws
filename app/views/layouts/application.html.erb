@@ -36,14 +36,15 @@
 			</div> 
 			<div id="bd"><!--body-->
 				<div id="yui-main"> 
-					<div class="yui-b" id="content"  role="main"><!--primary-->
+					<div class="yui-b" role="main"><!--primary-->
 						<%= render :partial => '/layouts/flashes' -%>
 						<% if user_signed_in? %>
 							<div class="flash info">Howdy. This is EARLY ALPHA software under active development.
 							There's really not much to see here yet, sorry; we're still working on making the platform. 
 							If you're impatient, you should consider joining the MYL team. ;-)</div>
 						<% end %>
-						<%= yield %>		
+						
+						<div id="content"><%= yield %></div>
 					</div><!-- primary -->
 				</div><!-- main -->
 					
@@ -61,6 +62,7 @@
 						<li><%= link_to_unless_current "Principles", principles_path %></li>
 						<li><%= link_to_unless_current "Strategy", strategy_path %></li>
 						<li><%= link_to_unless_current "FAQ", faq_path %></li>
+						<li><%= link_to_unless_current "FEC activity", fec_path %></li>
 						<li><%= link_to_unless_current "TOS", tos_path %> - <%= link_to_unless_current "privacy", privacy_path %></li>
 						<li><%= link_to_unless_current "Help us", help_path %> - <%= link_to_unless_current "legal", help_legal_path %></li>
 						<li><%= link_to_unless_current "Contact", contact_path %></li>

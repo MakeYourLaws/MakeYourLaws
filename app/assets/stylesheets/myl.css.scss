@@ -11,7 +11,7 @@ body { font-family: arial,helvetica,clean,sans-serif; }
 }
 
 /* i.e. first element of actual content */
-#flashes + * {
+#content *:first-child {
 	margin-top: 0;
 }
 
