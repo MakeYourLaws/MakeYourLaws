@@ -1,5 +1,6 @@
+<% t "Log in or sign up" %>
 <div style="float:left; margin-right: 20px;">
-	<h2>Sign in</h2>
+	<h1>Log in</h1>
 
 	<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 	  <div><%= f.label :login_or_email, :class => 'required' %><br />
@@ -16,14 +17,14 @@
 </div>
 
 <div style="float:left; margin-right: 20px;">
-	<h2>Sign up</h2>
+	<h1>Sign up</h1>
 
 	<%= render :partial => 'users/registrations/signup_form'%>
 	
 </div>
 
 <div style="float:left">
-	<h2>… or sign in with:</h2>
+	<h1>… or sign in with:</h1>
 
 	<%= render :partial => "identities/links" %>
 </div>
