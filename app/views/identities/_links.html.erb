@@ -1,5 +1,5 @@
 <div id="omniauth_links">
-	<ul>
+	<ul class="menu">
 		<%- User.omniauth_providers.each do |provider| %>
 			<% next if unavailable_providers.include?(provider) and !admin? %>
 			<li style="float:left;">
