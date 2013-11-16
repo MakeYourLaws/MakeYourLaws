@@ -20,16 +20,22 @@ MakeyourlawsOrg::Application.routes.draw do
   end
     
 #  get "main" => "main#index"  # this is root
-  get "introduction" => "main#introduction"
-  get "principles" => "main#principles"
-  get "strategy" => "main#strategy"
-  get "faq" => "main#faq"
-  get "fec" => "main#fec"
-  get "help" => "main#help"
-  get "contact" => "main#contact"
-  get "help/legal" => "main#help_legal"
-  get "tos" => "main#tos"
-  get "privacy" => "main#privacy"
+  scope module: 'main' do
+    get 'introduction'
+    get 'principles'
+    get 'strategy'
+    get 'faq'
+    get 'fec'
+    get 'help'
+    get 'contact'
+    get 'help/legal', action: 'help_legal'
+    get 'tos'
+    get 'privacy'
+    namespace :fec do
+      get 'bitcoin'
+      get 'earmarks'
+    end
+  end
   
   namespace :facebook do
     resources :payments, :only => :create
