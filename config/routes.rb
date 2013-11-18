@@ -34,6 +34,7 @@ MakeyourlawsOrg::Application.routes.draw do
     namespace :fec do
       get 'bitcoin'
       get 'earmarks'
+      get 'tplf'
     end
   end
   
