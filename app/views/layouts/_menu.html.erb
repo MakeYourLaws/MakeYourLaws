@@ -1,0 +1,16 @@
+<ul class="menu">
+	<% if user_signed_in? %>
+		<li><%= link_to_unless_current "Committees", committees_path %></li>
+		<li><%= link_to_unless_current "Initiatives", initiatives_path %></li>
+		<hr>
+	<% end %>
+	<li><%= link_to_unless_current "Main", root_path %></li>
+	<li><%= link_to_unless_current "Introduction", introduction_path %></li>
+	<li><%= link_to_unless_current "Principles", principles_path %></li>
+	<li><%= link_to_unless_current "Strategy", strategy_path %></li>
+	<li><%= link_to_unless_current "FAQ", faq_path %></li>
+	<li><%= link_to_unless_current "FEC activity", fec_path %></li>
+	<li><%= link_to_unless_current "TOS", tos_path %> - <%= link_to_unless_current "privacy", privacy_path %></li>
+	<li><%= link_to_unless_current "Help us", help_path %> - <%= link_to_unless_current "legal", help_legal_path %></li>
+	<li><%= link_to_unless_current "Contact", contact_path %> - <%= link_to_unless_current "press", press_path %></li>
+</ul>

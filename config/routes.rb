@@ -28,6 +28,7 @@ MakeyourlawsOrg::Application.routes.draw do
     get 'fec'
     get 'help'
     get 'contact'
+    get 'press'
     get 'help/legal', action: 'help_legal'
     get 'tos'
     get 'privacy'
