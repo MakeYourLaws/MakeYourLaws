@@ -51,22 +51,7 @@
 				<div class="yui-b"><!--secondary-->
 					<%= image_tag "myl_165.png", :alt => "Make Your Laws logo", :width => 165, :height => 120 %>
 					<div class="c i"><strong>This</strong> is what democracy looks like.</div>
-					<ul class="menu">
-						<% if user_signed_in? %>
-							<li><%= link_to_unless_current "Committees", committees_path %></li>
-							<li><%= link_to_unless_current "Initiatives", initiatives_path %></li>
-							<hr>
-						<% end %>
-						<li><%= link_to_unless_current "Main", root_path %></li>
-						<li><%= link_to_unless_current "Introduction", introduction_path %></li>
-						<li><%= link_to_unless_current "Principles", principles_path %></li>
-						<li><%= link_to_unless_current "Strategy", strategy_path %></li>
-						<li><%= link_to_unless_current "FAQ", faq_path %></li>
-						<li><%= link_to_unless_current "FEC activity", fec_path %></li>
-						<li><%= link_to_unless_current "TOS", tos_path %> - <%= link_to_unless_current "privacy", privacy_path %></li>
-						<li><%= link_to_unless_current "Help us", help_path %> - <%= link_to_unless_current "legal", help_legal_path %></li>
-						<li><%= link_to_unless_current "Contact", contact_path %></li>
-					</ul>
+					<%= render :partial => 'layouts/menu' %>
 					<%= render :partial => 'layouts/outlinks' %>
 				</div><!-- secondary -->
 			</div><!-- bd -->
