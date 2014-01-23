@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130625192625) do
+ActiveRecord::Schema.define(version: 20140123210643) do
 
   create_table "cart_items", force: true do |t|
     t.integer "cart_id",      null: false
@@ -130,6 +130,19 @@ ActiveRecord::Schema.define(version: 20130625192625) do
   add_index "fec_committees", ["state", "city"], name: "index_fec_committees_on_state_and_city", using: :btree
   add_index "fec_committees", ["treasurer_name"], name: "index_fec_committees_on_treasurer_name", using: :btree
   add_index "fec_committees", ["updated_at"], name: "index_fec_committees_on_updated_at", using: :btree
+
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"
@@ -364,6 +377,29 @@ ActiveRecord::Schema.define(version: 20130625192625) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "ssn_death_records", force: true do |t|
+    t.string  "change_type",        limit: 1
+    t.integer "ssn"
+    t.string  "last_name",          limit: 20
+    t.string  "name_suffix",        limit: 4
+    t.string  "first_name",         limit: 15
+    t.string  "middle_name",        limit: 15
+    t.string  "verified",           limit: 1
+    t.date    "death_date"
+    t.date    "birth_date"
+    t.boolean "death_date_noday"
+    t.boolean "death_date_badleap"
+    t.boolean "birth_date_noday"
+    t.boolean "birth_date_badleap"
+    t.integer "age_in_days"
+  end
+
+  add_index "ssn_death_records", ["birth_date", "death_date"], name: "index_ssn_death_records_on_birth_date_and_death_date", using: :btree
+  add_index "ssn_death_records", ["death_date"], name: "index_ssn_death_records_on_death_date", using: :btree
+  add_index "ssn_death_records", ["first_name"], name: "index_ssn_death_records_on_first_name", using: :btree
+  add_index "ssn_death_records", ["last_name", "first_name"], name: "index_ssn_death_records_on_last_name_and_first_name", using: :btree
+  add_index "ssn_death_records", ["ssn", "change_type"], name: "index_ssn_death_records_on_ssn_and_change_type", unique: true, using: :btree
 
   create_table "stripe_accounts", force: true do |t|
     t.string  "stripe_id",            null: false

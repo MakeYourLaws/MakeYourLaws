@@ -1,13 +1,13 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, # :validatable, # do it better ourselves
-         :token_authenticatable, :encryptable, :confirmable, 
+         :encryptable, :confirmable, 
          :lockable, :timeoutable, :omniauthable, 
          :authentication_keys => [:login_or_email] #, :email, :login, :name]
   
   has_many :identities
   has_many :carts
-  has_one :current_cart, :class_name => 'Cart', :conditions => {:state => [:empty, :filled, :checked_out]}
+  has_one :current_cart, -> {where(state: [:empty, :filled, :checked_out])}, class_name: 'Cart'
   
   extend FriendlyId
   friendly_id :login

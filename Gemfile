@@ -70,6 +70,8 @@ gem 'jwt' # for Google Wallet
 
 gem 'amazon_flex_pay'
 
+gem 'bitpay-client', :require => 'bitpay'
+
 gem "devise", ">= 3.1.1"
 gem "devise-encryptable", ">= 0.1.1c"
 gem "omniauth", ">= 1.1.0"
@@ -114,7 +116,9 @@ gem 'rdiscount' # or maybe bluecloth? TBD
 gem "strip_attributes", ">= 1.1.0"
 # gem 'client_side_validations', ">= 3.1.4" # rails 4 incompatible
 # gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '4-0-useable'
-gem 'friendly_id', github: 'norman/friendly_id'
+
+# Pending pull from https://github.com/norman/friendly_id/pull/518 to fix a bug
+gem 'friendly_id', ">= 5.0.0", git: 'git://github.com/saizai/friendly_id.git'
 
 # gem 'exception_notification', '>= 2.6.1', :require => 'exception_notifier'
 gem 'exception_notification', '>= 4.0.0', github: 'smartinez87/exception_notification'
