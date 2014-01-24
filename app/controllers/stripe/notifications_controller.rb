@@ -6,8 +6,20 @@ StripeEvent.configure do |events|
     event.data.object #=> #<Stripe::Charge:0x3fcb34c115f8>
   end
 
-  events.all BillingEventLogger.new(Rails.logger)
+  class BillingEventLogger
+    def initialize(logger = nil)
+      @logger = logger || begin
+        require 'logger'
+        Logger.new($stdout)
+      end
+    end
 
+    def call(event)
+      @logger.info "BILLING-EVENT: #{event.type} #{event.id}"
+    end
+  end
+  events.all BillingEventLogger.new(Rails.logger)
+  
   events.all do |event|
     # Handle all event types - logging, etc.
   end
