@@ -32,13 +32,12 @@ gem 'bcrypt-ruby', '>= 3.0.1'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano', '>= 3.0.1', require: false, group: :development
-gem 'capistrano-rails'
-gem 'capistrano-bundler'
-gem 'capistrano-rvm', github: 'capistrano/rvm'
-# gem 'capistrano-rbenv', github: "capistrano/rbenv"
-# gem 'rvm1-capistrano3', require: false # cap 3.x
-# gem 'rvm-capistrano', '>= 1.1.0' # from cap 2.x
+group :development do 
+  gem 'capistrano', '>= 3.0.1', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm', require: false
+end
 
 # Bundle the extra gems:
 # gem 'bj'
