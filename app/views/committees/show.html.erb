@@ -1,4 +1,4 @@
-<%= render_widget :cart_item, :new, :committee => @committee, :user => current_user %>
+<%= render partial: '/cart_items/new', committee: @committee %>
 
 <%= link_to "Edit this committee", edit_committee_path(@committee) %>
 

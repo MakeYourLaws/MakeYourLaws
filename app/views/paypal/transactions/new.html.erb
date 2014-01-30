@@ -3,7 +3,7 @@
 <%= form_for(@transaction, :url => paypal_transactions_path, :validate => true, :remote => true) do |f| %>
   <div><%= f.label :amount %> $<%= f.text_field :amount %></div>
 
-  <div><%= f.submit "Pay", :disable_with => "Processing…" %></div>
+  <div><%= f.submit "Pay", data: { disable_with: "Processing…"} %></div>
 <% end %>
 <div id='loading' style="display:none;">loading...</div>
 
