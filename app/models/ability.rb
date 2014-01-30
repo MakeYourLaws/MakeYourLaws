@@ -19,9 +19,8 @@ class Ability
       else
         if user.is_alpha?
           can :manage, [Initiative, Committee]
-          can :manage, [Payments::Paypal::Transaction, Cart], #Paypal::Preapproval],
-            :user_id => user.id
-          can :manage, [Payments::Stripe::Charge, Cart],
+          can :manage, [Payments::Paypal::Transaction, Payments::Stripe::Charge,
+                        Cart, CartItem], #Paypal::Preapproval],
             :user_id => user.id
         end
         can :manage, User, :id => user.id
