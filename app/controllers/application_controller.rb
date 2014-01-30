@@ -20,6 +20,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
+  def current_cart
+# FIXME: need cart for non logged in user
+    session[:cart] ||= current_user.try(:current_cart)
+  end
+  helper_method :current_cart
+
   before_filter :log_additional_data
   before_filter :security_headers
   before_filter :cleanup

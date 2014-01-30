@@ -1,0 +1,6 @@
+<% if !current_cart || !current_cart.committees.include?(@committee) %>
+	<%= button_to 'Add to cart', cart_items_path(:committee_id => @committee.id), :remote => true %>
+<% else %>
+	Added to cart
+	<%= link_to 'Check out', current_cart %>
+<% end %>
