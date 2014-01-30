@@ -1,11 +1,14 @@
 class CommitteesController < ApplicationController
-  load_and_authorize_resource :class => "::Committee"
-  
   def new
+    @committee = Committee.new
+    authorize! :create, @committee
   end
   
   def create
-    @committee = Committee.new params[:committee]
+# debugger
+    @committee = Committee.new committee_params
+    authorize! :create, @committee
+    
     if @committee.save
       redirect_to @committee
     else
@@ -15,9 +18,13 @@ class CommitteesController < ApplicationController
   end
   
   def show
+    @committee = Committee.find params[:id]
+    authorize! :show, @committee
   end
   
   def index
+    authorize! :read, Committee
+    @committees = Committee.all # FIXME: paginate
   end
   
   # def search
@@ -27,10 +34,15 @@ class CommitteesController < ApplicationController
   # end
   
   def edit
+    @committee = Committee.find params[:id]
+    authorize! :update, @committee
   end
   
   def update
-    if @committee.update_attributes params[:committee]
+    @committee = Committee.find params[:id]
+    authorize! :update, @committee
+    
+    if @committee.update_attributes committee_params
       redirect_to @committee
     else
       flash[:error] = "Error saving committee"

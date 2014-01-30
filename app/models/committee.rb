@@ -16,16 +16,16 @@ class Committee < ActiveRecord::Base
   COMMITTEE_TYPES = ["General purpose", "Small contributor", "Independent expenditure", "Non-contribution"]
   CORPORATION_TYPES = ["501(c)3", "501(c)4", "527 PAC", "527 multicandidate PAC", "527 Super PAC IEOC", "527 Hybrid Super PAC", "527 Non-PAC", "527 SSF", "527 Leadership PAC"]
   
-  validates :email, :email => true
-  validates :paypal_email, :email => true
-  validates :url, :uri => true
+  validates :email, email: true, allow_nil: true
+  validates :paypal_email, email: true, allow_nil: true
+  validates :url, uri: true, allow_nil: true
   
   validate :phone_validate
   
   def phone_validate
     begin
       # normalize
-      self.phone = Phoner::Phone.parse self.phone    
+      self.phone = Phoner::Phone.parse self.phone if self.phone
     rescue Phoner::AreaCodeError
       errors.add :phone, "must include area code"
     rescue 
