@@ -3,7 +3,7 @@
 	<%= render :partial => "committee_edit", :locals => {:f => f} %>
     <tr>
       <td/>
-      <td><%= f.submit "Update committee", :disable_with => "Processing…" %></td>
+      <td><%= f.submit "Update committee", data: { disable_with: "Processing…"} %></td>
     </tr>
   </table>
 <% end %>

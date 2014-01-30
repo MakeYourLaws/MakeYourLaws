@@ -37,7 +37,7 @@
 	
 	<input type="hidden" id="stripe_token" name="stripe_id">
 	
-	<div><%= f.submit "Pay", :disable_with => "Processing…" %></div>
+	<div><%= f.submit "Pay", data: { disable_with: "Processing…"} %></div>
 <% end %>
 
 
