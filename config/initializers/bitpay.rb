@@ -1,0 +1,1 @@
+BITPAY_PAC = BitPay::Client.new(Keys.get('bitpay_pac'))
