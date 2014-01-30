@@ -45,12 +45,13 @@ class Govt::SsnDeathRecord < ActiveRecord::Base
     [date, error]
   end
   
-  def self.import_from_file filename
+  def self.import_from_file filename, after = 0
     file = File.open(filename, 'r')
     batch = []
     while line = file.gets
       raise 'Unknown data' unless line[81..-1].blank?
-      batch << self.new_from_line(line)
+      new_entry = self.new_from_line(line)
+      batch << new_entry if new_entry.ssn > after
       if batch.size > 1000
         self.import batch 
         batch = []
