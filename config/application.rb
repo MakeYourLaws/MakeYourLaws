@@ -18,6 +18,8 @@ module MakeyourlawsOrg
     # Don't do this. See http://stackoverflow.com/questions/12467847/rails-namespaced-model-conflicting-with-non-namespaced-model
     # config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
     
+    config.middleware.insert_after ActionDispatch::RemoteIp, Rack::TorTag
+    
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
