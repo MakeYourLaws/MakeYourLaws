@@ -19,6 +19,7 @@ module MakeyourlawsOrg
     # config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
     
     config.middleware.insert_after ActionDispatch::RemoteIp, Rack::TorTag
+    config.middleware.use Rack::Attack
     
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

@@ -14,6 +14,7 @@ gem 'redis-rails' # switching out for dalli/memcached
 
 gem 'rack-cache'
 gem 'rack-tor-tag'
+gem 'rack-attack'
 
 # Deprecated in favor of redis store
 # gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
