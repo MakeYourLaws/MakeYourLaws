@@ -23,8 +23,10 @@
 	
 </div>
 
-<div style="float:left">
-	<h1>… or sign in with:</h1>
+<% unless tor? %>
+	<div style="float:left">
+		<h1>… or sign in with:</h1>
 
-	<%= render :partial => "identities/links" %>
-</div>
+		<%= render :partial => "identities/links" %>
+	</div>
+<% end %>
