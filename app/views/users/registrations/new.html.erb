@@ -2,6 +2,8 @@
 
 <%= render :partial => 'users/registrations/signup_form' %>
 
-<p>… or sign in with:</p>
+<% unless tor? %>
+	<p>… or sign in with:</p>
 
-<%= render :partial => "identities/links" %>
+	<%= render :partial => "identities/links" %>
+<% end %>
