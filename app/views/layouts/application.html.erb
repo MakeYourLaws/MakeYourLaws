@@ -32,6 +32,11 @@
 						</div>
 					</noscript>
 				<% end %>
+				<% if tor? and !hidden_service? %>
+					<div style="font-size: 1.5em;" class="flash notice">
+						Hello, Tor user! You probably want to use our <a href="http://<%= Keys.get 'tor_hostname' %>">Tor hidden service</a> instead.
+					</div>
+				<% end %>
 				<%= render :partial => '/layouts/user_header' %>
 			</div> 
 			<div id="bd"><!--body-->
