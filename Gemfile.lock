@@ -229,6 +229,8 @@ GEM
     people (0.2.1)
     polyglot (0.3.3)
     rack (1.5.2)
+    rack-attack (2.3.0)
+      rack
     rack-cache (1.2)
       rack (>= 0.4)
     rack-openid (1.3.1)
@@ -379,6 +381,7 @@ DEPENDENCIES
   paper_trail (>= 3.0.0.rc1)!
   phone!
   rack (>= 1.4.1)
+  rack-attack
   rack-cache
   rack-tor-tag
   rails (>= 4.0.1)
