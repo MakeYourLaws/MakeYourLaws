@@ -43,6 +43,11 @@ class ApplicationController < ActionController::Base
   
   force_ssl if: :ssl_configured?
   
+  def hidden_service?
+    request.env['HTTP_HOST'] =~ /\.onion\z/
+  end
+  helper_method :hidden_service?
+  
   def tor?
     request.env['tor']
   end
