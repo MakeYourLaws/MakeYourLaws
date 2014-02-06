@@ -21,6 +21,7 @@ Initial ruby/rails setup (on OSX)
     
     rvm autolibs macports
     rvm get stable
+    rvm autolibs macports
     rvm install 2.1.0
     rvm reload
     rvm alias create default 2.1.0
