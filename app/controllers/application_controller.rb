@@ -43,14 +43,8 @@ class ApplicationController < ActionController::Base
   
   force_ssl if: :ssl_configured?
   
-  before_filter :test_tor_middleware
-  def test_tor_middleware
-    logger.info "tor? #{request.env['tor'].inspect} tor_ip #{request.env['tor_ip'].to_s} remote_ip #{request.env['action_dispatch.remote_ip'].to_s}"
-  end
-  
-  
   def tor?
-    request.host =~ /\.onion\z/
+    request.env['tor']
   end
   helper_method :tor?
   
