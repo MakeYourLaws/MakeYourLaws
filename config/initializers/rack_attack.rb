@@ -4,9 +4,9 @@ Rack::Attack.blacklist('allow2ban login scrapers') do |req|
   # `filter` returns false value if request is to your login page (but still
   # increments the count) so request below the limit are not blocked until
   # they hit the limit.  At that point, filter will return true and block.
-  Rack::Attack::Allow2Ban.filter(req.ip, :maxretry => 20, :findtime => 1.minute, :bantime => 1.hour) do
+  Rack::Attack::Allow2Ban.filter(req.ip, :maxretry => 10, :findtime => 1.minute, :bantime => 1.hour) do
     # The count for the IP is incremented if the return value is truthy.
-    req.path == '/login' and req.post?
+    req.post? and req.path =~ /\A\/users/
   end
 end
 
