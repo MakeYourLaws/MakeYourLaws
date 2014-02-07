@@ -85,6 +85,7 @@ gem "omniauth-paypal", '>= 0.1.0', github: 'datariot/omniauth-paypal'
 
 gem 'cancan', '>= 1.6.8'
 # gem 'cantango', '>= 0.9.4.7'
+gem 'rolify'
 
 gem "rails_email_validator", '>= 0.1.4'
 gem "it", ">= 0.2.3"

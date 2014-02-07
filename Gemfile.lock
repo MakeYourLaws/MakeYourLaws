@@ -279,6 +279,7 @@ GEM
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rolify (3.4.0)
     ruby-openid (2.5.0)
     ruby-prof (0.14.2)
     sass (3.2.14)
@@ -389,6 +390,7 @@ DEPENDENCIES
   rake (>= 0.9.2.2)
   rdiscount
   redis-rails
+  rolify
   ruby-prof
   sass-rails (>= 4.0.0)
   sdoc

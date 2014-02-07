@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
          :encryptable, :confirmable, 
          :lockable, :timeoutable, :omniauthable, 
          :authentication_keys => [:login_or_email] #, :email, :login, :name]
+  rolify # :after_add => :after_role_add, :after_remove => :after_role_remove
+  # resourcify  # Currently broken. https://github.com/EppO/rolify/issues/102
+  has_many :users_roles
+  has_many :roles, :through => :users_roles
   
   has_many :identities
   has_many :carts
