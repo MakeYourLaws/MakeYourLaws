@@ -7,21 +7,24 @@ class Ability
     # resource: :all or class name
     # final: conditions hash
     
-    can :read, [User, Fec::Candidate, Fec::Committee, Initiative]
+    can :read, [Fec::Candidate, Fec::Committee, Initiative]
+    # can :read, User 
     can :create, [Payments::Paypal::Transaction]#, Paypal::Preapproval]
     can :create, [Payments::Stripe::Charge]#, Paypal::Preapproval]
     
     # user ||= User.new # guest user (not logged in)
     if user
-      if user.id == 1 # admin? 
+      if user.is_admin?
         can :manage, :all
       else
-        can :manage, [Initiative, Committee]
+        if user.is_alpha?
+          can :manage, [Initiative, Committee]
+          can :manage, [Payments::Paypal::Transaction, Cart], #Paypal::Preapproval], 
+            :user_id => user.id
+          can :manage, [Payments::Stripe::Charge, Cart],
+            :user_id => user.id
+        end
         can :manage, User, :id => user.id
-        can :manage, [Payments::Paypal::Transaction, Cart], #Paypal::Preapproval], 
-          :user_id => user.id
-        can :manage, [Payments::Stripe::Charge, Cart],
-          :user_id => user.id
       end
     end
   end
