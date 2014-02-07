@@ -1,4 +1,6 @@
 class Initiative < ActiveRecord::Base
+  resourcify
+  
   ELECTION_TYPES = %w(Primary General Special)
   INITIATOR_TYPES = %w(Legislature Citizen Commission Automatic)
   INITIATIVE_TYPES = ["Constitutional Amendment", "Statute", "Bond", "Veto", "Question", "Combined Constitutional Amendment & Statute", "Affirmation", "Recall"]

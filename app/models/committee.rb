@@ -1,5 +1,7 @@
 class Committee < ActiveRecord::Base
   self.inheritance_column = :_type_disabled # disable STI
+  resourcify
+  
   has_paper_trail
   strip_attributes
   
