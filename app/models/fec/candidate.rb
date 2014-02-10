@@ -88,9 +88,9 @@ class Fec::Candidate < ActiveRecord::Base
   
   def self.update!
     %w(80 82 84 86 88 90 92 94 96 98 00 02 04 06 08 10 12).each do |year|
-      prev_mtime = File.join(FILES_DIR, "cn#{year}.zip").mtime rescue nil
+      prev_mtime = File.mtime(File.join(FILES_DIR, "cn#{year}.zip")) rescue nil
       `cd #{FILES_DIR} && wget -N ftp://ftp.fec.gov/FEC#{"/19#{year}" if year.to_i >= 80}/cn#{year}.zip`
-      mtime = File.join(FILES_DIR, "cn#{year}.zip").mtime # -N preserves the ftp server's date
+      mtime = File.mtime(File.join(FILES_DIR, "cn#{year}.zip")) # -N preserves the ftp server's date
       next unless !prev_mtime or !last_updated or last_updated < mtime or prev_mtime < mtime
     
       filename = File.join(FILES_DIR, "fec_candidates_#{year}_#{mtime.to_date}.dta")
