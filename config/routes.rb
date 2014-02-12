@@ -1,4 +1,6 @@
 MakeyourlawsOrg::Application.routes.draw do
+  resources :invites
+
   resources :initiatives
   resources :committees
   resources :identities
