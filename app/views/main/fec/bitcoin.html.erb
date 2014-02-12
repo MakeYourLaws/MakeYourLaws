@@ -4,9 +4,9 @@
 
 <p class="c b"><a href="https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/" atrget="_blank">Google Doc of our full request</a></p>
 
-<p>In August 2013, Conservative Action Fund PAC (CAF) asked the Federal Election Commission (FEC) for an advisory opinion request (AOR) about whether they should be permitted to accept contributions of Bitcoin.</p>
+<p>In August 2013, Conservative Action Fund PAC (CAF) <%= link_to "asked the Federal Election Commission", fec_bitcoin_caf_path %> (FEC) for an <a href="http://www.fec.gov/pages/brochures/ao.shtml" target="_blank">advisory opinion</a> about whether they should be permitted to accept contributions of Bitcoin.</p>
 
-<p>We <a href="#caf">commented on that request extensively</a>, raising several issues with it that CAF failed to address. Though the underlying issues are complex, there were three main problems:
+<p>We <%= link_to "commented on that request extensively", fec_bitcoin_caf_path %>, raising several issues with it that CAF failed to address. Though the underlying issues are complex, there were three main problems:
 	<ol>
 		<li>transparency and auditability — Bitcoin is designed to protect its users' privacy; political contributions need to be tracable to a real person and limit anonymous contributions</li>
 		<li>prevention of money laundering, financial exploitation, and legal loopholes — people can abuse Bitcoin "refunds" or contributions between different types of political organizations</li>
@@ -19,9 +19,9 @@
 <a name="aor"></a>
 <h2><a href="#aor">Our request</a></h2>
 
-<p>February 10<sup>th</sup> 2014, <%= link_to "we", faq_path %> (i.e. MYL PAC) submitted <a href="https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/" atrget="_blank">our own advisory opinion request about Bitcoin contributions</a>, proposing our own policy for accepting Bitcoin which we believe would permit a reasonable treatment of Bitcoin contributions and be a good template for others to follow. It <a href="#other">omits a few things</a> that we'd like to address later, for the sake of simplicity.</p>
+<p>February 10<sup>th</sup> 2014, <%= link_to "we", faq_path %> (i.e. MYL PAC) submitted <a href="https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/" atrget="_blank">our own advisory opinion request (AOR) about Bitcoin contributions</a>, proposing our own policy for accepting Bitcoin which we believe would permit a reasonable treatment of Bitcoin contributions and be a good template for others to follow. It <a href="#other">omits a few things</a> that we'd like to address later, for the sake of simplicity.</p>
 
-<p>Because this is an AOR and not a rulemaking, we are strictly limited to asking the FEC "may we, MYL PAC, do this". We can't ask them to impose <em>requirements</em> on other political committees, and what we propose would only be one of (potentially) multiple ways of obeying the law.</p> 
+<p>Because this is an AOR and not a rulemaking, we are strictly limited to asking the FEC "may we, MYL PAC, do this". We can't ask them to impose <em>requirements</em> on other political committees, and what we propose would only be one of (potentially) multiple ways of obeying the law.</p>
 
 <p>However, if we are successful in getting the FEC's approval for our method, it's likely that other political committees will do the same.</p>
 
@@ -38,7 +38,7 @@
 		</li>
 		<li><strong>Spending Bitcoin</strong>
 			<ol>
-				<li>We <em>won't</em> spend Bitcoins for solicitation, advertising, polling, transfers, loans, refunds, candidate appearances, or political contributions (including transfers to other PACs).</li>
+				<li>We <em>won't</em> directly spend Bitcoins for solicitation, advertising, polling, transfers, loans, refunds, candidate appearances, or political contributions (including transfers to other PACs). Instead, we'll liquidate them to US dollars first.</li>
 				<li>We <em>will</em> spend Bitcoins for administrative/overhead expenses (including normal transaction fees to anonymous Bitcoin miners), salary, travel, campaign materials, and campaign event expenses (not including payments to candidates).</li>
 				<li>We will accept merchants' Bitcoin-specific discounts (if they're offered equally to non-political clients).</li>
 			</ol>
@@ -51,7 +51,7 @@
 
 <p>A 501(c)4 is only supposed to do "issue advocacy" (e.g. "Yes on Proposition X" type campaigns, lobbying, etc). In doing so, they are allowed to accept totally anonymous money. By contrast, PACs affect political elections, and anyone doing so is required to only use money from openly disclosed, non-foreign sources.</p>
 
-<p>There's currently a giant loophole in that system (aka the "501(c)4 to Super PAC money laundering loophole") — which the IRS is <a href="https://www.federalregister.gov/articles/2013/11/29/2013-28492/guidance-for-tax-exempt-social-welfare-organizations-on-candidate-related-political-activities" target="_blank">currently considering closing</a> — and we feel it's especiailly prudent to ensure that contributions from a 501(c)4, which can easily originate from a totally anonymous third party, aren't used to influence elections.</p>
+<p>There's currently a giant loophole in that system (aka the "501(c)4 to Super PAC money laundering loophole") which lets 501(c)4s effectively bypass that restriction. (The IRS is <a href="https://www.federalregister.gov/articles/2013/11/29/2013-28492/guidance-for-tax-exempt-social-welfare-organizations-on-candidate-related-political-activities" target="_blank">currently considering closing</a> it.) Because 501(c)4 contributions may ultimately originate from a totally anonymous third party or a foreign national, especially in the case of Bitcoin, we believe that a PAC shouldn't accept any Bitcoin contributions from a 501(c)4.</p>
 
 <p>We feel that it should be fine for a PAC to use Bitcoin to buy food, pay salaries, and other relatively less sensitive items — but that money spent on advertising, political contributions, etc., should go through better regulated, traditional banking channels, which are easier to audit when necessary.</p>
 
@@ -90,21 +90,3 @@
 <p>Give your name (and the name of any organization you represent), and mention the formal name of our request ("AO 2014-01"). Be clear and polite. Explain how you believe Bitcoins should (or shouldn't) be treated in campaign finance — and why.</p>
 
 <p>If you can, it's better to make a more formal-looking comment. General email comments usually get lumped together, whereas if you take a little extra time to make a good-looking PDF and explain your reasoning in more detail, it'll appear separately and be looked at more seriously. There are no mandatory formatting requirements, but we suggest you use 12 pt Arial w/ 1.5 line spacing for body text; 1 inch margin; and have a header saying "(your [group's] name) comments on AO 2014-01" &amp; the page # / # total pages.</p> -->
-
-<hr/>
-
-<a name="caf"></a>
-<h2><a href="#caf">CAF's request</a></h2>
-
-<p>On August 13th, Conservative Action Fund PAC <a href="http://saos.nictusa.com/aodocs/1245451.pdf" target="_blank">asked</a> the Federal Election Commission (FEC) about whether it should be allowed to accept Bitcoins. <a href="http://saos.nictusa.com/aodocs/1246139.pdf" target="_blank">BitPay</a> and the <a href="http://saos.nictusa.com/aodocs/1246138.pdf" target="_blank">Bitcoin Foundation</a> commented on the request, and the FEC posted a <a href="http://saos.nictusa.com/aodocs/201315.pdf" target="_blank">draft advisory opinion</a>.</p>
-
-<p>On November 12th, we formally <a href="/files/MYL%20PAC%20&%20MYL%20C4%20comment%20on%20AO%202013-15%20Conservative%20Action%20Fund.pdf" target="_blank">submitted a comment</a> pointing out several problems with the proposal, and suggesting ways to fix them.</p>
-
-<p>On November 13th, the FEC posted <a href="http://saos.nictusa.com/aodocs/201315_1.pdf" target="_blank">two new draft advisory opinions</a>, and we <a href="/files/MYL%20PAC%20&%20MYL%20C4%20comment%202%20on%20AO%202013-15%20Conservative%20Action%20Fund.pdf" target="_blank">submitted a supplemental comment</a> about new issues therein.</p>
-
-<p>On November 14th, the FEC held an <a href="http://fec.gov/agenda/2013/agenda20131114.shtml" target="_blank">open meeting</a> in which they <a href="http://www.fec.gov/press/press2013/news_releases/20131114release.shtml" target="_blank">decided</a> (<a href="http://www.fec.gov/audio/2013/2013111402.mp3" target="_blank">meeting audio</a>), in part based on our comment, to delay the matter until their <a href="http://www.fec.gov/agenda/2013/agenda20131121.shtml" target="_blank">November 21st meeting</a>, to give their lawyers time to draft a new response.</p>
-
-<p>On November 16th, we <a href="/files/MYL%20PAC%20&%20MYL%20C4%20comment%203%20on%20AO%202013-15%20Conservative%20Action%20Fund.pdf" target="_blank">filed comments</a> to address issues discussed in the FEC's Nov 14th meeting; on November 20th, the Bitcoin Foundation <a href="http://saos.nictusa.com/aodocs/1248189.pdf" target="_blank">did the same</a>, and the FEC issued their <a href="http://saos.nictusa.com/aodocs/1248186.pdf" target="_blank">fourth draft opinion</a>, which would have allowed dibursement of Bitcoins.</p>
-
-<p>On November 21st, the FEC deadlocked 3-3 (<a href="http://fec.gov/audio/2013/2013112101.mp3" target="_blank">audio</a>), issuing a <a href="http://saos.nictusa.com/aodocs/AO%202013-15.pdf" target="_blank">final non-decision</a>.</p>
-

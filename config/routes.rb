@@ -34,6 +34,7 @@ MakeyourlawsOrg::Application.routes.draw do
     get 'privacy'
     namespace :fec do
       get 'bitcoin'
+      get 'bitcoin/caf', action: 'bitcoin_caf'
       get 'earmarks'
       get 'tplf'
     end
