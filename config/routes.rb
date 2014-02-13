@@ -8,7 +8,7 @@ MakeyourlawsOrg::Application.routes.draw do
   end
   resources :cart_items # in case there isn't a cart
 
-  devise_for :users, :controllers => { 
+  devise_for :users, :controllers => {
     :omniauth_callbacks => "users/omniauth_callbacks",
     :registrations => "users/registrations" }
 
@@ -18,7 +18,7 @@ MakeyourlawsOrg::Application.routes.draw do
     get "signup" => "users/registrations#new"
     get "signup_from_id" => "users/registrations#new_from_id"
   end
-    
+
 #  get "main" => "main#index"  # this is root
   scope module: 'main' do
     get 'introduction'
@@ -36,15 +36,16 @@ MakeyourlawsOrg::Application.routes.draw do
     namespace :fec do
       get 'bitcoin'
       get 'bitcoin/caf', action: 'bitcoin_caf'
+      get 'bitcoin/pacs', action: 'bitcoin_pacs'
       get 'earmarks'
       get 'tplf'
     end
   end
-  
+
   namespace :facebook do
     resources :payments, :only => :create
   end
-  
+
   namespace :paypal do
     resources :transactions do
       member do
@@ -53,7 +54,7 @@ MakeyourlawsOrg::Application.routes.draw do
     end
     resources :notifications, :only => :create  # IPN
     resources :transaction_notifications, :only => :create # PDT
-     # , :only => [:show, :create, :destroy, :update] do 
+     # , :only => [:show, :create, :destroy, :update] do
       # member do
       #   get 'completed', :action => :show, :status => 'completed'
       #   get 'canceled', :action => :show, :status => 'canceled'
@@ -68,14 +69,14 @@ MakeyourlawsOrg::Application.routes.draw do
       # end
     # end
   end
-  
+
   namespace :stripe do
     resources :charges
   end
   mount StripeEvent::Engine => '/stripe/callback'
-  
+
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -116,7 +117,7 @@ MakeyourlawsOrg::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

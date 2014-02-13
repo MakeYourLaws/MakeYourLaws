@@ -1,0 +1,65 @@
+<%= t "Political organizations accepting bitcoin" %>
+
+<p class="c b"><%= link_to "Our Bitcoin request", fec_bitcoin_path %></p>
+
+<p>This is a list of all political organizations (parties, PACs, candidate committees, 501(c)4s, etc) that we know of who accept Bitcoin contributions.</p>
+
+<p>Please <%= mail_to "core@makeyourlaws.org", "email us", subject: "Political organization accepting Bitcoin" %> if you know of any we don't yet list, or if you know of any specific transactions that appear to have been made anonymously, through Bitcoin laundering, in excess of federal or state contribution limits, etc.</p>
+
+<p>Of course, we do not accuse anyone of violating the law (that is for the FEC to investigate and determine), and please don't cause any such transactions.</p>
+
+<table>
+	<tr>
+		<th>Type</th>
+		<th>Name</th>
+		<th>Campaign finance reports</th>
+		<th>Publicly known Bitcoin addresses</th>
+		<th>Notes</th>
+	</tr>
+	<tr>
+		<td>National party</td>
+		<td><a href="http://www.lp.org/make-a-bitcoin-contribution">Libertarian Party</a></td>
+		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00255695">C00255695</a></td>
+		<td></td>
+		<td>Donation page will give linked address w/out donor info</td>
+	</tr>
+	<tr>
+		<td>Campaign committee</td>
+		<td>
+			<a href="https://stockman2014.com/bitcoin-donation">Steven Stockman</a> (R)
+		</td>
+		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00553909">C00553909</a></td>
+		<td><a href="http://www.businessinsider.com/steve-stockman-is-accepting-bitcoins-2014-1">Business Insider article</a>: <a href="https://blockchain.info/address/1EVJyd8TbHBMUiMn6ogQ1PXbqoEZVp31Hz">1</a></td>
+		<td>Run by <a href="http://www.dbcapitalstrategies.com/">Dan Backer</a>, who represented <%= link_to "CAF's Bitcoin AOR", fec_bitcoin_caf_path %></td>
+	</tr>
+	<tr>
+		<td>Candidate's committee</td>
+		<td><a href="http://jimfulner.com">Jim Fulner</a> (Lib)</td>
+		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00549808">C00549808</a></td>
+		<td><a href="http://jimfulner.com/contact.html">Contact page</a>: <a href="https://blockchain.info/address/194TQCmRBJGo456juzxBaJRh6LzKvtu996">1</a></td>
+	</tr>
+	<tr>
+		<td>Michigan party affiliate</td>
+		<td><a href="http://livingstonlibertarians.org/">Livingston County Libertarians</a></td>
+		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00403907">C00403907</a></td>
+		<td><a href="http://livingstonlibertarians.org/#text-5">Main page</a>: <a href="https://blockchain.info/address/17T3xM9BWfw28YGUuBU3KYUF5gGRALh1fB">1</a></td>
+	</tr>
+	<tr>
+		<td>SuperPAC (IEOC)</td>
+		<td><a href="http://bitcoinvoterspac.org">Bitcoin Voters PAC</a> (defunct)</td>
+		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00554063">C00554063</a></td>
+		<td>
+			<a href="http://docquery.fec.gov/pdf/794/14031144794/14031144794.pdf">FEC Form 1</a>:
+				<a href='https://blockchain.info/address/18kKJ15uz1nuMJ2kacuahLKLL9NwnsbRQi'>1</a>,
+				<a href='https://blockchain.info/address/1EsR4cdbgPvnD3Gk6wNkTotdzexiN56wXt'>2</a>,
+				<a href='https://blockchain.info/address/14jc8MtHxE6M6Xn7LarvZnXF6GgaaRy1PY'>3</a>,
+				<a href='https://blockchain.info/address/12QeAyDyXiMVn5uwpQUHwS8g2Z3SZf2Kvx'>4</a>,
+				<a href='https://blockchain.info/address/1GuHY98Bxf4mFw2CQEUXqwDUTRqnTRrCt8'>5</a>,
+				<a href='https://blockchain.info/address/113pdko8qQYsvkbV4r7H247oFPFNMnUYqY'>6</a>,
+				<a href='https://blockchain.info/address/1M9AfWnRFmgQgAuTsQssL523ANsxKzfygs'>7</a>,
+				<a href='https://blockchain.info/address/199JdcXMQ41eA9ZPTLUktR9kfAiQRhaErW'>8</a>,
+				<a href='https://blockchain.info/address/1AZxfdTXg5V3gRZMtMfQZrwgBeaQMAtKqN'>9</a>,
+				<a href='https://blockchain.info/address/1NyuGppGprR6uM2koN7hH8wGP8bk6wKh15'>10</a>
+		</td>
+	</tr>
+</table>
