@@ -22,7 +22,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'redis-rails' # switching out for dalli/memcached
+gem 'redis-rails'
 gem "redis-rack-cache"
 
 gem "resque", require: "resque/server"
@@ -40,6 +40,8 @@ gem 'airbrake'
 gem 'rack-cache'
 gem 'rack-tor-tag', '>= 0.1'
 gem 'rack-attack'
+
+gem 'postmaster'
 
 gem 'mysql2'
 gem 'json', '>= 1.6.6'
