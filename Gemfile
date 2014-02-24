@@ -34,7 +34,7 @@ gem 'bcrypt-ruby', '>= 3.0.1'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-group :development do 
+group :development do
   gem 'capistrano', '>= 3.0.1', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-bundler', require: false
@@ -101,7 +101,7 @@ gem 'coffee-rails', '>= 4.0.0' # Use CoffeeScript for .js.coffee assets and view
 gem 'sass-rails', '>= 4.0.0' # Use SCSS for stylesheets
 
 # https://github.com/ndbroadbent/turbo-sprockets-rails3/issues/78
-# gem 'turbo-sprockets-rails3' # speed up asset compilation 
+# gem 'turbo-sprockets-rails3' # speed up asset compilation
 
 gem 'jquery-rails', '>= 2.0.2'
 gem 'jquery-ui-rails'
@@ -119,8 +119,7 @@ gem "strip_attributes", ">= 1.1.0"
 # gem 'client_side_validations', ">= 3.1.4" # rails 4 incompatible
 # gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '4-0-useable'
 
-# Pending pull from https://github.com/norman/friendly_id/pull/518 to fix a bug
-gem 'friendly_id', ">= 5.0.0", git: 'git://github.com/saizai/friendly_id.git'
+gem 'friendly_id', ">= 5.0.0"
 
 # gem 'exception_notification', '>= 2.6.1', :require => 'exception_notifier'
 gem 'exception_notification', '>= 4.0.0', github: 'smartinez87/exception_notification'
