@@ -343,7 +343,7 @@ DEPENDENCIES
   Empact-activerecord-import (>= 0.4.1)
   active_paypal_adaptive_payment
   amazon_flex_pay
-  bcrypt-ruby (>= 3.0.1)
+  bcrypt (>= 3.0.1)
   bettertabs
   bitpay-client
   cancan (>= 1.6.8)
