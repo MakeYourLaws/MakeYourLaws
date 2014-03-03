@@ -1,6 +1,6 @@
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :rvm_ruby_string, '2.0.0'
+set :rvm_ruby_string, '2.1.1'
 set :rvm_type, :system # using system level, not userspace, install of rvm
 
 set :application, "makeyourlaws"  # Required
@@ -39,14 +39,14 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       within fetch(:release_path) do
-        execute :touch, "tmp/restart.txt" 
+        execute :touch, "tmp/restart.txt"
         execute "curl -s https://makeyourlaws.org > /dev/null" # Make the server boot up
       end
     end
   end
-  
+
   after 'deploy:publishing', 'deploy:restart'
-  
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -57,33 +57,33 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
-  
-  
+
+
   # # https://github.com/capistrano/capistrano/issues/478#issuecomment-24983528
   # namespace :assets do
   #   task :update_asset_mtimes, :roles => lambda { assets_role }, :except => { :no_release => true } do
   #   end
   # end
   # set :normalize_asset_timestamps, %{public/images public/javascripts public/stylesheets}
-  
+
   task :down do
     on roles(:app) do
       within fetch(:release_path) do
-        execute :touch, "tmp/down" 
+        execute :touch, "tmp/down"
       end
     end
   end
   task :up do
     on roles(:app) do
       within fetch(:release_path) do
-        execute :rm, "tmp/down" 
+        execute :rm, "tmp/down"
       end
     end
   end
-  
+
   # after :restart, "deploy:restart_mail_fetcher"
   # after :finishing, "newrelic:notice_deployment" # newrelic isn't cap 3 compatible yet
-  
+
   task :restart_mail_fetcher do
     on roles(:app) do
       within fetch(:release_path) do
