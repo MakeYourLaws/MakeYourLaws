@@ -2,6 +2,8 @@ language: ruby
 rvm:
   - 2.1.1
 bundler_args: --without production  --binstubs
+before_script
+  - mysql -e 'create database myl_test'
 before_install:
   - gem update --system
   - gem --version
@@ -9,3 +11,6 @@ before_install:
 after_install:
   - bundle-audit update
   - bundle-audit
+services:
+  - redis-server
+  - mysql
