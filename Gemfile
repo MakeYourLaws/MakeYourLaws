@@ -107,6 +107,7 @@ gem 'stripe_event'
 
 gem 'jwt' # for Google Wallet
 
+gem 'aws-sdk'
 gem 'amazon_flex_pay'
 
 gem 'bitpay-client', :require => 'bitpay'

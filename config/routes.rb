@@ -51,6 +51,13 @@ MakeyourlawsOrg::Application.routes.draw do
     end
   end
 
+  namespace :amazon do
+    get 'return'
+    get 'abandon'
+    get 'cancel'
+    post 'ipn'
+  end
+
   namespace :facebook do
     resources :payments, :only => :create
   end
