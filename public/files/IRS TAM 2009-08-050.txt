@@ -1,0 +1,61 @@
+TAM 200908050 - Section 501 - Exemption From Tax on Corporations, Certain Trusts, etc. 
+INTERNAL REVENUE SERVICE 
+NATIONAL OFFICE TECHNICAL ADVICE MEMORANDUM 
+Number: 200908050 
+Release Date: 2/20/2009 
+UIL Code: 501.03-07 501.38-00 501.38-01 
+
+ISSUES 
+
+Whether A Local intervened in a political campaign by including web pages of its related section 501(c) (4) organization on its web site, where all web pages on A Local's web site contain A Local's banner, and other indicia of ownership, and where the related entity's web pages include candidate questionnaires and endorsements of candidates for public office? 
+
+FACTS 
+
+A Local is recognized as exempt from federal income tax as an organization described in section 501 (c)(3) of the Internal Revenue Code and classified as an organization that is not a private foundation under section 509(a)(2). It is affiliated with the A National, and operates in accordance with A National's affiliation rules. A National is recognized as exempt under section 501(c)(3), and functions as the national headquarters for all A organizations. A National does not, however, hold a group ruling. 
+
+A Local 501(c)(4) is recognized as exempt from federal income tax as an organization described in section 501(c)(4). 
+
+A Local controls A Local 501(c)(4) through common board membership and the organizations have a close working relationship. A Local 501(c)(4)'s bylaws require that a majority, though no more than two-thirds, of its board of directors consist of directors of A Local, and that one of these directors be the chairperson of the board of A Local. 
+
+A Local shares office space and employees with A Local 501(c)(4) pursuant to an agreement whereby A Local 501(c)(4) reimburses A Local for its share of the costs. 
+
+The management of A Local is vested in its board of directors, which establishes policies and approves programs, but delegates to its chief executive officer/president the authority to achieve the goals set by the board. The board of directors has the authority to monitor A Local's activities and require periodic reports from its chief executive officer/president. 
+
+For several years prior to the year in question, A Local and A Local 501(c)(4) maintained separate Internet web sites. During that period, the A Local web site contained a link to the A Local 501(c)(4) web site. The A Local 501(c)(4) web site experienced repeated technical problems throughout the period it was independent of the A Local web site _ it was unstable, vulnerable to hackers, and crashed often. 
+
+In response to the technical problems A Local 501(c)(4) had experienced with its web site, the web site manager for A Local 501(c)(4) determined that corrective action was necessary. In evaluating various options, and after observing that other section 501(c)(4) organizations "shared " web sites with related section 501(c)(3) organizations, the A Local 501(c)(4) web site manager recommended to the staff of A Local and A Local 501(c)(4) that A Local 501(c)(4)'s web site material should be moved to and housed within the A Local web site as a separate set of web pages. 
+
+A Local claims that the two organizations sought and received legal advice regarding the operation and maintenance of a shared web site. A Local states that its board was not informed about the web site change because it is not kept current on A Local's day-to-day operations. No written documentation was provided between A Local and its Internet service provider or with A Local 501(c)(4) concerning the operation of a shared web site. 
+
+In the year in question, the A Local 501(c)(4) web pages were moved onto the A Local web site. The pages were designed as a separate subset of the A Local site. A Local 501(c)(4) reimbursed A Local for its proportional share of the web site costs pursuant to the existing reimbursement agreement between the two organizations. 
+
+Every web page in the A Local web site contains a banner with the A Local logo, electronic links along the top, left side, and bottom, and a disclaimer notice and a copyright notice, both of A Local, at the bottom. All of the links lead to pages within the A Local web site. The banner along the top includes links entitled "Take Action, " "Support Us, " and "h Services. " Along the left side, there are links entitled "About Us, " "Education & Training, " "Volunteer, " "c & b Info, " "Members Only, " "Site Map, " "Tell-A-Friend, " and "Media, " along with links to register to become a member or to login if the user is already a member. Along the bottom are additional links entitled "Home, " "About Us, " "Education, " "Support Us, " "Volunteer, " "c & b Info, " and "Site Map. " 
+
+The "About Us " link leads to a page describing the mission and activities of A Local and the "Support Us " link leads to a page describing how to make tax-deductible contributions to A Local. The "Take Action " link leads to a page describing a number of activities and includes a link to "Find d on the web. " This link leads to a page containing a listing of a variety of links to other organizations on the Internet, including A National. The links are broken down into those that are part of the affiliation of A Local and A National ( "A Family ") and another group of links that share similar points of view as A Local ( "Our Allies "). The first link in the list is a link to the main A Local 501(c)(4) page, and is described as a link to the "local political arm " of A Local. 
+
+Like all pages on the A Local web site, the pages designated as A Local 501(c)(4) pages contain the A Local banner with the A Local logo at the top of the page. They also contain all of the A Local links to the various web pages at the top, side and bottom of each page, as well as the A Local disclaimer and copyright notices on the bottom of each page. Thus, for example, if a user clicks the link entitled "Support Us " or "About Us " while on any of the pages designated as A Local 501(c)(4) pages, the organization described is A Local, not A Local 501(c)(4). Although A Local asserts that the design of the shared site contains separate sections, or pages, for each organization, the only visual distinction between the layout and graphic design of the web pages designated as A Local 501(c)(4)'s and those designated as A Local's, is that A Local 501(c)(4)'s logo and address appears below the A Local banner on the pages designated as A Local 501(c)(4) pages. The pages designated as A Local 501(c)(4) pages contain candidate questionnaires and endorsements of candidates for public office. 
+
+At conference, A Local's representatives claimed that the Service was changing its view from only looking at allocation of costs between a section 501(c)(3) organization and a section 501(c)(4) organization and was now looking at overall graphic design. Furthermore, at the meeting, A Local representatives stated that its web site operator required A Local's banner to be on all pages of its web site, including the A Local 501(c)(4) pages. 
+
+
+LAW 
+
+Section 501(c)(3) provides, in part, for the exemption from federal income tax of corporations organized and operated exclusively for charitable, scientific, or educational purposes, provided no part of the organization's net earnings inures to the benefit of any private shareholder or individual and it does not participate or intervene (including the publishing or distributing of statements) in any political campaign on behalf of (or in opposition to) any candidate for public office. 
+
+Section 1 .501(c)(3)-1(c)(3) of the Income Tax Regulations states that an organization is not operated exclusively for one or more exempt purposes described in section 501(c)(3) if it is an "action " organization. An "action " organization is defined to include an organization which participates or intervenes, directly or indirectly, in any political campaign on behalf of or in opposition to any candidate for public office. Activities which constitute participation or intervention in a political campaign include, but are not limited to, the publication or distribution of written or printed statements or the making of oral statements on behalf of or in opposition to such a candidate. 
+
+Whether an organization is participating or intervening, directly or indirectly, in any political campaign on behalf of or in opposition to any candidate for public office depends upon all of the facts and circumstances. For example, certain "voter education " activities conducted in a non-partisan manner may not constitute prohibited political activities under section 501(c)(3). Other so-called "voter education " activities may be proscribed by the statute. Rev. Rul. 78-248, 1 978-1 C.B. 1 54, contrasts several situations illustrating when an organization that publishes a compilation of a candidate's position or voting record has or has not engaged in prohibited political activities based on whether the questionnaire or voting guide in content or structure shows a bias or preference with respect to the views of a particular candidate. See also Rev. Rul. 80-282, 1980-2 C.B. 178, amplifying Rev. Rul. 78-248, regarding the timing and distribution of voter education materials. 
+
+Rev. Rul. 2007-41 , 2007-25 I.R.B. 1421 (June 18, 2007), illustrates the analysis of facts and circumstances in a number of situations to determine whether a section 501(c)(3) organization has intervened in a political campaign on behalf of or in opposition to any candidate for public office, including several involving activity on the Internet (Situations 19-21). The revenue ruling notes that "[i]f an organization posts something on its web site that favors or opposes a candidate for public office, the organization will be treated the same as if it distributed printed material, oral statements or broadcasts that favored or opposed a candidate. " Situation 21 holds that a section 501(c)(3) organization that posted the following message on its web site, "Lend your support to B, your fellow parishioner, in Tuesday's election for town council, " intervened in a political campaign. Additionally, Situation 4 holds that a section 501(c)(3) organization intervened in a political campaign when its president endorsed a candidate in its official publication, even though the president paid for that portion of the publication from his personal funds. 
+
+
+ANALYSIS 
+
+To be an organization described under section 501(c)(3), an organization may not participate or intervene (including the publishing or distributing of statements) in any political campaign on behalf of (or in opposition to) any candidate for public office. All relevant facts and circumstances must be analyzed to determine whether an organization participates or intervenes in a political campaign. As discussed in Rev. Rul. 2007-41 , a web site is a form of communication. If an organization posts something on its web site that favors or opposes a candidate for public office, the organization will be treated the same as if it distributed printed material, oral statements, or broadcasts that favored or opposed a candidate. 
+
+In this case, A Local's banner, logo, site links, and disclaimer and copyright notices are included on every web page contained on the A Local web site, including the web pages with candidate questionnaires and endorsements of candidates for public office, material that was previously on A Local 501(c)(4)'s separate web site. Indeed, except for an A Local 501(c)(4) logo and address below the A Local banner, the banner and visual presentation of those A Local 501(c)(4) pages is virtually indistinguishable from the other pages of A Local's web site. As a result of this presentation, A Local is considered to have distributed those candidate questionnaires and endorsements. Additionally, as in Situation 4 of Rev. Rul. 2007-41 , the fact that A Local 501(c)(4) reimbursed A Local for the proportionate cost of the web site that contained its material does not change the conclusion that A Local is responsible for having distributed the material. 
+
+
+CONCLUSION
+
+A Local intervened in a political campaign by distributing campaign endorsements on its web site. 
