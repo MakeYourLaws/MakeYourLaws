@@ -1,0 +1,4 @@
+---
+:skip_files:
+- app/models/fec/candidate.rb
+- app/models/fec/committee.rb
