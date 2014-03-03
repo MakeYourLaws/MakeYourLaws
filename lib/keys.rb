@@ -1,6 +1,6 @@
 # Note: this is called from things where Rails is *not* yet loaded, which is why we can't use Rails.root
 module Keys
-  @keys_dir =  File.join File.dirname(__FILE__), '..', 'config', 'keys'   
+  @keys_dir =  File.join File.dirname(__FILE__), '..', 'config', 'keys'
   @keys_dir = File.join File.dirname(__FILE__), 'config', 'keys' unless Dir.exists?(@keys_dir)
 
   # Get the key for a given environment (falling back to the general one)
@@ -12,24 +12,26 @@ module Keys
     else
       'production'
     end
-    
+
     file = File.join(@keys_dir, name + '.' + environment)
-    key = if File.exist?(file)
-      IO.read(file).strip
-    else
-      file = File.join(@keys_dir, name)
-      IO.read(file).strip if File.exist?(file)
+    file = File.join(@keys_dir, name) unless File.exist?(file)
+    fakefile = File.join(@keys_dir, name + '.fake')
+    file = fakefile unless File.exist?(file)
+
+    unless File.exist?(fakefile)
+      IO.write(fakefile, SecureRandom.hex(64).to_s)
     end
-    
-    if !key
-      raise "Key #{name} not found for #{environment} environment. 
-      Set it in Rails console using Keys.set(\"#{name}\", \"SECRET-KEY\"[, \"#{environment}\"]) 
-      Alternately, run echo \"SECRET-KEY\" > config/keys/#{name}.#{environment} from shell."
-    else
-      key
+
+    if file == fakefile
+      puts "Key #{name} not found for #{environment} environment.
+      Set it in Rails console using Keys.set(\"#{name}\", \"SECRET-KEY\"[, \"#{environment}\"])
+      Alternately, run echo \"SECRET-KEY\" > config/keys/#{name}.#{environment} from shell.
+      In the meantime, we're using the .fake file."
     end
+
+    IO.read(file).strip
   end
-  
+
   # Name your key some_key.production (.test, .development) if you want it environment-specific.
   def self.set name, key, environment = nil
     name = "#{name}.#{environment}" if environment

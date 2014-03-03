@@ -5,6 +5,8 @@ log/*.log
 tmp/
 config/keys/
 !config/keys/PASSWORDS_GO_HERE
+!config/keys/*.fake
+!config/keys/tor_hostname
 .sass-cache/
 vendor/cache/
 .project

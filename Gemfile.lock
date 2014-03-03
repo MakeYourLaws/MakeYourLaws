@@ -1,42 +1,5 @@
-GIT
-  remote: git://github.com/airblade/paper_trail.git
-  revision: dad84ed216a6aa7f72a80fa180791c5bfd7ef031
-  specs:
-    paper_trail (3.0.0)
-      activerecord (>= 3.0, < 5.0)
-      activesupport (>= 3.0, < 5.0)
-
-GIT
-  remote: git://github.com/carr/phone.git
-  revision: 081a295f7a17fb7c5b868c310956beebdd9b7649
-  specs:
-    phone (1.3)
-
-GIT
-  remote: git://github.com/datariot/omniauth-paypal.git
-  revision: 1d0ce203d6a9fd8ec757f0c94e242392dcaa3b7f
-  specs:
-    omniauth-paypal (1.2.1)
-      omniauth-oauth2 (~> 1.1.0)
-
-GIT
-  remote: git://github.com/smartinez87/exception_notification.git
-  revision: 8a8c6a4c1f48fa49aa98328b3379f5a4a5596b32
-  specs:
-    exception_notification (4.0.1)
-      actionmailer (>= 3.0.4)
-      activesupport (>= 3.0.4)
-
-GIT
-  remote: git://github.com/stripe/stripe-ruby.git
-  revision: 637d5899f614a6f4d0fa2147f9b3b8b1c8b39b28
-  specs:
-    stripe (1.10.2)
-      json (~> 1.8.1)
-      mime-types (~> 1.25)
-      rest-client (~> 1.4)
-
 GEM
+  remote: https://code.stripe.com/
   remote: https://rubygems.org/
   specs:
     Empact-activerecord-import (0.4.3)
@@ -97,6 +60,17 @@ GEM
     bitpay-client (0.1.2)
       json
       rack
+    brakeman (2.4.1)
+      erubis (~> 2.6)
+      fastercsv (~> 1.5)
+      haml (>= 3.0, < 5.0)
+      highline (~> 1.6.20)
+      multi_json (~> 1.2)
+      ruby2ruby (~> 2.0.5)
+      ruby_parser (~> 3.4.0)
+      sass (~> 3.0)
+      slim (>= 1.3.6, < 3.0)
+      terminal-table (~> 1.4)
     builder (3.1.4)
     cancan (1.6.10)
     capistrano (3.1.0)
@@ -137,13 +111,19 @@ GEM
       devise (>= 2.1.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    exception_notification (4.0.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (2.0.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
     friendly_id (5.0.3)
       activerecord (>= 4.0.0)
+    haml (4.0.5)
+      tilt
     hashie (2.0.5)
+    highline (1.6.21)
     hike (1.2.3)
     i18n (0.6.9)
     it (0.2.5)
@@ -219,11 +199,17 @@ GEM
     omniauth-openid (1.0.1)
       omniauth (~> 1.0)
       rack-openid (~> 1.3.1)
+    omniauth-paypal (1.2.1)
+      omniauth-oauth2 (~> 1.1.0)
     omniauth-twitter (1.0.1)
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.5.0)
+    paper_trail (3.0.0)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     people (0.2.1)
+    phone (1.2.3)
     polyglot (0.3.4)
     rack (1.5.2)
     rack-attack (2.3.0)
@@ -279,6 +265,11 @@ GEM
     rolify (3.4.0)
     ruby-openid (2.5.0)
     ruby-prof (0.14.2)
+    ruby2ruby (2.0.7)
+      ruby_parser (~> 3.1)
+      sexp_processor (~> 4.0)
+    ruby_parser (3.4.1)
+      sexp_processor (~> 4.1)
     sass (3.2.14)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -287,6 +278,10 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    sexp_processor (4.4.1)
+    slim (2.0.2)
+      temple (~> 0.6.6)
+      tilt (>= 1.3.3, < 2.1)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -303,11 +298,17 @@ GEM
     state_machine (1.2.0)
     strip_attributes (1.5.0)
       activemodel (>= 3.0, < 5.0)
+    stripe (1.10.1)
+      json (~> 1.8.1)
+      mime-types (~> 1.25)
+      rest-client (~> 1.4)
     stripe_event (1.1.0)
       activesupport (>= 3.1)
       stripe (~> 1.6)
+    temple (0.6.7)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
+    terminal-table (1.4.5)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -346,6 +347,7 @@ DEPENDENCIES
   bcrypt (>= 3.0.1)
   bettertabs
   bitpay-client
+  brakeman
   cancan (>= 1.6.8)
   capistrano (>= 3.0.1)
   capistrano-bundler
@@ -355,7 +357,7 @@ DEPENDENCIES
   debugger
   devise (>= 3.1.1)
   devise-encryptable (>= 0.1.1c)
-  exception_notification (>= 4.0.0)!
+  exception_notification (>= 4.0.1)
   execjs (>= 1.3.0)
   friendly_id (>= 5.0.0)
   it (>= 0.2.3)
@@ -374,10 +376,10 @@ DEPENDENCIES
   omniauth-github (>= 1.0.1)
   omniauth-google-oauth2 (>= 0.1.9)
   omniauth-openid (>= 1.0.1)
-  omniauth-paypal (>= 0.1.0)!
+  omniauth-paypal (>= 1.2.1)
   omniauth-twitter (>= 0.0.10)
-  paper_trail (>= 3.0.0.rc1)!
-  phone!
+  paper_trail (>= 3.0.0)
+  phone
   rack (>= 1.4.1)
   rack-attack
   rack-cache
@@ -393,7 +395,7 @@ DEPENDENCIES
   sdoc
   state_machine
   strip_attributes (>= 1.1.0)
-  stripe!
+  stripe
   stripe_event
   therubyracer
   thin
