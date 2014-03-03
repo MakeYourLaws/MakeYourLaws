@@ -16,20 +16,3 @@ one:
   token: MyString
   secret: MyString
   raw_info: MyText
-
-two:
-  provider: MyString
-  uid: MyString
-  name: MyString
-  email: MyString
-  nickname: MyString
-  first_name: MyString
-  last_name: MyString
-  location: MyString
-  description: MyText
-  image: MyString
-  phone: MyString
-  urls: MyText
-  token: MyString
-  secret: MyString
-  raw_info: MyText
