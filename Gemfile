@@ -50,6 +50,12 @@ group :development, :test do
   gem 'ruby-prof'
   gem 'webrat', '>= 0.7.3'
   gem "brakeman", :require => false  # Rails security scanner
+  gem 'rspec-rails', '~> 3.0.0.beta'
+end
+
+group :test do
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
 end
 
 # Bundle the extra gems:
