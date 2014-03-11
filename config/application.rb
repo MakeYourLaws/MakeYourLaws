@@ -17,10 +17,10 @@ module MakeyourlawsOrg
     config.autoload_paths += [Rails.root.join('lib'), Rails.root.join('lib','{**}')]
     # Don't do this. See http://stackoverflow.com/questions/12467847/rails-namespaced-model-conflicting-with-non-namespaced-model
     # config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
-    
+
     config.middleware.insert_after ActionDispatch::RemoteIp, Rack::TorTag
     config.middleware.use Rack::Attack
-    
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -35,13 +35,13 @@ module MakeyourlawsOrg
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
-    
+
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    
+
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
@@ -56,14 +56,14 @@ module MakeyourlawsOrg
     # # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
 
-    config.cache_store = :redis_store
-    
+    config.cache_store = :redis_store, {:db => 1}
+
     # Enable the asset pipeline
     config.assets.enabled = true
-    
+
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    
+
     config.to_prepare do
        DeviseController.respond_to :html, :json
     end

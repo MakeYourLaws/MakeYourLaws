@@ -18,10 +18,10 @@ MakeyourlawsOrg::Application.configure do
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
   config.action_dispatch.rack_cache = {
-    metastore:   'redis://localhost:6379/1/metastore',
-    entitystore: 'redis://localhost:6379/1/entitystore'
+    metastore:   'redis://localhost:6379/3',
+    entitystore: 'redis://localhost:6379/4'
   }
-  
+
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
 
@@ -71,8 +71,8 @@ MakeyourlawsOrg::Application.configure do
   config.action_mailer.delivery_method = :sendmail # :smtp
   # defaults to -i -t. However, Mail::Sendmail actually puts recipients on the command line, so
   #  if -t gets them from the headers, it screws things up. Thus, no -t.
-  config.action_mailer.sendmail_settings = {:arguments => '-i '} 
-  
+  config.action_mailer.sendmail_settings = {:arguments => '-i '}
+
   # config.action_mailer.smtp_settings = {
   #   :address => 'mail.makeyourlaws.org',
   #   :port => 587,
@@ -80,17 +80,17 @@ MakeyourlawsOrg::Application.configure do
   #   :authentication => :login,
   #   :user_name => Keys.get("mail_user"),
   #   :password => Keys.get("mail_password"),
-  #   :enable_starttls_auto => false 
+  #   :enable_starttls_auto => false
   #   # FIXME: disabling TLS is a horrible but effective way to fix
   #   #  OpenSSL::SSL::SSLError (hostname was not match with the server certificate)
-  #   # There has to be something we can do to make DreamHost's SSL certs not crap out.    
+  #   # There has to be something we can do to make DreamHost's SSL certs not crap out.
   # }
-  
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-  
+
   # Enable threaded mode
   # config.threadsafe!
 
@@ -100,10 +100,10 @@ MakeyourlawsOrg::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
+
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
-    
+
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 end

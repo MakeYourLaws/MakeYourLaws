@@ -5,4 +5,4 @@
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rails generate session_migration")
-MakeyourlawsOrg::Application.config.session_store :redis_store
+MakeyourlawsOrg::Application.config.session_store :redis_store, :servers => {:db => 2}
