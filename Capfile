@@ -19,7 +19,7 @@ require 'capistrano/rvm'
 # require 'rvm1/capistrano3'
 require 'capistrano/bundler'
 require 'capistrano/rails'
-require 'airbrake/capistrano'
+require 'airbrake/capistrano3'
 
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
