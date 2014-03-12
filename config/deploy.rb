@@ -14,8 +14,7 @@ set :git_enable_submodules, 1
 set :runner, "makeyourlaws"
 set :deploy_to, "/home/makeyourlaws/makeyourlaws.org/" # must be path from root
 set :deploy_via, :remote_cache
-# default_run_options[:pty] = true  # Uncomment if on SunOS (eg Joyent) - http://groups.google.com/group/capistrano/browse_thread/thread/13b029f75b61c09d
-# set :use_sudo, false # sudo is false on DreamHost
+
 set :ssh_options, {
   user: "makeyourlaws",
   compression: false,
@@ -32,7 +31,6 @@ set :ssh_options, {
 # set :linked_files, %w{config/database.yml}
 set :linked_dirs,  %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/files db/data config/keys) # formerly shared_children
 
-set :default_env, { path: "/home/makeyourlaws/.gems/bin/:/usr/local/bin:/usr/bin:/bin:$PATH" }
 set :keep_releases, 15
 
 namespace :deploy do

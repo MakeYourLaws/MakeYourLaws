@@ -16,7 +16,6 @@ require 'capistrano/deploy'
 #   https://github.com/capistrano/rails/tree/master/migrations
 #
 require 'capistrano/rvm'
-# require 'rvm1/capistrano3'
 require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'airbrake/capistrano3'
