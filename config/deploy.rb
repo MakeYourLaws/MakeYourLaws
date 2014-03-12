@@ -45,7 +45,9 @@ namespace :deploy do
     end
   end
 
-  after 'deploy:publishing', 'deploy:restart'
+  after :publishing, 'deploy:restart'
+
+  after :restart, "airbrake:deploy"
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
@@ -95,5 +97,4 @@ namespace :deploy do
   end
 end
 
-        require './config/boot'
-        require 'airbrake/capistrano'
+require './config/boot'
