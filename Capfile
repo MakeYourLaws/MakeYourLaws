@@ -19,6 +19,8 @@ require 'capistrano/rvm'
 # require 'rvm1/capistrano3'
 require 'capistrano/bundler'
 require 'capistrano/rails'
+require 'airbrake/capistrano'
+
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
 # require 'new_relic/recipes' # not cap 3 compatible yet
