@@ -12,7 +12,7 @@ task "resque:setup" => :environment do
     logfile.sync = true
 
     # Create a new buffered logger
-    Resque.logger = ActiveSupport::BufferedLogger.new(logfile)
+    Resque.logger = ActiveSupport::Logger.new(logfile)
     Resque.logger.level = Logger::INFO
     Resque.logger.info "Resque Logger Initialized!"
   }
