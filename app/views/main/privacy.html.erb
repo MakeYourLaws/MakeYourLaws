@@ -1,6 +1,8 @@
 <%= t "Privacy policy" %>
 
-<p>This policy may change at any time without notice. You can view its complete history 
+<% cache do %>
+
+<p>This policy may change at any time without notice. You can view its complete history
 	<a href="https://github.com/MakeYourLaws/MakeYourLaws/commits/master/app/views/main/privacy.html.erb">here</a>.</p>
 
 <p>We collect information on our users that can be categorized in a few basic ways:</p>
@@ -19,16 +21,16 @@
 		<h3>Information that is public by your implicit consent or that you license to us</h3>
 		<p>For instance, if you post comments under your username, the text of those comments is public,
 			as is its association with your username.</p>
-		<p>Please note that as a condition of using this site, <i>all</i> content that you submit 
-			to us is licensed to us under the 
-			<a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons 
+		<p>Please note that as a condition of using this site, <i>all</i> content that you submit
+			to us is licensed to us under the
+			<a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons
 			attribution-only 3.0 US license</a>, meaning that we are allowed to use it in any way
 			at our discretion, so long as we give you credit.</p>
 	</li>
 	<li>
 		<h3>Information that is not personally identifiable</h3>
 		<p>For instance, this includes aggregated statistics across multiple MYL users,
-			such as "what is the distribution of a contributor's job title vs their 
+			such as "what is the distribution of a contributor's job title vs their
 			contribution amount".</p>
 		<p>We will share this data publicly and/or with individual researchers, to the extent
 			that we believe it would be beneficial to do so, and we are sure that
@@ -48,7 +50,7 @@
 			for instance, we use Google Analytics, which collects IP address, page viewing history,
 			etc.</p>
 		<p>We will use this information internally for a variety of purposes, such as personalizing
-			the website to you, abuse and fraud detection / prevention, account recovery verification, 
+			the website to you, abuse and fraud detection / prevention, account recovery verification,
 			identity authentication, research, etc.</p>
 	</li>
 	<li>
@@ -58,7 +60,7 @@
 		<p>Even if we wanted to, there is no way for us to access this information, and we will
 			oppose any effort to force us to install any "backdoors" in our code to bypass these
 			security measures.</p>
-		<p><a href="http://github.com/MakeYourLaws"</a>Our code</a> is publicly available for 
+		<p><a href="http://github.com/MakeYourLaws"</a>Our code</a> is publicly available for
 			review. What you see there is what is actually running on this server.</p>
 	</li>
 </ol>
@@ -66,14 +68,14 @@
 <h2>Privacy-hardened version of MYL</h2>
 
 <p>In parallel to our regular website (<a href="https://makeyourlaws.org">https://makeyourlaws.org</a>),
-	we maintain a Tor hidden service (<a href="http://<%= Keys.get 'tor_hostname' %>">http://<%= 
-	Keys.get 'tor_hostname' %></a>). This can be accessed via the Tor anonymizing proxy system; we 
+	we maintain a Tor hidden service (<a href="http://<%= Keys.get 'tor_hostname' %>">http://<%=
+	Keys.get 'tor_hostname' %></a>). This can be accessed via the Tor anonymizing proxy system; we
 	strongly recommend that you use the <a href="https://www.torproject.org/projects/torbrowser.html.en">Tor
 	Browser Bundle</a> to do so.</p>
-	
+
 <p>The Tor website functions differently in a few ways:
 	<ol>
-		<li>Javascript, Google Analytics, and all other privacy-disclosing tracking is disabled 
+		<li>Javascript, Google Analytics, and all other privacy-disclosing tracking is disabled
 			(though our own cookies are not, as they are necessary for secure logins and sessions)</li>
 		<li>all functionality that would implicate a legally mandated disclosure requirement is disabled
 			(e.g. you cannot send us campaign contributions via the Tor website*)</li>
@@ -87,11 +89,14 @@
 <p>If you have serious privacy concerns, we strongly encourage you to use the Tor website instead,
 	and to take careful precautions not to disclose anything that would link your Tor account to
 	any identifying information (e.g. IP address, legal name, username used elsewhere, etc).</p>
-	
+
 <p>* We are currently thinking through how we can permit anonymous users to participate in MYL.
 	In the future, this may include accepting Bitcoin contributions in some limited ways, allowing
 	anonymous users to act as proxies, etc. However, as we are subject to extensive legal regulation,
 	we will not do so without first obtaining approval from the FEC, IRS, and/or FinCEN (as appropriate).</p>
-	
-<p>If you have questions or concerns about our privacy policy, please <%= link_to "contact", contact_path %> 
+
+<p>If you have questions or concerns about our privacy policy, please <%= link_to "contact", contact_path %>
 	the core team.</p>
+
+
+<% end %>

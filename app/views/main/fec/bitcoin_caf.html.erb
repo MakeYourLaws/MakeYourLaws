@@ -1,5 +1,7 @@
 <%= t "Bitcoin contributions to PACs - CAF's request" %>
 
+<% cache do %>
+
 <p class="c b"><%= link_to "Our Bitcoin request", fec_bitcoin_path %></p>
 
 <p>In August 2013, the Conservative Action Fund PAC (CAF) asked the Federal Election Commission whether they should be permitted to accept contributions of Bitcoin.</p>
@@ -27,3 +29,5 @@
 <p>2013-11-16: We <a href="/files/MYL%20PAC%20&%20MYL%20C4%20comment%203%20on%20AO%202013-15%20Conservative%20Action%20Fund.pdf" target="_blank">filed comments</a> to address issues discussed in the FEC's Nov 14th meeting.</p>
 <p>2013-11-20: The Bitcoin Foundation <a href="http://saos.nictusa.com/aodocs/1248189.pdf" target="_blank">also commented</a>, and the FEC issued their <a href="http://saos.nictusa.com/aodocs/1248186.pdf" target="_blank">fourth draft opinion</a>, which would have allowed disbursement of Bitcoins.</p>
 <p>2013-11-21: The FEC <a href="http://saos.nictusa.com/aodocs/AO%202013-15.pdf" target="_blank">deadlocked</a> 3-3 (<a href="http://fec.gov/audio/2013/2013112101.mp3" target="_blank">audio</a>).</p>
+
+<% end %>

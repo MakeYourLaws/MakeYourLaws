@@ -1,5 +1,7 @@
 <%= t "Flexible earmarking" %><a name="top"></a>
 
+<% cache do %>
+
 <div class="flash notice l">This request is still in draft form; we have not yet submitted it officially. In the meantime, you can <a href="https://docs.google.com/document/d/1WCyUouQdPNTwvVMJdgmYABnu2xMmF8W14l4B8EIb86k/" target="_blank">read and comment on our draft</a>.</div>
 
 <p>Make Your Laws is developing innovative ways to apply the <%= link_to "principles of liquid democracy", introduction_path %>. We're starting with US campaign finance, which is regulated in part by the <a href="http://fec.gov" target="_blank">Federal Election Commission</a> (FEC).</p>
@@ -30,33 +32,33 @@
 
 <ol>
 	<li><h3>May a contributor defer a decision to earmark a contribution, or alter an untriggered earmark?</h3>
-		
+
 		<p>This would let you set up an automatic monthly payment and choose how you want us to spend that money later on (like if you're using proxies as in 2(f) below).</p>
 		<p>It would also let you change your mind about an earmarked contribution (e.g. to change the recipient or trigger), so long as you do it <em>before</em> the triggering event happens.</p>
 	</li>
 	<li><h3>May a contributor make an earmark contingent on any clearly defined external conditions?</h3>
-		
+
 		<p>This would let you contributions more easily and flexibly, by setting conditions and letting us do the tracking and logistical work for you.</p>
 		<p>We gave several types of earmarks we'd like you to be able to make:</p>
-		
+
 		<ol class="alpha italic">
 			<li><p>"$100 to XYZ PAC; or if they do not or cannot accept the contribution, to MYL PAC; or if my contribution limit to MYL PAC is exceeded, to MYL C4"</p>
-				
+
 				<p>This would let us have a fallback so that in case something goes wrong, we can use your money to effectively do what you asked us in some other way.</p>
 			</li>
 			<li><p class="mb-n">"$500, divided equally among every Senator who votes in favor of Senate Bill A when/if it comes to floor vote; or if there is no vote or it has no votes in favor, to be contributed to Americans For A."</p></li>
 			<li><p class="mb-n">"$50 to Senator Bob, if Senate Committee B approves Senate Bill C by date D; or to Citizens Against Senator Bob if the bill is not approved by Senate Committee B by that date."</p></li>
 			<li><p>"$1,000, divided equally among every 2015 House candidate to whom Citizens For A Better E gives a score of 90% or better by the end of October 2014."</p>
-				
+
 				<p>These three would let you contribute money based on specific issues or legislation that you want to you support or oppose. We'd handle the work of tracking votes, outcomes, etc.</p>
 				<p>It would also make collective action on a specific issue or bill much easier. By making contributions ahead of time, you could join together with people who agree with you on the issue in making your collective intent clear and raising funds while the debate is still fresh.</p>
 			</li>
 			<li><p>"$200 to F PAC, only in the event that pledges to F PAC total at least $10,000 or 500 contributors by Date G; or if the pledge requirement is not met, no contribution."</p>
-				
+
 				<p>This is the "Kickstarter model" for campaign finance. It lets you pledge contributions to small (or would-be) campaigns which need some minimum amount to be realistically viable.</p>
 			</li>
 			<li><p>"$50 per month, divided proportionally in whatever way MYL website user H recommends, to take effect unless I override this earmark within one week of being sent H's updated recommendations."</p>
-				
+
 				<p>This lets campaign finance work like a <%= link_to "liquid democracy", introduction_path %> in a way that's easy to use and completely transparent.</p>
 				<p>As a contributor, you could set how much you want to spend per month, and have it spent based on the recommendations of people you trust ("proxies").</p>
 				<p>Your proxies might include someone who is particularly knowledgable about some specific issue. You could also just proxy 100% to a friend who shares your values but is more politically active, who in turn picks experts for some issues and has their own opinions on others.</p>
@@ -66,26 +68,26 @@
 		</ol>
 	</li>
 	<li><h3>May MYL PAC notify potentially affected recipients of contingent earmarks?</h3>
-		
+
 		<p>This would let us automatically tell potential recipients (like your representatives) about earmarks that affect them — letting them know how people feel about an issue, demographic breakdowns (like their constituents' views), etc.</p>
 		<p>We would make all of that information publicly available on this website anyway; this question just asks whether we can <em>notify</em> potential recipients, so that they know in advance what's going on and so we can make everything more transparent.</p>
 	</li>
 	<li><h3>How would the answers to the above questions be different for contributions made by MYL PAC itself out of direct contributions to MYL PAC by its users, when its users give MYL PAC non-binding guidance on how they would prefer their money be used?</h3>
-		
+
 		<p>This would give us a fallback option in case something might not be allowed using an earmark but would be allowed if we have more control. It also helps make clearer for us how much we can communicate with you informally about how you want your money spent.</p>
 	</li>
 	<li><h3>Does MYL PAC's payment for the costs of payment processing and other direct costs of fundraising — including its payment of the general costs of website operation and advertisement overall — constitute an "independent expenditure" or "contribution"? How should such costs be reported?</h3>
-		
+
 		<p>PACs are required to report all their expenses, but some (like <a href="http://www.fec.gov/pages/brochures/indexp.shtml#IE" target="_blank">"independent expenditures"</a>), require more detailed reporting. It's mainly intended to make partisan PACs report money they spend mailing letters asking people to contribute to or vote for their preferred candidates, and to make Super PACs to report their advertising. These are benefits to transparency that we definitely support.</p>
 		<p>However, we're non-partisan and want to make it easy for you contribute to <em>any</em> political recipient; we'd be treating thousands of different recipients (all across the political spectrum) in exactly the same way. It'd be fairly hard for us to separately report exactly what portion of our general website or advertising expenses are for any particular recipient.</p>
 		<p>The regulation requiring extra reporting for such things just doesn't really apply to us, and we'd like to avoid the complications involved.</p>
-	</li>	
+	</li>
 </ol>
 
 
 <a name="comment"></a>
 <div style="text-align: center;"><a href="#top">Top</a> | <a href="#earmarks">What are earmarks?</a> | <a href="#questions">Our questions</a></div>
-	
+
 <h2><a href="#comment">How you can get involved</a></h2>
 
 <p>We want to know what you think, and the FEC does too.</p>
@@ -103,3 +105,6 @@
 <p>If you can, it's better to make a more formal-looking comment. General email comments usually get lumped together, whereas if you take a little extra time to make a good-looking PDF, it'll appear separately and be looked at more seriously.</p>
 
 <p>There are no specific formatting requirements, but we suggest you use 12 pt Arial w/ 1.5 line spacing for body text; 1 inch margin; and have a header saying "(your [group's] name) comments on AO ouraornumberhere MYL PAC" &amp; the page # / # total pages.</p> -->
+
+
+<% end %>

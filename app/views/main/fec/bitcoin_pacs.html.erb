@@ -1,5 +1,7 @@
 <%= t "Political organizations accepting Bitcoin" %>
 
+<% cache do %>
+
 <p class="c b"><%= link_to "Our Bitcoin request", fec_bitcoin_path %></p>
 
 <p>This is a list of all political organizations (parties, PACs, candidate committees, 501(c)4s, etc) that we know of who accept Bitcoin contributions.</p>
@@ -119,3 +121,5 @@
 		<td class="small">Defunct</td>
 	</tr>
 </table>
+
+<% end %>

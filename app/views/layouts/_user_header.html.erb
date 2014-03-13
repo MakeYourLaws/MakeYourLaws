@@ -1,13 +1,15 @@
-<div id='signin' class='header'>
-	<% if user_signed_in? %>
-		Welcome back, <%= current_user.name %>!  
-		<%= link_to 'Edit profile', edit_user_registration_path %>
-		<%= link_to 'Log out', logout_path, :method => :delete %>?<br/>
-	<% else %>
-		Would you like to <%= link_to 'log in or sign up', login_path %>?
-	<% end %>
-	
-	<% if tor? %>
-		<%= image_tag "tor-on_16.png", alt: "Tor!", width: 16, height: 16 %>
-	<% end %>
-</div>
+<% cache_unless user_signed_in?, ['user_header', tor_s] do %>
+	<div id='signin' class='header'>
+		<% if user_signed_in? %>
+			Welcome back, <%= current_user.name %>!
+			<%= link_to 'Edit profile', edit_user_registration_path %>
+			<%= link_to 'Log out', logout_path, :method => :delete %>?<br/>
+		<% else %>
+			Would you like to <%= link_to 'log in or sign up', login_path %>?
+		<% end %>
+
+		<% if tor? %>
+			<%= image_tag "tor-on_16.png", alt: "Tor!", width: 16, height: 16 %>
+		<% end %>
+	</div>
+<% end %>
