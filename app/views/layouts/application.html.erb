@@ -7,12 +7,12 @@
 		<% unless tor? %>
 			<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 			<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-			<%= csrf_meta_tags %>
 		<% end %>
 		<%= favicon_link_tag %>
 		<meta name="robots" content="all" />
 		<link href="https://plus.google.com/100183759660923071401" rel="publisher" />
 <% end %>
+		<%= csrf_meta_tags %>
 		<meta name="title" content="Make Your Laws: <%= yield :title %>" />
 		<title>Make Your Laws: <%= yield :title %></title>
 <% cache ['body-preheader', tor_s] do %>
