@@ -17,6 +17,11 @@ end
 
 gem 'redis-rails' # switching out for dalli/memcached
 
+gem "resque", :require => "resque/server"
+gem "capistrano-resque", git: "https://github.com/sshingler/capistrano-resque.git", require: false
+gem 'resque_mailer'
+gem 'resque-scheduler'
+
 gem 'newrelic_rpm', ">= 3.4.0"
 gem 'airbrake'
 # gem 'exception_notification', '>= 4.0.1' # deprecated for airbrake.io
@@ -98,6 +103,8 @@ gem "omniauth-google-oauth2", '>= 0.1.9'
 gem "omniauth-openid", '>= 1.0.1'
 gem "omniauth-twitter", '>= 0.0.10'
 gem "omniauth-paypal", '>= 1.2.1'
+
+gem 'devise-async'
 
 gem 'cancan', '>= 1.6.8'
 # gem 'cantango', '>= 0.9.4.7'
