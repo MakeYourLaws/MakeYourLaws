@@ -27,7 +27,8 @@ set :ssh_options, {
 
 server '173.255.252.140', roles: [:web, :app, :db, :workers, :resque_worker, :resque_scheduler]
 
-set :workers, { "*" => 4 }
+# capistrano-resque seems to have a problem w/ forking to create multiple workers
+set :workers, { "*" => 1 }
 
 # Uncomment this line if your workers need access to the Rails environment:
 # set :resque_environment_task, true
