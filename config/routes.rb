@@ -75,6 +75,12 @@ MakeyourlawsOrg::Application.routes.draw do
   end
   mount StripeEvent::Engine => '/stripe/callback'
 
+  namespace :admin do
+    constraints CanAccessResque do
+      mount Resque::Server, at: 'resque'
+    end
+  end
+
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
 
   # The priority is based upon order of creation: first created -> highest priority.

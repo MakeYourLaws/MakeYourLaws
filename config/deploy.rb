@@ -24,6 +24,14 @@ set :ssh_options, {
   # port: 25
 }
 
+
+server '173.255.252.140', roles: [:web, :app, :db, :workers, :resque_worker, :resque_scheduler]
+
+set :workers, { "*" => 4 }
+
+# Uncomment this line if your workers need access to the Rails environment:
+# set :resque_environment_task, true
+
 # set :format, :pretty
 # set :log_level, :debug
 # set :pty, true
@@ -46,6 +54,7 @@ namespace :deploy do
   after :publishing, 'deploy:restart'
 
   after :restart, "airbrake:deploy"
+  after :restart, "resque:restart"
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
