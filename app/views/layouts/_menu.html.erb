@@ -1,5 +1,6 @@
+<% cache ['menu', request.path, (current_user.try(:is_admin) ? 'admin' : (current_user.try(:is_alpha?) ? 'alpha' : 'nonalpha'))] do %>
 <ul class="menu">
-	<% if user_signed_in? %>
+	<% if user_signed_in? and current_user.is_alpha? %>
 		<li><%= link_to_unless_current "Committees", committees_path %></li>
 		<li><%= link_to_unless_current "Initiatives", initiatives_path %></li>
 		<hr>
@@ -14,3 +15,4 @@
 	<li><%= link_to_unless_current "Help us", help_path %> - <%= link_to_unless_current "legal", help_legal_path %></li>
 	<li><%= link_to_unless_current "Contact", contact_path %> - <%= link_to_unless_current "press", press_path %></li>
 </ul>
+<% end %>

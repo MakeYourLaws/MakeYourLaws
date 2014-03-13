@@ -1,5 +1,6 @@
 <%= t "Frequently Asked Questions" %>
 
+<% cache do %>
 <ol>
 	<li>
 		<p><strong>Are you a PAC? Super PAC? Non profit?</strong></p>
@@ -19,3 +20,5 @@
 		<p>We haven't yet launched our full website (where you'll be able to contribute easily to any political organization), but if you <%= link_to "create an account", signup_path %>, we'll let you know when that happens.</p>
 	</li>
 </ol>
+
+<% end %>

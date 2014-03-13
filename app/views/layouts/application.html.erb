@@ -1,3 +1,4 @@
+<% cache ['head', tor_s] do %>
 <!DOCTYPE html>
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
 	<head>
@@ -9,16 +10,18 @@
 			<%= csrf_meta_tags %>
 		<% end %>
 		<%= favicon_link_tag %>
-		<meta name="title" content="Make Your Laws" />
 		<meta name="robots" content="all" />
 		<link href="https://plus.google.com/100183759660923071401" rel="publisher" />
+<% end %>
+		<meta name="title" content="Make Your Laws: <%= yield :title %>" />
 		<title>Make Your Laws: <%= yield :title %></title>
+<% cache ['body-preheader', tor_s] do %>
 		<%= render :partial => '/layouts/mixpanel' unless tor? %>
 	</head>
 	<body>
 		<% unless tor? %>
 			<script>if (top!= self)  // frame breaker
-			 if (location) top.location.replace(self.location.href) 
+			 if (location) top.location.replace(self.location.href)
 			 else top.document.location.replace(self.document.location.href);</script>
 		<% end %>
 		<div id="doc" class="yui-t1">
@@ -37,26 +40,27 @@
 						Hello, Tor user! You probably want to use our <a href="http://<%= Keys.get 'tor_hostname' %>">Tor hidden service</a> instead.
 					</div>
 				<% end %>
+<% end %>
 				<%= render :partial => '/layouts/user_header' %>
-			</div> 
+			</div>
 			<div id="bd"><!--body-->
-				<div id="yui-main"> 
+				<div id="yui-main">
 					<div class="yui-b" role="main"><!--primary-->
 						<%= render :partial => '/layouts/flashes' -%>
 						<% if user_signed_in? %>
-							<div class="flash info">Howdy. This is EARLY ALPHA software under active development.
-							There's really not much to see here yet, sorry; we're still working on making the platform. 
-							If you're impatient, you should consider joining the MYL team. ;-)</div>
+							<div class="flash info">Thanks for signing up! We'll email you an invite when we go beta.</div>
 						<% end %>
-						
+
 						<div id="content"><%= yield %></div>
+<% cache 'sidebar_top' do %>
 					</div><!-- primary -->
 				</div><!-- main -->
-					
 				<div class="yui-b"><!--secondary-->
 					<%= image_tag "myl_165.png", :alt => "Make Your Laws logo", :width => 165, :height => 120 %>
 					<div class="c i"><strong>This</strong> is what democracy looks like.</div>
+<% end %>
 					<%= render :partial => 'layouts/menu' %>
+<% cache ['sidebar_bottom', tor_s] do %>
 					<%= render :partial => 'layouts/outlinks' %>
 				</div><!-- secondary -->
 			</div><!-- bd -->
@@ -64,7 +68,8 @@
 				<div id="disclaimer">makeyourlaws.org is paid for by Make Your Laws PAC, Inc. (MYL PAC) and not authorized by any candidate or candidate's committee. Contributions or gifts to MYL PAC and/or Make Your Laws Advocacy, Inc. (MYL C4) are not deductible as charitable contributions for Federal income tax purposes. Contributions to Make Your Laws, Inc. (MYL C3) are tax-deductible.</div>
 			</div>
 		</div><!--doc -->
-		
+
 		<%= render :partial => 'layouts/google_analytics' unless tor? %>
 	</body>
 </html>
+<% end %>

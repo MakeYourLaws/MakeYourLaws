@@ -1,5 +1,7 @@
 <%= t "Your one stop site for all political contributions" %>
 
+<% cache do %>
+
 <div class="flash notice"><%= link_to "Can you use Bitcoin to make political contributions?", fec_bitcoin_path %></div>
 
 <h3>Make Your Laws is launching soon.</h3>
@@ -11,3 +13,5 @@
 <h3>Interested?</h3>
 
 <p>If you <%= link_to "create an account", signup_path %>, we'll give you early access to the beta version.</p>
+
+<% end %>
