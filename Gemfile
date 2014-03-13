@@ -22,7 +22,7 @@ gem "capistrano-resque", git: "https://github.com/sshingler/capistrano-resque.gi
 gem 'resque_mailer'
 gem 'resque-scheduler'
 
-gem 'newrelic_rpm', ">= 3.4.0"
+# gem 'newrelic_rpm', ">= 3.4.0" # might be interfering with resque
 gem 'airbrake'
 # gem 'exception_notification', '>= 4.0.1' # deprecated for airbrake.io
 # gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
