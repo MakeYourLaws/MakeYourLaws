@@ -15,6 +15,8 @@ set :runner, "makeyourlaws"
 set :deploy_to, "/home/makeyourlaws/makeyourlaws.org/" # must be path from root
 set :deploy_via, :remote_cache
 
+set :rails_env, 'production'
+
 set :ssh_options, {
   user: "makeyourlaws",
   compression: false,
@@ -31,7 +33,7 @@ server '173.255.252.140', roles: [:web, :app, :db, :workers, :resque_worker, :re
 set :workers, { "*" => 1 }
 
 # Uncomment this line if your workers need access to the Rails environment:
-# set :resque_environment_task, true
+set :resque_environment_task, true
 
 # set :format, :pretty
 # set :log_level, :debug

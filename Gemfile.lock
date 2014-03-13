@@ -201,7 +201,6 @@ GEM
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
-    newrelic_rpm (3.7.3.204)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oauth (0.4.7)
@@ -454,7 +453,6 @@ DEPENDENCIES
   money-rails
   myl-fech (>= 1.0.2)
   mysql2 (>= 0.3.13)
-  newrelic_rpm (>= 3.4.0)
   omniauth (>= 1.1.0)
   omniauth-facebook (>= 1.2.0)
   omniauth-github (>= 1.0.1)
