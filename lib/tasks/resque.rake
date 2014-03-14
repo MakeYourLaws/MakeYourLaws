@@ -13,10 +13,14 @@ set_log 'resque_base.log'
 
 task "resque:setup" => :environment do
   Resque.before_fork = Proc.new {
-    ActiveRecord::Base.establish_connection
-
     queue_name = Resque.queue_from_class(self)
     set_log(queue_name ? "resque_#{queue_name}.log" : 'resque_worker.log')
+  }
+
+  Resque.after_fork = Proc.new {
+    ActiveRecord::Base.establish_connection
+    Rails.cache.reconnect
+    Resque.redis.client.reconnect
   }
 
   # Resque::Scheduler.dynamic = true
