@@ -58,6 +58,10 @@ module MakeyourlawsOrg
     # # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
 
+    config.action_mailer.default_options = {
+      from: 'MYL <notifications@makeyourlaws.org>'
+    }
+
     config.cache_store = :redis_store, {:db => 1}
 
     # Enable the asset pipeline

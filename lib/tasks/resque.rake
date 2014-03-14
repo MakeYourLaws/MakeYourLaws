@@ -28,7 +28,7 @@ task "resque:setup" => :environment do
     c.logfile = logfile
     c.logformat = 'text'
   end
-  Resque.schedule = YAML::load(File.join(Rails.root, 'config', 'resque_schedule.yml'))
+  Resque.schedule = YAML.load_file(File.join(Rails.root, 'config', 'resque_schedule.yml'))
 end
 
 # Example usage:
