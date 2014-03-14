@@ -12,12 +12,16 @@ end
 set_log 'resque_base.log'
 
 task "resque:setup" => :environment do
-  Resque.before_fork = Proc.new {
+  Resque.before_fork = Proc.new {   # for the parent
+    ActiveRecord::Base.establish_connection
+    Rails.cache.reconnect
+    Resque.redis.client.reconnect
+
     queue_name = Resque.queue_from_class(self)
     set_log(queue_name ? "resque_#{queue_name}.log" : 'resque_worker.log')
   }
 
-  Resque.after_fork = Proc.new {
+  Resque.after_fork = Proc.new {    # for the child
     ActiveRecord::Base.establish_connection
     Rails.cache.reconnect
     Resque.redis.client.reconnect
