@@ -33,5 +33,8 @@ MYL specific
 
 1. Fork the MYL repo
 2. Clone your fork to your local disk
-3. cd ~/your/fork/MakeYourLaws &&  bundle install
+3. cd ~/your/fork/MakeYourLaws
+4. Run:
 
+    bundle install
+    git update-index --assume-unchanged log/*.log
