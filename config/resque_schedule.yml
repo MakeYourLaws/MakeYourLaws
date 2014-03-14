@@ -1,3 +1,8 @@
+# Crontab format: [seconds] minute hour dayofmonth monthofyear dayofweek(0=sunday)
+
+DailyActiveUsers:
+  cron: "0 1 * * *"
+
 # CancelAbandonedOrders:
 #   cron: "*/5 * * * *"
 #
