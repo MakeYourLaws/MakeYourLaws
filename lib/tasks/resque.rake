@@ -6,7 +6,7 @@ module Resque
   class Worker
     alias_method :orig_startup, :startup
     def startup
-      reconnect unless Process.pid == @pid && @pid == redis.client.instance_variable_get(:@pid)
+      reconnect unless pid == redis.client.instance_variable_get(:@pid)
       orig_startup
     end
   end
