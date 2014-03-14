@@ -1,12 +1,17 @@
 require 'resque/tasks'
 require 'resque_scheduler/tasks'
+require 'resque-retry'
+require 'resque/failure/redis'
+
+Resque::Failure::MultipleWithRetrySuppression.classes = [Resque::Failure::Redis]
+Resque::Failure.backend = Resque::Failure::MultipleWithRetrySuppression
 
 # Monkeypatch to fix reconnection issues. See https://github.com/resque/resque/pull/1193
 module Resque
   class Worker
     alias_method :orig_startup, :startup
     def startup
-      reconnect unless pid == redis.client.instance_variable_get(:@pid)
+      reconnect
       orig_startup
     end
   end
