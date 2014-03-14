@@ -1,9 +1,15 @@
-<% cache ['menu', request.path, (current_user.try(:is_admin) ? 'admin' : (current_user.try(:is_alpha?) ? 'alpha' : 'nonalpha'))] do %>
+<% cache ['menu', request.path, (current_user.try(:is_admin?) ? 'admin' : (current_user.try(:is_alpha?) ? 'alpha' : 'nonalpha'))] do %>
 <ul class="menu">
-	<% if user_signed_in? and current_user.is_alpha? %>
-		<li><%= link_to_unless_current "Committees", committees_path %></li>
-		<li><%= link_to_unless_current "Initiatives", initiatives_path %></li>
-		<hr>
+	<% if user_signed_in? %>
+		<% if current_user.is_admin? %>
+			<li><%= link_to "Resque", admin_resque_server_path %></li>
+			<hr/>
+		<% end %>
+		<% if current_user.is_alpha? %>
+			<li><%= link_to_unless_current "Committees", committees_path %></li>
+			<li><%= link_to_unless_current "Initiatives", initiatives_path %></li>
+			<hr/>
+		<% end %>
 	<% end %>
 	<li><%= link_to_unless_current "Main", root_path %></li>
 	<li><%= link_to_unless_current "Introduction", introduction_path %></li>
