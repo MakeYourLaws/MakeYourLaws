@@ -30,14 +30,14 @@ set :ssh_options, {
 server '173.255.252.140', roles: [:web, :app, :db, :workers, :resque_worker, :resque_scheduler]
 
 # capistrano-resque seems to have a problem w/ forking to create multiple workers
-set :workers, { "*" => 1 }
+set :workers, { "*" => 4 }
 
 # Uncomment this line if your workers need access to the Rails environment:
 set :resque_environment_task, true
 
 # set :format, :pretty
 # set :log_level, :debug
-# set :pty, true
+set :pty, true  # turning on pty allows resque workers to be started without making capistrano hang
 
 # set :linked_files, %w{config/database.yml}
 set :linked_dirs,  %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/files db/data config/keys) # formerly shared_children
