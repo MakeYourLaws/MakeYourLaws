@@ -21,6 +21,7 @@ gem "resque", require: "resque/server"
 gem "capistrano-resque", git: "https://github.com/sshingler/capistrano-resque.git", require: false
 gem 'resque_mailer'
 gem 'resque-scheduler', require: 'resque_scheduler/server'
+gem 'resque-retry', require: ['resque-retry', 'resque-retry/server']
 
 # gem 'newrelic_rpm', ">= 3.4.0" # might be interfering with resque
 gem 'airbrake'
