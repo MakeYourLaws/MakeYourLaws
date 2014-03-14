@@ -1,6 +1,17 @@
 require 'resque/tasks'
 require 'resque_scheduler/tasks'
 
+# Monkeypatch to fix reconnection issues. See https://github.com/resque/resque/pull/1193
+module Resque
+  class Worker
+    alias_method :orig_startup, :startup
+    def startup
+      reconnect unless Process.pid == @pid && @pid == redis.client.instance_variable_get(:@pid)
+      orig_startup
+    end
+  end
+end
+
 def set_log log_name
   logfile = File.open(File.join(Rails.root, 'log', log_name), 'a')
   logfile.sync = true
@@ -10,21 +21,20 @@ def set_log log_name
 end
 
 set_log 'resque_base.log'
+Resque.logger.info 'base logger initiated'
 
 task "resque:setup" => :environment do
-  Resque.before_fork = Proc.new {   # for the parent
-    ActiveRecord::Base.establish_connection
-    Rails.cache.reconnect
-    Resque.redis.client.reconnect
+  Resque.logger.info 'setup initiated'
 
+  Resque.before_first_fork = Proc.new {   # for the parent
     queue_name = Resque.queue_from_class(self)
-    set_log(queue_name ? "resque_#{queue_name}.log" : 'resque_worker.log')
+    set_log(queue_name ? "resque_#{queue_name}_parent.log" : 'resque_worker_parent.log')
   }
 
   Resque.after_fork = Proc.new {    # for the child
+    queue_name = Resque.queue_from_class(self)
+    set_log(queue_name ? "resque_#{queue_name}.log" : 'resque_worker.log')
     ActiveRecord::Base.establish_connection
-    Rails.cache.reconnect
-    Resque.redis.client.reconnect
   }
 
   # Resque::Scheduler.dynamic = true
