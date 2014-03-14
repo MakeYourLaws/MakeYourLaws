@@ -31,13 +31,13 @@ Resque.logger.info 'base logger initiated'
 task "resque:setup" => :environment do
   Resque.logger.info 'setup initiated'
 
-  Resque.before_first_fork = Proc.new {   # for the parent
-    queue_name = Resque.queue_from_class(self)
+  Resque.before_first_fork = Proc.new {|args|   # for the parent
+    queue_name = args.try(:queue)
     set_log(queue_name ? "resque_#{queue_name}_parent.log" : 'resque_worker_parent.log')
   }
 
-  Resque.after_fork = Proc.new {    # for the child
-    queue_name = Resque.queue_from_class(self)
+  Resque.after_fork = Proc.new {|args|    # for the child
+    queue_name = args.try(:queue)
     set_log(queue_name ? "resque_#{queue_name}.log" : 'resque_worker.log')
     ActiveRecord::Base.establish_connection
   }
