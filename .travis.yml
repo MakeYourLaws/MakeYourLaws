@@ -4,7 +4,6 @@ rvm:
 bundler_args: --without production  --binstubs
 before_script:
   - mysql -e 'create database myl_test'
-  - touch log/resque_base.log log/resque_worker.log log/newrelic_agent.log log/production.log
 before_install:
   - gem update --system
   - gem --version
