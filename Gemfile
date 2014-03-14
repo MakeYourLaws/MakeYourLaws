@@ -17,10 +17,10 @@ end
 
 gem 'redis-rails' # switching out for dalli/memcached
 
-gem "resque", :require => "resque/server"
+gem "resque", require: "resque/server"
 gem "capistrano-resque", git: "https://github.com/sshingler/capistrano-resque.git", require: false
 gem 'resque_mailer'
-gem 'resque-scheduler'
+gem 'resque-scheduler', require: 'resque_scheduler/server'
 
 # gem 'newrelic_rpm', ">= 3.4.0" # might be interfering with resque
 gem 'airbrake'
