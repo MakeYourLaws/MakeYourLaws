@@ -1,0 +1,20 @@
+# CancelAbandonedOrders:
+#   cron: "*/5 * * * *"
+#
+# queue_documents_for_indexing:
+#   cron: "0 0 * * *"
+#   # you can use rufus-scheduler "every" syntax in place of cron if you prefer
+#   # every: 1h
+#   # By default the job name (hash key) will be taken as worker class name.
+#   # If you want to have a different job name and class name, provide the 'class' option
+#   class: "QueueDocuments"
+#   queue: high
+#   args:
+#   description: "This job queues all content for indexing in solr"
+#
+# clear_leaderboards_contributors:
+#   cron: "30 6 * * 1"
+#   class: "ClearLeaderboards"
+#   queue: low
+#   args: contributors
+#   description: "This job resets the weekly leaderboard for contributions"
