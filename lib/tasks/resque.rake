@@ -2,8 +2,10 @@ require 'resque/tasks'
 require 'resque_scheduler/tasks'
 require 'resque-retry'
 require 'resque/failure/redis'
+require 'resque/failure/airbrake'
 
-Resque::Failure::MultipleWithRetrySuppression.classes = [Resque::Failure::Redis]
+
+Resque::Failure::MultipleWithRetrySuppression.classes = [Resque::Failure::Redis, Resque::Failure::Airbrake]
 Resque::Failure.backend = Resque::Failure::MultipleWithRetrySuppression
 
 # Monkeypatch to fix reconnection issues. See https://github.com/resque/resque/pull/1193
