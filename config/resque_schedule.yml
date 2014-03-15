@@ -3,6 +3,9 @@
 DailyActiveUsers:
   cron: "0 1 * * *"
 
+UpdateOfac:
+  cron: "0 0 0/7 * *"
+
 # CancelAbandonedOrders:
 #   cron: "*/5 * * * *"
 #
