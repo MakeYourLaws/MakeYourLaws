@@ -40,6 +40,8 @@ class User < ActiveRecord::Base
 
   validate :validate_password_strength
 
+  scope :dau, ->(date) { where(updated_at: (date.midnight .. (date+1).midnight)) }
+
   def validate_password_strength
     return true unless password_required? # only set if setting the password; it's stored as encrypted_password
 

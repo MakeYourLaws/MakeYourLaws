@@ -17,9 +17,7 @@ class DailyActiveUsers
   # end
 
   def self.perform # args
-    dau = User.where(updated_at: (Time.now.midnight - 1.day)..Time.now.midnight).count
-    day = Date.today - 1
-    AdminMailer.dau(day, dau).deliver
+    AdminMailer.dau(Date.today - 1).deliver
   end
 
 end

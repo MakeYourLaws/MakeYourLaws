@@ -3,9 +3,9 @@ class AdminMailer < ActionMailer::Base
 
   default to: Proc.new{ Role.where(name: 'admin').first.users.select([:name, :email]).map{|u| "#{u.name} <#{u.email}>"} }
 
-  def dau date, dau
-    @date = date.to_s
-    @dau = dau
+  def dau date
+    @date = Date.parse(date)
+    @dau = User.dau(@date).count
     @usercount = User.count
     mail(subject: 'MYL DAU')
   end
