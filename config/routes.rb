@@ -76,9 +76,11 @@ MakeyourlawsOrg::Application.routes.draw do
   mount StripeEvent::Engine => '/stripe/callback'
 
   namespace :admin do
-    constraints CanAccessResque do
+    constraints IsAdmin do
       mount Resque::Server, at: 'resque'
     end
+    root to: redirect('/')
+    get '*any', to: redirect('/')
   end
 
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
