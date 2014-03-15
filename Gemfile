@@ -99,6 +99,8 @@ gem 'state_machine'
 # use MYL's fork of NYT's Fech gem, since it has bugfixes and other features that NYT hasn't committed
 gem 'myl-fech', '>= 1.0.2', :require => 'fech'
 
+gem "ofac" # Office of Foreign Assets Control's Specially Designated Nationals list checker
+
 gem 'money', '>= 5.0.0'
 gem 'money-rails', '>= 0.8.1'
 gem "active_paypal_adaptive_payment"

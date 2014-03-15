@@ -207,6 +207,8 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
+    ofac (2.0.3)
+      rails (>= 3.0)
     omniauth (1.2.1)
       hashie (>= 1.2, < 3)
       rack (~> 1.0)
@@ -672,6 +674,7 @@ DEPENDENCIES
   myl-fech (>= 1.0.2)
   mysql2
   newrelic_rpm
+  ofac
   omniauth (>= 1.1.0)
   omniauth-facebook (>= 1.2.0)
   omniauth-github (>= 1.0.1)
