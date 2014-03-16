@@ -100,6 +100,7 @@ gem 'state_machine'
 gem 'myl-fech', '>= 1.0.2', :require => 'fech'
 
 gem "ofac" # Office of Foreign Assets Control's Specially Designated Nationals list checker
+gem 'ssn_validator' # Social Security Death Master File. Free version @ http://ssdmf.info/download.html
 
 gem 'money', '>= 5.0.0'
 gem 'money-rails', '>= 0.8.1'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140315203004) do
+ActiveRecord::Schema.define(version: 20140315225327) do
 
   create_table "cart_items", force: true do |t|
     t.integer "cart_id",      null: false
@@ -64,6 +64,26 @@ ActiveRecord::Schema.define(version: 20140315203004) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "death_master_files", force: true do |t|
+    t.string   "social_security_number"
+    t.string   "last_name"
+    t.string   "name_suffix"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "verify_proof_code"
+    t.date     "date_of_death"
+    t.date     "date_of_birth"
+    t.string   "state_of_residence"
+    t.string   "last_known_zip_residence"
+    t.string   "last_known_zip_payment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "as_of"
+  end
+
+  add_index "death_master_files", ["as_of"], name: "idx_as_of", using: :btree
+  add_index "death_master_files", ["social_security_number"], name: "idx_ssn", unique: true, using: :btree
 
   create_table "fec_candidates", force: true do |t|
     t.string   "fec_id",                       limit: 9,              null: false
@@ -436,6 +456,17 @@ ActiveRecord::Schema.define(version: 20140315203004) do
   add_index "ssn_death_records", ["first_name"], name: "index_ssn_death_records_on_first_name", using: :btree
   add_index "ssn_death_records", ["last_name", "first_name"], name: "index_ssn_death_records_on_last_name_and_first_name", using: :btree
   add_index "ssn_death_records", ["ssn", "change_type"], name: "index_ssn_death_records_on_ssn_and_change_type", unique: true, using: :btree
+
+  create_table "ssn_high_group_codes", force: true do |t|
+    t.date     "as_of"
+    t.string   "area"
+    t.string   "group"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ssn_high_group_codes", ["area", "as_of"], name: "idx_area_as_of", using: :btree
+  add_index "ssn_high_group_codes", ["area"], name: "idx_area", using: :btree
 
   create_table "stripe_accounts", force: true do |t|
     t.string  "stripe_id",            null: false
