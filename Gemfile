@@ -149,7 +149,6 @@ gem 'phone'
 gem 'kramdown'
 
 gem "strip_attributes", ">= 1.1.0"
-# gem 'client_side_validations' # rails 4 incompatible
 
 gem 'friendly_id', ">= 5.0.0"
 
