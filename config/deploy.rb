@@ -5,6 +5,9 @@ set :rvm_type, :system # using system level, not userspace, install of rvm
 
 set :application, "makeyourlaws"  # Required
 
+set :ci_client, "travis"
+set :ci_repository, "MakeYourLaws/MakeYourLaws"
+
 set :scm, :git # :git, :darcs, :subversion, :cvs
 set :repo_url, "git://github.com/MakeYourLaws/MakeYourLaws.git"
 set :branch, "master"
@@ -43,6 +46,8 @@ set :pty, true  # turning on pty allows resque workers to be started without mak
 set :linked_dirs,  %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/files db/data config/keys) # formerly shared_children
 
 set :keep_releases, 15
+
+# before :deploy, "ci:verify" # not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
 
 namespace :deploy do
   task :restart do
