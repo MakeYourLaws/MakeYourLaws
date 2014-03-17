@@ -37,4 +37,3 @@ MYL specific
 4. Run:
 
     bundle install
-    git update-index --assume-unchanged log/*.log
