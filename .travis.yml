@@ -1,13 +1,15 @@
 language: ruby
 rvm:
   - 2.1.1
+  - rbx
+  - jruby
 bundler_args: --without production  --binstubs
 before_script:
   - mysql -e 'create database myl_test'
 before_install:
   - gem update --system
   - gem --version
-  - sudo apt-get update -qq
+  # - sudo apt-get update -qq
 after_install:
   - bundle-audit update
   - bundle-audit
