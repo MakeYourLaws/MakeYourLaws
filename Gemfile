@@ -146,7 +146,7 @@ gem 'turbolinks' # makes links load faster; see https://github.com/rails/turboli
 gem 'bettertabs'
 gem 'phone'
 
-gem 'rdiscount' # or maybe bluecloth? TBD
+gem 'kramdown' # more jruby-friendly than rdiscount
 
 gem "strip_attributes", ">= 1.1.0"
 # gem 'client_side_validations' # rails 4 incompatible
