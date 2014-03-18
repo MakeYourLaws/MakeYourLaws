@@ -5,7 +5,14 @@ gem 'stripe'
 
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+platform(:rbx) do
+  gem 'rubysl'
+  gem 'ffi'
+end
+platform(:jruby) { gem 'jruby-openssl' }
+
+gem 'puma'
+
 gem 'rails', '>= 4.0.1'
 gem 'rake', '>= 0.9.2.2'
 gem 'rack', '>= 1.4.1'
@@ -33,7 +40,8 @@ gem 'rack-cache'
 gem 'rack-tor-tag'
 gem 'rack-attack'
 
-gem 'mysql2', '>= 0.3.13'
+platform(:rbx, :mri) { gem 'mysql2' }
+platform(:jruby) { gem 'jdbc-mysql' }
 gem 'json', '>= 1.6.6'
 gem 'jbuilder', '>= 1.2' # JSON APIs. https://github.com/rails/jbuilder
 
@@ -47,7 +55,14 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rvm', require: false
-  gem 'debugger'
+  # gem 'capistrano-ci' # not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
+  gem 'term-ansicolor'
+  platform(:mri) { gem 'debugger' }
+  platform(:jruby) { gem 'ruby-debug' }
+  platform(:rbx) do
+    gem 'rubinius-compiler'
+    gem 'rubinius-debugger'
+  end
 end
 
 # Bundle gems for the local environment. Make sure to
@@ -55,7 +70,7 @@ end
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'thin'
-  gem 'ruby-prof'
+  platform(:mri) { gem 'ruby-prof' }
   gem 'webrat', '>= 0.7.3'
   gem "brakeman", :require => false  # Rails security scanner
   gem 'rspec-rails', '~> 3.0.0.beta'
