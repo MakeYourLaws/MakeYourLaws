@@ -138,7 +138,7 @@ gem 'sass-rails', '>= 4.0.0' # Use SCSS for stylesheets
 
 gem 'jquery-rails', '>= 2.0.2'
 gem 'jquery-ui-rails'
-
+gem 'jquery-turbolinks'
 gem 'turbolinks' # makes links load faster; see https://github.com/rails/turbolinks
 
 # gem 'jquery_datepicker' # rails 4 incompatible 2013-06-29
