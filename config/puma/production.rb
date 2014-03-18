@@ -39,19 +39,19 @@ daemonize
 
 # Store the pid of the server in the file at “path”.
 
-pidfile 'tmp/pids/puma.pid'
+pidfile '/home/makeyourlaws/makeyourlaws.org/shared/tmp/pids/puma.pid'
 
 # Use “path” as the file to store the server info state. This is
 # used by “pumactl” to query and control the server.
 
-state_path 'tmp/sockets/puma.state'
+state_path '/home/makeyourlaws/makeyourlaws.org/shared/tmp/sockets/puma.state'
 
 # Redirect STDOUT and STDERR to files specified. The 3rd parameter
 # (“append”) specifies whether the output is appended, the default is
 # “false”.
 #
 # stdout_redirect '/u/apps/lolcat/log/stdout', '/u/apps/lolcat/log/stderr'
-stdout_redirect 'log/puma.log', 'log/puma_err.log', true
+stdout_redirect '/home/makeyourlaws/makeyourlaws.org/shared/log/puma.log', '/home/makeyourlaws/makeyourlaws.org/shared/log/puma_err.log', true
 
 # Disable request logging.
 #
@@ -156,4 +156,4 @@ bind 'unix://tmp/sockets/puma.sock' # nginx takes care of SSL (for non-Tor users
 # activate_control_app 'unix:///var/run/pumactl.sock', { auth_token: '12345' }
 # activate_control_app 'unix:///var/run/pumactl.sock', { no_token: true }
 
-activate_control_app 'unix://tmp/sockets/pumactl.sock'
+activate_control_app 'unix:///home/makeyourlaws/makeyourlaws.org/shared/tmp/sockets/pumactl.sock'
