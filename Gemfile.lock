@@ -657,10 +657,8 @@ DEPENDENCIES
   friendly_id (>= 5.0.0)
   it (>= 0.2.3)
   jbuilder (>= 1.2)
-  jdbc-mysql
   jquery-rails (>= 2.0.2)
   jquery-ui-rails
-  jruby-openssl
   json (>= 1.6.6)
   jwt
   kramdown
@@ -695,7 +693,6 @@ DEPENDENCIES
   rspec-rails (~> 3.0.0.beta)
   rubinius-compiler
   rubinius-debugger
-  ruby-debug
   ruby-prof
   rubysl
   sass-rails (>= 4.0.0)
