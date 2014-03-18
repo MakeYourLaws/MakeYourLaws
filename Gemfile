@@ -69,7 +69,6 @@ end
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'thin'
   platform(:mri) { gem 'ruby-prof' }
   gem 'webrat', '>= 0.7.3'
   gem "brakeman", :require => false  # Rails security scanner
