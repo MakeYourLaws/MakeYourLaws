@@ -9,7 +9,6 @@ platform(:rbx) do
   gem 'rubysl'
   gem 'ffi'
 end
-platform(:jruby) { gem 'jruby-openssl' }
 
 gem 'puma'
 
@@ -40,8 +39,7 @@ gem 'rack-cache'
 gem 'rack-tor-tag'
 gem 'rack-attack'
 
-platform(:rbx, :mri) { gem 'mysql2' }
-platform(:jruby) { gem 'jdbc-mysql' }
+gem 'mysql2'
 gem 'json', '>= 1.6.6'
 gem 'jbuilder', '>= 1.2' # JSON APIs. https://github.com/rails/jbuilder
 
@@ -60,7 +58,6 @@ group :development do
   # gem 'capistrano-ci' # not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
   gem 'term-ansicolor'
   platform(:mri) { gem 'debugger' }
-  platform(:jruby) { gem 'ruby-debug' }
   platform(:rbx) do
     gem 'rubinius-compiler'
     gem 'rubinius-debugger'
@@ -147,7 +144,7 @@ gem 'turbolinks' # makes links load faster; see https://github.com/rails/turboli
 gem 'bettertabs'
 gem 'phone'
 
-gem 'kramdown' # more jruby-friendly than rdiscount
+gem 'kramdown'
 
 gem "strip_attributes", ">= 1.1.0"
 # gem 'client_side_validations' # rails 4 incompatible
