@@ -22,6 +22,7 @@ group :doc do
 end
 
 gem 'redis-rails' # switching out for dalli/memcached
+gem "redis-rack-cache"
 
 gem "resque", require: "resque/server"
 gem "capistrano-resque", git: "https://github.com/sshingler/capistrano-resque.git", require: false
