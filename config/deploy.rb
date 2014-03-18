@@ -60,8 +60,8 @@ namespace :deploy do
 
   after :publishing, 'deploy:restart'
 
-  after :start, 'puma:start'
-  after :stop, "puma:stop"
+  # after :start, 'puma:start'
+  # after :stop, "puma:stop"
   after :restart, "puma:restart"
 
   after :restart, "resque:restart"
@@ -77,6 +77,7 @@ namespace :deploy do
     end
   end
 
+  after :finishing, 'puma:status'
   after :finishing, 'deploy:cleanup'
   after :finishing, "airbrake:deploy"
 
