@@ -21,7 +21,7 @@ require 'capistrano/rails'
 require 'airbrake/capistrano3'
 require "capistrano-resque"
 # require 'capistrano/ci/recipes' # pending cap3 compatibility https://github.com/railsware/capistrano-ci/pull/4
-require 'puma/capistrano'
+require 'capistrano/puma'
 
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
