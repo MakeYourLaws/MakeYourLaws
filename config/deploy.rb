@@ -50,14 +50,13 @@ set :keep_releases, 15
 # before :deploy, "ci:verify" # not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
 
 namespace :deploy do
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      within fetch(:release_path) do
-        execute :touch, "tmp/restart.txt"
-        execute "curl -s https://makeyourlaws.org > /dev/null" # Make the server boot up
-      end
-    end
-  end
+  # task :restart do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     within fetch(:release_path) do
+  #       execute :touch, "tmp/restart.txt"
+  #     end
+  #   end
+  # end
 
   after :publishing, 'deploy:restart'
 
@@ -67,6 +66,7 @@ namespace :deploy do
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
+      execute "curl -s https://makeyourlaws.org > /dev/null" # Warm up the server
       # Here we can do anything such as:
       # within release_path do
       #   execute :rake, 'cache:clear'
