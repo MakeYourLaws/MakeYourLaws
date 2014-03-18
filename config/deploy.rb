@@ -60,7 +60,10 @@ namespace :deploy do
 
   after :publishing, 'deploy:restart'
 
-  after :restart, "airbrake:deploy"
+  after :start, 'puma:start'
+  after :stop, "puma:stop"
+  after :restart, "puma:restart"
+
   after :restart, "resque:restart"
   after :restart, "resque:scheduler:restart"
 
@@ -75,6 +78,7 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
+  after :finishing, "airbrake:deploy"
 
 
   # # https://github.com/capistrano/capistrano/issues/478#issuecomment-24983528
