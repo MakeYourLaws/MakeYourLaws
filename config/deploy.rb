@@ -105,7 +105,7 @@ namespace :deploy do
   end
 
   # after :restart, "deploy:restart_mail_fetcher"
-  after :finishing, "newrelic:notice_deployment"
+  # after :finishing, "newrelic:notice_deployment"
 
   task :restart_mail_fetcher do
     on roles(:app) do
