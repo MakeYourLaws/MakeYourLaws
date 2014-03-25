@@ -25,7 +25,6 @@ gem 'redis-rails' # switching out for dalli/memcached
 gem "redis-rack-cache"
 
 gem "resque", require: "resque/server"
-gem "capistrano-resque", git: "https://github.com/sshingler/capistrano-resque.git", require: false
 gem 'resque_mailer'
 gem 'resque-scheduler', require: 'resque_scheduler/server'
 gem 'resque-retry', require: ['resque-retry', 'resque-retry/server']
@@ -55,6 +54,7 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-puma', require: false
+  gem "capistrano-resque", git: "https://github.com/sshingler/capistrano-resque.git", require: false
 
   # gem 'capistrano-ci' # not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
   gem 'term-ansicolor'
