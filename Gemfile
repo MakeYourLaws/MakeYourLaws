@@ -30,7 +30,7 @@ gem 'resque-scheduler', require: 'resque_scheduler/server'
 gem 'resque-retry', require: ['resque-retry', 'resque-retry/server']
 gem 'resque-job-stats', require: ['resque-job-stats/server', 'resque/plugins/job_stats']
 
-# gem 'newrelic_rpm', ">= 3.4.0" # might be interfering with resque
+gem 'newrelic_rpm'
 gem 'airbrake'
 # gem 'exception_notification', '>= 4.0.1' # deprecated for airbrake.io
 # gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
