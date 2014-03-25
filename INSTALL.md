@@ -22,10 +22,10 @@ Initial ruby/rails setup (on OSX)
     rvm autolibs macports
     rvm get stable
     rvm autolibs macports
-    rvm install 2.1.1
+    rvm install rbx
     rvm reload
-    rvm alias create default 2.1.1
-    rvm 2.1.1
+    rvm alias create default rbx
+    rvm rbx
 
 
 MYL specific
