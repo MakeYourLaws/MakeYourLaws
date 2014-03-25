@@ -18,7 +18,9 @@ module MakeyourlawsOrg
     # Don't do this. See http://stackoverflow.com/questions/12467847/rails-namespaced-model-conflicting-with-non-namespaced-model
     # config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
 
-    config.middleware.insert_after ActionDispatch::RemoteIp, Rack::TorTag
+    # Rack::TorTag is broken by Rubinius' failure to implement Socket#ip_address_list
+    #  cf  https://github.com/rubinius/rubinius/issues/2303
+    # config.middleware.insert_after ActionDispatch::RemoteIp, Rack::TorTag
     config.middleware.use Rack::Attack
     Rack::Attack.cache.store = Redis::Store.new(db: 5)
 
