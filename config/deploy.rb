@@ -90,16 +90,12 @@ namespace :deploy do
 
   task :down do
     on roles(:app) do
-      within fetch(:release_path) do
-        execute :touch, "tmp/down"
-      end
+      execute :mv, "#{release_path}/public/maintenance_standby.html", "#{release_path}/public/maintenance.html"
     end
   end
   task :up do
     on roles(:app) do
-      within fetch(:release_path) do
-        execute :rm, "tmp/down"
-      end
+      execute :mv, "#{release_path}/public/maintenance.html", "#{release_path}/public/maintenance_standby.html"
     end
   end
 
