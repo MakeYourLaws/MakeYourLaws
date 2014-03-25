@@ -36,7 +36,7 @@ gem 'airbrake'
 # gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
 
 gem 'rack-cache'
-gem 'rack-tor-tag'
+gem 'rack-tor-tag', >= '0.1'
 gem 'rack-attack'
 
 gem 'mysql2'
