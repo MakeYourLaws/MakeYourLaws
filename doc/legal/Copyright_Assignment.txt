@@ -1,0 +1,66 @@
+[[
+INSTRUCTIONS:
+1. Replace the [[]] placeholders in the Definitions and at the end as appropriate.
+2. For each of the [[]] options, pick the one that applies to you and delete the rest.
+3. Delete this.
+4. PGP sign the full text (ASCII armored inline clear-sign) if you can.
+5. Save the document to /doc/legal/[[yourname]]_assignment.asc
+6. Send a pull request with just your document, or as part of your first pull request.
+]]
+
+
+Contributor's Copyright Assignment Agreement
+
+Definitions:
+
+1. "MYL": Make Your Laws group (Make Your Laws, Inc., Make Your Laws Advocacy, Inc. & Make Your Laws PAC, Inc.), including its officers, employees, agents, and assignees
+
+2. "Work": the Make Your Laws project, including its source code, design, logos, etc.
+
+3. "Contributor": [[YOUR FULL LEGAL NAME]], github user [[YOUR GITHUB ACCOUNT NAME]], including their heirs, assignees, etc.
+
+4. "Contributions": Contributor's changes to the Work, including any future revisions thereof
+
+[[Option 1: You have an existing employer / IP agreement]]
+5. "Contributor's Employer(s)": [[EMPLOYERS' FULL LEGAL NAMES]]
+[[]]
+
+
+Whereas Contributor and MYL freely choose to have Contributor make Contributions to MYL's Work, they hereby agree as follows.
+
+A. Contributor agrees that:
+
+[[Option 2: Volunteer]]
+1. Contributor volunteers to make the Contributions to the Work for no compensation.
+[[Option 2: Paid]]
+1. Contributor acknowledges receipt of good and valuable consideration for the Contributions to the Work.
+[[]]
+
+2. Contributor hereby transfers to MYL Contributor's entire right, title, and interest (including all rights under copyright) in the Contributions.
+
+3. If Contributor has, or later acquires, any intellectual property affecting the Work, that property will not be used to in any way restrict MYL's use of the Work.
+
+[[Option 1: No potentially conflicting IP agreement]]
+4. Contributor represents and warrants that Contributor is the sole holder of the intellectual property contained in their Contributions.
+[[Option 1: You have an existing employer / IP agreement]]
+4. Contributor represents and warrants that Contributor and Contributor's Employer(s) are the sole copyright holders for the Contributions; that Contributor has the right and power to enter into this contract, having received any authorization from Contributor's Employer(s) required; that Contributor's Employer(s) disclaims all intellectual property interest in Contributor's Contributions, and that Contributor's Employer(s) will not assert any intellectual property interest that would prevent MYL's use of the Work and Contributions.
+[[]]
+
+5. Contributor indemnifies and holds harmless MYL against any and all claims, actions or damages (including attorney's reasonable fees) asserted by or paid to any party on account of a breach or alleged breach of the above warranty.
+
+6. Contributor makes no other express or implied warranty as to the Contributions.
+
+
+B. MYL agrees that:
+
+1. MYL grants Contributor permanent, non-exclusive rights to use their Contributions in whatever way Contributor sees fit, without any limitation on MYL's rights to the Contributions or Work.
+
+2. MYL promises that the Work and all derivatives thereof shall be distributed by MYL under a license approved by the Open Source Initiative, listed at http://opensource.org/licenses/alphabetical, of MYL's choice.
+
+
+
+Agreed today, [[FULL DATE in form DD MONTH YYYY]], by [[FULL NAME]] ("Contributor")
+
+[[Option 3: PGP signature]]
+Signed using Contributor's PGP key, [[PGP KEY ID #]].
+[[]]
