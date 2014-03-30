@@ -13,11 +13,11 @@ Contributor's Copyright Assignment Agreement
 
 Definitions:
 
-1. "MYL": Make Your Laws group (Make Your Laws, Inc., Make Your Laws Advocacy, Inc. & Make Your Laws PAC, Inc.), including its officers, employees, agents, and assignees
+1. "MYL": Make Your Laws group (Make Your Laws, Inc., Make Your Laws Advocacy, Inc. & Make Your Laws PAC, Inc.), including any assignees it may designate
 
 2. "Work": the Make Your Laws project, including its source code, design, logos, etc.
 
-3. "Contributor": [[YOUR FULL LEGAL NAME]], github user [[YOUR GITHUB ACCOUNT NAME]], including their heirs, assignees, etc.
+3. "Contributor": [[YOUR FULL LEGAL NAME]], github user [[YOUR GITHUB ACCOUNT NAME]], including any heirs, assignees, etc.
 
 4. "Contributions": Contributor's changes to the Work, including any future revisions thereof
 
@@ -51,7 +51,8 @@ A. Contributor agrees that:
 6. Contributor makes no other express or implied warranty as to the Contributions.
 
 
-B. MYL agrees that:
+
+B. MYL agrees that, except for Contributions (or parts thereof) relating to MYL trade dress (e.g. branding, logos, etc):
 
 1. MYL grants Contributor permanent, non-exclusive rights to use their Contributions in whatever way Contributor sees fit, without any limitation on MYL's rights to the Contributions or Work.
 
