@@ -38,29 +38,6 @@ class CreateLegalIdentities < ActiveRecord::Migration
       t.index [:legal_identity, :type]
     end
 
-    create_table :addresses do |t|
-      # TODO: Support Google's location info
-
-      # FEC spec
-      t.string :street_address_1, :street_address_1, :limit => 34
-      t.string :city, :limit => 30
-      t.string :state, :limit => 2
-      t.integer :zip, :limit => 4 # bytes
-      t.float :lat, :lng
-
-      t.index [:lat, :lng]
-      t.index [:state, :city, :street_address_1]
-      t.index :full_addresss, :unique => true
-    end
-
-    # Import from FEC/USPS definitions
-    create_table :states do |t|
-      t.string :abbreviation, :limit => 2
-      t.string :name
-
-      t.index :abbreviation, :unique => true
-    end
-
     create_table :name_usages do |t|
       t.references :legal_name
       t.references :legal_identity

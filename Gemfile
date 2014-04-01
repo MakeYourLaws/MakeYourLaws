@@ -42,6 +42,7 @@ gem 'rack-tor-tag', '>= 0.1'
 gem 'rack-attack'
 
 gem 'postmaster'
+gem 'geokit-rails'
 
 gem 'mysql2'
 gem 'json', '>= 1.6.6'
