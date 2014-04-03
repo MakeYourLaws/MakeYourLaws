@@ -4,7 +4,7 @@
 
 <p class="c b">
 	The <a href="http://fec.gov/agenda/2014/agenda20140403.shtml">first FEC hearing</a> on this request is scheduled for <s>April 3<sup>rd</sup></s> approx. April 23<sup>rd</sup>.
-	<br/><a href="https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/" atrget="_blank">Google Doc of our full request</a> - <a href="#docs">AO 2014-02 official documents</a></p>
+	<br/><%= link_to "Google Doc of our full request", fec_bitcoin_aor_path, :target => 'blank' %> - <a href="#docs">AO 2014-02 official documents</a></p>
 
 <p>Recently, the FEC <%= link_to "was asked to consider", fec_bitcoin_caf_path %> whether <a href="http://en.wikipedia.org/wiki/Bitcoin">Bitcoins</a> should be allowed in political contributions. Because the PAC requesting to use Bitcoins wasn't able to explain how they would know who made the contributions, the FEC ultimately deadlocked on their <a href="http://www.fec.gov/pages/brochures/ao.shtml" target="_blank">advisory opinion</a> request (AOR). In the meantime, other political committees are <%= link_to "already accepting Bitcoin", fec_bitcoin_pacs_path %>, without any guidelines for how to do so properly.</p>
 
@@ -14,7 +14,7 @@
 
 <p>Because of the legal context of this request, we can only ask the FEC to approve our own activity; we can't ask them to impose <em>requirements</em> on other political committees. However, if we are successful in getting the FEC's approval for our method, it's likely that other political committees will adopt the same policy.</p>
 
-<p>Here's a summary of <a href="https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/" atrget="_blank">our proposal</a>:
+<p>Here's a summary of <%= link_to "our proposal", fec_bitcoin_aor_path, :target => 'blank' %>:
 	<ol>
 		<li><strong>Receiving Bitcoin</strong>
 			<ol>
@@ -65,7 +65,7 @@
 
 <p>We want to know what you think, and the FEC does too.</p>
 
-<p>To tell us informally, just email <a href="mailto:team@makeyourlaws.org?subject=Comments%20on%20bitcoin%20AOR">team@makeyourlaws.org</a> or comment on the <a href="https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/">Google doc</a>.</p>
+<p>To tell us informally, just email <a href="mailto:team@makeyourlaws.org?subject=Comments%20on%20bitcoin%20AOR">team@makeyourlaws.org</a> or comment on the <%= link_to "Google doc", fec_bitcoin_aor_path, :target => 'blank' %>.</p>
 
 <p>If you <%= link_to "create an account", signup_path %>, we'll also let you know when we launch the Make Your Laws democratized campaign finance website and invite you to the beta. (What you see now is only a placeholder.)</p>
 
@@ -83,6 +83,6 @@
 
 <p>2014-03-28: We <a href="http://saos.fec.gov/aodocs/1254119.pdf">granted</a> FEC's request for an extension of time to respond until May 9th.</p>
 <p>2014-02-24: <a href="http://saos.fec.gov/aodocs/1252134.pdf">Supplemental information</a> re. our $100 limit on Bitcoin contributions</p>
-<p>2014-02-12: <a href="http://saos.fec.gov/aodocs/1251666.pdf">Our request</a> (the <a href="https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/">google doc</a> is more readable and has usable links)</p>
+<p>2014-02-12: <a href="http://saos.fec.gov/aodocs/1251666.pdf">Our request</a> (the <%= link_to "Google doc", fec_bitcoin_aor_path, :target => 'blank' %> is more readable and has usable links)</p>
 
 <% end %>

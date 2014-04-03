@@ -2,7 +2,7 @@
 
 <% cache do %>
 
-<div class="flash notice l">This request is still in draft form; we have not yet submitted it officially. In the meantime, you can <a href="https://docs.google.com/document/d/1WCyUouQdPNTwvVMJdgmYABnu2xMmF8W14l4B8EIb86k/" target="_blank">read and comment on our draft</a>.</div>
+<div class="flash notice l">This request is still in draft form; we have not yet submitted it officially. In the meantime, you can <%= link_to "read and comment on our draft", fec_earmarks_aor_path, target: '_blank' %>.</div>
 
 <p>Make Your Laws is developing innovative ways to apply the <%= link_to "principles of liquid democracy", introduction_path %>. We're starting with US campaign finance, which is regulated in part by the <a href="http://fec.gov" target="_blank">Federal Election Commission</a> (FEC).</p>
 
@@ -28,7 +28,7 @@
 
 <h2><a href="#questions">What we'll ask the FEC</a></h2>
 
-<p>We encourage you to read our <a href="https://docs.google.com/document/d/1WCyUouQdPNTwvVMJdgmYABnu2xMmF8W14l4B8EIb86k/edit" target="_blank">full request</a> for the details — we've tried to ensure that it is clear and understandable to non-specialists — but here is a summary of what we will ask the FEC, and how it affects what you would be able to do on this site.</p>
+<p>We encourage you to read our <%= link_to "full request", fec_earmarks_aor_path, target: '_blank' %> for the details — we've tried to ensure that it is clear and understandable to non-specialists — but here is a summary of what we will ask the FEC, and how it affects what you would be able to do on this site.</p>
 
 <ol>
 	<li><h3>May a contributor defer a decision to earmark a contribution, or alter an untriggered earmark?</h3>
@@ -92,7 +92,7 @@
 
 <p>We want to know what you think, and the FEC does too.</p>
 
-<p>To tell us informally, just email <a href="mailto:team@makeyourlaws.org?subject=Comments%20on%20earmarking%20AOR">team@makeyourlaws.org</a> or use <a href="https://docs.google.com/document/d/1WCyUouQdPNTwvVMJdgmYABnu2xMmF8W14l4B8EIb86k/edit?usp=sharing" target="_blank">comments on the google doc</a>.</p>
+<p>To tell us informally, just email <a href="mailto:team@makeyourlaws.org?subject=Comments%20on%20earmarking%20AOR">team@makeyourlaws.org</a> or use <%= link_to "comments on the Google doc", fec_earmarks_aor_path, target: '_blank' %>`.</p>
 
 <p>Once we submit our request, you'll also be email the FEC with your formal comments.</p>
 
