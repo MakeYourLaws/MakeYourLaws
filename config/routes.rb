@@ -25,6 +25,13 @@ MakeyourlawsOrg::Application.routes.draw do
     get 'principles'
     get 'strategy'
     get 'faq'
+    get 'about/pac/bylaws', to: redirect('https://docs.google.com/document/d/1BbKNamiQdlemLS28iGnkwrwar9vQ9HucK_S1PrZ2mu4/', status: 302)
+    get 'about/pac/finances', to: redirect('https://docs.google.com/spreadsheet/ccc?key=0AjmetJxi-p0VdGlJSkl5NDkxdlE4bVlLLWtYWEZtcWc', status: 302)
+    get 'about/pac/fec_reports', to: redirect('http://images.nictusa.com/cgi-bin/fecimg/?C00529743', status: 302)
+    get 'about/c4/bylaws', to: redirect('https://docs.google.com/document/d/1uQEetVLONuzNdY_EYvmPX5P5PHC0kgp6kE-cdeVOT0A', status: 302)
+    get 'about/c4/finances', to: redirect('https://docs.google.com/spreadsheet/ccc?key=0AjmetJxi-p0VdEg3ajFfTDJZM1VPaEZMRmd0LUJ0ZVE', status: 302)
+    get 'about/c3/bylaws', to: redirect('https://docs.google.com/document/d/1ZU8yNZVC1AnSEKHm9nLN6WlEB6K2Kn2e5J6Mb-e37AI', status: 302)
+    get 'about/c3/finances', to: redirect('https://docs.google.com/spreadsheet/ccc?key=0AjmetJxi-p0VdF8tSWwxcHJ1QTJzQWtRSzhMY1ZFSWc', status: 302)
     get 'fec'
     get 'help'
     get 'contact'
@@ -37,7 +44,9 @@ MakeyourlawsOrg::Application.routes.draw do
       get 'bitcoin'
       get 'bitcoin/caf', action: 'bitcoin_caf'
       get 'bitcoin/pacs', action: 'bitcoin_pacs'
+      get 'bitcoin/aor', to: redirect('https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/', status: 302)
       get 'earmarks'
+      get 'earmarks/aor', to: redirect('http://docs.google.com/document/d/12ZrP9YKbbdBMZG4W0rdU06DrLX-ojDLfXuOmEivek68/', status: 302)
       get 'tplf'
     end
   end
