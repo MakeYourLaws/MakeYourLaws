@@ -100,7 +100,7 @@ gem 'state_machine'
 gem 'myl-fech', '>= 1.0.2', :require => 'fech'
 
 gem 'money', '>= 5.0.0'
-gem 'money-rails'
+gem 'money-rails', '>= 0.8.1'
 gem "active_paypal_adaptive_payment"
 
 gem 'stripe_event'
