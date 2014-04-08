@@ -30,7 +30,7 @@ set :ssh_options, {
 }
 
 
-server '173.255.252.140', roles: [:web, :app, :db, :workers, :resque_worker, :resque_scheduler]
+server '173.255.252.140', roles: [:web, :app, :db, :resque_worker, :resque_scheduler]
 
 set :workers, { "*" => 2 }
 
@@ -111,6 +111,68 @@ namespace :deploy do
       end
     end
   end
+end
+
+# Via http://stackoverflow.com/questions/8114065/run-resque-in-background & modified to use init.d
+# init.d takes: service makeyourlaws_resque start|stop|graceful-stop|quick-stop|restart|reload|status
+namespace :resque do
+  desc "Starts resque-pool daemon."
+  task :start, :roles => :app, :only => { :resque_worker => true } do
+    sudo "service makeyourlaws_resque start"
+  end
+
+  desc "Sends INT to resque-pool daemon to close master, letting workers finish their jobs."
+  task :stop, :roles => :app, :only => { :resque_worker => true } do
+    sudo "service makeyourlaws_resque stop"
+  end
+
+  desc "Reloads resque-pool for log rotation etc"
+  task :reload, :roles => :app, :only => { :resque_worker => true } do
+    sudo "service makeyourlaws_resque reload"
+  end
+
+  desc "Restart resque-pool"
+  task :restart, :roles => :app, :only => { :resque_worker => true } do
+    sudo "service makeyourlaws_resque restart"
+  end
+
+  desc "Checks resque-pool's status"
+  task :status, :roles => :app, :only => { :resque_worker => true } do
+    sudo "service makeyourlaws_resque status"
+  end
+
+  desc "List all resque processes."
+  task :ps, :roles => :app, :only => { :resque_worker => true } do
+    run 'ps -ef f | grep -E "[r]esque-(pool|[0-9])"'
+  end
+
+  desc "List all resque pool processes."
+  task :psm, :roles => :app, :only => { :resque_worker => true } do
+    run 'ps -ef f | grep -E "[r]esque-pool"'
+  end
+
+  namespace :scheduler do
+    desc "See current scheduler status"
+    task :status, :roles => :app, :only => { :resque_scheduler => true } do
+      sudo "service makeyourlaws_scheduler status"
+    end
+
+    desc "Starts resque scheduler"
+    task :start, :roles => :app, :only => { :resque_scheduler => true } do
+      sudo "service makeyourlaws_scheduler start"
+    end
+
+    desc "Stops resque scheduler"
+    task :stop, :roles => :app, :only => { :resque_scheduler => true } do
+      sudo "service makeyourlaws_scheduler stop"
+    end
+
+    desc "Restarts resque scheduler"
+    task :restart, :roles => :app, :only => { :resque_scheduler => true } do
+      sudo "service makeyourlaws_scheduler restart"
+    end
+  end
+
 end
 
 require './config/boot'
