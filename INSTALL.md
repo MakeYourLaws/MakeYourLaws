@@ -39,7 +39,11 @@ MYL specific
 
 1. Fork the MYL repo (https://github.com/MakeYourLaws/MakeYourLaws)
 
+2. Get it running locally:
+
     cd ~/your/workspace/directory
     # git clone git@github.com:YOURUSERNAME/MakeYourLaws.git
     cd MakeYourLaws
     bundle install
+    rails s
+
