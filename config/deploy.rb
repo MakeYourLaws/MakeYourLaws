@@ -42,11 +42,61 @@ set :resque_environment_task, true
 set :pty, true  # turning on pty allows resque workers to be started without making capistrano hang
 
 # set :linked_files, %w{config/database.yml}
-set :linked_dirs,  %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/assets public/files db/data config/keys) # formerly shared_children
+set :linked_dirs,  %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/assets public/files db/data config/keys)
 
 set :keep_releases, 15
 
 # before :deploy, "ci:verify" # not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
+
+namespace :resque do
+  resque_options = {:start => "Starts resque-pool daemon.",
+    :stop => "Sends INT to resque-pool daemon to close master, letting workers finish their jobs.",
+    :graceful_stop => "Gracefully stop resque-pool",
+    :quick_stop => "Quick stop resque-pool",
+    :reload => "Reloads resque-pool for log rotation etc",
+    :restart => "Restart resque-pool",
+    :status => "Checks resque-pool's status"}
+
+  resque_options.each do |cmd, txt|
+    desc txt
+    task cmd do
+      on roles(:resque_worker) do
+        execute "service makeyourlaws_resque #{cmd}"
+      end
+    end
+  end
+
+  desc "List all resque processes."
+  task :ps do
+    on roles(:resque_worker) do
+      info capture('ps -ef f | grep -E "[r]esque-(pool|[0-9])" || echo "No workers found" && exit 1')
+    end
+  end
+
+  desc "List all resque pool processes."
+  task :psm do
+    on roles(:resque_worker) do
+      info capture('ps -ef f | grep -E "[r]esque-pool" || echo "No resque-pool found" && exit 1')
+    end
+  end
+
+  namespace :scheduler do
+    resque_scheduler_options = {:status => "See current scheduler status",
+      :status => "Starts resque scheduler",
+      :stop => "Stops resque scheduler",
+      :restart => "Restarts resque scheduler"}
+
+    resque_scheduler_options.each do |cmd, txt|
+      desc txt
+      task cmd do
+        on roles(:resque_scheduler) do
+          execute "service makeyourlaws_resque_scheduler #{cmd}"
+        end
+      end
+    end
+  end
+
+end
 
 namespace :deploy do
   # task :restart do
@@ -76,9 +126,11 @@ namespace :deploy do
     end
   end
 
-  after :finishing, 'puma:status'
   after :finishing, 'deploy:cleanup'
   after :finishing, "airbrake:deploy"
+  after :finishing, 'puma:status'
+  after :finishing, 'resque:status'
+  after :finishing, 'resque:scheduler:status'
 
 
   # # https://github.com/capistrano/capistrano/issues/478#issuecomment-24983528
@@ -111,68 +163,6 @@ namespace :deploy do
       end
     end
   end
-end
-
-# Via http://stackoverflow.com/questions/8114065/run-resque-in-background & modified to use init.d
-# init.d takes: service makeyourlaws_resque start|stop|graceful-stop|quick-stop|restart|reload|status
-namespace :resque do
-  desc "Starts resque-pool daemon."
-  task :start, :roles => :app, :only => { :resque_worker => true } do
-    sudo "service makeyourlaws_resque start"
-  end
-
-  desc "Sends INT to resque-pool daemon to close master, letting workers finish their jobs."
-  task :stop, :roles => :app, :only => { :resque_worker => true } do
-    sudo "service makeyourlaws_resque stop"
-  end
-
-  desc "Reloads resque-pool for log rotation etc"
-  task :reload, :roles => :app, :only => { :resque_worker => true } do
-    sudo "service makeyourlaws_resque reload"
-  end
-
-  desc "Restart resque-pool"
-  task :restart, :roles => :app, :only => { :resque_worker => true } do
-    sudo "service makeyourlaws_resque restart"
-  end
-
-  desc "Checks resque-pool's status"
-  task :status, :roles => :app, :only => { :resque_worker => true } do
-    sudo "service makeyourlaws_resque status"
-  end
-
-  desc "List all resque processes."
-  task :ps, :roles => :app, :only => { :resque_worker => true } do
-    run 'ps -ef f | grep -E "[r]esque-(pool|[0-9])"'
-  end
-
-  desc "List all resque pool processes."
-  task :psm, :roles => :app, :only => { :resque_worker => true } do
-    run 'ps -ef f | grep -E "[r]esque-pool"'
-  end
-
-  namespace :scheduler do
-    desc "See current scheduler status"
-    task :status, :roles => :app, :only => { :resque_scheduler => true } do
-      sudo "service makeyourlaws_scheduler status"
-    end
-
-    desc "Starts resque scheduler"
-    task :start, :roles => :app, :only => { :resque_scheduler => true } do
-      sudo "service makeyourlaws_scheduler start"
-    end
-
-    desc "Stops resque scheduler"
-    task :stop, :roles => :app, :only => { :resque_scheduler => true } do
-      sudo "service makeyourlaws_scheduler stop"
-    end
-
-    desc "Restarts resque scheduler"
-    task :restart, :roles => :app, :only => { :resque_scheduler => true } do
-      sudo "service makeyourlaws_scheduler restart"
-    end
-  end
-
 end
 
 require './config/boot'
