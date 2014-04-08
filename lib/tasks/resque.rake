@@ -3,7 +3,7 @@ require 'resque_scheduler/tasks'
 require 'resque-retry'
 require 'resque/failure/redis'
 require 'resque/failure/airbrake'
-
+require 'resque/pool/tasks'
 
 Resque::Failure::MultipleWithRetrySuppression.classes = [Resque::Failure::Redis, Resque::Failure::Airbrake]
 Resque::Failure.backend = Resque::Failure::MultipleWithRetrySuppression
@@ -61,3 +61,15 @@ end
 # or remove the job later:
 #  Resque.remove_delayed(SendFollowUpEmail, :user_id => current_user.id) # with exactly the same parameters
 #  Resque.remove_delayed_selection { |args| args[0]['user_id'] == current_user.id } # or partial matching
+
+
+task "resque:pool:setup" do
+  # close any sockets or files in pool manager
+  ActiveRecord::Base.connection.disconnect!
+  # and re-open them in the resque worker parent
+  Resque::Pool.after_prefork do |job|
+    set_log 'resque_pool.log'
+    ActiveRecord::Base.establish_connection
+    Resque.redis.client.reconnect
+  end
+end
