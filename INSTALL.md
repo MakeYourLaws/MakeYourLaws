@@ -14,7 +14,13 @@ Initial ruby/rails setup (on OSX)
 
     # 3. install mysql: http://dev.mysql.com/downloads/mysql/
 
-    # 4. install RVM:
+    # 4. install redis:  http://redis.io/download
+
+    sudo port install redis
+
+    # server's config is in /server/redis.conf if you want to copy it
+
+    # 5. install RVM:
     \curl -sSL https://get.rvm.io | bash
 
     # now manually do the stuff it tells you to
@@ -22,7 +28,7 @@ Initial ruby/rails setup (on OSX)
     rvm autolibs macports
     rvm get stable
     rvm autolibs macports
-    rvm install rbx
+    rvm install rbx   # Note: MYL will also run on Ruby 2.1 if you prefer not to use Rubinius.
     rvm reload
     rvm alias create default rbx
     rvm rbx
@@ -31,9 +37,9 @@ Initial ruby/rails setup (on OSX)
 MYL specific
 ------------
 
-1. Fork the MYL repo
-2. Clone your fork to your local disk
-3. cd ~/your/fork/MakeYourLaws
-4. Run:
+1. Fork the MYL repo (https://github.com/MakeYourLaws/MakeYourLaws)
 
+    cd ~/your/workspace/directory
+    # git clone git@github.com:YOURUSERNAME/MakeYourLaws.git
+    cd MakeYourLaws
     bundle install
