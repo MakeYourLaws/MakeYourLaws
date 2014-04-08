@@ -8,6 +8,7 @@ source 'https://rubygems.org'
 platform(:rbx) do
   gem 'rubysl'
   gem 'ffi'
+  gem 'psych'
 end
 
 gem 'puma'
