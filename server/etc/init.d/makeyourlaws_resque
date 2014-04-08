@@ -60,6 +60,7 @@ case "$1" in
       then
   	    ps -f -p $(cat ${pidfile}) | sed -n 2p
   	  else
+		echo 'no resque-pool PID'
   	    exit 3
   	fi
     ;;
