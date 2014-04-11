@@ -1,0 +1,4 @@
+[tor]
+title=Tor relay
+description=Tor relay
+ports=9001,9030/tcp|9001,9030/udp

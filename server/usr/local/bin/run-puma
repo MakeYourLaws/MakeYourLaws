@@ -1,0 +1,4 @@
+#!/bin/bash
+app=$1; config=$2; log=$3;
+echo "starting puma as `whoami`: cd $app && bundle exec puma -C $config 2>&1 >> $log" >> $log
+cd $app && /usr/local/rvm/bin/rvm default do bundle exec puma -C $config 2>&1 >> $log
