@@ -2,10 +2,15 @@
 
 <% cache do %>
 
+<p class="flash notice">
+	The <a href="http://saos.fec.gov/aodocs/201402.pdf">first draft opinion</a> is up. We'll file comments shortly; <a href="#comment">you can too</a>.
+	<br/>
+	On April 23<sup>rd</sup>, we'll broadcast the <a href="http://fec.gov/agenda/2014/agenda20140423.shtml">first FEC meeting</a> as a <a href="https://plus.google.com/events/cg6fvrd55f4cvt9vi4uvtqockfk">live hangout</a>, where you can participate.
+</p>
+
 <p class="c b">
-	The first FEC hearing on this request is scheduled for <s><a href="http://fec.gov/agenda/2014/agenda20140403.shtml">April 3<sup>rd</sup></a></s> <a href="http://fec.gov/agenda/2014/agenda20140423.shtml">April 23<sup>rd</sup></a>.
-	<br/>The <a href="http://saos.fec.gov/aodocs/201402.pdf">first draft opinion</a> is up. We'll file comments shortly; <a href="#comment">you can too</a>.
-	<br/><%= link_to "Google Doc of our full request", fec_bitcoin_aor_path, :target => 'blank' %> - <a href="#docs">AO 2014-02 official documents</a></p>
+	<%= link_to "Google Doc of our full request", fec_bitcoin_aor_path, :target => 'blank' %> - <a href="#docs">AO 2014-02 official documents</a>
+</p>
 
 <p>Recently, the FEC <%= link_to "was asked to consider", fec_bitcoin_caf_path %> whether <a href="http://en.wikipedia.org/wiki/Bitcoin">Bitcoins</a> should be allowed in political contributions. Because the PAC requesting to use Bitcoins wasn't able to explain how they would know who made the contributions, the FEC ultimately deadlocked on their <a href="http://www.fec.gov/pages/brochures/ao.shtml" target="_blank">advisory opinion</a> request (AOR). In the meantime, other political committees are <%= link_to "already accepting Bitcoin", fec_bitcoin_pacs_path %>, without any guidelines for how to do so properly.</p>
 
