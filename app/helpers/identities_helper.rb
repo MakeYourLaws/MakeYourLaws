@@ -1,6 +1,6 @@
 module IdentitiesHelper
   def unavailable_providers
-    [:coinbase]
+    []
   end
 
   def provider_image provider, size = 32
