@@ -10,27 +10,46 @@
 
 <p>Of course, we do not accuse anyone of violating the law (that is for the FEC to investigate and determine), and please don't cause any such transactions.</p>
 
+<h3>Donor info meanings</h3>
+<ul class="flush flat">
+	<li><%= btc_anon_image :green %> Requires donor info and uses one-time linked address.</li>
+	<li><%= btc_anon_image :orange %> Tries to collect donor info, but has a critical failure that allows totally anonymous contributions.</li>
+	<li><%= btc_anon_image :red %> Website doesn't collect donor info; accepts totally anonymous contributions.</li>
+	<li><%= btc_anon_image :broken %> Bitcoin contribution page broken.</li>
+</ul>
+<ul class="bullet small">
+	<% {
+      "K" => "There is a publicly known address or equivalent.",
+      "A" => "Website requests donor info, but gives out a contribution address without it.",
+      "I" => "Website does not ask for donor info."
+    }.each do |sym, meaning| %>
+		<li><%= sym %>: <%= meaning %></li>
+	<% end %>
+</ul>
+
 <table>
 	<tr>
 		<th>Type</th>
 		<th>Name</th>
 		<th>Campaign finance reports</th>
 		<th>Publicly known addresses</th>
-		<th style="width: 35%;">Notes</th>
+		<th>Donor info</th>
+		<th style="width: 25%;">Notes</th>
 	</tr>
 	<tr>
 		<td class="small">National party</td>
 		<td><a href="http://www.lp.org/make-a-bitcoin-contribution">Libertarian Party</a></td>
 		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00255695">C00255695</a></td>
 		<td></td>
-		<td class="small">Donation page will give linked address w/out donor info, thus permitting totally anonymous Bitcoin contributions.</td>
+		<td class="small"><%= btc_anon_image :orange %>A</td>
 	</tr>
 	<tr>
 		<td class="small">Presidential candidate</td>
 		<td><A href="http://darrylwperry.com/donate/">Darryl W Perry</a></td>
 		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?P60004868">P60004868</a></td>
 		<td><a  href="https://blockchain.info/address/1DWP16K2oeZEsX5z6vPWsZJ7GB5ajtgcb4">1</a>, <a href="http://block-explorer.com/address/LeU8KBCEz2LuBgR3aXFxRu68qiiUeqCeyh">2</a>, <a href="http://block-explorer.com/address/LbuXfKMzNiEq5fP8cZ616EYEg3hD3wbTJU">3</a> (source <a href="http://darrylwperry.com/donate">1</a>, <a href="http://docquery.fec.gov/pdf/038/13031070038/13031070038.pdf">2</a>)</td>
-		<td class="small">Accepts totally anonymous Bitcoin contributions. Single <a href="http://docquery.fec.gov/pdf/038/13031070038/13031070038.pdf">letter to FEC</a> says he will not make any disclosures and claims FEC has no jurisdiction over his receipt of "Bitcoin, Litecoin, and precious metals".</td>
+		<td class="small"><%= btc_anon_image :red %>I</td>
+		<td class="small">Single <a href="http://docquery.fec.gov/pdf/038/13031070038/13031070038.pdf">letter to FEC</a> says he will not make any disclosures and claims FEC has no jurisdiction over his receipt of "Bitcoin, Litecoin, and precious metals".</td>
 	</tr>
 	<tr>
 		<td class="small">Federal candidate</td>
@@ -39,80 +58,104 @@
 		</td>
 		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00553909">C00553909</a></td>
 		<td><a href="https://blockchain.info/address/1EVJyd8TbHBMUiMn6ogQ1PXbqoEZVp31Hz">1</a> (<a href="http://www.businessinsider.com/steve-stockman-is-accepting-bitcoins-2014-1">source</a>)</td>
-		<td class="small">Run by <a href="http://www.dbcapitalstrategies.com/">Dan Backer</a>, who represented <%= link_to "CAF's Bitcoin AOR", fec_bitcoin_caf_path %>. Because there is a publicly known Bitcoin address, they cannot prevent (and may have received) totally anonymous Bitcoin contributions. <a href="http://en.wikipedia.org/wiki/Steve_Stockman#2014_U.S._Senate_election">Defeated in primary</a>, but still accepting senate campaign contributions.</td>
+		<td class="small"><%= btc_anon_image :orange %>K</td>
+		<td class="small">Run by <%= link_to "Dan Backer", fec_bitcoin_caf_path %>.
+			<br/><a href="http://en.wikipedia.org/wiki/Steve_Stockman#2014_U.S._Senate_election">Defeated in primary</a>, but still accepting senate campaign contributions.
+			<br/>Website collects info properly, but publicly known address means anonymous contributions are possible.</td>
 	</tr>
 	<tr>
 		<td class="small">Federal candidate</td>
-		<td><a href="http://jimfulner.com">Jim Fulner</a></td>
+		<td><a href="http://jimfulner.com/contact">Jim Fulner</a></td>
 		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00549808">C00549808</a></td>
 		<td><a href="https://blockchain.info/address/194TQCmRBJGo456juzxBaJRh6LzKvtu996">1</a> (<a href="http://jimfulner.com/contact.html">source</a>)</td>
-		<td class="small">Because there is a publicly known Bitcoin address, they cannot prevent (and may have received) totally anonymous Bitcoin contributions.</td>
+		<td class="small"><%= btc_anon_image :red %>I</td>
 	</tr>
 	<tr>
 		<td class="small">Federal candidate</td>
 		<td><a href="http://blaineforuscongress.com/">Blaine Richardson</a></td>
 		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg?C00518514">C00518514</a></td>
 		<td></td>
-		<td class="small">Accepts totally anonymous Bitcoin contributions</td>
+		<td class="small"><%= btc_anon_image :red %>I</td>
 	</tr>
 	<tr>
 		<td class="small">Hybrid SuperPAC</td>
 		<td><a href="http://www.bit-pac.com/donate/">BitPAC</a></td>
 		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00550400">C00550400</a></td>
 		<td></td>
-		<td class="small">Run by Dan Backer; donation page will give linked address w/out donor info, thus permitting totally anonymous Bitcoin contributions.</td>
+		<td class="small"><%= btc_anon_image :orange %>A</td>
+		<td class="small">Run by <%= link_to "Dan Backer", fec_bitcoin_caf_path %>.</td>
 	</tr>
 	<tr>
 		<td class="small">SuperPAC</td>
-		<td><a href="http://www.1911united.com/">1911 United</a></td>
+		<td><a href="http://www.1911united.com/donatebitcoin">1911 United</a></td>
 		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00508200">C00508200</a></td>
+		<td><a href="https://coinbase.com/checkouts/380ec5dcf932306bfaeca49407514051">1</a></td>
+		<td class="small"><%= btc_anon_image :red %>K</td>
 	</tr>
 	<tr>
 		<td class="small">PAC</td>
 		<td><a href="http://coinpac.org/contribute.html">Coin PAC</a></td>
 		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00553073">C00553073</td>
+		<td></td>
+		<td class="small"><%= btc_anon_image :broken %></td>
 	</tr>
 	<tr><td colspan=5><hr/></td></tr>
 	<tr>
 		<td class="small">Michigan party affiliate</td>
-		<td><a href="http://livingstonlibertarians.org/">Livingston County Libertarians</a></td>
+		<td><a href="http://livingstonlibertarians.org/#text-5">Livingston County Libertarians</a></td>
 		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00403907">C00403907</a></td>
 		<td><a href="https://blockchain.info/address/17T3xM9BWfw28YGUuBU3KYUF5gGRALh1fB">1</a> (<a href="http://livingstonlibertarians.org/#text-5">source</a>)</td>
-		<td class="small">Because there is a publicly known Bitcoin address, they cannot prevent (and may have received) totally anonymous Bitcoin contributions.</td>
+		<td class="small"><%= btc_anon_image :red %>I</td>
 	</tr>
 	<tr>
 		<td class="small">California candidate</td>
 		<td><a href="http://bryanparker.org/contribute/">Bryan Parker</a></td>
 		<td>1357609</td>
+		<td></td>
+		<td class="small"><%= btc_anon_image :green %></td>
 	</tr>
 	<tr>
 		<td class="small">California candidate</td>
 		<td><a href="http://glenn2014.com/donate/">Michael B Glenn</a></td>
 		<td>?</td>
+		<td></td>
+		<td class="small"><%= btc_anon_image :green %></td>
 	</tr>
 	<tr>
 		<td class="small">Maine candidate</td>
 		<td><a href="https://brakey.nationbuilder.com/donate">Eric L Brakey</td>
 		<td><a href="https://secure.mainecampaignfinance.com/PublicSite/SearchPages/CommitteeDetail.aspx?OrgID=6551">6551</a></td>
+		<td></td>
+		<td class="small"><%= btc_anon_image :green %></td>
 	</tr>
 	<tr>
 		<td class="small">New Hampshire candidate</td>
 		<td><a href="http://www.markwarden.com/page/bitcoin-donation">Mark D Warden</a></td>
 		<td>3214</td>
+		<td></td>
+		<td class="small"><%= btc_anon_image :green %></td>
 	</tr>
 	<tr>
 		<td class="small">New Hampshire candidate</td>
-		<td><a href="http://www.andrewhemingway.com/donate/">Andrew Hemingway</a></td>
+		<td><a href="http://www.andrewhemingway.com/donatebitcoin">Andrew Hemingway</a></td>
 		<td>3492</td>
-		<td></td>
-		<td class="small">Accepts totally anonymous Bitcoin contributions</td>
+		<td><a href="https://blockchain.info/address/1JW2u1gWD4snoxWVmDKDm4NYjUWb1Kj7B8">1</a> (<a href="http://www.andrewhemingway.com/donatebitcoin">source</a>)</td>
+		<td class="small"><%= btc_anon_image :red %>K</td>
+		<!-- Hemingway's previous (public) Bitpay code, above the information form:
+			<form action="https://bitpay.com/checkout" method="post">
+			  <input type="hidden" name="action" value="checkout">
+			  <input type="hidden" name="posData" value="">
+			  <input type="hidden" name="data" value="QFGudEKFK6O78RAI/u+1P8hsH0Usx2N2Jvzmq5dJek44YYemyXL68z4CIMNMmV/Co2KePsnTbH0q6GbiYoqJSxqmUhkFIZrlc6RbQjwf71/sAPa2l7yZP9xO7VrpXYMcsIX+9SoBaD0V2GT8doiVyf/k2Jofo7lCxaM+XLkz6jfNYu+qI3QG5YE7GUs0bNzesjOlXvdSWqhcPEf/De1QwA==">
+			  <input type="image" src="https://bitpay.com/img/button8.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins.">
+			</form>
+		-->
 	</tr>
 	<tr>
 		<td class="small">Texas candidate</td>
 		<td><a href="http://www.gregabbott.com/bitcoin-donation-form/">Greg Abbott</a></td>
 		<td><a href="http://www.ethics.state.tx.us/php/filer.php?acct=00051153SPAC">00051153</a>, <a href="http://www.ethics.state.tx.us/php/filer.php?acct=00019652COH">00019652</a></td>
 		<td><a href="https://blockchain.info/address/1CJQhFeLEXnZ7fQ7dqQmqJLoFWX6CrNdyT">1</a> (<a href="http://www.gregabbott.com/bitcoin-donation-form">source</a>)</td>
-		<td class="small">Because there is a publicly known Bitcoin address, they cannot prevent (and may have received) totally anonymous Bitcoin contributions.</td>
+		<td class="small"><%= btc_anon_image :red %>K</td>
 	</tr>
 	<tr><td colspan=5><hr/></td></tr>
 	<tr>
@@ -120,7 +163,8 @@
 		<td><a href="http://bitcoinsuperpac.org">Bitcoin SuperPAC</a></td>
 		<td><a href="http://docquery.fec.gov/cgi-bin/fecimg/?C00551689">C00551689</a></td>
 		<td></td>
-		<td class="small">Defunct</td>
+		<td>?</td>
+		<td class="small">Defunct. Website now down.</td>
 	</tr>
 	<tr>
 		<td class="small">SuperPAC</td>
@@ -139,6 +183,7 @@
 			<a href='https://blockchain.info/address/1NyuGppGprR6uM2koN7hH8wGP8bk6wKh15'>10</a>
 			(<a href="http://docquery.fec.gov/pdf/794/14031144794/14031144794.pdf">source</a>)
 		</td>
+		<td class="small"><%= btc_anon_image :red %>K</td>
 		<td class="small">Defunct</td>
 	</tr>
 	<tr>
@@ -146,7 +191,8 @@
 		<td><a href="https://web.archive.org/web/20130916012527/http://www.barnettformayor.com/bitcoins">Bill Barnett</a></td>
 		<td>?</td>
 		<td></td>
-		<td class="small"><a href="http://www.naplesgov.com/index.aspx?NID=454">Defeated by John Sorey.</a> Campaign website now down.</td>
+		<td class="small"><%= btc_anon_image :green %></td>
+		<td class="small"><a href="http://www.naplesgov.com/index.aspx?NID=454">Defeated by John Sorey.</a> Website now down.</td>
 	</tr>
 </table>
 
