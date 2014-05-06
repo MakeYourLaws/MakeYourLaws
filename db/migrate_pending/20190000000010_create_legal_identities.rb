@@ -1,51 +1,32 @@
 class CreateLegalIdentities < ActiveRecord::Migration
   def change
     create_table :legal_identities do |t|
+      t.boolean :human, :null => false
+
+      t.string :legal_name # cached version of their main current legal name; set through usages
+
       # Both humans and corporations
-      t.date :birthdate
+      t.date :birthdate # i.e. 'incorporation date' for corps
+
       # This is actually 1:M not 1:1 (EIN/SSN/etc can be changed), but for now we're not handling that
-      t.integer :irs_id, :limit => 4 # bytes — EIN for corps, SSN for humans
-      t.integer :party_id # refers to an FEC::Committee ID this entity is formally affiliated with (if any)
+      t.integer :irs_id, :limit => 4 #  bytes — EIN for corps, SSN for humans
+      t.boolean :govt_contractor
+
+      # t.integer :party_id # refers to an FEC::Committee ID this entity is formally affiliated with (if any)
 
       # Human specific
       t.boolean :us_citizen_or_greencard # US Citizen or permanent resident / green card holder?
-      t.boolean :govt_contractor
-      t.references :employer # a legal_identity. Special cases: self.id (self-employed), nil (unemployed)
-      t.references :occupation
 
       t.integer :lock_version
       t.timestamps
 
       t.index :irs_id, :unique => true # allows nil in most DBs
-      t.index :employer  # for autocomplete
+      t.index :full_name  # for autocomplete
       t.index :occupation
     end
 
-    create_table :occupations do |t|
-      t.string :name, :null => false  # special: "unemployed", "retired", "homemaker"
-      t.string :irs_id
-
-      t.index :name
-    end
-
-    create_table :address_usages do |t|
-      t.references :legal_identity
-      t.references :address
-      t.string :type # e.g. residential, mailing, billing, voting, fec
-      t.date :from
-      t.date :to
-
-      t.index [:legal_identity, :type]
-    end
-
-    create_table :name_usages do |t|
-      t.references :legal_name
-      t.references :legal_identity
-      t.date :from
-      t.date :to
-      t.string :authority # people can have different names according to different government entities
-    end
-
+    # Doesn't belong exclusively to any individual (people share the same name)
+    # Also, this is *legal* names (as in what's on wallet ID) - not the same as display names.
     create_table :legal_names do |t|
       t.string :full_name
       t.string :name_prefix, :length => 10 # Based on FEC filing requirements
@@ -54,10 +35,55 @@ class CreateLegalIdentities < ActiveRecord::Migration
       t.string :last_name, :length => 50
       t.string :name_suffix, :length => 10 # Jr., Sr., I, II, etc
 
+      t.index :full_name
+      t.index [:last_name, :first_name]
+    end
+
+    create_table :occupations do |t|
+      t.string :name, :null => false  # special: "unemployed", "retired", "homemaker"
+
+      t.index :name
+    end
+
+    create_table :occupation_usages do |t|
+      t.references :employee, :null => false # a legal_identity (human)
+      t.references :employer # another legal_identity. Special cases: identical (self-employed), nil (unemployed, retired, homemaker)
+      t.references :occupation, :null => false
+
+      t.date :from
+      t.date :to
+
+      t.integer :lock_version
+      t.timestamps
+    end
+
+    create_table :address_usages do |t|
+      t.references :legal_identity, :null => false
+      t.references :address, :null => false
+      t.string :usage # e.g. residential, mailing, billing, voting, fec
+      t.date :from
+      t.date :to
+
       t.integer :lock_version
       t.timestamps
 
-      t.index [:legal_idenity, :from]
+      t.index [:legal_identity, :usage] # look up the _ address for someone
+      t.index [:address. :legal_identity] # look up who is at the same address
     end
+
+    create_table :name_usages do |t|
+      t.references :legal_name, :null => false
+      t.references :legal_identity, :null => false
+      t.date :from
+      t.date :to
+      t.string :authority # people can have different names according to different government entities
+
+      t.integer :lock_version
+      t.timestamps
+
+      t.index :legal_identity
+      t.index :legal_name
+    end
+
   end
 end

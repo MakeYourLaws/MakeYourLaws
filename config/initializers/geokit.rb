@@ -23,8 +23,11 @@ Geokit::Geocoders::request_timeout = 3
 # This is your Google Maps geocoder keys (all optional).
 # See http://www.google.com/apis/maps/signup.html
 # and http://www.google.com/apis/maps/documentation/#Geocoding_Examples
-Geokit::Geocoders::GoogleGeocoder.client_id = Keys.get('google_id')
-Geokit::Geocoders::GoogleGeocoder.cryptographic_key = Keys.get('google_secret')
+
+# FIXME: some sort of issue with our google api keys, works better anon
+# Geokit::Geocoders::GoogleGeocoder.client_id = Keys.get('google_id')
+# Geokit::Geocoders::GoogleGeocoder.cryptographic_key = Keys.get('google_secret')
+
 # Geokit::Geocoders::GoogleGeocoder.channel = Keys.get('google_channel') # ?
 
 # google do_geocode options: language, bias

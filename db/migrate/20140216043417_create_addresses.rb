@@ -13,7 +13,7 @@ class CreateAddresses < ActiveRecord::Migration
       # Geocoding
       t.float :lat, :lng, :precision => 10, :scale => 6
 
-      t.index [:lat, :lng]
+      t.index [:lat, :lng] # not unique due to precision issues
       t.index [:country, :state, :city]
     end
 
