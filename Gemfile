@@ -155,3 +155,5 @@ gem "strip_attributes", ">= 1.1.0"
 
 gem 'friendly_id', ">= 5.0.0"
 
+gem 'twitter'
+gem 'uncoil'
