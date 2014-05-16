@@ -40,6 +40,10 @@ MakeyourlawsOrg::Application.routes.draw do
     get 'help/legal', action: 'help_legal'
     get 'tos'
     get 'privacy'
+    namespace :press do
+      get 'BNA-2014-05-09'
+      get 'BNA-2013-11-15'
+    end
     namespace :fec do
       get 'bitcoin'
       get 'bitcoin/caf', action: 'bitcoin_caf'
