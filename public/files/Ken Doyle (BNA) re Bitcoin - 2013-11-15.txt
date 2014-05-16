@@ -1,0 +1,79 @@
+Reproduced with permission from Money & Politics Report, (Nov.15, 2013).
+Copyright 2013 by The Bureau of National Affairs, Inc. (800-372-1033)
+<http://www.bna.com>
+
+
+Source:  Money & Politics Report: News Archive > 2013 > November > 11/15/2013 > Lead Report > Campaign Finance: Vote on Bitcoin Ruling Delayed As FEC Discusses Disclosure Concerns
+
+
+Campaign Finance
+
+Vote on Bitcoin Ruling Delayed As FEC Discusses Disclosure Concerns
+
+BNA Snapshot
+
+FEC Discusses Bitcoins
+
+Key Development: Federal Election Commission put off final action on advisory opinion (AO 2013-15) regarding Bitcoins after lengthy discussion about the potential effect of digital currency on campaign financing.
+
+Impact: FEC focused on concerns that it may be difficult to trace, disclose original donor of Bitcoin political contribution, as required under campaign finance laws.
+
+By Kenneth P. Doyle
+
+Nov. 14 — The Federal Election Commission put off final action on an advisory opinion (AO 2013-15) regarding Bitcoins after a lengthy discussion at a Nov. 14 meeting about the potential effect of the digital currency on campaign financing.
+
+In other action at the meeting, the FEC commissioners voted unanimously to approve an advisory ruling (AO 2013-13) requiring a joint fundraising committee called Freshman Hold'em to list all of its partner campaigns in disclaimer notices.
+
+The FEC also unanimously approved an audit report for the Arizona Republican Party and a ruling denying additional federal matching funds to the 2012 campaign of Libertarian presidential candidate Gary Johnson.
+
+Regarding the Bitcoin AO, the FEC commissioners may vote at their next scheduled open meeting Nov. 21 to approve a ruling from among at least three drafts that have been discussed to date.
+
+All three of the current draft rulings would allow by the political action committee making the AO request, the Conservative Action Fund (CAF), to accept Bitcoin contributions. However, the drafts differ on the question of whether the PAC could pass on Bitcoins it receives to other PACs or candidate committees without first cashing in the Bitcoins for U.S. dollars.
+
+Disclosure Concerns
+
+Bitcoin transactions fall outside the traditional financial system—a factor that has raised concerns at other agencies about their potential use for money laundering and other crimes. Democratic FEC Commissioner Ann Ravel raised concerns during the commission meeting that it may be difficult to trace and disclose the original donor of a Bitcoin political contribution, as required under campaign finance laws.
+
+Ravel cited comments on the advisory opinion request filed by another PAC, called Make Your Laws, which said that treating Bitcoins as cash, as suggested in the advisory request, could “allow unlimited anonymous hard money contributions” in federal campaigns.
+
+The request itself indicated CAF would make its “best efforts” under FEC rules to make sure any Bitcoin contributors are identified and disclosed, as required under FEC rules for all contributors.
+
+Attorney Dan Backer of DB Capitol Strategies, representing CAF, told the FEC commissioners during the Nov. 14 meeting that Bitcoins should not face a “heightened burden” for disclosure above other types of contributions the FEC has previously allowed that also raise potential concerns about the identity of the contributor. These include contributions made by credit cards, gift cards and text messages, Backer said.
+
+All of the draft responses to the CAF request would allow the PAC to accept Bitcoins solely as “in-kind” campaign contributions, similar to stocks or bonds.
+
+Under two of the drafts, the Bitcoin contributions would be unusable by the PAC for any purpose until they have been sold for U.S. dollars and the proceeds have been placed in campaign depositories. Under a third alternative, however, the PAC could take Bitcoins it receives and pass them along directly to other PACs or candidates, also as in-kind contributions.
+
+Freshman Hold'em
+
+The FEC discussed only briefly the other items on its agenda, including the advisory opinion request from the Freshman Hold'em committee, which had generated a number of alternative draft rulings.
+
+A final, compromise draft responding to the committee was produced following a 40-minute delay in the scheduled start of the commission meeting. The draft was approved with little discussion at the beginning of the meeting.
+
+The approved ruling denied the joint fundraising committee's request to leave off the names of its 18 connected campaign committees when making fundraising solicitations and other communications. The ruling said the FEC disclaimer requirements to disclose the names of all the campaigns being funded by a joint fundraising committee could not be waived.
+
+The final draft approved by the commissioners eliminated some language from an original draft outlining specific items—such as donor cards—on which disclaimer information about participating committees would have to be included.
+
+Easing Tensions
+
+The agreement on the Freshman Hold'em advisory ruling appeared to reflect a continued easing of partisan tensions at the agency since the arrival of two new commissioners, Democratic Commissioner Ann Ravel and Republican Commissioner Lee Goodman, who now serves as the FEC vice chairman.
+In brief remarks to reporters after the commission meeting, Ellen Weintraub, the FEC's veteran Democratic chairwoman, said agency operations have been going smoothly since the arrival of Goodman and Ravel. She added that the commission is facing a big workload, especially of pending enforcement cases, which are handled confidentially in closed FEC meetings.
+
+Weintraub said there is no schedule yet to consider possible new regulatory efforts on a series of issues that the FEC had said it would like to address.
+
+To contact the reporter on this story: Kenneth P. Doyle in Washington at kdoyle@bna.com
+
+To contact the editor responsible for this story: Heather Rothman at hrothman@bna.com
+
+For More Information
+
+Documents discussed at the Nov. 14 FEC meeting are available online at http://www.fec.gov/agenda/2013/agenda20131114.shtml .
+
+
+--------------------------------------------------------------------------------
+
+Contact us at http://www.bna.com/contact/index.html or call 1-800-372-1033
+
+ISSN 1523-570X
+
+Copyright © 2013, The Bureau of National Affairs, Inc.. Reproduction or redistribution, in whole or in part, and in any form, without express written permission, is prohibited except as permitted by the BNA Copyright Policy. http://www.bna.com/corp/index.html#V
