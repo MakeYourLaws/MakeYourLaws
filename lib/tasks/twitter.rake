@@ -25,7 +25,7 @@ namespace :twitter do
     if File.exist?(@statefile)
       @search_terms = JSON.parse(File.read(@statefile))
     else
-      @search_terms = {"fec bitcoin" => [0, 99999999999999999999], "@makeyourlaws" => [0, 99999999999999999999], "make your laws"  => [0, 99999999999999999999], "ao 2014-02" => [0, 99999999999999999999]}
+      @search_terms = {"fec bitcoin" => [0, 99999999999999999999], "@makeyourlaws" => [0, 99999999999999999999], "makeyourlaws.org"  => [0, 99999999999999999999]}
     end
 
     if File.exist?(@tweetfile)
@@ -71,25 +71,31 @@ namespace :twitter do
     end
 
     def save_and_print search_term
-      puts "\n" * 5, 'saving...'
-      if !@urls.blank?
-        @unique_urls += [@uncoil.expand(@urls)].flatten.map{|u| u.long_url.sub(/\?utm_.+$/, '').sub(/\&utm_.+$/, '')}
-        @urls = []
-        @unique_urls.uniq!
-        @unique_urls.sort!{|a,b| a[/:\/\/[^\/]+/].split('.').reverse <=> b[/:\/\/[^\/]+/].split('.').reverse}
+      if @n > 0
+        puts "\n" * 5, 'saving...'
+        if !@urls.blank?
+          @unique_urls += [@uncoil.expand(@urls)].flatten.map{|u| u.long_url.sub(/\?utm_.+$/, '').sub(/\&utm_.+$/, '')}
+          @urls = []
+          @unique_urls.uniq!
+          @unique_urls.sort!{|a,b| a[/:\/\/[^\/]+/].split('.').reverse <=> b[/:\/\/[^\/]+/].split('.').reverse}
 
-        File.open(@linkfile, 'w'){|f| f.write(@unique_urls.join("\n")) }
+          File.open(@linkfile, 'w'){|f| f.write(@unique_urls.join("\n")) }
+        end
+
+        File.open(@statefile, 'w'){|f| f.write(@search_terms.to_json) }
+        File.open(@tweetfile, 'w'){|f| f.write(@tweets.to_json) }
+        File.open(@plaintweetfile, 'w') {|f| f.write(@tweets.sort do |b,a|
+          stats_a = extract_stats a
+          stats_b = extract_stats b
+          (stats_a[:fav] + stats_a[:rt]) <=> (stats_b[:fav] + stats_b[:rt])
+        end.map{|tweet| format_tweet tweet}.join("\n")) }
+
+        puts "new tweets: #{@n}, new urls: #{@unique_urls.size - @unique_urls_old.size}, max = #{@search_terms[search_term][0]}, min = #{@search_terms[search_term][1]}", "\n" * 5
+
+        @n = 0
+      else
+        puts "\n" * 5, 'nothing new to save...', "\n" * 5
       end
-
-      File.open(@statefile, 'w'){|f| f.write(@search_terms.to_json) }
-      File.open(@tweetfile, 'w'){|f| f.write(@tweets.to_json) }
-      File.open(@plaintweetfile, 'w') {|f| f.write(@tweets.sort do |a,b|
-        stats_a = extract_stats a
-        stats_b = extract_stats b
-        (stats_a[:fav] + stats_a[:rt]) <=> (stats_b[:fav] + stats_b[:rt])
-      end.map{|tweet| format_tweet tweet}.join("\n")) }
-
-      puts "new tweets: #{@n}, new urls: #{@unique_urls.size - @unique_urls_old.size}, max = #{@search_terms[search_term][0]}, min = #{@search_terms[search_term][1]}", "\n" * 5
     end
 
     def update_and_print search_term, tweet
