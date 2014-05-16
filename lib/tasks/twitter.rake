@@ -34,13 +34,41 @@ namespace :twitter do
       @tweets = []
     end
 
+    @uncoil = Uncoil.new
+    @n = 0
     @urls = []
 
-    def format_tweet tweet
-       "fol #{tweet.user.followers_count} fav #{tweet.favorite_count} rt #{tweet.retweet_count} | @#{tweet.user.screen_name}: #{tweet.full_text}"
+    def extract_stats tweet
+      stats = {}
+      if tweet.respond_to? :user
+        stats[:fol] = tweet.user.followers_count
+        stats[:fav] = tweet.favorite_count
+        stats[:rt] = tweet.retweet_count
+        stats[:name] = tweet.user.screen_name
+        stats[:txt] = tweet.full_text || tweet.txt
+      elsif tweet.has_key? :user
+        stats[:fol] = tweet[:user][:followers_count]
+        stats[:fav] = tweet[:favorite_count]
+        stats[:rt] = tweet[:retweet_count]
+        stats[:name] = tweet[:user][:screen_name]
+        stats[:txt] = tweet[:full_text] || tweet[:text]
+      elsif tweet.has_key? 'user'
+        stats[:fol] = tweet['user']['followers_count']
+        stats[:fav] = tweet['favorite_count']
+        stats[:rt] = tweet['retweet_count']
+        stats[:name] = tweet['user']['screen_name']
+        stats[:txt] = tweet['full_text'] || tweet['text']
+      else
+        raise "unable to parse tweet #{tweet.inspect}"
+      end
+      stats
     end
 
-    @uncoil = Uncoil.new
+    def format_tweet tweet
+      stats = extract_stats tweet
+
+       "fol #{stats[:fol]} fav #{stats[:fav]} rt #{stats[:rt]} | @#{stats[:name]}: #{stats[:txt]}"
+    end
 
     def save_and_print search_term
       puts "\n" * 5, 'saving...'
@@ -52,7 +80,11 @@ namespace :twitter do
       File.open(@linkfile, 'w'){|f| f.write(@unique_urls.join("\n")) }
       File.open(@statefile, 'w'){|f| f.write(@search_terms.to_json) }
       File.open(@tweetfile, 'w'){|f| f.write(@tweets.to_json) }
-      File.open(@plaintweetfile, 'w') {|f| f.write(@tweets.sort{|a,b| a[:favorite_count] + a[:retweet_count] <=> b[:favorite_count] + b[:retweet_count] }.map{|tweet| format_tweet tweet}.join("\n")) }
+      File.open(@plaintweetfile, 'w') {|f| f.write(@tweets.sort do |a,b|
+        stats_a = extract_stats a
+        stats_b = extract_stats b
+        (stats_a[:fav] + stats_a[:rt]) <=> (stats_b[:fav] + stats_b[:rt])
+      end.map{|tweet| format_tweet tweet}.join("\n")) }
 
       puts "new tweets: #{@n}, new urls: #{@unique_urls.size - @unique_urls_old.size}, max = #{@search_terms[search_term][0]}, min = #{@search_terms[search_term][1]}", "\n" * 5
     end
