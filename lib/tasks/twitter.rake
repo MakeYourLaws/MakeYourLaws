@@ -72,12 +72,15 @@ namespace :twitter do
 
     def save_and_print search_term
       puts "\n" * 5, 'saving...'
-      @unique_urls += @uncoil.expand(@urls).map{|u| u.long_url.sub(/\?utm_.+$/, '').sub(/\&utm_.+$/, '')}
-      @urls = []
-      @unique_urls.uniq!
-      @unique_urls.sort!{|a,b| a[/:\/\/[^\/]+/].split('.').reverse <=> b[/:\/\/[^\/]+/].split('.').reverse}
+      if !@urls.blank?
+        @unique_urls += [@uncoil.expand(@urls)].flatten.map{|u| u.long_url.sub(/\?utm_.+$/, '').sub(/\&utm_.+$/, '')}
+        @urls = []
+        @unique_urls.uniq!
+        @unique_urls.sort!{|a,b| a[/:\/\/[^\/]+/].split('.').reverse <=> b[/:\/\/[^\/]+/].split('.').reverse}
 
-      File.open(@linkfile, 'w'){|f| f.write(@unique_urls.join("\n")) }
+        File.open(@linkfile, 'w'){|f| f.write(@unique_urls.join("\n")) }
+      end
+
       File.open(@statefile, 'w'){|f| f.write(@search_terms.to_json) }
       File.open(@tweetfile, 'w'){|f| f.write(@tweets.to_json) }
       File.open(@plaintweetfile, 'w') {|f| f.write(@tweets.sort do |a,b|
