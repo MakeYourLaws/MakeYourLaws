@@ -10,7 +10,7 @@ class Tweet < ActiveRecord::Base
     t = self.find_or_initialize_by(twitter_id: tweet.id)
     t.update(text: (tweet.full_text || tweet.txt), user: tweet.user.screen_name,
       favorited: tweet.favorite_count, retweeted: tweet.retweet_count,
-      raw: tweet.to_json)
+      raw: tweet.to_h.to_json)
     t
   end
 
