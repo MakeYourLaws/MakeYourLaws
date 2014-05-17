@@ -28,8 +28,8 @@ class Tweet < ActiveRecord::Base
     search.update_attribute :status, 'processing'
 
     begin
-      [{:result_type => 'recent', :max_id => ->{(search.results.maximum(:twitter_id) || 0)  - 1}},
-        {:result_type => 'recent', :since_id => ->{search.results.minimum(:twitter_id) || 99999999999999999999}}].each do |param|
+      [{:result_type => 'recent', :max_id => (search.results.minimum(:twitter_id) || 99999999999999999999)  - 1},
+        {:result_type => 'recent', :since_id => (search.results.maximum(:twitter_id) || 0)}].each do |param|
         i = 1
         while i > 0 do
           i = 0
