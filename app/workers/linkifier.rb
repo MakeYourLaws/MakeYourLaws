@@ -17,7 +17,7 @@ class Linkifier
   # end
 
   def self.perform # args
-    TwitterLink.unlinked.find_each{|t| t.linkify! if t.status == 'created'}
+    Tweet.unlinked.find_each{|t| t.linkify! if t.status == 'created'}
   end
 
 end

@@ -8,24 +8,24 @@ class TweetLink < ActiveRecord::Base
     if long
       uncoiled = Uncoil.expand(long).long_url
       if uncoiled != long
-        bestlink = Link.find_or_create_by(url: uncoiled)
-        longlink = Link.find_or_create_by(url: long)
+        bestlink = Link.add_by_url(uncoiled)
+        longlink = Link.add_by_url(long)
         longlink.update_attribute :duplicate_of_id, bestlink.id
       else
-        bestlink = Link.find_or_create_by(url: long)
+        bestlink = Link.add_by_url(long)
       end
     end
     bestlink = shortlink if !bestlink
 
     if bestlink.uncrufted != bestlink.url
-      uncrufted = Link.find_or_create_by(url: bestlink.uncrufted)
+      uncrufted = Link.add_by_url(bestlink.uncrufted)
       bestlink.update_attribute :duplicate_of_id, uncrufted.id
       bestlink = uncrufted
     end
 
     bestlink.update_attribute :duplicate_of_id, bestlink.id
 
-    shortlink = Link.find_or_create_by(url: short)
+    shortlink = Link.add_by_url(short)
     # needs to be updated post creation to get its own link
     shortlink.update_attribute(:duplicate_of_id, bestlink.id)
 

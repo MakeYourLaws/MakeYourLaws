@@ -6,6 +6,26 @@ class Link < ActiveRecord::Base
 
   has_many :duplicates, class_name: Link, as: :duplicate_of
 
+  before_save :clean_url
+
+  def self.add_by_url url
+    self.find_or_create_by(url: Link.clean_url(url))
+  end
+
+  def self.clean_url url
+    url = url.sub(/^HTTP:\/\/http/i, 'http').sub(/:\/\/[\/]+/, '://')
+    if url.size > 255
+      uri = Addressable::URI.parse(url)
+      uri.query_values = []
+      url = uri.to_s.sub(/\?$/,'')
+    end
+    url
+  end
+
+  def clean_url
+    self.url = Link.clean_url(url)
+  end
+
   def uncrufted
     uri = Addressable::URI.parse(self.url)
 
