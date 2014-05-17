@@ -26,15 +26,16 @@ class Tweet < ActiveRecord::Base
 
   def self.search search
     search.update_attribute :status, 'processing'
-
+    @search = search
     begin
-      [{:result_type => 'recent', :max_id => (search.results.minimum(:twitter_id) || 99999999999999999999)  - 1},
-        {:result_type => 'recent', :since_id => (search.results.maximum(:twitter_id) || 0)}].each do |param|
+      [->{{:result_type => 'recent', :max_id => (@search.results.minimum(:twitter_id) || 99999999999999999999)  - 1}},
+        ->{{:result_type => 'recent', :since_id => (@search.results.maximum(:twitter_id) || 0)}}].each do |param|
         i = 1
         while i > 0 do
           i = 0
-          logger.info "Scraping twitter: #{param}"
-          TWITTER.search(search.term, param).each do |tweet|
+          this_param = param.call
+          logger.info "Scraping twitter for #{search.term}: #{this_param}"
+          TWITTER.search(search.term, this_param).each do |tweet|
             i += 1
             t = Tweet.save_from_twitter(tweet)
             begin
