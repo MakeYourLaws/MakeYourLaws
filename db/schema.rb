@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206205054) do
+ActiveRecord::Schema.define(version: 20140516160548) do
+
+  create_table "addresses", force: true do |t|
+    t.string  "country",                     default: "United States", null: false
+    t.string  "street_address_1", limit: 34
+    t.string  "city",             limit: 30,                           null: false
+    t.string  "state",            limit: 2,                            null: false
+    t.integer "zip"
+    t.float   "lat"
+    t.float   "lng"
+  end
+
+  add_index "addresses", ["country", "state", "city"], name: "index_addresses_on_country_and_state_and_city", using: :btree
+  add_index "addresses", ["lat", "lng"], name: "index_addresses_on_lat_and_lng", using: :btree
 
   create_table "cart_items", force: true do |t|
     t.integer "cart_id",      null: false
@@ -65,6 +78,26 @@ ActiveRecord::Schema.define(version: 20140206205054) do
     t.datetime "updated_at"
   end
 
+  create_table "death_master_files", force: true do |t|
+    t.string   "social_security_number"
+    t.string   "last_name"
+    t.string   "name_suffix"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "verify_proof_code"
+    t.date     "date_of_death"
+    t.date     "date_of_birth"
+    t.string   "state_of_residence"
+    t.string   "last_known_zip_residence"
+    t.string   "last_known_zip_payment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "as_of"
+  end
+
+  add_index "death_master_files", ["as_of"], name: "idx_as_of", using: :btree
+  add_index "death_master_files", ["social_security_number"], name: "idx_ssn", unique: true, using: :btree
+
   create_table "fec_candidates", force: true do |t|
     t.string   "fec_id",                       limit: 9,              null: false
     t.string   "name",                         limit: 38
@@ -82,8 +115,8 @@ ActiveRecord::Schema.define(version: 20140206205054) do
     t.string   "district",                     limit: 2
     t.integer  "last_update_year"
     t.integer  "lock_version",                            default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
   end
 
   add_index "fec_candidates", ["district"], name: "index_fec_candidates_on_district", using: :btree
@@ -116,8 +149,8 @@ ActiveRecord::Schema.define(version: 20140206205054) do
     t.string   "candidate_id",                limit: 9
     t.integer  "last_update_year"
     t.integer  "lock_version",                           default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "fec_committees", ["candidate_id"], name: "index_fec_committees_on_candidate_id", using: :btree
@@ -220,6 +253,16 @@ ActiveRecord::Schema.define(version: 20140206205054) do
   add_index "initiatives", ["status"], name: "index_initiatives_on_status", using: :btree
   add_index "initiatives", ["title"], name: "index_initiatives_on_title", using: :btree
 
+  create_table "links", force: true do |t|
+    t.string   "url",             null: false
+    t.integer  "duplicate_of_id"
+    t.integer  "lock_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "links", ["url", "duplicate_of_id"], name: "index_links_on_url_and_duplicate_of_id", using: :btree
+
   create_table "ny_voters", force: true do |t|
     t.string   "last_name"
     t.string   "first_name"
@@ -288,6 +331,31 @@ ActiveRecord::Schema.define(version: 20140206205054) do
   add_index "ny_voters", ["town_city"], name: "index_ny_voters_on_town_city", using: :btree
   add_index "ny_voters", ["voter_id"], name: "index_ny_voters_on_voter_id", unique: true, using: :btree
   add_index "ny_voters", ["ward"], name: "index_ny_voters_on_ward", using: :btree
+
+  create_table "ofac_sdns", force: true do |t|
+    t.text     "name"
+    t.string   "sdn_type"
+    t.string   "program"
+    t.string   "title"
+    t.string   "vessel_call_sign"
+    t.string   "vessel_type"
+    t.string   "vessel_tonnage"
+    t.string   "gross_registered_tonnage"
+    t.string   "vessel_flag"
+    t.string   "vessel_owner"
+    t.text     "remarks"
+    t.text     "address"
+    t.string   "city"
+    t.string   "country"
+    t.string   "address_remarks"
+    t.string   "alternate_identity_type"
+    t.text     "alternate_identity_name"
+    t.string   "alternate_identity_remarks"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ofac_sdns", ["sdn_type"], name: "index_ofac_sdns_on_sdn_type", using: :btree
 
   create_table "paypal_notifications", force: true do |t|
     t.integer  "transaction_id"
@@ -378,6 +446,29 @@ ActiveRecord::Schema.define(version: 20140206205054) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
+  create_table "search_results", force: true do |t|
+    t.integer  "search_id"
+    t.integer  "result_id"
+    t.string   "result_type"
+    t.datetime "created_at"
+  end
+
+  add_index "search_results", ["result_id", "result_type"], name: "index_search_results_on_result_id_and_result_type", using: :btree
+  add_index "search_results", ["search_id"], name: "index_search_results_on_search_id", using: :btree
+
+  create_table "searches", force: true do |t|
+    t.string   "term",                                 null: false
+    t.string   "source",                               null: false
+    t.string   "status",           default: "created", null: false
+    t.integer  "update_frequency"
+    t.integer  "lock_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "searches", ["source", "term"], name: "index_searches_on_source_and_term", unique: true, using: :btree
+  add_index "searches", ["status"], name: "index_searches_on_status", using: :btree
+
   create_table "sessions", force: true do |t|
     t.string   "session_id",               null: false
     t.text     "data"
@@ -411,6 +502,280 @@ ActiveRecord::Schema.define(version: 20140206205054) do
   add_index "ssn_death_records", ["first_name"], name: "index_ssn_death_records_on_first_name", using: :btree
   add_index "ssn_death_records", ["last_name", "first_name"], name: "index_ssn_death_records_on_last_name_and_first_name", using: :btree
   add_index "ssn_death_records", ["ssn", "change_type"], name: "index_ssn_death_records_on_ssn_and_change_type", unique: true, using: :btree
+
+  create_table "ssn_high_group_codes", force: true do |t|
+    t.date     "as_of"
+    t.string   "area"
+    t.string   "group"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ssn_high_group_codes", ["area", "as_of"], name: "idx_area_as_of", using: :btree
+  add_index "ssn_high_group_codes", ["area"], name: "idx_area", using: :btree
+
+  create_table "states", force: true do |t|
+    t.string "abbreviation", limit: 2
+    t.string "name",                                             null: false
+    t.string "country",                default: "United States", null: false
+  end
+
+  add_index "states", ["country", "abbreviation"], name: "index_states_on_country_and_abbreviation", unique: true, using: :btree
+  add_index "states", ["country", "name"], name: "index_states_on_country_and_name", unique: true, using: :btree
+
+  create_table "stripe_accounts", force: true do |t|
+    t.string  "stripe_id",            null: false
+    t.boolean "charge_enabled",       null: false
+    t.string  "currencies_enabled",   null: false
+    t.boolean "details_submitted",    null: false
+    t.boolean "transfer_enabled",     null: false
+    t.string  "email",                null: false
+    t.string  "statement_descriptor"
+  end
+
+  create_table "stripe_bank_accounts", force: true do |t|
+    t.string  "stripe_id",             null: false
+    t.string  "bank_name"
+    t.string  "country",     limit: 2
+    t.string  "last4"
+    t.string  "fingerprint"
+    t.boolean "validated"
+  end
+
+  create_table "stripe_cards", force: true do |t|
+    t.integer  "exp_month",           limit: 1,  null: false
+    t.integer  "exp_year",            limit: 2,  null: false
+    t.string   "fingerprint",                    null: false
+    t.string   "last4",               limit: 4,  null: false
+    t.string   "type",                limit: 20, null: false
+    t.string   "address_city"
+    t.string   "address_country"
+    t.string   "address_line1"
+    t.string   "adress_line2"
+    t.string   "address_state"
+    t.string   "address_zip"
+    t.boolean  "address_line1_check"
+    t.boolean  "address_zip_check"
+    t.boolean  "cvc_check"
+    t.string   "country",             limit: 2
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stripe_charges", force: true do |t|
+    t.string   "stripe_id"
+    t.boolean  "test"
+    t.integer  "amount"
+    t.boolean  "captured"
+    t.integer  "stripe_card_id"
+    t.datetime "stripe_created_at"
+    t.string   "currency",           default: "usd"
+    t.integer  "fee_amount"
+    t.integer  "stripe_fee_id"
+    t.boolean  "paid"
+    t.boolean  "refunded"
+    t.integer  "amount_refunded"
+    t.integer  "stripe_customer_id"
+    t.string   "description"
+    t.string   "failure_code"
+    t.string   "failure_message"
+    t.integer  "stripe_invoice_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stripe_coupons", force: true do |t|
+    t.string   "stripe_id",                                    null: false
+    t.boolean  "test",                                         null: false
+    t.string   "duration",                                     null: false
+    t.integer  "amount_off"
+    t.string   "currency",           limit: 3, default: "usd"
+    t.integer  "duration_in_months"
+    t.integer  "max_redemptions"
+    t.integer  "percent_off",        limit: 1
+    t.datetime "redeem_by"
+    t.integer  "times_redeemed",               default: 0,     null: false
+  end
+
+  create_table "stripe_customers", force: true do |t|
+    t.string   "stripe_id",                              null: false
+    t.boolean  "test",                                   null: false
+    t.datetime "stripe_created_at",                      null: false
+    t.integer  "account_balance",        default: 0,     null: false
+    t.integer  "stripe_card_id",                         null: false
+    t.boolean  "delinquent",             default: false, null: false
+    t.string   "description"
+    t.integer  "stripe_discount_id"
+    t.string   "email"
+    t.integer  "stripe_subscription_id"
+    t.boolean  "deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stripe_discounts", force: true do |t|
+    t.integer  "stripe_coupon_id",   null: false
+    t.integer  "stripe_customer_id", null: false
+    t.datetime "start",              null: false
+    t.datetime "end"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stripe_disputes", force: true do |t|
+    t.boolean  "test",                                         null: false
+    t.integer  "amount",                                       null: false
+    t.integer  "stripe_charge_id",                             null: false
+    t.datetime "stripe_created_at",                            null: false
+    t.string   "currency",          limit: 3,  default: "usd", null: false
+    t.string   "reason",            limit: 25,                 null: false
+    t.string   "status",            limit: 15,                 null: false
+    t.text     "evidence"
+    t.datetime "evidence_due_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stripe_events", force: true do |t|
+    t.string   "stripe_id",                       null: false
+    t.boolean  "test",                            null: false
+    t.datetime "stripe_created_at",               null: false
+    t.integer  "pending_webhooks",    default: 0, null: false
+    t.string   "type"
+    t.string   "request"
+    t.text     "object"
+    t.text     "previous_attributes"
+  end
+
+  create_table "stripe_fees", force: true do |t|
+    t.integer  "amount",                                    null: false
+    t.string   "currency",        limit: 3, default: "usd", null: false
+    t.string   "type",                                      null: false
+    t.integer  "amount_refunded"
+    t.string   "application"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stripe_invoice_lines", force: true do |t|
+    t.integer  "stripe_invoice_id_id"
+    t.integer  "stripe_customer_id_id",                            null: false
+    t.string   "stripe_id"
+    t.boolean  "test",                                             null: false
+    t.integer  "amount",                                           null: false
+    t.string   "currency",                         default: "usd", null: false
+    t.string   "type",                  limit: 15
+    t.string   "description"
+    t.integer  "stripe_plan_id"
+    t.integer  "quantity"
+    t.datetime "period_start"
+    t.datetime "period_end"
+    t.boolean  "proration"
+  end
+
+  create_table "stripe_invoices", force: true do |t|
+    t.string   "stripe_id",                                      null: false
+    t.boolean  "test",                                           null: false
+    t.integer  "amount_due",                                     null: false
+    t.integer  "attempt_count",                                  null: false
+    t.boolean  "attempted",                      default: false, null: false
+    t.boolean  "closed",                         default: false, null: false
+    t.string   "currency",             limit: 3, default: "usd", null: false
+    t.integer  "stripe_customer_id"
+    t.datetime "date"
+    t.boolean  "paid",                           default: false, null: false
+    t.datetime "period_end",                                     null: false
+    t.datetime "period_start",                                   null: false
+    t.integer  "starting_balance",                               null: false
+    t.integer  "subtotal",                                       null: false
+    t.integer  "total",                                          null: false
+    t.integer  "stripe_charge_id"
+    t.integer  "stripe_discount_id"
+    t.integer  "ending_balance"
+    t.datetime "next_payment_attempt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stripe_plans", force: true do |t|
+    t.string   "stripe_id",                                   null: false
+    t.boolean  "test",                                        null: false
+    t.integer  "amount",                                      null: false
+    t.string   "currency",          limit: 3, default: "usd", null: false
+    t.string   "interval",          limit: 5,                 null: false
+    t.integer  "interval_count",              default: 1,     null: false
+    t.string   "name",                                        null: false
+    t.integer  "trial_period_days"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stripe_recipients", force: true do |t|
+    t.string   "stripe_id",                         null: false
+    t.boolean  "test",                              null: false
+    t.datetime "stripe_created_at"
+    t.string   "type",                   limit: 15
+    t.integer  "stripe_bank_account_id"
+    t.string   "description"
+    t.string   "email"
+    t.string   "name"
+  end
+
+  create_table "stripe_subscriptions", force: true do |t|
+    t.boolean  "cancel_at_period_end",            default: false, null: false
+    t.integer  "stripe_customer_id",                              null: false
+    t.integer  "stripe_plan_id",                                  null: false
+    t.integer  "quantity",                        default: 1,     null: false
+    t.datetime "start",                                           null: false
+    t.string   "status",               limit: 10,                 null: false
+    t.datetime "canceled_at"
+    t.datetime "current_period_end",                              null: false
+    t.datetime "current_period_start",                            null: false
+    t.datetime "ended_at"
+    t.datetime "trial_end"
+    t.datetime "trial_start"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stripe_transfers", force: true do |t|
+    t.string   "stripe_id",                                       null: false
+    t.boolean  "test",                                            null: false
+    t.integer  "amount",                                          null: false
+    t.string   "currency",             limit: 3,  default: "usd", null: false
+    t.datetime "date",                                            null: false
+    t.integer  "fee",                                             null: false
+    t.string   "status",               limit: 10,                 null: false
+    t.string   "description"
+    t.integer  "stripe_recipient_id"
+    t.string   "statement_descriptor"
+  end
+
+  create_table "tweet_links", force: true do |t|
+    t.integer "tweet_id", null: false
+    t.integer "link_id",  null: false
+  end
+
+  add_index "tweet_links", ["link_id", "tweet_id"], name: "index_tweet_links_on_link_id_and_tweet_id", using: :btree
+  add_index "tweet_links", ["tweet_id", "link_id"], name: "index_tweet_links_on_tweet_id_and_link_id", using: :btree
+
+  create_table "tweets", force: true do |t|
+    t.integer  "twitter_id",   limit: 8,             null: false
+    t.string   "text",                               null: false
+    t.string   "user",                               null: false
+    t.integer  "favorited",              default: 0
+    t.integer  "retweeted",              default: 0
+    t.text     "raw",                                null: false
+    t.integer  "lock_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tweets", ["favorited", "retweeted"], name: "index_tweets_on_favorited_and_retweeted", using: :btree
+  add_index "tweets", ["twitter_id"], name: "index_tweets_on_twitter_id", unique: true, using: :btree
+  add_index "tweets", ["user"], name: "index_tweets_on_user", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
