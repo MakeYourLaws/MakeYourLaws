@@ -262,6 +262,7 @@ ActiveRecord::Schema.define(version: 20140516160548) do
   end
 
   add_index "links", ["url", "duplicate_of_id"], name: "index_links_on_url_and_duplicate_of_id", using: :btree
+  add_index "links", ["url"], name: "index_links_on_url", unique: true, using: :btree
 
   create_table "ny_voters", force: true do |t|
     t.string   "last_name"
@@ -453,8 +454,7 @@ ActiveRecord::Schema.define(version: 20140516160548) do
     t.datetime "created_at"
   end
 
-  add_index "search_results", ["result_id", "result_type"], name: "index_search_results_on_result_id_and_result_type", using: :btree
-  add_index "search_results", ["search_id"], name: "index_search_results_on_search_id", using: :btree
+  add_index "search_results", ["search_id", "result_type", "result_id"], name: "index_search_results_on_search_id_and_result_type_and_result_id", unique: true, using: :btree
 
   create_table "searches", force: true do |t|
     t.string   "term",                                 null: false
@@ -759,21 +759,23 @@ ActiveRecord::Schema.define(version: 20140516160548) do
   end
 
   add_index "tweet_links", ["link_id", "tweet_id"], name: "index_tweet_links_on_link_id_and_tweet_id", using: :btree
-  add_index "tweet_links", ["tweet_id", "link_id"], name: "index_tweet_links_on_tweet_id_and_link_id", using: :btree
+  add_index "tweet_links", ["tweet_id", "link_id"], name: "index_tweet_links_on_tweet_id_and_link_id", unique: true, using: :btree
 
   create_table "tweets", force: true do |t|
-    t.integer  "twitter_id",   limit: 8,             null: false
-    t.string   "text",                               null: false
-    t.string   "user",                               null: false
+    t.integer  "twitter_id",   limit: 8,                     null: false
+    t.string   "text",                                       null: false
+    t.string   "user",                                       null: false
     t.integer  "favorited",              default: 0
     t.integer  "retweeted",              default: 0
-    t.text     "raw",                                null: false
+    t.text     "raw",                                        null: false
     t.integer  "lock_version"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status",                 default: "created"
   end
 
   add_index "tweets", ["favorited", "retweeted"], name: "index_tweets_on_favorited_and_retweeted", using: :btree
+  add_index "tweets", ["status"], name: "index_tweets_on_status", using: :btree
   add_index "tweets", ["twitter_id"], name: "index_tweets_on_twitter_id", unique: true, using: :btree
   add_index "tweets", ["user"], name: "index_tweets_on_user", using: :btree
 
