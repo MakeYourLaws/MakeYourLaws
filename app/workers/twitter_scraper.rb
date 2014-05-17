@@ -17,7 +17,8 @@ class TwitterScraper
   # end
 
   def self.perform # args
-    Tweet.search Search.pending.first
+    s = Search.pending.first
+    Tweet.search s if s
   end
 
 end
