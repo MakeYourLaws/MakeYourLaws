@@ -8,5 +8,5 @@ class Search < ActiveRecord::Base
   scope :processing, -> {where(status: 'processing')}
   scope :not_processing, -> {where.not(status: 'processing')}
   scope :done, -> {where(status: 'done')}
-  scope :pending, -> { not_processing.where("updated_at < updated_at + update_frequency")}
+  scope :pending, -> { not_processing.where(["updated_at + INTERVAL update_frequency SECOND < ?", Time.now])}
 end
