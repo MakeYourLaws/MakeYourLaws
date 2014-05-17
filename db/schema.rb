@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516160548) do
+ActiveRecord::Schema.define(version: 20140517213307) do
 
   create_table "addresses", force: true do |t|
     t.string  "country",                     default: "United States", null: false
@@ -254,11 +254,12 @@ ActiveRecord::Schema.define(version: 20140516160548) do
   add_index "initiatives", ["title"], name: "index_initiatives_on_title", using: :btree
 
   create_table "links", force: true do |t|
-    t.string   "url",             null: false
+    t.string   "url",                             null: false
     t.integer  "duplicate_of_id"
     t.integer  "lock_version"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "checked",         default: false, null: false
   end
 
   add_index "links", ["url", "duplicate_of_id"], name: "index_links_on_url_and_duplicate_of_id", using: :btree
