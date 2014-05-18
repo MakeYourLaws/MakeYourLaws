@@ -40,7 +40,7 @@ case "$1" in
     start-stop-daemon --start --pidfile ${pidfile} \
       --chuid ${run_as_user} --chdir ${app_dir} \
       --startas ${ruby} -- default do bundle exec \
-      resque-pool -d -a ${app_name} -p ${pidfile} -E ${environment} -o ${stdout_log} -e ${stderr_log}
+      resque-pool -d -a ${app_name} -p ${pidfile} -E ${environment} -o ${stdout_log} -e ${stderr_log} TERM_CHILD=1
     ;;
   reload)
     echo 'sending HUP to resque-pool'
