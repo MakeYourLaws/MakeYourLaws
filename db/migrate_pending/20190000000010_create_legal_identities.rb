@@ -52,7 +52,7 @@ class CreateLegalIdentities < ActiveRecord::Migration
 
       t.date :from
       t.date :to
-      t.boolean :verified
+      t.datetime :confirmed
 
       t.integer :lock_version
       t.timestamps
@@ -64,7 +64,7 @@ class CreateLegalIdentities < ActiveRecord::Migration
       t.string :usage # e.g. residential, mailing, billing, voting, fec
       t.date :from
       t.date :to
-      t.boolean :verified
+      t.datetime :confirmed
 
       t.integer :lock_version
       t.timestamps
@@ -79,7 +79,7 @@ class CreateLegalIdentities < ActiveRecord::Migration
       t.date :from
       t.date :to
       t.string :authority # people can have different names according to different government entities
-      t.boolean :verified
+      t.datetime :confirmed
 
       t.integer :lock_version
       t.timestamps
