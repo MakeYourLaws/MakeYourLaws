@@ -3,6 +3,12 @@
 DailyActiveUsers:
   cron: "0 1 * * *"
 
+TwitterScraper:
+  cron: "* * * * *"
+
+Linkifier:
+  cron: "* * * * *"
+
 # CancelAbandonedOrders:
 #   cron: "*/5 * * * *"
 #

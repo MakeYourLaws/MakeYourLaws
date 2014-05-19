@@ -16,6 +16,12 @@ module Resque
       reconnect
       orig_startup
     end
+
+    alias_method :orig_unregister_worker, :unregister_worker
+    def unregister_worker exception = nil
+      log "#{exception.render}" if exception
+      orig_unregister_worker(exception)
+    end
   end
 end
 
@@ -46,12 +52,8 @@ task "resque:setup" => :environment do
 
   # Resque::Scheduler.dynamic = true
   Resque::Scheduler.configure do |c|
-    logfile = File.open(File.join(Rails.root, 'log', 'resque_scheduler.log'), 'a')
-    logfile.sync = true
+    set_log 'resque_scheduler.log'
     c.mute = false
-    c.verbose = true
-    c.logfile = logfile
-    c.logformat = 'text'
   end
   Resque.schedule = YAML.load_file(File.join(Rails.root, 'config', 'resque_schedule.yml'))
 end

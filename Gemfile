@@ -113,6 +113,7 @@ gem 'jwt' # for Google Wallet
 gem 'amazon_flex_pay'
 
 gem 'bitpay-client', :require => 'bitpay'
+gem 'coinbase', ">= 1.3.2"
 
 gem "devise", ">= 3.1.1"
 gem "devise-encryptable", ">= 0.1.1c"
@@ -123,6 +124,7 @@ gem "omniauth-google-oauth2", '>= 0.1.9'
 gem "omniauth-openid", '>= 1.0.1'
 gem "omniauth-twitter", '>= 0.0.10'
 gem "omniauth-paypal", '>= 1.2.1'
+gem "omniauth-coinbase"
 
 gem 'devise-async'
 
@@ -156,3 +158,5 @@ gem "strip_attributes", ">= 1.1.0"
 
 gem 'friendly_id', ">= 5.0.0"
 
+gem 'twitter'
+gem 'uncoil'

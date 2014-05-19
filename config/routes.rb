@@ -40,13 +40,17 @@ MakeyourlawsOrg::Application.routes.draw do
     get 'help/legal', action: 'help_legal'
     get 'tos'
     get 'privacy'
+    namespace :press do
+      get 'BNA-2014-05-09'
+      get 'BNA-2013-11-15'
+    end
     namespace :fec do
       get 'bitcoin'
       get 'bitcoin/caf', action: 'bitcoin_caf'
       get 'bitcoin/pacs', action: 'bitcoin_pacs'
       get 'bitcoin/aor', to: redirect('https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/', status: 302)
       get 'earmarks'
-      get 'earmarks/aor', to: redirect('http://docs.google.com/document/d/12ZrP9YKbbdBMZG4W0rdU06DrLX-ojDLfXuOmEivek68/', status: 302)
+      get 'earmarks/aor', to: redirect('https://docs.google.com/document/d/1aebcD6vyN-B-Ikb923N3Mz3lOvgHYL-06wKgwvozI1Y/', status: 302)
       get 'tplf'
     end
   end
