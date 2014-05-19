@@ -3,7 +3,7 @@ class CreateLegalIdentities < ActiveRecord::Migration
     create_table :legal_identities do |t|
       t.boolean :human, :null => false
 
-      t.string :legal_name # cached version of their main current legal name; set through usages
+      t.string :legal_name # cached version of their (full) main legal name; set through usages
 
       # Both humans and corporations
       t.date :birthdate # i.e. 'incorporation date' for corps
@@ -20,8 +20,8 @@ class CreateLegalIdentities < ActiveRecord::Migration
       t.integer :lock_version
       t.timestamps
 
-      t.index :irs_id, :unique => true # allows nil in most DBs
-      t.index :full_name  # for autocomplete
+      t.index :irs_id, :unique => true # allows nil in most DBs, incl mysql
+      t.index :legal_name  # for autocomplete
       t.index :occupation
     end
 
@@ -52,6 +52,7 @@ class CreateLegalIdentities < ActiveRecord::Migration
 
       t.date :from
       t.date :to
+      t.boolean :verified
 
       t.integer :lock_version
       t.timestamps
@@ -63,6 +64,7 @@ class CreateLegalIdentities < ActiveRecord::Migration
       t.string :usage # e.g. residential, mailing, billing, voting, fec
       t.date :from
       t.date :to
+      t.boolean :verified
 
       t.integer :lock_version
       t.timestamps
@@ -71,12 +73,13 @@ class CreateLegalIdentities < ActiveRecord::Migration
       t.index [:address. :legal_identity] # look up who is at the same address
     end
 
-    create_table :name_usages do |t|
+    create_table :legal_name_usages do |t|
       t.references :legal_name, :null => false
       t.references :legal_identity, :null => false
       t.date :from
       t.date :to
       t.string :authority # people can have different names according to different government entities
+      t.boolean :verified
 
       t.integer :lock_version
       t.timestamps
