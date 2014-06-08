@@ -7,6 +7,7 @@ class Linkifier
   # extend Resque::Plugins::Retry
   # @retry_delay = 60
   extend Resque::Plugins::ExponentialBackoff
+  @retry_delay_multiplicand_max = 1.1 # https://github.com/lantins/resque-retry/pull/102
 
   @retry_limit = 3
   # @sleep_after_requeue = 5
