@@ -31,6 +31,8 @@ gem 'resque-scheduler', require: 'resque_scheduler/server'
 gem 'resque-retry', require: ['resque-retry', 'resque-retry/server']
 gem 'resque-job-stats', require: ['resque-job-stats/server', 'resque/plugins/job_stats']
 gem 'resque-pool'
+gem 'resque-lock-timeout'
+gem 'resque-async-method-enhanced'
 
 gem 'newrelic_rpm'
 gem 'airbrake'
