@@ -8,14 +8,21 @@
       <td><%= f.label :name, :class => 'required' %></td>
       <td><%= f.text_field :name, :'x-autocompletetype' => 'name-full' %></td>
     </tr>
+	<tr>
+	  <td class="small" colspan=2>This is just what you want us to call you.</td>
+	</tr>
+<% if false
+# logins / usernames now only for profiles %>
     <tr>
       <td><%= f.label :login, :class => 'required' %></td>
       <td><%= f.text_field :login %></td>
     </tr>
+<% end %>
     <tr>
       <td><%= f.label :email, :class => 'required' %></td>
       <td><%= f.email_field :email, :'x-autocompletetype' => 'email' %></td>
     </tr>
+<% unless passwords_optional %>
     <tr>
       <td><%= f.label :password, :class => ('required' unless passwords_optional) %></td>
       <td><%= f.password_field :password %></td>
@@ -24,6 +31,7 @@
       <td><%= f.label :password_confirmation, "… again:",  :class => ('required' unless passwords_optional) %></td>
       <td><%= f.password_field :password_confirmation %></td>
     </tr>
+<% end %>
     <tr>
       <td/>
       <td><%= f.submit "Sign up", data: { disable_with: "Processing…"} %></td>
