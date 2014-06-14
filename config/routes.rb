@@ -50,7 +50,7 @@ MakeyourlawsOrg::Application.routes.draw do
       get 'bitcoin/pacs', action: 'bitcoin_pacs'
       get 'bitcoin/aor', to: redirect('https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/', status: 302)
       get 'earmarks'
-      get 'earmarks/aor', to: redirect('https://docs.google.com/document/d/1YKv5Csfkyg3LAzfP_pkJsgFn9Gns8gWaKyvNbHFsoDE/', status: 302)
+      get 'earmarks/aor', to: redirect('https://docs.google.com/document/d/1YeVdRxEqC8fWnJGl9DgkcNVY6HmkCPEzyRxB_0wttU0/', status: 302)
       get 'tplf'
     end
   end
