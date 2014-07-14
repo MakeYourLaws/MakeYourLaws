@@ -9,7 +9,7 @@ class Fec::Candidate < ActiveRecord::Base
 
   # source: ftp://ftp.fec.gov/FEC/cn12.zip - updated weekly
   #                                                                     length start end
-  validates :fec_id, unique: true, length: { is: 9 }, presence: true    #  9    0   8
+  validates :fec_id, uniqueness: true, length: { is: 9 }, presence: true #  9    0   8
   # The candidate ID for a specific candidate remains the same across election cycles as long as
   #  the candidate is running for the same office.
 

@@ -8,7 +8,7 @@ class Fec::Committee < ActiveRecord::Base
 
   # source: ftp://ftp.fec.gov/FEC/cm12.zip - updated weekly
   #                                                                      length start end
-  validates :fec_id, unique: true, length: { is: 9 }, presence: true    #  9    0   8
+  validates :fec_id, uniqueness: true, length: { is: 9 }, presence: true #  9    0   8
   validates :name, presence: true, length: { maximum: 90 }              # 90    9  98
   validates :treasurer_name, length: { maximum: 38 }                    # 38   99 136
   validates :street_1, :street_2, length: { maximum: 34 }               # 34  137 170 street 1

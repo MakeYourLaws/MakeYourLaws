@@ -8,7 +8,7 @@ module Keys
   # Note that keys are listed in .gitignore, so should not be committed.
   # Instead, they are manually scp'd to the Capistrano /shared/config/keys directory on the server.
   def self.get name, environment = nil
-    environment ||= (defined? Rails ? Rails.env : 'production')
+    environment ||= (defined?(Rails) ? Rails.env : 'production')
 
     file = File.join(@keys_dir, name + '.' + environment)
     file = File.join(@keys_dir, name) unless File.exist?(file)
