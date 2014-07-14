@@ -20,5 +20,4 @@ class DailyActiveUsers
   def self.perform # args
     AdminMailer.dau(Date.today - 1).deliver
   end
-
 end

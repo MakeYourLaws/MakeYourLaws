@@ -23,5 +23,4 @@ class TwitterScraper
     s = Search.pending.first
     Tweet.search s if s
   end
-
 end

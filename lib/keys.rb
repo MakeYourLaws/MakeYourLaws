@@ -1,26 +1,21 @@
-# Note: this is called from things where Rails is *not* yet loaded, which is why we can't use Rails.root
+# Note: this is called from things where Rails is *not* yet loaded,
+#  which is why we can't use Rails.root
 module Keys
   @keys_dir =  File.join File.dirname(__FILE__), '..', 'config', 'keys'
-  @keys_dir = File.join File.dirname(__FILE__), 'config', 'keys' unless Dir.exists?(@keys_dir)
+  @keys_dir = File.join File.dirname(__FILE__), 'config', 'keys' unless Dir.exist?(@keys_dir)
 
   # Get the key for a given environment (falling back to the general one)
   # Note that keys are listed in .gitignore, so should not be committed.
   # Instead, they are manually scp'd to the Capistrano /shared/config/keys directory on the server.
   def self.get name, environment = nil
-    environment ||= if defined? Rails
-      Rails.env
-    else
-      'production'
-    end
+    environment ||= (defined? Rails ? Rails.env : 'production')
 
     file = File.join(@keys_dir, name + '.' + environment)
     file = File.join(@keys_dir, name) unless File.exist?(file)
     fakefile = File.join(@keys_dir, name + '.fake')
     file = fakefile unless File.exist?(file)
 
-    unless File.exist?(fakefile)
-      IO.write(fakefile, SecureRandom.hex(64).to_s)
-    end
+    IO.write(fakefile, SecureRandom.hex(64).to_s) unless File.exist?(fakefile)
 
     if file == fakefile
       puts "Key #{name} not found for #{environment} environment.
@@ -36,6 +31,6 @@ module Keys
   def self.set name, key, environment = nil
     name = "#{name}.#{environment}" if environment
     file = File.join(@keys_dir, name)
-    File.open(file, 'w') {|f| f.write(key) }
+    File.open(file, 'w') { |f| f.write(key) }
   end
 end

@@ -2,12 +2,14 @@ AllCops:
   RunRailsCops: true
   Include:
     - '**/Rakefile'
+    - '**/*.rake'
     - '**/config.ru'
   Exclude:
     - 'db/**/*'
     - 'bin/**/*'
     - 'log/**/*'
     - 'temp/**/*'
+    - 'script/**/*'
     - 'vendor/**/*'
 
 Style/AlignHash:
@@ -38,3 +40,6 @@ Style/LineLength:
 
 Style/CaseIndentation:
   IndentOneStep: true
+
+Style/EachWithObject:
+  Enabled: false
