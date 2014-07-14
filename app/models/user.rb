@@ -21,24 +21,24 @@ class User < ActiveRecord::Base
   has_paper_trail
   strip_attributes
 
-  validates :email, unique: true, email: true, presence: true
+  validates :email, uniqueness: true, email: true, presence: true
   validates :name, presence: true # :login
-  validates :login, unique: true, allow_nil: true # login still unique pending move to profiles
+  validates :login, uniqueness: true, allow_nil: true # login still unique pending move to profiles
 
   # No more logins for users. Only for profiles.
-  validates :login, format: { with: /\A[a-zA-Z0-9_]+\z/i }, allow_nil: true,
-    message: 'can only have letters a-z, digits and underscores'
-  validates :login, format: { with: /\A[a-zA-Z0-9].*\z/i }, allow_nil: true,
-    message: 'must start with letter or digit'
-  validates :login, format: { with: /\A.*[a-zA-Z0-9]\z/i }, allow_nil: true,
-    message: 'must end with letter or digit'
+  validates :login, format: { with: /\A[a-zA-Z0-9_]+\z/i,
+    message: 'can only have letters a-z, digits and underscores' }, allow_nil: true
+  validates :login, format: { with: /\A[a-zA-Z0-9].*\z/i,
+    message: 'must start with letter or digit' }, allow_nil: true
+  validates :login, format: { with: /\A.*[a-zA-Z0-9]\z/i,
+    message: 'must end with letter or digit' }, allow_nil: true
 
-  validates :password, format: { with: /\A.*[[:alpha:]].*\z/ }, if: :password_required?,
-    message: 'must contain at least one letter'
+  validates :password, format: { with: /\A.*[[:alpha:]].*\z/,
+    message: 'must contain at least one letter' }, if: :password_required?
   # Note: :punct: is supposed to match all punctuation, but misses =`~$^+|<>> - see http://stackoverflow.com/questions/11130490/why-does-ruby-punct-miss-some-punctuation-characters
-  validates :password, format:  { with: /\A.*[[:digit:]\s[:punct:]=`~$^+|<>>].*\z/ },
-                       if:      :password_required?,
-                       message: 'must contain at least one number, space, or punctuation character'
+  validates :password, format:  { with: /\A.*[[:digit:]\s[:punct:]=`~$^+|<>>].*\z/,
+                       message: 'must contain a number, space, or punctuation character' },
+                       if:      :password_required?
   validates :password, length: { minimum: 6 }, if: :password_required?
 
   before_validation do
