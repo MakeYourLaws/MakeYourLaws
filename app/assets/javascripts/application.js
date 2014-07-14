@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require turbolinks
-//= require jquery.ui.all
+//= require jquery-ui
 //= require jquery.bettertabs.min
 //= require_tree .
 

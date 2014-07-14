@@ -22,7 +22,16 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'hashie', '>= 3.2.0'
+# gem 'hashie', '>= 3.2.0'
+# Inclusion causes error:
+#  Superclass mismatch: Object != Hashie::Mash (TypeError)
+#
+#   Rubinius.open_class_under at kernel/delta/rubinius.rb:334
+#  { } in Object(Module)#__script__ at
+#   ~/.rvm/gems/rbx-2.2.10/gems/active_paypal_adaptive_payment-0.3.16/lib
+#    /active_merchant/billing/gateways/paypal_adaptive_payments/ext.rb:7
+# Haven't diagnosed why. Works fine without.
+
 gem 'hashie_rails'  # see https://github.com/intridea/hashie/blob/master/UPGRADING.md
 
 gem 'redis-rails' # switching out for dalli/memcached
