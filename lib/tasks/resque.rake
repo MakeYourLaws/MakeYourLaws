@@ -25,7 +25,7 @@ module Resque
   end
 end
 
-def set_log log_name
+def reset_log log_name
   logfile = File.open(File.join(Rails.root, 'log', log_name), 'a')
   logfile.sync = true
   Resque.logger = ActiveSupport::Logger.new(logfile)
@@ -33,26 +33,26 @@ def set_log log_name
   Resque.logger.formatter = Resque::VeryVerboseFormatter.new
 end
 
-set_log 'resque_base.log'
+reset_log 'resque_base.log'
 Resque.logger.info 'base logger initiated'
 
-task "resque:setup" => :environment do
+task 'resque:setup' => :environment do
   Resque.logger.info 'setup initiated'
 
-  Resque.before_first_fork = Proc.new {|args|   # for the parent
+  Resque.before_first_fork = lambda {|args|   # for the parent
     queue_name = args.try(:queue)
-    set_log(queue_name ? "resque_#{queue_name}_parent.log" : 'resque_worker_parent.log')
+    reset_log(queue_name ? "resque_#{queue_name}_parent.log" : 'resque_worker_parent.log')
   }
 
-  Resque.after_fork = Proc.new {|args|    # for the child
+  Resque.after_fork = lambda {|args|    # for the child
     queue_name = args.try(:queue)
-    set_log(queue_name ? "resque_#{queue_name}.log" : 'resque_worker.log')
+    reset_log(queue_name ? "resque_#{queue_name}.log" : 'resque_worker.log')
     ActiveRecord::Base.establish_connection
   }
 
   # Resque::Scheduler.dynamic = true
   Resque::Scheduler.configure do |c|
-    set_log 'resque_scheduler.log'
+    reset_log 'resque_scheduler.log'
     c.mute = false
   end
   Resque.schedule = YAML.load_file(File.join(Rails.root, 'config', 'resque_schedule.yml'))
@@ -61,16 +61,17 @@ end
 # Example usage:
 #  Resque.enqueue_in(5.days, SendFollowUpEmail, :user_id => current_user.id)
 # or remove the job later:
-#  Resque.remove_delayed(SendFollowUpEmail, :user_id => current_user.id) # with exactly the same parameters
-#  Resque.remove_delayed_selection { |args| args[0]['user_id'] == current_user.id } # or partial matching
+#  # with exactly the same parameters
+#  Resque.remove_delayed(SendFollowUpEmail, :user_id => current_user.id)
+#  # or partial matching
+#  Resque.remove_delayed_selection { |args| args[0]['user_id'] == current_user.id }
 
-
-task "resque:pool:setup" do
+task 'resque:pool:setup' do
   # close any sockets or files in pool manager
   ActiveRecord::Base.connection.disconnect!
   # and re-open them in the resque worker parent
-  Resque::Pool.after_prefork do |job|
-    set_log 'resque_pool.log'
+  Resque::Pool.after_prefork do |_job|
+    reset_log 'resque_pool.log'
     ActiveRecord::Base.establish_connection
     Resque.redis.client.reconnect
   end

@@ -12,14 +12,16 @@ MakeyourlawsOrg::Application.configure do
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
-  config.action_view.cache_template_loading = false # enable caching in development but still update on page change
+
+  # enable caching in development but still update on page change
+  config.action_view.cache_template_loading = false
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
   config.after_initialize do
     Rails.application.routes.default_url_options[:host] = 'localhost:3000'
   end
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -38,4 +40,3 @@ MakeyourlawsOrg::Application.configure do
   # number of complex assets.
   config.assets.debug = false # turn off when not debugging it
 end
-

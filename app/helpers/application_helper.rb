@@ -1,10 +1,14 @@
 module ApplicationHelper
   def m string
-     Kramdown::Document.new(string).to_html.html_safe unless string.blank?
+    Kramdown::Document.new(string).to_html.html_safe unless string.blank?
   end
 
   def tor_s
-    (tor? ? (hidden_service? ? 'tor' : 'hiddenservice') : 'nontor')
+    if tor?
+      hidden_service? ? 'tor' : 'hiddenservice'
+    else
+      'nontor'
+    end
   end
 
   def t string

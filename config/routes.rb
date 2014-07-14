@@ -4,34 +4,47 @@ MakeyourlawsOrg::Application.routes.draw do
   resources :identities
 
   resources :carts do
-    resources :cart_items, :path => 'items'
+    resources :cart_items, path: 'items'
   end
   resources :cart_items # in case there isn't a cart
 
-  devise_for :users, :controllers => {
-    :omniauth_callbacks => "users/omniauth_callbacks",
-    :registrations => "users/registrations" }
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations:      'users/registrations' }
 
   devise_scope :user do
-    get "login" => "devise/sessions#new"
-    delete "logout" => "devise/sessions#destroy"
-    get "signup" => "users/registrations#new"
-    get "signup_from_id" => "users/registrations#new_from_id"
+    get 'login' => 'devise/sessions#new'
+    delete 'logout' => 'devise/sessions#destroy'
+    get 'signup' => 'users/registrations#new'
+    get 'signup_from_id' => 'users/registrations#new_from_id'
   end
 
-#  get "main" => "main#index"  # this is root
+  #  get "main" => "main#index"  # this is root
   scope module: 'main' do
     get 'introduction'
     get 'principles'
     get 'strategy'
     get 'faq'
-    get 'about/pac/bylaws', to: redirect('https://docs.google.com/document/d/1BbKNamiQdlemLS28iGnkwrwar9vQ9HucK_S1PrZ2mu4/', status: 302)
-    get 'about/pac/finances', to: redirect('https://docs.google.com/spreadsheet/ccc?key=0AjmetJxi-p0VdGlJSkl5NDkxdlE4bVlLLWtYWEZtcWc', status: 302)
-    get 'about/pac/fec_reports', to: redirect('http://images.nictusa.com/cgi-bin/fecimg/?C00529743', status: 302)
-    get 'about/c4/bylaws', to: redirect('https://docs.google.com/document/d/1uQEetVLONuzNdY_EYvmPX5P5PHC0kgp6kE-cdeVOT0A', status: 302)
-    get 'about/c4/finances', to: redirect('https://docs.google.com/spreadsheet/ccc?key=0AjmetJxi-p0VdEg3ajFfTDJZM1VPaEZMRmd0LUJ0ZVE', status: 302)
-    get 'about/c3/bylaws', to: redirect('https://docs.google.com/document/d/1ZU8yNZVC1AnSEKHm9nLN6WlEB6K2Kn2e5J6Mb-e37AI', status: 302)
-    get 'about/c3/finances', to: redirect('https://docs.google.com/spreadsheet/ccc?key=0AjmetJxi-p0VdF8tSWwxcHJ1QTJzQWtRSzhMY1ZFSWc', status: 302)
+    get 'about/pac/bylaws', to: redirect(
+      'https://docs.google.com/document/d/1BbKNamiQdlemLS28iGnkwrwar9vQ9HucK_S1PrZ2mu4/',
+      status: 302)
+    get 'about/pac/finances', to: redirect(
+      'https://docs.google.com/spreadsheet/ccc?key=0AjmetJxi-p0VdGlJSkl5NDkxdlE4bVlLLWtYWEZtcWc',
+      status: 302)
+    get 'about/pac/fec_reports', to: redirect(
+      'http://images.nictusa.com/cgi-bin/fecimg/?C00529743', status: 302)
+    get 'about/c4/bylaws', to: redirect(
+      'https://docs.google.com/document/d/1uQEetVLONuzNdY_EYvmPX5P5PHC0kgp6kE-cdeVOT0A',
+      status: 302)
+    get 'about/c4/finances', to: redirect(
+      'https://docs.google.com/spreadsheet/ccc?key=0AjmetJxi-p0VdEg3ajFfTDJZM1VPaEZMRmd0LUJ0ZVE',
+      status: 302)
+    get 'about/c3/bylaws', to: redirect(
+      'https://docs.google.com/document/d/1ZU8yNZVC1AnSEKHm9nLN6WlEB6K2Kn2e5J6Mb-e37AI',
+      status: 302)
+    get 'about/c3/finances', to: redirect(
+      'https://docs.google.com/spreadsheet/ccc?key=0AjmetJxi-p0VdF8tSWwxcHJ1QTJzQWtRSzhMY1ZFSWc',
+      status: 302)
     get 'fec'
     get 'help'
     get 'contact'
@@ -48,15 +61,19 @@ MakeyourlawsOrg::Application.routes.draw do
       get 'bitcoin'
       get 'bitcoin/caf', action: 'bitcoin_caf'
       get 'bitcoin/pacs', action: 'bitcoin_pacs'
-      get 'bitcoin/aor', to: redirect('https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/', status: 302)
+      get 'bitcoin/aor', to: redirect(
+        'https://docs.google.com/document/d/1AVuXrnNPynEcIq07MTgZPCjXMJICxtKeRH0jshYHVk8/',
+        status: 302)
       get 'earmarks'
-      get 'earmarks/aor', to: redirect('https://docs.google.com/document/d/1YeVdRxEqC8fWnJGl9DgkcNVY6HmkCPEzyRxB_0wttU0/', status: 302)
+      get 'earmarks/aor', to: redirect(
+        'https://docs.google.com/document/d/1YeVdRxEqC8fWnJGl9DgkcNVY6HmkCPEzyRxB_0wttU0/',
+        status: 302)
       get 'tplf'
     end
   end
 
   namespace :facebook do
-    resources :payments, :only => :create
+    resources :payments, only: :create
   end
 
   namespace :paypal do
@@ -65,21 +82,21 @@ MakeyourlawsOrg::Application.routes.draw do
         patch 'refresh'
       end
     end
-    resources :notifications, :only => :create  # IPN
-    resources :transaction_notifications, :only => :create # PDT
-     # , :only => [:show, :create, :destroy, :update] do
-      # member do
-      #   get 'completed', :action => :show, :status => 'completed'
-      #   get 'canceled', :action => :show, :status => 'canceled'
-      #   get 'failed', :action => :show, :status => 'failed'
-      # end
+    resources :notifications, only: :create  # IPN
+    resources :transaction_notifications, only: :create # PDT
+    # , :only => [:show, :create, :destroy, :update] do
+    # member do
+    #   get 'completed', :action => :show, :status => 'completed'
+    #   get 'canceled', :action => :show, :status => 'canceled'
+    #   get 'failed', :action => :show, :status => 'failed'
+    # end
     # end
     # resources :preapprovals # , :only => [:show, :create, :destroy, :update] do
-      # member do
-      #   get 'completed'
-      #   get 'canceled'
-      #   get 'failed'
-      # end
+    # member do
+    #   get 'completed'
+    #   get 'canceled'
+    #   get 'failed'
+    # end
     # end
   end
 
@@ -96,13 +113,13 @@ MakeyourlawsOrg::Application.routes.draw do
     get '*any', to: redirect('/')
   end
 
-  post "versions/:id/revert" => "versions#revert", :as => "revert_version"
+  post 'versions/:id/revert' => 'versions#revert', :as => 'revert_version'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root "main#index"
+  root 'main#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
