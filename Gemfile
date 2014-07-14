@@ -22,6 +22,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'hashie', '>= 3.2.0'
+gem 'hashie_rails'  # see https://github.com/intridea/hashie/blob/master/UPGRADING.md
+
 gem 'redis-rails' # switching out for dalli/memcached
 gem "redis-rack-cache"
 
@@ -141,8 +144,8 @@ gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '>= 4.0.0' # Use CoffeeScript for .js.coffee assets and views
 gem 'sass-rails', '>= 4.0.0' # Use SCSS for stylesheets
 
-gem 'jquery-rails', '>= 2.0.2'
-gem 'jquery-ui-rails'
+gem 'jquery-rails', '>= 3.0.0'
+gem 'jquery-ui-rails', '>= 5.0.0'
 gem 'jquery-turbolinks'
 gem 'turbolinks' # makes links load faster; see https://github.com/rails/turbolinks
 
