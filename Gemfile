@@ -77,7 +77,9 @@ end
 group :development, :test do
   platform(:mri) { gem 'ruby-prof' }
   gem 'webrat', '>= 0.7.3'
-  gem "brakeman", :require => false  # Rails security scanner
+  gem "brakeman", require: false  # Rails security scanner
+  gem 'rubocop', require: false
+  gem 'bundler-audit', require: false
   gem 'rspec-rails', '~> 3.0.0.beta'
 end
 

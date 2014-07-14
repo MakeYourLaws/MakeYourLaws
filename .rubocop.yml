@@ -1,0 +1,22 @@
+AllCops:
+  RunRailsCops: true
+
+# Change to table?
+Style/AlignHash:
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/DotPosition:
+  EnforcedStyle: trailing
+
+Style/Encoding:
+  EnforcedStyle: when_needed
+
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+
+
+
