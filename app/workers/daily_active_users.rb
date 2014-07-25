@@ -1,6 +1,8 @@
 class DailyActiveUsers
   @queue = :active_users
   extend Resque::Plugins::JobStats
+  extend Resque::Plugins::LockTimeout
+  @loner = true
 
   # extend Resque::Plugins::Retry
   # @retry_delay = 60
