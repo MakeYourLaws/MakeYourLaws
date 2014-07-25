@@ -39,12 +39,14 @@ Resque.logger.info 'base logger initiated'
 task 'resque:setup' => :environment do
   Resque.logger.info 'setup initiated'
 
-  Resque.before_first_fork = lambda {|args|   # for the parent
+  # Proc.new instead of lambda because args might not be passed
+  #  (and lambda does strict argument checking)
+  Resque.before_first_fork = Proc.new {|args|   # for the parent
     queue_name = args.try(:queue)
     reset_log(queue_name ? "resque_#{queue_name}_parent.log" : 'resque_worker_parent.log')
   }
 
-  Resque.after_fork = lambda {|args|    # for the child
+  Resque.after_fork = Proc.new {|args|    # for the child
     queue_name = args.try(:queue)
     reset_log(queue_name ? "resque_#{queue_name}.log" : 'resque_worker.log')
     ActiveRecord::Base.establish_connection
