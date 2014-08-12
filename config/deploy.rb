@@ -3,7 +3,7 @@
 set :rvm_ruby_string, 'rbx'
 set :rvm_type, :system # using system level, not userspace, install of rvm
 
-set :application, 'makeyourlaws'  # Required
+set :application, 'mylfrontend'  # Required
 
 set :ci_client, 'travis'
 set :ci_repository, 'MakeYourLaws/MakeYourLaws'
@@ -14,21 +14,22 @@ set :branch, 'master'
 set :git_enable_submodules, 1
 
 # set :gateway, "gate.host.com"  # default to no gateway
-set :runner, 'makeyourlaws'
-set :deploy_to, '/home/makeyourlaws/makeyourlaws.org/' # must be path from root
+set :runner, 'mylfrontend'
+set :group, 'mylfrontend'
+set :deploy_to, '/home/mylfrontend/makeyourlaws.org/' # must be path from root
 set :deploy_via, :remote_cache
 
 set :rails_env, 'production'
 
 set :ssh_options,
-    user:          'makeyourlaws',
+    user:          'mylfrontend',
     compression:   false,
     # keys:  %w(~/.ssh/myl_deploy),
     forward_agent: true # make sure you have an SSH agent running locally
 # auth_methods: %w(password)
 # port: 25
 
-server '173.255.252.140', roles: [:web, :app, :db, :resque_worker, :resque_scheduler]
+server '23.239.5.163', roles: [:web, :app, :db, :resque_worker, :resque_scheduler]
 
 set :workers,  '*' => 2
 
@@ -108,6 +109,17 @@ namespace :deploy do
   #     end
   #   end
   # end
+
+  before :updating, 'deploy:sync_keys'
+
+  task :sync_keys do
+    on roles(:web) do
+      execute "chmod 0750 #{shared_path}/config/keys"
+      `rsync -vrSzhPc ~/myl_sensitive/keys/*.production #{fetch :runner}@#{fetch :server
+      }:#{shared_path}/config/keys`
+      execute "chmod 0640 #{shared_path}/config/keys/*"
+    end
+  end
 
   after :publishing, 'deploy:restart'
 
