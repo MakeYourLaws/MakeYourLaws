@@ -65,7 +65,7 @@ stdout_redirect '/home/mylfrontend/makeyourlaws.org/shared/log/puma.log',
 #
 # The default is "0, 16".
 #
-threads 0, 4
+threads 1, 4
 
 # Bind the server to "url". "tcp://", "unix://" and "ssl://" are the only
 # accepted protocols.
@@ -106,7 +106,7 @@ restart_command '/usr/sbin/service restart puma'
 #
 # The default is "0".
 #
-workers 2
+# workers 2
 
 # Code to run when a worker boots to setup the process before booting
 # the app.
@@ -136,11 +136,15 @@ workers 2
 # Preload the application before starting the workers; this conflicts with
 # phased restart feature. (off by default)
 
-# preload_app
+# preload_app!
 
 # Additional text to display in process listing
-#
+
 tag 'mylfrontend'
+
+# Change the default timeout of workers
+#
+# worker_timeout 60
 
 # === Puma control rack application ===
 
