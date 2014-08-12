@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.1
+  # - 2.1
   - rbx-2
 bundler_args: --without production  --binstubs
 before_script:
