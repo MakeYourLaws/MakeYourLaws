@@ -55,7 +55,6 @@ task 'resque:setup' => :environment do
   # Resque::Scheduler.dynamic = true
   Resque::Scheduler.configure do |c|
     reset_log 'resque_scheduler.log'
-    c.mute = false
   end
   Resque.schedule = YAML.load_file(File.join(Rails.root, 'config', 'resque_schedule.yml'))
 end
