@@ -39,7 +39,7 @@ gem "redis-rack-cache"
 
 gem "resque", require: "resque/server"
 gem 'resque_mailer'
-gem 'resque-scheduler', require: 'resque_scheduler/server'
+gem 'resque-scheduler', require: 'resque/scheduler/server'
 gem 'resque-retry', require: ['resque-retry', 'resque-retry/server']
 gem 'resque-job-stats', require: ['resque-job-stats/server', 'resque/plugins/job_stats']
 gem 'resque-pool'

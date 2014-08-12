@@ -15,7 +15,7 @@ class TwitterScraper
   # @retry_exceptions = [OnlyRetryThisError]
   # @retry_exceptions = { NetworkError => 30, SystemCallError => [120, 240] }
   # @fatal_exceptions = [DontRetryThisError]
-  # def self.args_for_retry(same_args_as_perform)
+  # def self.retry_args(same_args_as_perform)
   #   [new_args_for_perform]
   # end
 
