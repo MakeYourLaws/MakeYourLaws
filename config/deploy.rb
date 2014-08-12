@@ -63,7 +63,7 @@ namespace :resque do
     desc txt
     task cmd do
       on roles(:resque_worker) do
-        execute "service makeyourlaws_resque #{cmd}"
+        execute "service mylfrontend_resque #{cmd}"
       end
     end
   end
@@ -93,7 +93,7 @@ namespace :resque do
       desc txt
       task cmd do
         on roles(:resque_scheduler) do
-          execute "service makeyourlaws_resque_scheduler #{cmd}"
+          execute "service mylfrontend_resque_scheduler #{cmd}"
         end
       end
     end
