@@ -65,7 +65,7 @@ stdout_redirect '/home/mylfrontend/makeyourlaws.org/shared/log/puma.log',
 #
 # The default is "0, 16".
 #
-# threads 0, 16
+threads 0, 4
 
 # Bind the server to "url". "tcp://", "unix://" and "ssl://" are the only
 # accepted protocols.
@@ -98,7 +98,7 @@ bind 'unix:///home/mylfrontend/makeyourlaws.org/shared/tmp/sockets/puma.sock'
 # load puma itself (ie. 'ruby -Ilib bin/puma'), not the arguments
 # to puma, as those are the same as the original process.
 #
-# restart_command '/u/app/lolcat/bin/restart_puma'
+restart_command '/usr/sbin/service restart puma'
 
 # === Cluster mode ===
 
@@ -106,7 +106,7 @@ bind 'unix:///home/mylfrontend/makeyourlaws.org/shared/tmp/sockets/puma.sock'
 #
 # The default is "0".
 #
-# workers 2
+workers 2
 
 # Code to run when a worker boots to setup the process before booting
 # the app.
@@ -136,11 +136,11 @@ bind 'unix:///home/mylfrontend/makeyourlaws.org/shared/tmp/sockets/puma.sock'
 # Preload the application before starting the workers; this conflicts with
 # phased restart feature. (off by default)
 
-# preload_app
+preload_app
 
 # Additional text to display in process listing
 #
-# tag 'app name'
+tag 'mylfrontend'
 
 # === Puma control rack application ===
 
