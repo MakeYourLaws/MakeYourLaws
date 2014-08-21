@@ -110,16 +110,26 @@ namespace :deploy do
   #   end
   # end
 
-  before :updating, 'deploy:sync_keys'
-
+  desc "Synchronize production keys local secure storage"
   task :sync_keys do
     on roles(:web) do
-      execute "chmod 0750 #{shared_path}/config/keys"
-      `rsync -vrSzhPc ~/myl_sensitive/keys/*.production #{fetch :runner}@#{fetch :server
-      }:#{shared_path}/config/keys`
-      execute "chmod 0640 #{shared_path}/config/keys/*"
+      `[[ -d ~/myl_sensitive/keys ]] && \
+      rsync -vrSzhPc ~/myl_sensitive/keys/*.production \
+      #{fetch :runner}@#{fetch :server}:#{shared_path}/config/keys`
     end
   end
+
+  desc "Set permissions on shared folders"
+  task :set_permissions do
+    on roles(:web) do
+      execute "chmod -R u=rwX,g=rX,o= #{shared_path}/"
+      execute "chmod o=rX #{shared_path}/"
+      execute "chmod -R o=rX #{shared_path}/public/"
+    end
+  end
+
+  before :updating, 'deploy:sync_keys'
+  after :sync_keys, 'deploy:set_permissions'
 
   after :publishing, 'deploy:restart'
 
