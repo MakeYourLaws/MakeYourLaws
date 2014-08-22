@@ -3,12 +3,12 @@
 # PDTs are more detail about a particular subtransaction, as opposed to the general IPN which is
 #  about the whole lump.
 class Payments::Paypal::TransactionNotificationsController < ApplicationController
-  include ActiveMerchant::Billing::Integrations::Paypal
+  include OffsitePayments::Integrations::Paypal
   skip_before_action :verify_authenticity_token # API call
   skip_authorization_check # can't use CanCan for this; authorized via IPN acknowledgement
 
   def create
-    notify = ActiveMerchant::Billing::Integrations::PaypalAdaptivePayment::Notification.new(request.raw_post)
+    notify = OffsitePayments::Integrations::PaypalAdaptivePayment::Notification.new(request.raw_post)
 
     @subtransaction = Payments::Paypal::Subtransaction.find_by_paypal_transaction_id(notify.params['txn_id']) ||
      Payments::Paypal::Subtransaction.find_by_paypal_transaction_id(notify.params['parent_txn_id'])

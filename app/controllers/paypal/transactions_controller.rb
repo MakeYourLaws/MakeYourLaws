@@ -1,5 +1,5 @@
 class Paypal::TransactionsController < ApplicationController
-  include ActiveMerchant::Billing::Integrations::Paypal
+  include OffsitePayments::Integrations::Paypal
   load_and_authorize_resource class: Payments::Paypal::Transaction
   before_action :deny_tor_users
 

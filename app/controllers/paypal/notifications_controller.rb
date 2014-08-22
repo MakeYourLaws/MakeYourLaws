@@ -1,10 +1,10 @@
 class Payments::Paypal::NotificationsController < ApplicationController
-  include ActiveMerchant::Billing::Integrations::Paypal
+  include OffsitePayments::Integrations::Paypal
   skip_before_action :verify_authenticity_token # API call
   skip_authorization_check # can't use CanCan for this; authorized via IPN acknowledgement
 
   def create
-    notify = ActiveMerchant::Billing::Integrations::PaypalAdaptivePayment::Notification.new(request.raw_post)
+    notify = OffsitePayments::Integrations::PaypalAdaptivePayment::Notification.new(request.raw_post)
 
     @transaction = Payments::Paypal::Transaction.find_by_pay_key notify.params['pay_key']
     @notification = Payments::Paypal::Notification.new
