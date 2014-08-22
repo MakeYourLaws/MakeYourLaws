@@ -149,8 +149,8 @@ namespace :deploy do
 
   after :publishing, 'deploy:restart'
 
-  after :start, 'puma:start'
-  after :stop, "puma:stop"
+  # after :start, 'puma:start'
+  # after :stop, "puma:stop"
   after :restart, 'puma:restart'
 
   after :restart, 'resque:restart'
