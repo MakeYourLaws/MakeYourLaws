@@ -101,6 +101,22 @@ namespace :resque do
 
 end
 
+namespace :puma do
+  puma_service_options = { start: "Start puma",
+                           stop: "Stop puma",
+                           status: "Get puma status",
+                           restart: "Restart puma" }
+
+  puma_service_options.each do |cmd, txt|
+   desc txt
+   task cmd do
+     on roles(:web) do
+       execute "service puma #{cmd} #{deploy_to}"
+     end
+   end
+  end
+end
+
 namespace :deploy do
   # task :restart do
   #   on roles(:app), in: :sequence, wait: 5 do
@@ -133,8 +149,8 @@ namespace :deploy do
 
   after :publishing, 'deploy:restart'
 
-  # after :start, 'puma:start'
-  # after :stop, "puma:stop"
+  after :start, 'puma:start'
+  after :stop, "puma:stop"
   after :restart, 'puma:restart'
 
   after :restart, 'resque:restart'
