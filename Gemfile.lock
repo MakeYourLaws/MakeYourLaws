@@ -713,6 +713,7 @@ PLATFORMS
 DEPENDENCIES
   Empact-activerecord-import (>= 0.4.1)
   active_paypal_adaptive_payment
+  activemerchant
   airbrake
   amazon_flex_pay
   bcrypt (>= 3.0.1)
@@ -750,6 +751,7 @@ DEPENDENCIES
   myl-fech (>= 1.0.2)
   mysql2
   newrelic_rpm
+  offsite_payments
   omniauth (>= 1.1.0)
   omniauth-coinbase
   omniauth-facebook (>= 1.2.0)
