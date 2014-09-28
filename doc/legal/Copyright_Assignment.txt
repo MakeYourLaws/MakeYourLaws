@@ -1,15 +1,41 @@
-[[
+Plain English summary:
+
+You're making a contribution to the MYL project. That's awesome! Thank you for supporting us.
+
+MYL is a strong supporter of open source and open licensing (we use plenty of open source code ourselves). Nearly all of our project is open source and open licensed. We are committed to keeping it that way - and this agreement with you creates a binding contract that requires us to do so.
+
+However, we need to own all rights to the entire project, so that we can enforce the licenses, change which open source license we use, add new companies to the MYL group, comply with government regulations or contracts with other companies, etc.
+
+
+You agree that MYL will own your contribution entirely, on the condition that in return, MYL
+a) grants you complete license to use your own contributions however you like, and
+b) will publish your contributions (if in use) under a Creative Commons or OSI-approved open source license of MYL's choice.
+
+The current license is in the LICENSE file at the root of each MYL repository (all of which are currently at https://github.com/MakeYourLaws). As of August 23, 2014, that is primarily the Affero GNU Public License (AGPL), though some separate libraries are released under the MIT license.
+
+
+However, some things are necessary for MYL to keep restricted, and MYL reserves all rights to them. For instance, if your contribution affects a MYL logo or trademark, we have to own it exclusively (or we wouldn't be able to use it effectively).
+
+You agree that such contributions are transferred outright, with no license back to you or open licensing agreement, and are not covered by the license covering the rest of the repository.
+
+
+If you have any questions or concerns, please contact Sai (sai@makeyourlaws.org).
+
+Thanks in advance for your help!
+
+
 INSTRUCTIONS:
 1. Replace the [[]] placeholders in the Definitions and at the end as appropriate.
-2. For each of the [[]] options, pick the one that applies to you and delete the rest.
-3. Delete this.
-4. PGP sign the full text (ASCII armored inline clear-sign) if you can.
-5. Save the document to /doc/legal/[[yourname]]_assignment.asc
-6. Send a pull request with just your document, or as part of your first pull request.
-]]
+2. Delete everything above "Contributor's Intellectual Property Assignment Agreement".
+3. PGP sign the full text (ASCII armored inline clear-sign) if you can.
+4. Save the document to /doc/legal/[[yourname]]_assignment.asc (if PGP signed) or .txt (if not)
+5. Send a pull request with just your document, or as part of your first pull request.
 
 
-Contributor's Copyright Assignment Agreement
+
+
+Contributor's Intellectual Property Assignment Agreement
+
 
 Definitions:
 
@@ -17,51 +43,58 @@ Definitions:
 
 2. "Work": the Make Your Laws project, including its source code, design, logos, etc.
 
-3. "Contributor": [[YOUR FULL LEGAL NAME]], github user [[YOUR GITHUB ACCOUNT NAME]], including any heirs, assignees, etc.
+3. "Contributor": [[YOUR FULL LEGAL NAME]], including any heirs, assignees, etc.
 
 4. "Contributions": Contributor's changes to the Work, including any future revisions thereof
 
-[[Option 1: You have an existing employer / IP agreement]]
-5. "Contributor's Employer(s)": [[EMPLOYERS' FULL LEGAL NAMES]]
-[[]]
+5. "Contributor's Employer(s)": [[EMPLOYERS' FULL LEGAL NAMES -or- "n/a - There are other parties that have intellectual property rights to the Contributions."]]
 
 
 Whereas Contributor and MYL freely choose to have Contributor make Contributions to MYL's Work, they hereby agree as follows.
 
 A. Contributor agrees that:
 
-[[Option 2: Volunteer]]
-1. Contributor volunteers to make the Contributions to the Work for no compensation.
-[[Option 2: Paid]]
-1. Contributor acknowledges receipt of good and valuable consideration for the Contributions to the Work.
-[[]]
+1. Contributor volunteers to make the Contributions to the Work for no financial compensation in order to benefit MYL, and considers their use by MYL to constitute adequate "consideration" under contract law.
 
 2. Contributor hereby transfers to MYL Contributor's entire right, title, and interest (including all rights under copyright) in the Contributions.
 
-3. If Contributor has, or later acquires, any intellectual property affecting the Work, that property will not be used to in any way restrict MYL's use of the Work.
+3. If Contributor and/or Contributor's Employer(s) has, or later acquires, any intellectual property affecting the Work, that property will not be used to in any way restrict MYL's use of the Work and Contributions.
 
-[[Option 1: No potentially conflicting IP agreement]]
-4. Contributor represents and warrants that Contributor is the sole holder of the intellectual property contained in their Contributions.
-[[Option 1: You have an existing employer / IP agreement]]
-4. Contributor represents and warrants that Contributor and Contributor's Employer(s) are the sole copyright holders for the Contributions; that Contributor has the right and power to enter into this contract, having received any authorization from Contributor's Employer(s) required; that Contributor's Employer(s) disclaims all intellectual property interest in Contributor's Contributions, and that Contributor's Employer(s) will not assert any intellectual property interest that would prevent MYL's use of the Work and Contributions.
-[[]]
+4. Contributor represents and warrants that:
+a) Contributor is the sole holder of the intellectual property contained in their Contributions, and/or
+b)
+ i) Contributor and/or Contributor's Employer(s) are the sole copyright holders for the Contributions,
+ ii) Contributor has received any required authorization from Contributor's Employer(s),
+ iii) Contributor has the right and power to enter into this contract, and
+ iv) Contributor's Employer(s) disclaims all intellectual property interest in Contributor's Contributions.
 
-5. Contributor indemnifies and holds harmless MYL against any and all claims, actions or damages (including attorney's reasonable fees) asserted by or paid to any party on account of a breach or alleged breach of the above warranty.
+5. Contributor indemnifies and holds harmless MYL against any and all claims, actions or damages (including attorney's reasonable fees) asserted by or paid to any party on account of a breach or alleged breach of the above agreements and warranties.
 
 6. Contributor makes no other express or implied warranty as to the Contributions.
 
 
 
-B. MYL agrees that, except for Contributions (or parts thereof) relating to MYL trade dress (e.g. branding, logos, etc):
+B. MYL agrees that, except for Contributions (or parts thereof) relating to MYL trade dress or trademark (e.g. branding, logos, etc), or that MYL and Contributor separately agree to be non-open:
 
 1. MYL grants Contributor permanent, non-exclusive rights to use their Contributions in whatever way Contributor sees fit, without any limitation on MYL's rights to the Contributions or Work.
 
-2. MYL promises that the Work and all derivatives thereof shall be distributed by MYL under a license approved by the Open Source Initiative, listed at http://opensource.org/licenses/alphabetical, of MYL's choice.
+2. MYL promises that, to the extent that MYL continues to use them, the Contributions and all derivatives thereof shall be distributed by MYL under a license approved either by the Open Source Initiative (http://opensource.org/licenses/alphabetical) and/or Creative Commons (https://creativecommons.org/licenses/), of MYL's choice.
 
 
+C. Although MYL will in general maintain a strong preference for open source and license of its Work, some portions of the Work, at MYL's exclusive discretion, may be more restricted.
 
-Agreed today, [[FULL DATE in form DD MONTH YYYY]], by [[FULL NAME]] ("Contributor")
+For example, this includes any Work that is related to MYL's trade dress, trademark, or patents; that MYL is required not to openly distribute and/or license due to obligations to third parties (such as closed-source APIs by vendors contracted by MYL); or that is crucial to MYL's competitive advantage.
 
-[[Option 3: PGP signature]]
+Such non-open portions of the Work will not include Contributions that are covered by part B(2) above.
+
+
+D. If, in the future, either the Open Source Institute or Creative Commons become defunct, MYL may use licenses that the OSI or CC previously published and/or to retroactively amend this agreement to refer to a replacement third-party organization that provides essentially the same service (i.e. maintaining and publishing what are commonly agreed to be "open source" type licenses).
+
+
+Agreed today, [[FULL DATE in form DD MONTH YYYY]], by [[YOUR FULL LEGAL NAME]], aka github user [[YOUR GITHUB ACCOUNT NAME]] ("Contributor")
+
+/s/ [[YOUR FULL LEGAL NAME]]
+
+[[If you have a PGP key, include the next line and then ASCII-armor inline clearsign the whole thing. If you don't have a PGP key, just delete this part.]]
 Signed using Contributor's PGP key, [[PGP KEY ID #]].
 [[]]
