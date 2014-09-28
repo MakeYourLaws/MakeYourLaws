@@ -3,13 +3,15 @@
 <% cache do %>
 
 <div class="flash notice">
-	<%= link_to "Can you use Bitcoin to make political contributions?", fec_bitcoin_path %><br/>
-	The first FEC hearing is scheduled for <s><a href="http://fec.gov/agenda/2014/agenda20140403.shtml">April 3<sup>rd</sup></a></s> <a href="http://fec.gov/agenda/2014/agenda20140423.shtml">April 23<sup>rd</sup></a>.
+	<%= link_to "Can you use Bitcoin to make political contributions? YES.", fec_bitcoin_path %><br/>
+	The  <%= link_to "third draft", fec_bitcoin_path(anchor: 'draft_c') %> was unanimously approved. You can see our <a href="https://www.youtube.com/watch?v=TXeXNTdfAek">live hangout</a> of the meeting on YouTube. We'll post more detailed updates soon.
+	<br/><br/>
+	<a href="https://www.youtube.com/watch?v=jahnHk6DAoI&list=PLB350213D4F5B545C">Video</a> from Sai at the <a href="http://www.coe.int/en/web/world-forum-democracy/lab11_">World Forum for Democracy 2013</a> is now up on <a href="https://youtube.com/makeyourlaws">our YouTube channel</a>.
 </div>
 
 <h3>Make Your Laws is launching soon.</h3>
 
-<p>When we do, you will be able to use this website to make easily all kinds of political contributions, using <%= link_to "flexible tools", fec_earmarks_path %> that empower normal people and transparently use the trust and advice relationships they already have.</p>
+<p>When we do, you will be able to use this website to easily make all kinds of political contributions, using <%= link_to "flexible tools", fec_earmarks_path %> that empower normal people and transparently use the trust and advice relationships they already have.</p>
 
 <p>This is our <%= link_to "first step", strategy_path %> towards our ultimate goal of making every legislature a <%= link_to "liquid democracy", introduction_path %> — one where you can participate as much you want, collaboratively author new legislation, have your values be accurately represented on every issue, and truly <em>make your laws</em>.</p>
 
