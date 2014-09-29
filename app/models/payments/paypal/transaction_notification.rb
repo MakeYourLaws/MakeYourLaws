@@ -1,12 +1,12 @@
 class Payments::Paypal::TransactionNotification < ActiveRecord::Base
-  self.table_name = "paypal_transaction_notifications" # use namespaced table
-  
+  self.table_name = 'paypal_transaction_notifications' # use namespaced table
+
   belongs_to :subtransaction
-  
+
   def details
     @details ||= JSON.parse details_json
   end
-  
+
   # def update_details!
   #   self.details_json = get_details
   #   self.status = if transaction_status == [nil]
@@ -16,5 +16,4 @@ class Payments::Paypal::TransactionNotification < ActiveRecord::Base
   #   end
   #   save!
   # end
-  
 end

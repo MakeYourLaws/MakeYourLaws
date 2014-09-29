@@ -4,18 +4,18 @@ class Payments::Paypal::Preapproval < ActiveRecord::Base
   def details get_billing_address = true
     # :error_language = 'en_US'
     if preapproval_key
-      response = PAYPAL.details_for_payment :pay_key => preapproval_key, :get_billing_address => true
+      PAYPAL.details_for_payment pay_key: preapproval_key, get_billing_address: get_billing_address
     else
-      raise "Can't get details without preapproval_key"
+      fail "Can't get details without preapproval_key"
     end
-  end 
-  
+  end
+
   def cancel!
     # :error_language = 'en_US'
     if preapproval_key
-      response = PAYPAL.details_for_payment :pay_key => preapproval_key
+      PAYPAL.details_for_payment pay_key: preapproval_key
     else
-      raise "Can't get details without preapproval_key"
+      fail "Can't get details without preapproval_key"
     end
-  end 
+  end
 end

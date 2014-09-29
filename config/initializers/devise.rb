@@ -13,7 +13,7 @@ Devise.setup do |config|
   config.mailer_sender = 'Make Your Laws <noreply@makeyourlaws.org>'
 
   # Configure the class responsible to send e-mails.
-  config.mailer = "Devise::Mailer"
+  config.mailer = 'Devise::Mailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -29,7 +29,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [ :login_or_email ]
+  config.authentication_keys = [:email] # login_or_email
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -41,12 +41,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :login_or_email, :email, :login ]
+  config.case_insensitive_keys = [:email, :login] # :login_or_email
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :login_or_email, :email, :login ]
+  config.strip_whitespace_keys = [:email, :login] # :login_or_email
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -95,7 +95,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 20
 
   # Setup a pepper to generate the encrypted password.
-  pepper_file = File.join(Rails.root, "config", "keys", "devise_pepper")
+  pepper_file = File.join(Rails.root, 'config', 'keys', 'devise_pepper')
   config.pepper = IO.read(pepper_file) if File.exist?(pepper_file)
 
   # ==> Configuration for :confirmable
@@ -119,7 +119,7 @@ Devise.setup do |config|
   # db field (see migrations). Until confirmed new email is stored in
   # unconfirmed email column, and copied to email column on successful confirmation.
   config.reconfirmable = true # use unconfirmed_email to allow confirming a changed email
-                              # TODO: hack Devise to handle real 1:M emails
+  # TODO: hack Devise to handle real 1:M emails
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]
@@ -133,7 +133,7 @@ Devise.setup do |config|
 
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
-  config.rememberable_options = { :secure => true }
+  config.rememberable_options = { secure: true }
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 8..128.
@@ -181,7 +181,7 @@ Devise.setup do |config|
   # ==> Configuration for :recoverable
   #
   # Defines which key will be used when recovering the password for an account
-  config.reset_password_keys = [ :login_or_email ]
+  config.reset_password_keys = [:email] # :login_or_email
 
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
@@ -230,18 +230,32 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   require 'openid/store/filesystem'
-  require "openid/fetchers"
-  OpenID.fetcher.ca_file = File.join(Rails.root, "lib", "ca-certificates.crt")
+  require 'openid/fetchers'
+  OpenID.fetcher.ca_file = File.join(Rails.root, 'lib', 'ca-certificates.crt')
 
-  config.omniauth :facebook, Keys.get("facebook_id"), Keys.get("facebook_secret"), :display => "popup", :scope => "email,user_location,user_religion_politics,offline_access,user_hometown"
-  config.omniauth :github, Keys.get("github_id"), Keys.get("github_secret") # no need for user write access
-  # FIXME: google_oauth2 :scope is broken. See https://github.com/zquestz/omniauth-google-oauth2/issues/8
+  config.omniauth :facebook, Keys.get('facebook_id'), Keys.get('facebook_secret'),
+                  display: 'popup',
+                  scope:   'email,user_location,user_religion_politics,offline_access,user_hometown'
+
+  # no need for user write access
+  config.omniauth :github, Keys.get('github_id'), Keys.get('github_secret')
+
+  # FIXME: google_oauth2 :scope is broken. See
+  #  https://github.com/zquestz/omniauth-google-oauth2/issues/8
   # TODO: add plus.me to scope
-  config.omniauth :google_oauth2, Keys.get("google_id"), Keys.get("google_secret"), :name => "google"#, :scope => "userinfo.email,userinfo.profile"
-  config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'), :require => 'omniauth-openid'  # TODO: use :identifier => "http://standardprefix/" + :name to make presets for LJ et al
-  config.omniauth :twitter, Keys.get("twitter_key"), Keys.get("twitter_secret")
-  config.omniauth :paypal , Keys.get("paypal_oauth2_key"), Keys.get("paypal_oauth2_secret")
-  config.omniauth :coinbase, Keys.get("coinbase_oauth_id"), Keys.get("coinbase_oauth_secret"), :scope => "user"
+  config.omniauth :google_oauth2, Keys.get('google_id'), Keys.get('google_secret'), name: 'google'
+  # , :scope => "userinfo.email,userinfo.profile"
+
+  # TODO: use :identifier => "http://standardprefix/" + :name to make presets for LJ et al
+  config.omniauth :open_id, store:   OpenID::Store::Filesystem.new('/tmp'),
+                            require: 'omniauth-openid'
+
+  config.omniauth :twitter, Keys.get('twitter_key'), Keys.get('twitter_secret')
+
+  config.omniauth :paypal, Keys.get('paypal_oauth2_key'), Keys.get('paypal_oauth2_secret')
+
+  config.omniauth :coinbase, Keys.get('coinbase_oauth_id'), Keys.get('coinbase_oauth_secret'),
+                  scope: 'user'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

@@ -9,7 +9,7 @@ class Link < ActiveRecord::Base
   before_save :clean_url
 
   def self.add_by_url url
-    self.find_or_create_by(url: Link.clean_url(url))
+    find_or_create_by(url: Link.clean_url(url))
   end
 
   def self.add_with_hint short, long = nil
@@ -34,7 +34,7 @@ class Link < ActiveRecord::Base
       bestlink = uncruftedlink
     end
 
-    bestlink = shortlink if !bestlink
+    bestlink = shortlink unless bestlink
     bestlink.update_attribute :duplicate_of_id, bestlink.id
 
     # needs to be updated post creation to get its own link
@@ -43,11 +43,11 @@ class Link < ActiveRecord::Base
   end
 
   def self.clean_url url
-    url = url.sub(/^HTTP:\/\/http/i, 'http').sub(/:\/\/[\/]+/, '://')
+    url = url.sub(%r{^HTTP://http}i, 'http').sub(%r{://[/]+}, '://')
     if url.size > 255
       uri = Addressable::URI.parse(url)
       uri.query_values = []
-      url = uri.to_s.sub(/\?$/,'')
+      url = uri.to_s.sub(/\?$/, '')
     end
     url
   end
@@ -57,20 +57,19 @@ class Link < ActiveRecord::Base
   end
 
   def uncrufted
-    uri = Addressable::URI.parse(self.url)
+    uri = Addressable::URI.parse(url)
 
-    blacklist = %w(utm_source utm_medium utm_term utm_content utm_campaign s_campaign dlvrit utm_cid refid feature hp)
+    blacklist = %w(utm_source utm_medium utm_term utm_content utm_campaign s_campaign dlvrit
+                   utm_cid refid feature hp)
     params = uri.query_values
     if params
-      blacklist.each{|w| params.delete w}
+      blacklist.each { |w| params.delete w }
       uri.query_values = params
     end
+
     fragment = uri.fragment
-    if fragment
-      uri.fragment = fragment.sub(/\.[a-zA-Z0-9-_]*\.twitter/, '')
-    end
+    uri.fragment = fragment.sub(/\.[a-zA-Z0-9-_]*\.twitter/, '') if fragment
 
-    uri.to_s.sub(/\?$/,'')
+    uri.to_s.sub(/\?$/, '')
   end
-
 end
