@@ -9,21 +9,21 @@ class Ability
 
     can :read, [Fec::Candidate, Fec::Committee, Initiative]
     # can :read, User
-    can :create, [Payments::Paypal::Transaction]#, Paypal::Preapproval]
-    can :create, [Payments::Stripe::Charge]#, Paypal::Preapproval]
+    can :create, [Payments::Paypal::Transaction] # , Paypal::Preapproval]
+    can :create, [Payments::Stripe::Charge] # , Paypal::Preapproval]
 
     # user ||= User.new # guest user (not logged in)
     if user
-      if user.is_admin?
-        can :manage, :all
-      else
-        if user.is_alpha?
-          can :manage, [Initiative, Committee]
-          can :manage, [Payments::Paypal::Transaction, Payments::Stripe::Charge,
-                        Cart, CartItem], #Paypal::Preapproval],
-            :user_id => user.id
-        end
-        can :manage, User, :id => user.id
+      can :manage, User, id: user.id
+      can :manage, :all if user.is_admin?
+      if user.is_alpha?
+        # can :manage, [Initiative, Committee]
+        can :manage, [Payments::Paypal::Transaction], # Paypal::Preapproval],
+            user_id: user.id
+        can :manage, [Payments::Stripe::Charge]
+            user_id: user.id
+        can :manage, [Cart, CartItem],
+            user_id: user.id
       end
     end
   end

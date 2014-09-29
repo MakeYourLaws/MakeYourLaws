@@ -1,4 +1,0 @@
-[monit]
-title=Monit
-description=Monit
-ports=2812/tcp
