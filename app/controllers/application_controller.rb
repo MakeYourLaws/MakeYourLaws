@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # include ExceptionLogger::ExceptionLoggable
   # rescue_from Exception, :with => :log_exception_handler
 
-  before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -12,17 +12,17 @@ class ApplicationController < ActionController::Base
   include Mixpanel
 
   def info_for_paper_trail
-    { :ip => request.remote_ip }
+    { ip: request.remote_ip }
   end
 
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
-    redirect_to root_url, :alert => exception.message
+    redirect_to root_url, alert: exception.message
   end
 
-  before_filter :log_additional_data
-  before_filter :security_headers
-  before_filter :cleanup
+  before_action :log_additional_data
+  before_action :security_headers
+  before_action :cleanup
 
   # incompatible w/ rails 4.
   #
@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
   private
 
   def ssl_configured?
-    Rails.env.production? and !tor?
+    Rails.env.production? && !tor?
   end
 
   # Note: Strict-Transport-Security is already set to 1 year through config.force_ssl (i.e. Rack:SSL)
@@ -72,22 +72,27 @@ class ApplicationController < ActionController::Base
   protected
 
   def log_additional_data
-    request.env["exception_notifier.exception_data"] = {
-      :user => current_user
+    request.env['exception_notifier.exception_data'] = {
+      user: current_user
     }
   end
 
   def configure_permitted_parameters
     # Defaults (see https://github.com/plataformatec/devise/tree/rails4):
     # sign_in (Devise::SessionsController#new) - Permits only the authentication keys (like email)
-    # sign_up (Devise::RegistrationsController#create) - Permits authentication keys plus password and password_confirmation
-    # account_update (Devise::RegistrationsController#update) - Permits authentication keys plus password, password_confirmation and current_password
+    # sign_up (Devise::RegistrationsController#create) - Permits authentication keys plus password
+    #  and password_confirmation
+    # account_update (Devise::RegistrationsController#update) - Permits authentication keys plus
+    #  password, password_confirmation and current_password
 
     # Formerly, in Rails 3
-    # attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :login, :login_or_email
+    # attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :login,
+    #  :login_or_email
 
     # Modify them:
     # devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login_or_email) }
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :name, :password, :password_confirmation) } # :login
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:email, :name, :password, :password_confirmation) # :login
+    end
   end
 end

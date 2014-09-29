@@ -1,6 +1,8 @@
 class DailyActiveUsers
   @queue = :active_users
   extend Resque::Plugins::JobStats
+  extend Resque::Plugins::LockTimeout
+  @loner = true
 
   # extend Resque::Plugins::Retry
   # @retry_delay = 60
@@ -13,12 +15,11 @@ class DailyActiveUsers
   # @retry_exceptions = [OnlyRetryThisError]
   # @retry_exceptions = { NetworkError => 30, SystemCallError => [120, 240] }
   # @fatal_exceptions = [DontRetryThisError]
-  # def self.args_for_retry(same_args_as_perform)
+  # def self.retry_args(same_args_as_perform)
   #   [new_args_for_perform]
   # end
 
   def self.perform # args
     AdminMailer.dau(Date.today - 1).deliver
   end
-
 end
