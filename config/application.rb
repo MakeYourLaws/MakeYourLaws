@@ -6,6 +6,17 @@ Bundler.require(:default, Rails.env)
 
 require 'activerecord-import' # doesn't auto-require properly
 
+# patch for https://github.com/mikel/mail/pull/782 / https://github.com/rubinius/rubinius/issues/3050
+module Mail
+  class PartsList
+    def sort_by args = nil
+      p "custom sort_by - args: #{args.inspect}, self: #{self.inspect}"
+      (self.empty? or args.blank?) ? self : super(args)
+    end
+  end
+end
+
+
 module MakeyourlawsOrg
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
