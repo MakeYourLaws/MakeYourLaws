@@ -1,8 +1,6 @@
 class IdentitiesController < ApplicationController
-  
-  
-  private 
-  
+  private
+
   def identities_params
     params.permit(:provider, :uid)
   end

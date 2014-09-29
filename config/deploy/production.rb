@@ -8,10 +8,10 @@ set :stage, :production
 # role :app, %w{deploy@example.com}
 # role :web, %w{deploy@example.com}
 # role :db,  %w{deploy@example.com}
-set :ip, '173.255.252.140' # IP of server. Better than using DNS lookups, if it's static
-role :app, '173.255.252.140'
-role :web, '173.255.252.140'
-role :db, '173.255.252.140'
+set :ip, '23.239.5.163' # IP of server. Better than using DNS lookups, if it's static
+role :app, '23.239.5.163'
+role :web, '23.239.5.163'
+role :db, '23.239.5.163'
 
 # Extended Server Syntax
 # ======================
@@ -22,7 +22,8 @@ role :db, '173.255.252.140'
 # server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
 
 # you can set custom ssh options
-# it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
+# it's possible to pass any option but you need to keep in mind that net/ssh understand
+#  limited list of options
 # you can see them in [net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start)
 # set it globally
 #  set :ssh_options, {
