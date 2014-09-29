@@ -1,4 +1,4 @@
-class Fec::CommitteeInterestGroupCategory 
+class Fec::CommitteeInterestGroupCategory
   TYPES = {
     'C' => 'Corporation',
     'L' => 'Labor organization',

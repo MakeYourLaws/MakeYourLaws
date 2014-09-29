@@ -7,7 +7,7 @@
 
 <%= if user_signed_in?
 	javascript_tag "mixpanel.identify('#{current_user.id}');
-					mixpanel.name_tag('#{current_user.login}');"
+					mixpanel.name_tag('#{current_user.email}');"
 end
 
 # Track events using e.g.:
