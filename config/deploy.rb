@@ -63,7 +63,7 @@ namespace :resque do
     desc txt
     task cmd do
       on roles(:resque_worker) do
-        execute "service mylfrontend_resque #{cmd}"
+        execute :sudo, "service mylfrontend_resque #{cmd}"
       end
     end
   end
@@ -85,7 +85,7 @@ namespace :resque do
 
   namespace :scheduler do
     resque_scheduler_options = { status:  'See current scheduler status',
-                                 status:  'Starts resque scheduler',
+                                 start:  'Starts resque scheduler',
                                  stop:    'Stops resque scheduler',
                                  restart: 'Restarts resque scheduler' }
 
@@ -93,7 +93,7 @@ namespace :resque do
       desc txt
       task cmd do
         on roles(:resque_scheduler) do
-          execute "service mylfrontend_resque_scheduler #{cmd}"
+          execute :sudo, "service mylfrontend_resque_scheduler #{cmd}"
         end
       end
     end
@@ -111,7 +111,7 @@ namespace :puma do
    desc txt
    task cmd do
      on roles(:web) do
-       execute "service puma #{cmd} #{deploy_to}"
+       execute :sudo, "service puma #{cmd} #{deploy_to}"
      end
    end
   end

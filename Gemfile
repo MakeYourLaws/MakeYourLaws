@@ -106,6 +106,9 @@ end
 gem 'Empact-activerecord-import', '>= 0.4.1' # zdennis hasn't yet imported the import profiling fix; this is a bugfix tracking fork
 gem "paper_trail", '>= 3.0.0'
 
+gem 'groupdate' # https://github.com/ankane/groupdate
+gem 'mailhopper' # https://github.com/cerebris/mailhopper
+
 # NoMethodError: undefined method `[]' for #<ActiveRecord::Reflection::AssociationReflection:0x007fe9a2743860>
 # gem 'has_many_polymorphs', github => 'jystewart/has_many_polymorphs'
 
@@ -141,7 +144,7 @@ gem "omniauth-twitter", '>= 0.0.10'
 gem "omniauth-paypal", '>= 1.2.1'
 gem "omniauth-coinbase"
 
-gem 'devise-async'
+# gem 'devise-async'
 
 gem 'cancan', '>= 1.6.8'
 # gem 'cantango', '>= 0.9.4.7'
