@@ -22,6 +22,6 @@
 en:
   activerecord:
     attributes:
-      user:  
-        login_or_email: "Username or email"
+      user:
+        email: "Email" # login_or_email: "Username or email"
         login: "Username"

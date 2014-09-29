@@ -20,7 +20,7 @@ require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'airbrake/capistrano3'
 # require 'capistrano/ci/recipes' # pending cap3 compatibility https://github.com/railsware/capistrano-ci/pull/4
-require 'capistrano/puma'
+# require 'capistrano/puma'
 
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
