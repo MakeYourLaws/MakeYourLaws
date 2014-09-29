@@ -5,7 +5,7 @@ class Fec::CommitteeFilingFrequency
     'M' => 'Monthly filer',
     'Q' => 'Quarterly filer',
     'T' => 'Terminated',
-    'W' => 'Waived',
+    'W' => 'Waived'
   }
   def method_missing type
     TYPES[type] || TYPE.rassoc(type)[0]

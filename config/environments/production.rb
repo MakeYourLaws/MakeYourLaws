@@ -16,7 +16,8 @@ MakeyourlawsOrg::Application.configure do
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
-  # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
+  # For large-scale production use, consider using a caching reverse proxy like nginx,
+  #   varnish or squid.
   config.action_dispatch.rack_cache = {
     metastore:   'redis://localhost:6379/3',
     entitystore: 'redis://localhost:6379/4'
@@ -67,11 +68,11 @@ MakeyourlawsOrg::Application.configure do
   config.after_initialize do
     Rails.application.routes.default_url_options[:host] = 'www.makeyourlaws.org'
   end
-  config.action_mailer.default_url_options = { :host => 'www.makeyourlaws.org' }
-  config.action_mailer.delivery_method = :sendmail # :smtp
+  config.action_mailer.default_url_options = { host: 'www.makeyourlaws.org' }
+  config.action_mailer.delivery_method = :mailhopper
   # defaults to -i -t. However, Mail::Sendmail actually puts recipients on the command line, so
   #  if -t gets them from the headers, it screws things up. Thus, no -t.
-  config.action_mailer.sendmail_settings = {:arguments => '-i '}
+  config.action_mailer.sendmail_settings = { arguments: '-i ' }
 
   # config.action_mailer.smtp_settings = {
   #   :address => 'mail.makeyourlaws.org',

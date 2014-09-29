@@ -1,5 +1,5 @@
 # class CartItemWidget < Apotomo::Widget
-# 
+#
 #   def new args
 # p 1
 #     user    = args[:user]
@@ -13,10 +13,10 @@
 # p @committee
 #     @present = @committee and @cart.committees.include?(@committee)
 # p 'present', @present
-#     
+#
 #     render
 #   end
-#   
+#
 #   def create args
 # p 2
 # raise 2
@@ -27,15 +27,15 @@
 #     ci.committee = @committee
 #     @cart.save!
 # p @cart
-# p @commitee    
-#     
+# p @commitee
+#
 #     update :state => :new
 #   end
-# 
+#
 #   def destroy
 #   end
-# 
+#
 #   def update
 #   end
-# 
+#
 # end

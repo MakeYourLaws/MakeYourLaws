@@ -1,0 +1,45 @@
+AllCops:
+  RunRailsCops: true
+  Include:
+    - '**/Rakefile'
+    - '**/*.rake'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'log/**/*'
+    - 'temp/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+
+Style/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+  # EnforcedStyle: compact
+
+Style/DotPosition:
+  EnforcedStyle: trailing
+
+Style/Encoding:
+  EnforcedStyle: when_needed
+
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+
+Style/Documentation:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/LineLength:
+  Max: 100
+
+Style/CaseIndentation:
+  IndentOneStep: true
+
+Style/EachWithObject:
+  Enabled: false
