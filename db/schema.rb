@@ -11,13 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140315225327) do
+ActiveRecord::Schema.define(version: 20140928204953) do
+
+  create_table "addresses", force: true do |t|
+    t.string  "country",                     default: "United States", null: false
+    t.string  "street_address_1", limit: 34
+    t.string  "city",             limit: 30,                           null: false
+    t.string  "state",            limit: 2,                            null: false
+    t.integer "zip"
+    t.float   "lat",              limit: 24
+    t.float   "lng",              limit: 24
+  end
+
+  add_index "addresses", ["country", "state", "city"], name: "index_addresses_on_country_and_state_and_city", using: :btree
+  add_index "addresses", ["lat", "lng"], name: "index_addresses_on_lat_and_lng", using: :btree
 
   create_table "cart_items", force: true do |t|
-    t.integer "cart_id",      null: false
-    t.integer "committee_id", null: false
+    t.integer "cart_id",                 null: false
+    t.integer "committee_id",            null: false
     t.integer "amount_cents"
-    t.float   "proportion"
+    t.float   "proportion",   limit: 24
   end
 
   add_index "cart_items", ["cart_id", "committee_id"], name: "index_cart_items_on_cart_id_and_committee_id", unique: true, using: :btree
@@ -84,6 +97,23 @@ ActiveRecord::Schema.define(version: 20140315225327) do
 
   add_index "death_master_files", ["as_of"], name: "idx_as_of", using: :btree
   add_index "death_master_files", ["social_security_number"], name: "idx_ssn", unique: true, using: :btree
+
+  create_table "emails", force: true do |t|
+    t.string   "from_address",                        null: false
+    t.string   "reply_to_address"
+    t.string   "subject"
+    t.text     "to_address"
+    t.text     "cc_address"
+    t.text     "bcc_address"
+    t.text     "content",          limit: 2147483647
+    t.datetime "sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "emails", ["created_at"], name: "index_emails_on_created_at", using: :btree
+  add_index "emails", ["from_address", "subject"], name: "index_emails_on_from_address_and_subject", using: :btree
+  add_index "emails", ["sent_at"], name: "index_emails_on_sent_at", using: :btree
 
   create_table "fec_candidates", force: true do |t|
     t.string   "fec_id",                       limit: 9,              null: false
@@ -239,6 +269,18 @@ ActiveRecord::Schema.define(version: 20140315225327) do
   add_index "initiatives", ["proposition_name"], name: "index_initiatives_on_proposition_name", using: :btree
   add_index "initiatives", ["status"], name: "index_initiatives_on_status", using: :btree
   add_index "initiatives", ["title"], name: "index_initiatives_on_title", using: :btree
+
+  create_table "links", force: true do |t|
+    t.string   "url",                             null: false
+    t.integer  "duplicate_of_id"
+    t.integer  "lock_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "checked",         default: false, null: false
+  end
+
+  add_index "links", ["url", "duplicate_of_id"], name: "index_links_on_url_and_duplicate_of_id", using: :btree
+  add_index "links", ["url"], name: "index_links_on_url", unique: true, using: :btree
 
   create_table "ny_voters", force: true do |t|
     t.string   "last_name"
@@ -423,6 +465,28 @@ ActiveRecord::Schema.define(version: 20140315225327) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
+  create_table "search_results", force: true do |t|
+    t.integer  "search_id"
+    t.integer  "result_id"
+    t.string   "result_type"
+    t.datetime "created_at"
+  end
+
+  add_index "search_results", ["search_id", "result_type", "result_id"], name: "index_search_results_on_search_id_and_result_type_and_result_id", unique: true, using: :btree
+
+  create_table "searches", force: true do |t|
+    t.string   "term",                                 null: false
+    t.string   "source",                               null: false
+    t.string   "status",           default: "created", null: false
+    t.integer  "update_frequency"
+    t.integer  "lock_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "searches", ["source", "term"], name: "index_searches_on_source_and_term", unique: true, using: :btree
+  add_index "searches", ["status"], name: "index_searches_on_status", using: :btree
+
   create_table "sessions", force: true do |t|
     t.string   "session_id",               null: false
     t.text     "data"
@@ -467,6 +531,15 @@ ActiveRecord::Schema.define(version: 20140315225327) do
 
   add_index "ssn_high_group_codes", ["area", "as_of"], name: "idx_area_as_of", using: :btree
   add_index "ssn_high_group_codes", ["area"], name: "idx_area", using: :btree
+
+  create_table "states", force: true do |t|
+    t.string "abbreviation", limit: 2
+    t.string "name",                                             null: false
+    t.string "country",                default: "United States", null: false
+  end
+
+  add_index "states", ["country", "abbreviation"], name: "index_states_on_country_and_abbreviation", unique: true, using: :btree
+  add_index "states", ["country", "name"], name: "index_states_on_country_and_name", unique: true, using: :btree
 
   create_table "stripe_accounts", force: true do |t|
     t.string  "stripe_id",            null: false
@@ -698,6 +771,32 @@ ActiveRecord::Schema.define(version: 20140315225327) do
     t.string   "statement_descriptor"
   end
 
+  create_table "tweet_links", force: true do |t|
+    t.integer "tweet_id", null: false
+    t.integer "link_id",  null: false
+  end
+
+  add_index "tweet_links", ["link_id", "tweet_id"], name: "index_tweet_links_on_link_id_and_tweet_id", using: :btree
+  add_index "tweet_links", ["tweet_id", "link_id"], name: "index_tweet_links_on_tweet_id_and_link_id", unique: true, using: :btree
+
+  create_table "tweets", force: true do |t|
+    t.integer  "twitter_id",   limit: 8,                     null: false
+    t.string   "text",                                       null: false
+    t.string   "user",                                       null: false
+    t.integer  "favorited",              default: 0
+    t.integer  "retweeted",              default: 0
+    t.text     "raw",                                        null: false
+    t.integer  "lock_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status",                 default: "created"
+  end
+
+  add_index "tweets", ["favorited", "retweeted"], name: "index_tweets_on_favorited_and_retweeted", using: :btree
+  add_index "tweets", ["status"], name: "index_tweets_on_status", using: :btree
+  add_index "tweets", ["twitter_id"], name: "index_tweets_on_twitter_id", unique: true, using: :btree
+  add_index "tweets", ["user"], name: "index_tweets_on_user", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: ""
@@ -718,7 +817,7 @@ ActiveRecord::Schema.define(version: 20140315225327) do
     t.datetime "locked_at"
     t.string   "authentication_token"
     t.string   "name",                                null: false
-    t.string   "login",                               null: false
+    t.string   "login"
     t.integer  "lock_version",           default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -728,7 +827,7 @@ ActiveRecord::Schema.define(version: 20140315225327) do
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
+  add_index "users", ["login"], name: "index_users_on_login", using: :btree
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unconfirmed_email"], name: "index_users_on_unconfirmed_email", unique: true, using: :btree
