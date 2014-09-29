@@ -17,6 +17,7 @@ MakeyourlawsOrg::Application.configure do
   config.action_view.cache_template_loading = false
 
   # Don't care if the mailer can't send
+  config.action_mailer.delivery_method = :mailhopper
   config.action_mailer.raise_delivery_errors = false
   config.after_initialize do
     Rails.application.routes.default_url_options[:host] = 'localhost:3000'

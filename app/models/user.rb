@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, # :validatable, # do it better ourselves
-         :encryptable, :confirmable, :async,
+         :encryptable, :confirmable, # :async,
          :lockable, :timeoutable, :omniauthable,
          authentication_keys: [:email] # :login_or_email, :email, :login, :name]
   rolify # :after_add => :after_role_add, :after_remove => :after_role_remove
