@@ -51,7 +51,7 @@ a { text-decoration: none;
 }
 
 q {
-	&:before { content: open-quote; }	
+	&:before { content: open-quote; }
 	&:after  { content: close-quote; }
 }
 
@@ -77,7 +77,7 @@ img.gray {
             filter: grayscale(100%); /* IE6-9 */
     filter: alpha(opacity=40); /* msie */
     opacity: 0.4;
-    zoom: 1;  /* needed to trigger "hasLayout" in IE if no width or height is set */ 
+    zoom: 1;  /* needed to trigger "hasLayout" in IE if no width or height is set */
 }
 
 #toc {
@@ -99,9 +99,9 @@ hr {
   overflow: hidden;
 }
 
-ol, ul { 
+ol, ul {
 	/* For setting the first part of list elements, e.g. when they each have multiple paragraphs */
-	&.italic { 
+	&.italic {
 		li *:first-child { font-style: italic; }
 	}
 	&.bold {
@@ -109,20 +109,25 @@ ol, ul {
 	}
 }
 
-ol { list-style: decimal; 
-	&.alpha { list-style: lower-alpha; 
+ol { list-style: decimal;
+	&.alpha { list-style: lower-alpha;
 		li  { list-style: lower-alpha; }
 	}
 }
 
-ul { list-style: none; 
+ul {
 	li { margin-bottom: 0.5em; }
-	&.bullet { list-style: disc outside; }
+	&.bullet { list-style: disc outside;
+		li { list-style: disc outside; }
+	}
+	&.flat { list-style: none;
+		li { list-style: none; }
+	}
 	&.flush {
 		margin: 0 0 1ex 0;
 		padding: 0;
 		li {
-			margin: 0 0 0.5ex; 
+			margin: 0 0 0.5ex;
 			padding: 0;
 		}
 		ul { margin: 0 1em;
@@ -151,7 +156,7 @@ ul { list-style: none;
 	}
 }
 
-img { 
+img {
 	border: none;
 	vertical-align: bottom;
 }
@@ -191,7 +196,7 @@ blockquote {
 	cursor: help;
 	span { display: none }
 	&:hover span { /*the span will display just on :hover state*/
-		z-index:		1; 
+		z-index:		1;
 	    display:		block;
 	    position:		absolute;
 	    top:			1em; /* 1.6em; is prettier a bit, but 1em allows user to mouse in to it easily and thus click links etc */
@@ -209,7 +214,7 @@ blockquote {
 }
 
 .highlight { background-color: #ffa;
-	&:hover{ background-color: #ff6; 
+	&:hover{ background-color: #ff6;
 		span { background-color: #ffe; }
 	}
 }
@@ -219,7 +224,7 @@ blockquote {
 	padding:	.3em .4em;
 	margin:		0 auto .5em;
 	clear:		both;
-	max-width:	46.923em; /* 610/13 */  
+	max-width:	46.923em; /* 610/13 */
 	*max-width:	45.750em; /* 610/13.3333 - for IE */
 	&.error {
 		border: thin solid #8b0000;

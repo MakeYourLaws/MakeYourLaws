@@ -4,14 +4,14 @@ Rack::Attack.blacklist('allow2ban login scrapers') do |req|
   # `filter` returns false value if request is to your login page (but still
   # increments the count) so request below the limit are not blocked until
   # they hit the limit.  At that point, filter will return true and block.
-  Rack::Attack::Allow2Ban.filter(req.ip, :maxretry => 10, :findtime => 1.minute, :bantime => 1.hour) do
+  Rack::Attack::Allow2Ban.filter(req.ip, maxretry: 10, findtime: 1.minute, bantime: 1.hour) do
     # The count for the IP is incremented if the return value is truthy.
-    req.post? and req.path =~ /\A\/users/
+    req.post? && req.path =~ /\A\/users/
   end
 end
 
 # Throttle requests to 5 requests per second per ip
-Rack::Attack.throttle('req/ip', :limit => 5, :period => 1.second) do |req|
+Rack::Attack.throttle('req/ip', limit: 5, period: 1.second) do |req|
   # If the return value is truthy, the cache key for the return value
   # is incremented and compared with the limit. In this case:
   #   "rack::attack:#{Time.now.to_i/1.second}:req/ip:#{req.ip}"
