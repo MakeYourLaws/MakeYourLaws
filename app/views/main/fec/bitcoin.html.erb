@@ -2,9 +2,13 @@
 
 <% cache do %>
 
+<p class="flash notice">
+	The <a href="#draft_c">third draft</a> was unanimously approved. You can see our <a href="https://www.youtube.com/watch?v=TXeXNTdfAek">live hangout</a> of the meeting on YouTube. We'll post more detailed updates soon.
+</p>
+
 <p class="c b">
-	The first FEC hearing on this request is scheduled for <s><a href="http://fec.gov/agenda/2014/agenda20140403.shtml">April 3<sup>rd</sup></a></s> <a href="http://fec.gov/agenda/2014/agenda20140423.shtml">April 23<sup>rd</sup></a>.
-	<br/><%= link_to "Google Doc of our full request", fec_bitcoin_aor_path, :target => 'blank' %> - <a href="#docs">AO 2014-02 official documents</a></p>
+	<%= link_to "Our request", fec_bitcoin_aor_path, :target => 'blank' %> | <a href="#drafts">Drafts &amp; our response</a> | <a href="#docs">Official docs</a> | <%= link_to "Orgs taking BTC", fec_bitcoin_pacs_path %> | <%= link_to "Previous BTC AOR", fec_bitcoin_caf_path%>
+</p>
 
 <p>Recently, the FEC <%= link_to "was asked to consider", fec_bitcoin_caf_path %> whether <a href="http://en.wikipedia.org/wiki/Bitcoin">Bitcoins</a> should be allowed in political contributions. Because the PAC requesting to use Bitcoins wasn't able to explain how they would know who made the contributions, the FEC ultimately deadlocked on their <a href="http://www.fec.gov/pages/brochures/ao.shtml" target="_blank">advisory opinion</a> request (AOR). In the meantime, other political committees are <%= link_to "already accepting Bitcoin", fec_bitcoin_pacs_path %>, without any guidelines for how to do so properly.</p>
 
@@ -41,7 +45,7 @@
 
 <p>A 501(c)4 is only supposed to do "issue advocacy" (e.g. "Yes on Proposition X" type campaigns, lobbying, etc). In doing so, they are allowed to accept totally anonymous money. By contrast, PACs affect political elections, and anyone doing so is required to only use money from openly disclosed, non-foreign sources.</p>
 
-<p>There's currently a <a href="https://en.wikipedia.org/wiki/501(c)_organization#501.28c.29.284.29">giant loophole</a> in that system which lets 501(c)4s effectively bypass that restriction and give up to half of their assets to a SuperPAC, which can then use the money to run political ads — even though the ultimate contributors aren't reported and might not even be legally allowed to influence US elections. (The IRS is <a href="https://www.federalregister.gov/articles/2013/11/29/2013-28492/guidance-for-tax-exempt-social-welfare-organizations-on-candidate-related-political-activities" target="_blank">currently considering closing</a> this loophole.) Because 501(c)4 contributions may ultimately originate from a totally anonymous third party or a foreign national, especially in the case of Bitcoin, we believe that a PAC shouldn't accept any Bitcoin contributions from a 501(c)4.</p>
+<p>There's currently a <a href="https://en.wikipedia.org/wiki/501(c)_organization#501.28c.29.284.29">giant loophole</a> in that system which lets 501(c)4s effectively bypass that restriction and give up to half of their assets to a SuperPAC, which can then use the money to run political ads — even though the ultimate contributors aren't reported and might not even be legally allowed to influence US elections. (The IRS is <a href="http://www.regulations.gov/#!docketDetail;D=IRS-2013-0038" target="_blank">currently considering closing</a> this loophole.) Because 501(c)4 contributions may ultimately originate from a totally anonymous third party or a foreign national, especially in the case of Bitcoin, we believe that a PAC shouldn't accept any Bitcoin contributions from a 501(c)4.</p>
 
 <p>We feel that it should be fine for a PAC to use Bitcoin to buy food, pay salaries, and other relatively less sensitive items — but that money spent on advertising, political contributions, etc., should go through better regulated, traditional banking channels, which are easier to audit when necessary.</p>
 
@@ -60,29 +64,97 @@
 
 <p>We intend to raise some of these issues in a future AOR, when we have a specific situation to address (e.g. if we receive an anonymous Bitcoin contribution). Some issues (like refunds or a cap on the total amount given) might be addressable through an "as applied" interpretation of existing regulations, or might require regulatory or legal changes.</p>
 
+
+<a name="drafts"></a>
+<h2><a href="#drafts">FEC's draft opinions and our comments on them</a></h2>
+
+<p>The FEC has so far issued two drafts, <a href="http://saos.fec.gov/aodocs/201402.pdf">A</a> and <a href="http://saos.fec.gov/aodocs/201402_1.pdf">B</a>. We <a href="https://docs.google.com/document/d/125Oyen0EdpVQ_uWWyO5licLbukxoaijcD0ykteLhG5Q/edit">filed comments</a> on both. Here's a summary of the major points; please read the full docs for details.
+
+<ol>
+	<li><a name="draft_a"></a>
+		<h3><a href="http://saos.fec.gov/aodocs/201402.pdf">Draft A</a></h3>
+		<ul>
+			<li>We may accept and refund Bitcoins per our policy above.</li>
+			<li>Bitcoins may be treated as in-kind contributions.</li>
+			<li>We may both hold and buy Bitcoins.</li>
+			<li>We may expend Bitcoin per our policy above, but only from Bitcoins we receive as contributions and hold unliquidated — not from Bitcoins we purchase.</li>
+			<li>Bitcoin is valued at either at the market price at the time of transaction or at the actual price given by our Bitcoin processor (if converted to currency "contemporaneously").</li>
+		</ul>
+	</li>
+	<li><a name="draft_b"></a>
+		<h3><a href="http://saos.fec.gov/aodocs/201402_1.pdf">Draft B</a></h3>
+		<ul>
+			<li>We may accept and refund Bitcoins per our policy above.</li>
+			<li>Bitcoins are not currency <em>per se</em>, but must be treated like currency contributions.</li>
+			<li>We may not hold Bitcoin and must immediately convert it to currency held in a depository institution (e.g. a bank). However, we may buy Bitcoins for investment purposes.</li>
+			<li>We may not make direct expenditures with Bitcoin at all.</li>
+			<li>Bitcoin is valued at the market price at the time we first receive notice of the authorization or completed transfer (even if it changes price between receipt and contemporaneous liquidation).</li>
+			<li>Bitcoin contributions <em>must</em> be subject to our proposed $100 limit.</li>
+			<li>We must dispose of un-identified Bitcoin contributions to permitted recipients (e.g. a 501(c)4, 501(c)3, or the US Treasury).</li>
+		</ul>
+	</li>
+	<li>
+		<h3><a href="https://docs.google.com/document/d/125Oyen0EdpVQ_uWWyO5licLbukxoaijcD0ykteLhG5Q/edit">Our comments on drafts A and B</a></h3>
+		<ul>
+			<li><h3>Differences between the two drafts</h3>
+				<ul>
+					<li><p>Bitcoin is cash-like in terms of difficulty to audit, but definitely <em>not</em> currency/cash/money; it's more like gold or silver pieces. Treating it as "cash" more broadly would be very problematic (see our <%= link_to "comments on the previous Bitcoin AOR", fec_bitcoin_caf_path %>, first comment, p 7-8).</p>
+						<p>Our proposed compromise: we should be <em>required</em> to have the $100 limit (as in B), but allowed to expend non-liquidated contributions and treat Bitcoin as an in-kind contribution (as in A).</p>
+						<p>A further compromise could be made by limiting Bitcoin <em>expenditures</em> to $100 too (like the limit on <a href="http://www.law.cornell.edu/cfr/text/11/102.11">petty cash</a>).</p></li>
+					<li>We prefer A's valuation method; B's clause for disposal of unidentified contributions; and B's reporting method for immediate conversions.</li>
+				</ul>
+			</li>
+
+			<li><h3>Other issues with both drafts</h3>
+				<ul>
+					<li>The opinion should use the term "virtual currency" to describe Bitcoin, not "currency", since the latter would be confusing (it's not accurate and is a legally defined term in the FECA).</li>
+					<li>We should always be allowed to pay normal <a href="http://bitcoinfees.com">transaction fees</a> (including to anonymous Bitcoin miners), in Bitcoin.</li>
+					<li>We should be allowed to deduct the cost of making a refund (e.g. of an excessive donation) from the refund itself, and if that's more than the refund, dispose of it to a c4/c3/etc.</li>
+					<li>We should be allowed to deduct the cost of processing an <%= link_to "earmarked", fec_earmarks_path(anchor: 'earmarks') %> contribution from the amount we disburse to the recipient (since we're not the ones even receiving the money).</li>
+					<li>We shouldn't have to connect a sale of Bitcoin to specific contributions, since that might not even be possible.</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li><a name="draft_c"></a>
+		<h3><a href="http://saos.fec.gov/aodocs/201402_2.pdf">Draft C</a></h3>
+		<ul>
+			<li>We may accept and refund Bitcoins per our policy above.</li>
+			<li>Bitcoins may be treated as in-kind contributions.</li>
+			<li>We may both hold and buy Bitcoins.</li>
+			<li>Deadlock on whether we can expend Bitcoins.</li>
+			<li>No comment on our $100 limit (i.e. it is part of the circumstances of the request, but the opinion does not say whether it is required or not).</li>
+			<li>Bitcoin is valued at either at the market price at the time of transaction or at the actual price given by our Bitcoin processor (if converted to currency "contemporaneously").</li>
+		</ul>
+	</li>
+</ol>
+
 <a name="comment"></a>
 <h2><a href="#comment">How you can get involved</a></h2>
 
-<p>We want to know what you think, and the FEC does too.</p>
+<p><a href="#draft_c">Draft C</a> was unanimously approved by the FEC on May 8th.</p>
 
-<p>To tell us informally, just email <a href="mailto:team@makeyourlaws.org?subject=Comments%20on%20bitcoin%20AOR">team@makeyourlaws.org</a> or comment on the <%= link_to "Google doc", fec_bitcoin_aor_path, :target => 'blank' %>.</p>
+<p>Please <%= link_to "create an account", signup_path %>, and we'll let you know when we launch the Make Your Laws democratized campaign finance website and invite you to the beta. (What you see now is only a placeholder.)</p>
 
-<p>If you <%= link_to "create an account", signup_path %>, we'll also let you know when we launch the Make Your Laws democratized campaign finance website and invite you to the beta. (What you see now is only a placeholder.)</p>
+<p>You can always email us at <a href="mailto:team@makeyourlaws.org?subject=Helping%20out%20with%20MYL">team@makeyourlaws.org</a> if you'd like to help us get launched sooner. Coders, designers, &amp; financial backers would all be very helpful. See <a href="/files/2min.pdf">the 4-slide pitch</a> to get the tl;dr of what's coming up, our tech stack, and how you could help.</p>
 
-<br/>
-
-<p>To tell the FEC, just email <a href="mailto:ao@fec.gov?subject=Comments%20AO%202014-02">ao@fec.gov</a> or fax the FEC's Secretary at +1 (202) 208-3333 and Office of General Counsel at +1 (202) 219-3923.</p>
-
-<p>Give your name (and the name of any organization you represent), and mention the formal name of our request ("AO 2014-02"). Be clear and polite — explain both how you believe Bitcoins should (or shouldn't) be treated in campaign finance, and why.</p>
-
-<p>If you can, it's better to make a more formal-looking comment. General email comments usually get lumped together, whereas if you take a little extra time to make a good-looking PDF and explain your reasoning in more detail, it'll appear separately and be looked at more seriously. There are no mandatory formatting requirements, but we suggest you use 12 pt Arial w/ 1.5 line spacing for body text; 1 inch margin; and have a header saying "(your [group's] name) comments on AO 2014-02" &amp; the page # / # total pages.</p>
 
 
 <a name="docs"></a>
 <h2><a href="#docs">Official filings in AO 2014-02 (MYL PAC re Bitcoin)</a></h2>
-
+<p>2014-05-08: Official statements released by FEC <a href="http://saos.fec.gov/aodocs/1256452.pdf">Chair Goodman (R)</a> and <a href="http://saos.fec.gov/aodocs/1256453.pdf">Vice-Chair Ravel, Commissioner Walther, &amp; Commissioner Weintraub (D)</a>.</p>
+<p>2014-05-08: <a href="http://saos.fec.gov/aodocs/2014-02.pdf">Final advisory opinion 2014-02</a> issued.
+<p>2014-05-08: The FEC unanimously approved <a href="#draft_c">Draft C</a>. (<a href="https://www.youtube.com/watch?v=TXeXNTdfAek">MYL video, <a href="http://www.fec.gov/audio/2014/2014050800.mp3">FEC audio</a>)</p>
+<p>2014-05-07: The FEC issued its <a href="http://saos.fec.gov/aodocs/201402_2.pdf">third draft opinion</a>.</p>
+<p>2014-05-07: The <a href="http://saos.fec.gov/aodocs/1256435.pdf">Bitcoin Foundation submitted comments</a>.</p>
+<p>2014-04-23: The FEC held an <a href="http://www.fec.gov/agenda/2014/agenda20140423.shtml">open meeting</a> (<a href="https://www.youtube.com/watch?v=R9QhBI2onLE">MYL video</a>, <a href="http://www.fec.gov/audio/2014/2014042304.mp3">FEC audio</a>).
+<p>2014-04-22: We filed <a href="https://docs.google.com/document/d/1fROdNRFL8BEqVN-6rdZeNZyN8WD2vBMYCHP4P12pxKE/">comments</a> responding to Louis Joyce's comments. (<a href="http://saos.fec.gov/aodocs/1255838.pdf">FEC scan version</a>)</p>
+<p>2014-04-20: We filed <a href="https://docs.google.com/document/d/125Oyen0EdpVQ_uWWyO5licLbukxoaijcD0ykteLhG5Q/">comments</a> on drafts A and B. (<a href="http://saos.fec.gov/aodocs/1255669.pdf">FEC scan version</a>)</p>
+<p>2014-04-18: <a href="http://saos.fec.gov/aodocs/1255510.pdf">Louis Joyce filed comments</a> on drafts A and B.</p>
+<p>2014-04-17: The FEC published its <a href="http://saos.fec.gov/aodocs/201402_1.pdf">second draft opinion</a>.</p>
+<p>2014-04-16: The FEC published its <a href="http://saos.fec.gov/aodocs/201402.pdf">first draft opinion</a>.</p>
 <p>2014-03-28: We <a href="http://saos.fec.gov/aodocs/1254119.pdf">granted</a> FEC's request for an extension of time to respond until May 9th.</p>
 <p>2014-02-24: <a href="http://saos.fec.gov/aodocs/1252134.pdf">Supplemental information</a> re. our $100 limit on Bitcoin contributions</p>
-<p>2014-02-12: <a href="http://saos.fec.gov/aodocs/1251666.pdf">Our request</a> (the <%= link_to "Google doc", fec_bitcoin_aor_path, :target => 'blank' %> is more readable and has usable links)</p>
+<p>2014-02-12: We submitted <%= link_to "our original request", fec_bitcoin_aor_path, :target => 'blank' %>. (<a href="http://saos.fec.gov/aodocs/1251666.pdf">FEC scan version</a>)</p>
 
 <% end %>

@@ -1,8 +1,5 @@
 <%= t "Finish your registration" %>
 
-<p>We received some information from <%= resource.identities.first.provider.camelcase %>, but we need you to confirm
-	that you want to use what they gave us, and to fill in the rest.</p>
-	
-<p>Please note that adding a password is <b>optional</b>. You can always log in using <%= resource.identities.first.provider.camelcase %>. Providing a password just gives you the alternative to also log in directly, and provides extra security for your account.</p>
+<p>We received some information from <%= resource.identities.first.provider.camelcase %>, but we need you to confirm that you want to use what they gave us, and to fill in the rest.</p>
 
 <%= render :partial => 'users/registrations/signup_form', :locals => {:passwords_optional => true} %>

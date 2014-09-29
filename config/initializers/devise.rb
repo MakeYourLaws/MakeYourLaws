@@ -5,7 +5,7 @@ Devise.setup do |config|
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   config.secret_key = Keys.get('devise_secret')
-  
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -13,8 +13,8 @@ Devise.setup do |config|
   config.mailer_sender = 'Make Your Laws <noreply@makeyourlaws.org>'
 
   # Configure the class responsible to send e-mails.
-  config.mailer = "Devise::Mailer"
-  
+  config.mailer = 'Devise::Mailer'
+
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
@@ -29,7 +29,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [ :login_or_email ]
+  config.authentication_keys = [:email] # login_or_email
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -41,12 +41,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :login_or_email, :email, :login ]
+  config.case_insensitive_keys = [:email, :login] # :login_or_email
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :login_or_email, :email, :login ]
+  config.strip_whitespace_keys = [:email, :login] # :login_or_email
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -84,7 +84,7 @@ Devise.setup do |config|
   # requests for sign in and sign up, you need to get a new CSRF token
   # from the server. You can disable this option at your own risk.
   # config.clean_up_csrf_token_on_authentication = true
-  
+
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
   # using other encryptors, it sets how many times you want the password re-encrypted.
@@ -95,7 +95,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 20
 
   # Setup a pepper to generate the encrypted password.
-  pepper_file = File.join(Rails.root, "config", "keys", "devise_pepper")
+  pepper_file = File.join(Rails.root, 'config', 'keys', 'devise_pepper')
   config.pepper = IO.read(pepper_file) if File.exist?(pepper_file)
 
   # ==> Configuration for :confirmable
@@ -113,17 +113,17 @@ Devise.setup do |config|
   # Default is nil, meaning there is no restriction on how long a user can take
   # before confirming their account.
   # config.confirm_within = 3.days
-  
+
   # If true, requires any email changes to be confirmed (exactly the same way as
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed new email is stored in
   # unconfirmed email column, and copied to email column on successful confirmation.
   config.reconfirmable = true # use unconfirmed_email to allow confirming a changed email
-                              # TODO: hack Devise to handle real 1:M emails
-  
+  # TODO: hack Devise to handle real 1:M emails
+
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]
-  
+
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
   config.remember_for = 2.weeks
@@ -133,12 +133,12 @@ Devise.setup do |config|
 
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
-  config.rememberable_options = { :secure => true }
+  config.rememberable_options = { secure: true }
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 8..128.
   config.password_length = 8..128
-  
+
   # Email regex used to validate email formats. It simply asserts that
   # an one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
@@ -148,10 +148,10 @@ Devise.setup do |config|
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
   config.timeout_in = 2.hours
-  
+
   # If true, expires auth token on session timeout.
   # config.expire_auth_token_on_timeout = false
-  
+
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.
   # :failed_attempts = Locks an account after a number of failed attempts to sign in.
@@ -174,14 +174,14 @@ Devise.setup do |config|
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
   config.unlock_in = 1.hour
-  
+
   # Warn on the last attempt before the account is locked.
   # config.last_attempt_warning = false
-  
+
   # ==> Configuration for :recoverable
   #
   # Defines which key will be used when recovering the password for an account
-  config.reset_password_keys = [ :login_or_email ]
+  config.reset_password_keys = [:email] # :login_or_email
 
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
@@ -194,7 +194,7 @@ Devise.setup do |config|
   # :authlogic_sha512 (then you should set stretches above to 20 for default behavior)
   # and :restful_authentication_sha1 (then you should set stretches to 10, and copy
   # REST_AUTH_SITE_KEY to pepper)
-  
+
   # Require the `devise-encryptable` gem when using anything other than bcrypt
   config.encryptor = :sha512
 
@@ -229,18 +229,33 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  require 'openid/store/filesystem' 
-  require "openid/fetchers"
-  OpenID.fetcher.ca_file = File.join(Rails.root, "lib", "ca-certificates.crt")
-  
-  config.omniauth :facebook, Keys.get("facebook_id"), Keys.get("facebook_secret"), :display => "popup", :scope => "email,user_location,user_religion_politics,offline_access,user_hometown"
-  config.omniauth :github, Keys.get("github_id"), Keys.get("github_secret") # no need for user write access
-  # FIXME: google_oauth2 :scope is broken. See https://github.com/zquestz/omniauth-google-oauth2/issues/8
+  require 'openid/store/filesystem'
+  require 'openid/fetchers'
+  OpenID.fetcher.ca_file = File.join(Rails.root, 'lib', 'ca-certificates.crt')
+
+  config.omniauth :facebook, Keys.get('facebook_id'), Keys.get('facebook_secret'),
+                  display: 'popup',
+                  scope:   'email,user_location,user_religion_politics,offline_access,user_hometown'
+
+  # no need for user write access
+  config.omniauth :github, Keys.get('github_id'), Keys.get('github_secret')
+
+  # FIXME: google_oauth2 :scope is broken. See
+  #  https://github.com/zquestz/omniauth-google-oauth2/issues/8
   # TODO: add plus.me to scope
-  config.omniauth :google_oauth2, Keys.get("google_id"), Keys.get("google_secret"), :name => "google"#, :scope => "userinfo.email,userinfo.profile"
-  config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'), :require => 'omniauth-openid'  # TODO: use :identifier => "http://standardprefix/" + :name to make presets for LJ et al
-  config.omniauth :twitter, Keys.get("twitter_key"), Keys.get("twitter_secret")
-  config.omniauth :paypal , Keys.get("paypal_oauth2_key"), Keys.get("paypal_oauth2_secret")
+  config.omniauth :google_oauth2, Keys.get('google_id'), Keys.get('google_secret'), name: 'google'
+  # , :scope => "userinfo.email,userinfo.profile"
+
+  # TODO: use :identifier => "http://standardprefix/" + :name to make presets for LJ et al
+  config.omniauth :open_id, store:   OpenID::Store::Filesystem.new('/tmp'),
+                            require: 'omniauth-openid'
+
+  config.omniauth :twitter, Keys.get('twitter_key'), Keys.get('twitter_secret')
+
+  config.omniauth :paypal, Keys.get('paypal_oauth2_key'), Keys.get('paypal_oauth2_secret')
+
+  config.omniauth :coinbase, Keys.get('coinbase_oauth_id'), Keys.get('coinbase_oauth_secret'),
+                  scope: 'user'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -249,7 +264,7 @@ Devise.setup do |config|
   # config.warden do |manager|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
-  # end  
+  # end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
