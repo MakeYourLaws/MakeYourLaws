@@ -144,7 +144,7 @@ gem "omniauth-twitter", '>= 0.0.10'
 gem "omniauth-paypal", '>= 1.2.1'
 gem "omniauth-coinbase"
 
-gem 'devise-async'
+# gem 'devise-async'
 
 gem 'cancan', '>= 1.6.8'
 # gem 'cantango', '>= 0.9.4.7'
