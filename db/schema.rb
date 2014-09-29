@@ -11,25 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140517213307) do
+ActiveRecord::Schema.define(version: 20140928204953) do
+
   create_table "addresses", force: true do |t|
     t.string  "country",                     default: "United States", null: false
     t.string  "street_address_1", limit: 34
     t.string  "city",             limit: 30,                           null: false
     t.string  "state",            limit: 2,                            null: false
     t.integer "zip"
-    t.float   "lat"
-    t.float   "lng"
+    t.float   "lat",              limit: 24
+    t.float   "lng",              limit: 24
   end
 
   add_index "addresses", ["country", "state", "city"], name: "index_addresses_on_country_and_state_and_city", using: :btree
   add_index "addresses", ["lat", "lng"], name: "index_addresses_on_lat_and_lng", using: :btree
 
   create_table "cart_items", force: true do |t|
-    t.integer "cart_id",      null: false
-    t.integer "committee_id", null: false
+    t.integer "cart_id",                 null: false
+    t.integer "committee_id",            null: false
     t.integer "amount_cents"
-    t.float   "proportion"
+    t.float   "proportion",   limit: 24
   end
 
   add_index "cart_items", ["cart_id", "committee_id"], name: "index_cart_items_on_cart_id_and_committee_id", unique: true, using: :btree
@@ -96,6 +97,23 @@ ActiveRecord::Schema.define(version: 20140517213307) do
 
   add_index "death_master_files", ["as_of"], name: "idx_as_of", using: :btree
   add_index "death_master_files", ["social_security_number"], name: "idx_ssn", unique: true, using: :btree
+
+  create_table "emails", force: true do |t|
+    t.string   "from_address",                        null: false
+    t.string   "reply_to_address"
+    t.string   "subject"
+    t.text     "to_address"
+    t.text     "cc_address"
+    t.text     "bcc_address"
+    t.text     "content",          limit: 2147483647
+    t.datetime "sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "emails", ["created_at"], name: "index_emails_on_created_at", using: :btree
+  add_index "emails", ["from_address", "subject"], name: "index_emails_on_from_address_and_subject", using: :btree
+  add_index "emails", ["sent_at"], name: "index_emails_on_sent_at", using: :btree
 
   create_table "fec_candidates", force: true do |t|
     t.string   "fec_id",                       limit: 9,              null: false
@@ -799,7 +817,7 @@ ActiveRecord::Schema.define(version: 20140517213307) do
     t.datetime "locked_at"
     t.string   "authentication_token"
     t.string   "name",                                null: false
-    t.string   "login",                               null: false
+    t.string   "login"
     t.integer  "lock_version",           default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -809,7 +827,7 @@ ActiveRecord::Schema.define(version: 20140517213307) do
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
+  add_index "users", ["login"], name: "index_users_on_login", using: :btree
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unconfirmed_email"], name: "index_users_on_unconfirmed_email", unique: true, using: :btree
