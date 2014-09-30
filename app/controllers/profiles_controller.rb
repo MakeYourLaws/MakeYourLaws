@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   load_and_authorize_resource
 
   def show
+    # TODO: redirect to preferred capitalization
     @profile = Profile.find(params[:id].is_a?(String) ? params[:id].downcase : params[:id].to_i)
   end
 

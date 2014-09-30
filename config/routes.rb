@@ -6,7 +6,6 @@ MakeyourlawsOrg::Application.routes.draw do
   resources :carts do
     resources :cart_items, path: 'items'
   end
-  resources :cart_items # in case there isn't a cart
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',

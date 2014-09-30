@@ -22,7 +22,7 @@ class Ability
         can :manage, [Initiative, Committee]
         # can :manage, [Payments::Paypal::Transaction], # Paypal::Preapproval],
         #     user_id: user.id
-        can :manage, [Payments::Stripe::Charge]
+        can :manage, [Payments::Stripe::Charge],
             user_id: user.id
         can :manage, [Cart, CartItem],
             user_id: user.id

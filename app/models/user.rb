@@ -10,8 +10,9 @@ class User < ActiveRecord::Base
   has_many :roles, through: :users_roles
 
   has_many :identities
-  has_many :carts
-  has_one :current_cart, -> { where(state: [:empty, :filled, :checked_out]) }, class_name: 'Cart'
+  has_many :carts, as: :owner
+  has_one :current_cart, -> { where(state: [:empty, :filled, :checked_out]) },
+    class_name: 'Cart', as: :owner
 
   extend FriendlyId
   friendly_id :email

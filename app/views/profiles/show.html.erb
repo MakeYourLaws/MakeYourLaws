@@ -1,5 +1,7 @@
 <h1><%= @profile.name %></h1>
 
+<%= render :partial => '/cart_items/new' %>
+
 <div id="avatar"><%= image_tag @profile.avatar.url(:medium) %></div>
 
 <div id="bio"><%= m @profile.bio %></div>

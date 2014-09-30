@@ -5,10 +5,11 @@ class Profile < ActiveRecord::Base
 
   extend FriendlyId
   # ID is in user's preferred capitalization, though uniqueness is case-insensitive
-  friendly_id :handle, use: :finders
+  friendly_id :handle_lowercase, use: :finders
   has_paper_trail
   strip_attributes
 
+  has_many :carts, as: :owner
   belongs_to :legal_identity # for recipients & validated identity info
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" },
