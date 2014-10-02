@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :carts
   has_one :current_cart, -> { where(state: [:empty, :filled, :checked_out]) }, class_name: 'Cart'
 
+  belongs_to :legal_identity
+
   extend FriendlyId
   friendly_id :email
 
