@@ -1,0 +1,40 @@
+<%= form_for @legal_identity, :url => legal_identities_path do |f| %>
+    <table>
+        <tr>
+            <td><%= f.label :name %></td>
+            <td>
+                <%= f.text_field :name_prefix, nil, placeholder: "Prefix", limit: 10 %>
+                <%= f.text_field :first_name, nil, placeholder: "First", limit: 50 %>
+                <%= f.text_field :middle_name, nil, placeholder: "Middle", limit: 50 %>
+                <%= f.text_field :last_name, nil, placeholder: "Last", limit: 50 %>
+                <%= f.text_field :name_suffix, nil, placeholder: "Suffix", limit: 10 %>
+            </td>
+        </tr>
+        <tr>
+            <td><%= f.label :address %></td>
+            <td>TODO: autofill w/ google</td>
+        </tr>
+        <tr>
+            <td><%= f.label :occupation %></td>
+            <td><%= f.text_field :occupation %></td>
+            TODO: radio buttons for unemployed, retired, homemaker
+        </tr>
+        <tr>
+            <td><%= f.label :employer %></td>
+            <td><%= f.text_field :employer %></td>
+            TODO: autofill all LIs who have an employee other than self
+            TODO: radio buttons for self-employed; disable for unemployed, retired, homemaker
+        </tr>
+        <tr>
+            <td><%= f.label :us_citizen_or_greencard, "I am a US citizen or lawful permanent resident (green card holder)."%></td>
+            <td><%= f.checkbox :us_citizen_or_greencard %></td>
+        </tr>
+        <tr>
+            <td><%= f.label :govt_contractor, "I am not a US government contractor."%></td>
+            <td><%= f.checkbox :govt_contractor %></td>
+        </tr>
+        TODO: before finances, check that funds are exclusively from self or joint account w/ spouse
+
+        OPTIONAL: birthdate (security / demographics); require >13yo
+    </table>
+<% end %>

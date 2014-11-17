@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929203604) do
+ActiveRecord::Schema.define(version: 20140930200004) do
+
+  create_table "address_usages", force: true do |t|
+    t.integer  "legal_identity_id", null: false
+    t.integer  "address_id",        null: false
+    t.string   "usage"
+    t.date     "from"
+    t.date     "to"
+    t.datetime "confirmed"
+    t.integer  "lock_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "address_usages", ["address_id", "legal_identity_id"], name: "index_address_usages_on_address_id_and_legal_identity_id", using: :btree
+  add_index "address_usages", ["legal_identity_id", "usage"], name: "index_address_usages_on_legal_identity_id_and_usage", using: :btree
 
   create_table "addresses", force: true do |t|
     t.string  "country",                     default: "United States", null: false
@@ -26,28 +41,66 @@ ActiveRecord::Schema.define(version: 20140929203604) do
   add_index "addresses", ["country", "state", "city"], name: "index_addresses_on_country_and_state_and_city", using: :btree
   add_index "addresses", ["lat", "lng"], name: "index_addresses_on_lat_and_lng", using: :btree
 
-  create_table "cart_items", force: true do |t|
-    t.integer "cart_id",                 null: false
-    t.integer "committee_id",            null: false
-    t.integer "amount_cents"
-    t.float   "proportion",   limit: 24
+  create_table "bit_pay_invoices", force: true do |t|
+    t.string   "bitpay_id"
+    t.string   "url"
+    t.string   "pos_data",        limit: 100
+    t.string   "state",           limit: 10,                           default: "new", null: false
+    t.decimal  "price",                       precision: 10, scale: 0,                 null: false
+    t.string   "currency",        limit: 3,                                            null: false
+    t.string   "order_id",        limit: 100
+    t.string   "item_desc",       limit: 100
+    t.string   "item_code",       limit: 100
+    t.boolean  "physical",                                             default: false, null: false
+    t.string   "buyer_name",      limit: 100
+    t.string   "buyer_address_1", limit: 100
+    t.string   "buyer_address_2", limit: 100
+    t.string   "buyer_city",      limit: 100
+    t.string   "buyer_state",     limit: 100
+    t.string   "buyer_zip",       limit: 100
+    t.string   "buyer_country",   limit: 100
+    t.string   "buyer_email",     limit: 100
+    t.string   "buyer_phone",     limit: 100
+    t.decimal  "btc_price",                   precision: 10, scale: 0
+    t.datetime "invoice_time"
+    t.datetime "expiration_time"
+    t.datetime "current_time"
   end
 
-  add_index "cart_items", ["cart_id", "committee_id"], name: "index_cart_items_on_cart_id_and_committee_id", unique: true, using: :btree
+  create_table "bit_pay_rates", force: true do |t|
+    t.string  "name"
+    t.string  "code", limit: 3
+    t.decimal "rate",           precision: 10, scale: 0
+  end
+
+  create_table "cart_items", force: true do |t|
+    t.integer "cart_id",                  null: false
+    t.float   "proportion",   limit: 24
+    t.integer "item_id",                  null: false
+    t.string  "item_type",                null: false
+    t.text    "reason"
+    t.string  "short_reason", limit: 140
+    t.text    "message"
+  end
+
+  add_index "cart_items", ["cart_id", "item_type", "item_id"], name: "index_cart_items_on_cart_id_and_item_type_and_item_id", unique: true, using: :btree
+  add_index "cart_items", ["item_type", "item_id"], name: "index_cart_items_on_item_type_and_item_id", using: :btree
 
   create_table "carts", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "disbursement_id"
+    t.integer  "owner_id"
     t.string   "state"
     t.integer  "cart_items_count", default: 0
-    t.integer  "total_cents"
-    t.integer  "currency"
     t.integer  "lock_version"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "owner_type"
+    t.string   "name"
+    t.text     "reason"
+    t.text     "short_reason"
   end
 
-  add_index "carts", ["user_id"], name: "index_carts_on_user_id", using: :btree
+  add_index "carts", ["owner_id", "owner_type", "name"], name: "index_carts_on_owner_id_and_owner_type_and_name", using: :btree
+  add_index "carts", ["state"], name: "index_carts_on_state", using: :btree
 
   create_table "committees", force: true do |t|
     t.integer  "legal_committee_id"
@@ -270,6 +323,46 @@ ActiveRecord::Schema.define(version: 20140929203604) do
   add_index "initiatives", ["status"], name: "index_initiatives_on_status", using: :btree
   add_index "initiatives", ["title"], name: "index_initiatives_on_title", using: :btree
 
+  create_table "legal_identities", force: true do |t|
+    t.boolean  "human",                   null: false
+    t.date     "birthdate"
+    t.integer  "irs_id"
+    t.boolean  "govt_contractor"
+    t.boolean  "us_citizen_or_greencard"
+    t.integer  "lock_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "legal_identities", ["irs_id"], name: "index_legal_identities_on_irs_id", unique: true, using: :btree
+
+  create_table "legal_name_usages", force: true do |t|
+    t.integer  "legal_name_id",     null: false
+    t.integer  "legal_identity_id", null: false
+    t.date     "from"
+    t.date     "to"
+    t.string   "authority"
+    t.datetime "confirmed"
+    t.integer  "lock_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "legal_name_usages", ["legal_identity_id"], name: "index_legal_name_usages_on_legal_identity_id", using: :btree
+  add_index "legal_name_usages", ["legal_name_id"], name: "index_legal_name_usages_on_legal_name_id", using: :btree
+
+  create_table "legal_names", force: true do |t|
+    t.string "full_name"
+    t.string "name_prefix"
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "name_suffix"
+  end
+
+  add_index "legal_names", ["full_name"], name: "index_legal_names_on_full_name", using: :btree
+  add_index "legal_names", ["last_name", "first_name"], name: "index_legal_names_on_last_name_and_first_name", using: :btree
+
   create_table "links", force: true do |t|
     t.string   "url",                             null: false
     t.integer  "duplicate_of_id"
@@ -350,6 +443,27 @@ ActiveRecord::Schema.define(version: 20140929203604) do
   add_index "ny_voters", ["town_city"], name: "index_ny_voters_on_town_city", using: :btree
   add_index "ny_voters", ["voter_id"], name: "index_ny_voters_on_voter_id", unique: true, using: :btree
   add_index "ny_voters", ["ward"], name: "index_ny_voters_on_ward", using: :btree
+
+  create_table "occupation_usages", force: true do |t|
+    t.integer  "employee_id",   null: false
+    t.integer  "employer_id"
+    t.integer  "occupation_id", null: false
+    t.date     "from"
+    t.date     "to"
+    t.datetime "confirmed"
+    t.integer  "lock_version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "occupation_usages", ["employee_id", "employer_id"], name: "index_occupation_usages_on_employee_id_and_employer_id", using: :btree
+  add_index "occupation_usages", ["employer_id", "occupation_id"], name: "index_occupation_usages_on_employer_id_and_occupation_id", using: :btree
+
+  create_table "occupations", force: true do |t|
+    t.string "name", null: false
+  end
+
+  add_index "occupations", ["name"], name: "index_occupations_on_name", using: :btree
 
   create_table "ofac_sdns", force: true do |t|
     t.text     "name"

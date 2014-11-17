@@ -3,8 +3,6 @@ class CreateLegalIdentities < ActiveRecord::Migration
     create_table :legal_identities do |t|
       t.boolean :human, :null => false
 
-      t.string :legal_name # cached version of their (full) main legal name; set through usages
-
       # Both humans and corporations
       t.date :birthdate # i.e. 'incorporation date' for corps
 
@@ -21,8 +19,6 @@ class CreateLegalIdentities < ActiveRecord::Migration
       t.timestamps
 
       t.index :irs_id, :unique => true # allows nil in most DBs, incl mysql
-      t.index :legal_name  # for autocomplete
-      t.index :occupation
     end
 
     # Doesn't belong exclusively to any individual (people share the same name)
@@ -56,6 +52,9 @@ class CreateLegalIdentities < ActiveRecord::Migration
 
       t.integer :lock_version
       t.timestamps
+
+      t.index [:employer_id, :occupation_id]
+      t.index [:employee_id, :employer_id]
     end
 
     create_table :address_usages do |t|
@@ -69,8 +68,8 @@ class CreateLegalIdentities < ActiveRecord::Migration
       t.integer :lock_version
       t.timestamps
 
-      t.index [:legal_identity, :usage] # look up the _ address for someone
-      t.index [:address. :legal_identity] # look up who is at the same address
+      t.index [:legal_identity_id, :usage] # look up the _ address for someone
+      t.index [:address_id, :legal_identity_id] # look up who is at the same address
     end
 
     create_table :legal_name_usages do |t|
@@ -84,8 +83,8 @@ class CreateLegalIdentities < ActiveRecord::Migration
       t.integer :lock_version
       t.timestamps
 
-      t.index :legal_identity
-      t.index :legal_name
+      t.index :legal_identity_id
+      t.index :legal_name_id
     end
 
   end
