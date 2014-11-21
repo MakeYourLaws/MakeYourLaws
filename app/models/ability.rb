@@ -7,7 +7,6 @@ class Ability
     # resource: :all or class name
     # final: conditions hash
 
-    can :read, [Fec::Candidate, Fec::Committee, Initiative]
     # can :read, User
     can :create, [Payments::Paypal::Transaction] # , Paypal::Preapproval]
     can :create, [Payments::Stripe::Charge] # , Paypal::Preapproval]
@@ -17,6 +16,9 @@ class Ability
       can :manage, User, id: user.id
       can :manage, :all if user.is_admin?
       if user.is_alpha?
+        can :read, [Fec::Candidate, Fec::Committee, Initiative]
+        can :create, Profile
+        can :read, Profile
         can :manage, [Initiative, Committee]
         can :manage, [Payments::Paypal::Transaction, Cart], # Paypal::Preapproval],
             user_id: user.id
