@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140928204953) do
+ActiveRecord::Schema.define(version: 20140929203604) do
 
   create_table "addresses", force: true do |t|
     t.string  "country",                     default: "United States", null: false
@@ -454,6 +454,25 @@ ActiveRecord::Schema.define(version: 20140928204953) do
   add_index "paypal_transactions", ["status"], name: "index_paypal_transactions_on_status", using: :btree
   add_index "paypal_transactions", ["user_id"], name: "index_paypal_transactions_on_user_id", using: :btree
 
+  create_table "profiles", force: true do |t|
+    t.string   "handle",              null: false
+    t.string   "handle_lowercase",    null: false
+    t.string   "name",                null: false
+    t.text     "bio"
+    t.string   "type",                null: false
+    t.integer  "legal_identity_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.text     "avatar_meta"
+    t.string   "avatar_fingerprint"
+  end
+
+  add_index "profiles", ["handle_lowercase"], name: "index_profiles_on_handle_lowercase", unique: true, using: :btree
+  add_index "profiles", ["legal_identity_id"], name: "index_profiles_on_legal_identity_id", using: :btree
+  add_index "profiles", ["name"], name: "index_profiles_on_name", using: :btree
+
   create_table "roles", force: true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -817,7 +836,6 @@ ActiveRecord::Schema.define(version: 20140928204953) do
     t.datetime "locked_at"
     t.string   "authentication_token"
     t.string   "name",                                null: false
-    t.string   "login"
     t.integer  "lock_version",           default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -827,7 +845,6 @@ ActiveRecord::Schema.define(version: 20140928204953) do
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["login"], name: "index_users_on_login", using: :btree
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unconfirmed_email"], name: "index_users_on_unconfirmed_email", unique: true, using: :btree

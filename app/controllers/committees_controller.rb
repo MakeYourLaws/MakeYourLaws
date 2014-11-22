@@ -7,10 +7,8 @@ class CommitteesController < ApplicationController
   end
 
   def create
-# debugger
     @committee = Committee.new committee_params
     authorize! :create, @committee
-
     if @committee.save
       redirect_to @committee
     else
@@ -43,7 +41,6 @@ class CommitteesController < ApplicationController
   def update
     @committee = Committee.find params[:id]
     authorize! :update, @committee
-
     if @committee.update_attributes committee_params
       redirect_to @committee
     else
