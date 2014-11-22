@@ -1,0 +1,28 @@
+<%= form_for @profile, :url => profile_path(@profile), :method => :patch, :html => { :multipart => true } do |f| %>
+    <table>
+        <tr>
+            <td><%= f.label :name, :class => 'required' %></td>
+            <td><%= f.text_field :name, :'x-autocompletetype' => 'name-full' %></td>
+        </tr>
+    	<tr>
+    	  <td class="small" colspan=2>This is the name will be shown on your public profile.</td>
+    	</tr>
+        <tr>
+            <td><%= f.label :avatar %></td>
+            <td><%= f.file_field :avatar %></td>
+        </tr>
+        <tr>
+            <td><%= f.label :bio %></td>
+            <td><%= f.text_area :bio %></td>
+        </tr>
+    	<tr>
+    	  <td class="small" colspan=2>Uses Markdown formatting.</td>
+    	</tr>
+        <% # TODO: associate legal identity
+        %>
+        <tr>
+          <td/>
+          <td><%= f.submit "Edit profile", data: { disable_with: "Processing…"} %></td>
+        </tr>
+    </table>
+<% end %>
