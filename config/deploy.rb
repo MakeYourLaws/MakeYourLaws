@@ -138,14 +138,25 @@ namespace :deploy do
   desc "Set permissions on shared folders"
   task :set_permissions do
     on roles(:web) do
-      execute "chmod -R u=rwX,g=rX,o= #{shared_path}/"
-      execute "chmod o=rX #{shared_path}/"
-      execute "chmod -R o=rX #{shared_path}/public/"
+      # execute "chmod -R u=rwX,g=rX,o= #{shared_path}/"
+      # execute "chmod o=rX #{shared_path}/"
+      # execute "chmod -R o=rX #{shared_path}/public/"
+
+      ['bin', 'bundle', 'config', 'db', 'log', 'tmp', 'tmp/cache', 'tmp/pids', 'vendor', 'vendor/bundle'].each do |i|
+        execute "chmod 2751 #{shared_path}/#{i}"
+      end
+      ['tmp/sockets', 'public'].each do |i|
+        execute "chmod 2755 #{shared_path}/#{i}"
+      end
+      execute "chmod 2775 #{shared_path}/tmp/sockets/*.sock"
     end
   end
 
   before :updating, 'deploy:sync_keys'
   after :sync_keys, 'deploy:set_permissions'
+
+  before :restart, 'deploy:set_permissions'
+  after :restart, 'deploy:set_permissions'
 
   after :publishing, 'deploy:restart'
 
