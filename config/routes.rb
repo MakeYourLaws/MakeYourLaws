@@ -121,6 +121,11 @@ MakeyourlawsOrg::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'main#index'
 
+  # Last so that it has minimal URLs but doesn't override anything
+  resources :profiles, except: [:show, :update, :edit, :destroy]
+  resources :profiles, only: [:show, :update, :edit, :destroy], path: '/'
+  # get '/:id', to: 'profiles#show' #, as: :profile
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

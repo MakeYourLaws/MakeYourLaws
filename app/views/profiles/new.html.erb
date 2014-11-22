@@ -1,0 +1,35 @@
+<%= form_for @profile, :url => profiles_path, :html => { :multipart => true } do |f| %>
+    <table>
+        <tr>
+            <td><%= f.label :handle, :class => 'required' %></td>
+            <td><%= f.text_field :handle %></td>
+        </tr>
+    	<tr>
+    	  <td class="small" colspan=2>This will be your profile's URL - e.g. https://makeyourlaws.org/YourHandleHere. Must start with a letter or digit, and include only letters, digits, or underscores. It can't be changed, so choose carefully.</td>
+    	</tr>
+        <tr>
+            <td><%= f.label :name, :class => 'required' %></td>
+            <td><%= f.text_field :name, :'x-autocompletetype' => 'name-full' %></td>
+        </tr>
+    	<tr>
+    	  <td class="small" colspan=2>This is the name will be shown on your public profile.</td>
+    	</tr>
+        <tr>
+            <td><%= f.label :avatar %></td>
+            <td><%= f.file_field :avatar %></td>
+        </tr>
+        <tr>
+            <td><%= f.label :bio %></td>
+            <td><%= f.text_area :bio %></td>
+        </tr>
+    	<tr>
+    	  <td class="small" colspan=2>Uses Markdown formatting.</td>
+    	</tr>
+        <% # TODO: associate legal identity
+        %>
+        <tr>
+          <td/>
+          <td><%= f.submit "Create profile", data: { disable_with: "Processing…"} %></td>
+        </tr>
+    </table>
+<% end %>

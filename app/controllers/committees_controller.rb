@@ -5,7 +5,7 @@ class CommitteesController < ApplicationController
   end
 
   def create
-    @committee = Committee.new params[:committee]
+    @committee = Committee.new committee_params
     if @committee.save
       redirect_to @committee
     else
@@ -30,7 +30,7 @@ class CommitteesController < ApplicationController
   end
 
   def update
-    if @committee.update_attributes params[:committee]
+    if @committee.update_attributes committee_params
       redirect_to @committee
     else
       flash[:error] = 'Error saving committee'
