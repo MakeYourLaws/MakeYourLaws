@@ -106,6 +106,9 @@ end
 gem 'Empact-activerecord-import', '>= 0.4.1' # zdennis hasn't yet imported the import profiling fix; this is a bugfix tracking fork
 gem "paper_trail", '>= 3.0.0'
 
+gem 'paperclip'
+gem 'paperclip-meta'
+
 gem 'groupdate' # https://github.com/ankane/groupdate
 gem 'mailhopper' # https://github.com/cerebris/mailhopper
 
@@ -146,7 +149,7 @@ gem "omniauth-coinbase"
 
 # gem 'devise-async'
 
-gem 'cancan', '>= 1.6.8'
+gem 'cancancan' # original cancan went inactive
 # gem 'cantango', '>= 0.9.4.7'
 gem 'rolify'
 
