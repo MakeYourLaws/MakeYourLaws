@@ -13,3 +13,4 @@ vendor/cache/
 *.sql
 db/data/
 !db/data/DATA_DUMPS_GO_HERE
+public/system
