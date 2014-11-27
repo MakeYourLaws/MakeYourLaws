@@ -63,7 +63,7 @@ namespace :resque do
     desc txt
     task cmd do
       on roles(:resque_worker) do
-        execute :sudo, "service mylfrontend_resque #{cmd}"
+        execute :sudo, "/usr/sbin/service mylfrontend_resque #{cmd}"
       end
     end
   end
@@ -93,7 +93,7 @@ namespace :resque do
       desc txt
       task cmd do
         on roles(:resque_scheduler) do
-          execute :sudo, "service mylfrontend_resque_scheduler #{cmd}"
+          execute :sudo, "/usr/sbin/service mylfrontend_resque_scheduler #{cmd}"
         end
       end
     end
@@ -111,7 +111,7 @@ namespace :puma do
    desc txt
    task cmd do
      on roles(:web) do
-       execute :sudo, "service puma #{cmd} #{deploy_to}"
+       execute :sudo, "/usr/sbin/service puma #{cmd} #{deploy_to[-1] == '/' ? deploy_to[0..-2] : deploy_to}"
      end
    end
   end
