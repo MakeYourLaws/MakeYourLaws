@@ -153,10 +153,10 @@ namespace :deploy do
   end
 
   before :updating, 'deploy:sync_keys'
-  after :sync_keys, 'deploy:set_permissions'
+  # after :sync_keys, 'deploy:set_permissions'
 
-  before :restart, 'deploy:set_permissions'
-  after :restart, 'deploy:set_permissions'
+  # before :restart, 'deploy:set_permissions'
+  before :finishing, 'deploy:set_permissions'
 
   after :publishing, 'deploy:restart'
 
