@@ -31,13 +31,13 @@ def reset_log log_name
   Resque.logger = ActiveSupport::Logger.new(logfile)
   Resque.logger.level = Logger::INFO
   Resque.logger.formatter = Resque::VeryVerboseFormatter.new
+  Resque.logger.info "#{log_name} logger initiated"
 end
 
 reset_log 'resque_base.log'
-Resque.logger.info 'base logger initiated'
 
 task 'resque:setup' => :environment do
-  Resque.logger.info 'setup initiated'
+  reset_log 'resque_setup.log'
 
   # Proc.new instead of lambda because args might not be passed
   #  (and lambda does strict argument checking)
@@ -68,6 +68,8 @@ end
 #  Resque.remove_delayed_selection { |args| args[0]['user_id'] == current_user.id }
 
 task 'resque:pool:setup' do
+  reset_log 'resque_pool_setup.log'
+
   # close any sockets or files in pool manager
   ActiveRecord::Base.connection.disconnect!
   # and re-open them in the resque worker parent
