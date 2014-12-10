@@ -77,7 +77,7 @@ threads 1, 4
 # bind 'unix:///var/run/puma.sock?umask=0777'
 # bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'
 
-bind 'unix:///home/mylfrontend/makeyourlaws.org/shared/tmp/sockets/puma.sock?umask=0775'
+bind 'unix:///home/mylfrontend/makeyourlaws.org/shared/tmp/sockets/puma.sock?umask=775'
 # bind 'unix:///tmp/sockets/puma.sock' # nginx takes care of SSL (for non-Tor users)
 
 # Instead of "bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'" you
