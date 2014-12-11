@@ -77,7 +77,8 @@ threads 1, 4
 # bind 'unix:///var/run/puma.sock?umask=0777'
 # bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'
 
-bind 'unix:///home/mylfrontend/makeyourlaws.org/shared/tmp/sockets/puma.sock?umask=775'
+# umask here is subtractive, not additive. 0007 = o-rwx
+bind 'unix:///home/mylfrontend/makeyourlaws.org/shared/tmp/sockets/puma.sock?umask=0007'
 # bind 'unix:///tmp/sockets/puma.sock' # nginx takes care of SSL (for non-Tor users)
 
 # Instead of "bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'" you
@@ -98,7 +99,7 @@ bind 'unix:///home/mylfrontend/makeyourlaws.org/shared/tmp/sockets/puma.sock?uma
 # load puma itself (ie. 'ruby -Ilib bin/puma'), not the arguments
 # to puma, as those are the same as the original process.
 #
-restart_command '/usr/sbin/service restart puma'
+# restart_command '/usr/bin/env sudo /usr/sbin/service puma restart'
 
 # === Cluster mode ===
 

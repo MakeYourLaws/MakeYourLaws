@@ -1,7 +1,7 @@
 language: ruby
 rvm:
   # - 2.1
-  - rbx-2
+  - rbx-2.3.0
 bundler_args: --without production  --binstubs
 before_script:
   - mysql -e 'create database myl_test'
