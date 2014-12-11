@@ -1,6 +1,6 @@
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :rvm_ruby_string, 'rbx'
+set :rvm_ruby_string, 'rbx-2.3.0'
 set :rvm_type, :system # using system level, not userspace, install of rvm
 
 set :application, 'mylfrontend'  # Required
@@ -111,7 +111,7 @@ namespace :puma do
    desc txt
    task cmd do
      on roles(:web) do
-       execute :sudo, "/usr/sbin/service puma #{cmd} #{deploy_to[-1] == '/' ? deploy_to[0..-2] : deploy_to}"
+       execute :sudo, "/usr/sbin/service puma #{cmd} #{current_path[-1] == '/' ? current_path[0..-2] : current_path}"
      end
    end
   end
