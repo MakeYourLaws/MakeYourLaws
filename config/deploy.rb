@@ -111,7 +111,7 @@ namespace :puma do
    desc txt
    task cmd do
      on roles(:web) do
-       execute :sudo, "/usr/sbin/service puma #{cmd} #{current_path[-1] == '/' ? current_path[0..-2] : current_path}"
+       execute :sudo, "/usr/sbin/service puma #{cmd} #{current_path.to_s[-1] == '/' ? current_path.to_s[0..-2] : current_path.to_s}"
      end
    end
   end
@@ -148,7 +148,7 @@ namespace :deploy do
       ['tmp/sockets', 'public'].each do |i|
         execute "chmod 2755 #{shared_path}/#{i}"
       end
-      execute "chmod 2775 #{shared_path}/tmp/sockets/*.sock"
+      execute "chmod 2770 #{shared_path}/tmp/sockets/*.sock"
     end
   end
 
