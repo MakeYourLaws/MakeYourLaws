@@ -20,6 +20,53 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: exception.message
   end
 
+  def self.ensure_role(*role_names)
+    before_action { ensure_role(*role_names) }
+  end
+
+  def redirect_back_or_root
+    if request.env['HTTP_REFERER'].present?
+      redirect_to :back
+    else
+      redirect_to root_url
+    end
+  end
+
+  def self.ensure_current_user
+    before_action { ensure_current_user }
+  end
+
+  def ensure_current_user
+    unless current_user
+      flash[:error] = "You must be logged in to do that"
+      redirect_back_or_root
+      return false
+    end
+    nil
+  end
+
+  def ensure_offered_role(*role_names)
+    not_offered = role_names.reject { |role_name| current_user ? current_user.offered_roles.any? { |role| role.name == role_name.to_s } : false }
+    if not_offered.any?
+      flash[:error] = "You are not authorized for that"
+      redirect_back_or_root
+      return false
+    end
+    nil
+  end
+  def ensure_role(*role_names)
+    offered = ensure_offered_role(*role_names)
+    return offered if offered == false
+    not_active = role_names.reject { |role_name| current_user ? current_user.roles.any? { |role| role.name == role_name.to_s } : false }
+    if not_active.any?
+      session[:return_after_agreed] = request.url if request.get?
+      flash[:notice] = "Please agree for role #{not_active.first}"
+      redirect_to url_for(:controller => :agreements, :action => :for_role, :role_name => not_active.first)
+      return false
+    end
+    nil
+  end
+
   before_action :log_additional_data
   before_action :security_headers
   before_action :cleanup
