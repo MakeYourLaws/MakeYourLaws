@@ -73,6 +73,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'role_agreements/:role_name', to: 'agreements#for_role'
+  post 'agreements/:name/:version/agree', to: 'agreements#agree'
+
   namespace :facebook do
     resources :payments, only: :create
   end
