@@ -10,7 +10,9 @@ class CreateAgreements < ActiveRecord::Migration
       t.datetime :expires_at
 
       t.timestamps
+
+      t.index :name
+      t.index [:name, :version], :unique => true
     end
-    add_index :agreements, :name
   end
 end

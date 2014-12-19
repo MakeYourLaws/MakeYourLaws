@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20141117095244) do
     t.datetime "updated_at"
   end
 
+  add_index "agreements", ["name", "version"], name: "index_agreements_on_name_and_version", unique: true, using: :btree
   add_index "agreements", ["name"], name: "index_agreements_on_name", using: :btree
 
   create_table "cart_items", force: true do |t|
