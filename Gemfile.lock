@@ -801,6 +801,7 @@ DEPENDENCIES
   ffi
   friendly_id
   groupdate
+  haml
   hashie_rails
   it
   jbuilder

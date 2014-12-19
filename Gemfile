@@ -16,6 +16,7 @@ gem 'puma'
 gem 'rails'#, '>= 4.0.1'
 gem 'rake'#, '>= 0.9.2.2'
 gem 'rack'#, '>= 1.4.1'
+gem 'haml'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
