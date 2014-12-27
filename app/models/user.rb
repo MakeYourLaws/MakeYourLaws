@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   has_many :users_agreements
   has_many :agreements, :through => :users_agreements
 
+  has_many :active_agreements, -> { where(Agreement::WHERE_ACTIVE) }, :through => :users_agreements, :source => :agreement
+
   has_many :offered_roles, :through => :users_roles, :source => :role
 
   active_roles_scope = -> do
