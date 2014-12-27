@@ -35,9 +35,7 @@ class User < ActiveRecord::Base
           'WHERE `users_agreements`.`user_id` = `users_roles`.`user_id` ' +
           # for that agreement
           'AND `agreements`.`name` = `roles_agreements`.`agreement_name` ' +
-          # which are active. (TODO remove code duplication with agreement.rb)
-          'AND (`agreements`.`activates_at` IS NOT NULL AND `agreements`.`activates_at` < UTC_TIMESTAMP()) ' +
-          'AND (`agreements`.`expires_at` IS NULL OR `agreements`.`expires_at` > UTC_TIMESTAMP())' +
+          "AND #{Agreement::WHERE_ACTIVE}" +
         ')' +
       ')'
     )

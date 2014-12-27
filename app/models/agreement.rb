@@ -13,7 +13,8 @@
 # when the current time is past expires_at, the agreement is inactive. 
 # if the agreement has a null expires_at, it is active indefinitely.
 class Agreement < ActiveRecord::Base
-  scope :active, -> { where("(activates_at IS NOT NULL AND activates_at < UTC_TIMESTAMP()) AND (expires_at IS NULL OR expires_at > UTC_TIMESTAMP())") }
+  WHERE_ACTIVE = "(`agreements`.`activates_at` IS NOT NULL AND `agreements`.`activates_at` < UTC_TIMESTAMP()) AND (`agreements`.`expires_at` IS NULL OR `agreements`.`expires_at` > UTC_TIMESTAMP())"
+  scope :active, -> { where(Agreement::WHERE_ACTIVE) }
 
   validates :version, :uniqueness => {:scope => :name}
 
