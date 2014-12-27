@@ -21,7 +21,7 @@ class AgreementsController < ApplicationController
     if params[:for_role_name]
       redirect_to :action => :for_role, :role_name => params[:for_role_name]
     else
-      redirect_to root_url
+      redirect_to(session[:return_after_agreed] || root_url)
     end
   end
 end
