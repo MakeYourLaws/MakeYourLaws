@@ -1,14 +1,3 @@
 %div= "You must agree to the following #{@needed_agreements.size == 1 ? 'agreement' : 'agreements'} for the role #{@role.name}:"
 - @needed_agreements.map do |agreement|
-  %table
-    %tr
-      %td
-        = "#{agreement.name} #{agreement.version}"
-    %tr
-      %td
-        = agreement.full
-    %tr
-      %td
-        = form_tag(:controller => :agreements, :action => :agree, :name => agreement.name, :version => agreement.version) do
-          = hidden_field_tag 'for_role_name', @role.name
-          = submit_tag 'I agree'
+  = render :partial => 'show', :locals => {:agreement => agreement}
