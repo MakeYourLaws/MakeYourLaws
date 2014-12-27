@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
     before_action { ensure_role(*role_names) }
   end
 
+  def self.ensure_agreed(*agreement_names)
+    before_action { ensure_agreed(*agreement_names) }
+  end
+
   def redirect_back_or_root
     if request.env['HTTP_REFERER'].present?
       redirect_to :back
@@ -62,6 +66,19 @@ class ApplicationController < ActionController::Base
       session[:return_after_agreed] = request.url if request.get?
       flash[:notice] = "Please agree for role #{not_active.first}"
       redirect_to url_for(:controller => :agreements, :action => :for_role, :role_name => not_active.first)
+      return false
+    end
+    nil
+  end
+
+  def ensure_agreed(*agreement_names)
+    not_active = agreement_names.reject do |agreement_name|
+      current_user ? current_user.active_agreements.where('agreements.name' => agreement_name.to_s).any? : false
+    end
+    if not_active.any?
+      session[:return_after_agreed] = request.url if request.get?
+      flash[:notice] = "please agree to agreement #{not_active.first}"
+      redirect_to url_for(:controller => :agreements, :action => :show, :name => not_active.first)
       return false
     end
     nil
