@@ -73,7 +73,8 @@ group :development do
 
   # gem 'capistrano-ci' # not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
   gem 'term-ansicolor'
-  platform(:mri) { gem 'debugger' }
+  platform(:mri_19) { gem 'debugger' }
+  platform(:mri_20, :mri_21) { gem 'byebug' }
   platform(:rbx) do
     gem 'rubinius-compiler'
     gem 'rubinius-debugger'

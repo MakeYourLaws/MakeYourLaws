@@ -88,6 +88,10 @@ GEM
     bundler-audit (0.3.1)
       bundler (~> 1.2)
       thor (~> 0.18)
+    byebug (3.5.1)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+      slop (~> 3.6)
     cancancan (1.9.2)
     capistrano (3.3.3)
       capistrano-stats (~> 1.0.3)
@@ -741,6 +745,7 @@ DEPENDENCIES
   bitpay-client
   brakeman
   bundler-audit
+  byebug
   cancancan
   capistrano
   capistrano-bundler
