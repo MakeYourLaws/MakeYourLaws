@@ -68,6 +68,7 @@ MakeyourlawsOrg::Application.routes.draw do
         'https://docs.google.com/document/d/1YeVdRxEqC8fWnJGl9DgkcNVY6HmkCPEzyRxB_0wttU0/',
         status: 302)
       get 'tplf'
+      get 'volunteer_ip'
     end
   end
 
