@@ -4,6 +4,7 @@ class AsyncEmail < Mailhopper::Email
   extend Resque::Plugins::LockTimeout
   extend Resque::Plugins::Retry
   @retry_delay = 60
+  @lock_timeout = 120
   extend Resque::Plugins::ExponentialBackoff
   @retry_delay_multiplicand_max = 1.1 # https://github.com/lantins/resque-retry/pull/102
 
