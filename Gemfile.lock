@@ -4,17 +4,17 @@ GEM
   specs:
     Empact-activerecord-import (0.4.3)
       activerecord (>= 3.0.0)
-    actionmailer (4.1.8)
-      actionpack (= 4.1.8)
-      actionview (= 4.1.8)
+    actionmailer (4.1.9)
+      actionpack (= 4.1.9)
+      actionview (= 4.1.9)
       mail (~> 2.5, >= 2.5.4)
-    actionpack (4.1.8)
-      actionview (= 4.1.8)
-      activesupport (= 4.1.8)
+    actionpack (4.1.9)
+      actionview (= 4.1.9)
+      activesupport (= 4.1.9)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    actionview (4.1.8)
-      activesupport (= 4.1.8)
+    actionview (4.1.9)
+      activesupport (= 4.1.9)
       builder (~> 3.1)
       erubis (~> 2.7.0)
     active_paypal_adaptive_payment (0.3.16)
@@ -23,25 +23,22 @@ GEM
       mocha (>= 0.10.0)
       money (>= 3.6.0)
       multi_json (>= 1.0.0)
-    active_utils (2.2.3)
-      activesupport (>= 2.3.11)
+    active_utils (3.0.0)
+      activesupport (>= 3.2)
       i18n
-    activemerchant (1.44.1)
-      active_utils (~> 2.2.0)
+    activemerchant (1.46.0)
       activesupport (>= 3.2.14, < 5.0.0)
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
-      json (~> 1.7)
       nokogiri (~> 1.4)
-      offsite_payments (~> 2.0.0)
-    activemodel (4.1.8)
-      activesupport (= 4.1.8)
+    activemodel (4.1.9)
+      activesupport (= 4.1.9)
       builder (~> 3.1)
-    activerecord (4.1.8)
-      activemodel (= 4.1.8)
-      activesupport (= 4.1.8)
+    activerecord (4.1.9)
+      activemodel (= 4.1.9)
+      activesupport (= 4.1.9)
       arel (~> 5.0.0)
-    activesupport (4.1.8)
+    activesupport (4.1.9)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -59,20 +56,25 @@ GEM
     ast (2.0.0)
     astrolabe (1.3.0)
       parser (>= 2.2.0.pre.3, < 3.0)
-    bcrypt (3.1.9)
+    bcrypt (3.1.10)
     bettertabs (1.4.2)
       jquery-rails
       rails (>= 3.1.0)
-    bitly (0.10.3)
+    bitly (0.10.4)
       httparty (>= 0.7.6)
       multi_json (~> 1.3)
       oauth2 (>= 0.5.0, < 2.0)
-    bitpay-client (2.0.0)
+    bitpay-client (2.2.0)
+      bitpay-sdk (~> 2.1)
       commander
-      ecdsa
-      json
-      rack
-    brakeman (2.6.3)
+      ecdsa (~> 1.2.0)
+      json (~> 1.8.1)
+      rack (~> 1.5.2)
+    bitpay-sdk (2.2.0)
+      ecdsa (~> 1.2.0)
+      json (~> 1.8.1)
+      rack (~> 1.5.2)
+    brakeman (3.0.1)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
       haml (>= 3.0, < 5.0)
@@ -81,19 +83,19 @@ GEM
       ruby2ruby (~> 2.1.1)
       ruby_parser (~> 3.5.0)
       sass (~> 3.0)
-      slim (>= 1.3.6, < 3.0)
       terminal-table (~> 1.4)
     buftok (0.2.0)
     builder (3.2.2)
     bundler-audit (0.3.1)
       bundler (~> 1.2)
       thor (~> 0.18)
-    cancancan (1.9.2)
-    capistrano (3.2.1)
+    cancancan (1.10.1)
+    capistrano (3.3.5)
+      capistrano-stats (~> 1.1.0)
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
-    capistrano-bundler (1.1.3)
+    capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
     capistrano-rails (1.1.2)
@@ -102,6 +104,7 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano-stats (1.1.1)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -110,7 +113,7 @@ GEM
       xpath (~> 2.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cocaine (0.5.4)
+    cocaine (0.5.5)
       climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -118,19 +121,19 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.8.0)
-    coinbase (2.1.0)
+    coffee-script-source (1.9.0)
+    coinbase (2.1.1)
       hashie (>= 1.2.0)
       httparty (>= 0.8.3)
       monetize (~> 0.3.0)
       money (~> 6.0)
       multi_json (>= 1.3.4)
-      oauth2 (~> 0.9)
-    colorize (0.7.3)
-    columnize (0.8.9)
+      oauth2 (~> 1.0)
+    colorize (0.7.5)
+    columnize (0.9.0)
     commander (4.2.1)
       highline (~> 1.6.11)
-    cucumber (1.3.17)
+    cucumber (1.3.18)
       builder (>= 2.1.2)
       diff-lcs (>= 1.1.3)
       gherkin (~> 2.12)
@@ -142,13 +145,13 @@ GEM
       mime-types (>= 1.16, < 3)
       nokogiri (~> 1.5)
       rails (>= 3, < 5)
-    database_cleaner (1.3.0)
+    database_cleaner (1.4.0)
     debugger (1.6.8)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
       debugger-ruby_core_source (~> 1.3.5)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.3.7)
+    debugger-ruby_core_source (1.3.8)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -162,15 +165,15 @@ GEM
     ecdsa (1.2.0)
     equalizer (0.0.9)
     erubis (2.7.0)
-    ethon (0.7.1)
+    ethon (0.7.2)
       ffi (>= 1.3.0)
     execjs (2.2.2)
-    faraday (0.9.0)
+    faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
     ffi (1.9.6)
     ffi2-generators (0.1.1)
-    friendly_id (5.0.4)
+    friendly_id (5.1.0)
       activerecord (>= 4.0.0)
     geokit (1.8.4)
       multi_json (>= 1.3.2)
@@ -179,11 +182,11 @@ GEM
       rails (>= 3.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
-    groupdate (2.3.0)
+    groupdate (2.4.0)
       activesupport (>= 3)
-    haml (4.0.5)
+    haml (4.0.6)
       tilt
-    hashie (3.3.1)
+    hashie (3.4.0)
     hashie_rails (0.0.1)
       hashie (>= 3.0)
       rails (~> 4.0)
@@ -198,7 +201,7 @@ GEM
     i18n (0.6.11)
     it (0.2.5)
       actionpack (>= 3.0.0)
-    jbuilder (2.2.5)
+    jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.2)
@@ -207,10 +210,11 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
-    jquery-ui-rails (5.0.2)
+    jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
-    json (1.8.1)
-    jwt (1.0.0)
+    json (1.8.2)
+    jwt (1.2.1)
+    kgio (2.9.3)
     kramdown (1.5.0)
     libv8 (3.16.14.7)
     mail (2.6.3)
@@ -221,8 +225,8 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     metaclass (0.0.4)
     mime-types (1.25.1)
-    mini_portile (0.6.1)
-    minitest (5.4.3)
+    mini_portile (0.6.2)
+    minitest (5.5.1)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     monetize (0.3.0)
@@ -246,24 +250,24 @@ GEM
     naught (1.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.1)
-    newrelic_rpm (3.9.7.266)
-    nokogiri (1.6.4.1)
+    net-ssh (2.9.2)
+    newrelic_rpm (3.9.9.275)
+    nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     oauth (0.4.7)
-    oauth2 (0.9.4)
+    oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    offsite_payments (2.0.1)
-      active_utils (~> 2.2.0)
+    offsite_payments (2.1.0)
+      actionpack (>= 3.2.20, < 5.0.0)
+      active_utils (~> 3.0.0)
       activesupport (>= 3.2.14, < 5.0.0)
       builder (>= 2.1.2, < 4.0.0)
       i18n (~> 0.5)
-      json (~> 1.7)
-      money (< 7.0.0)
+      money (>= 5.0.0, < 7.0.0)
       nokogiri (~> 1.4)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
@@ -272,8 +276,8 @@ GEM
       coinbase (~> 2.0)
       multi_json (~> 1.3)
       omniauth-oauth2
-    omniauth-facebook (1.6.0)
-      omniauth-oauth2 (~> 1.1)
+    omniauth-facebook (2.0.0)
+      omniauth-oauth2 (~> 1.2)
     omniauth-github (1.1.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
@@ -283,16 +287,16 @@ GEM
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
-    omniauth-oauth2 (1.1.2)
+    omniauth-oauth2 (1.2.0)
       faraday (>= 0.8, < 0.10)
       multi_json (~> 1.3)
-      oauth2 (~> 0.9.3)
+      oauth2 (~> 1.0)
       omniauth (~> 1.2)
     omniauth-openid (1.0.1)
       omniauth (~> 1.0)
       rack-openid (~> 1.3.1)
-    omniauth-paypal (1.2.2)
-      omniauth-oauth2 (~> 1.1.0)
+    omniauth-paypal (1.3)
+      omniauth-oauth2 (~> 1.2.0)
     omniauth-twitter (1.1.0)
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
@@ -300,16 +304,15 @@ GEM
     paper_trail (3.0.6)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
-    paperclip (4.2.0)
+    paperclip (4.2.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
     paperclip-meta (1.1.0)
       paperclip (>= 3.0.2, < 5.0)
-    parser (2.2.0.pre.8)
+    parser (2.2.0.2)
       ast (>= 1.1, < 3.0)
-      slop (~> 3.4, >= 3.4.5)
     people (0.2.1)
     phone (1.2.3)
     polyglot (0.3.4)
@@ -317,8 +320,8 @@ GEM
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
     powerpack (0.0.9)
-    psych (2.0.6)
-    puma (2.9.2)
+    psych (2.0.12)
+    puma (2.11.0)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-attack (4.2.0)
@@ -330,32 +333,31 @@ GEM
       ruby-openid (>= 2.1.8)
     rack-protection (1.5.3)
       rack
-    rack-test (0.6.2)
+    rack-test (0.6.3)
       rack (>= 1.0)
-    rack-tor-tag (0.1.2)
-    rails (4.1.8)
-      actionmailer (= 4.1.8)
-      actionpack (= 4.1.8)
-      actionview (= 4.1.8)
-      activemodel (= 4.1.8)
-      activerecord (= 4.1.8)
-      activesupport (= 4.1.8)
+    rack-tor-tag (0.2.1)
+    rails (4.1.9)
+      actionmailer (= 4.1.9)
+      actionpack (= 4.1.9)
+      actionview (= 4.1.9)
+      activemodel (= 4.1.9)
+      activerecord (= 4.1.9)
+      activesupport (= 4.1.9)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.1.8)
+      railties (= 4.1.9)
       sprockets-rails (~> 2.0)
     rails_email_validator (0.1.4)
       activemodel (>= 3.0.0)
-    railties (4.1.8)
-      actionpack (= 4.1.8)
-      activesupport (= 4.1.8)
+    railties (4.1.9)
+      actionpack (= 4.1.9)
+      activesupport (= 4.1.9)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
-    rake (10.3.2)
-    rb-readline (0.5.1)
-    rdoc (4.1.2)
+    rake (10.4.2)
+    rdoc (4.2.0)
       json (~> 1.4)
-    redis (3.1.0)
+    redis (3.2.0)
     redis-actionpack (4.0.0)
       actionpack (~> 4)
       redis-rack (~> 1.5.0)
@@ -390,55 +392,61 @@ GEM
       activesupport
       resque
       resque-lock-timeout
+    resque-cleaner (0.3.0)
+      resque (~> 1.0)
+    resque-ensure-connected (0.2.0)
+      activerecord (>= 2.3.5)
+      resque (>= 1.10.0)
     resque-job-stats (0.3.0)
       resque (~> 1.17)
     resque-lock-timeout (0.4.4)
       resque (~> 1.22)
-    resque-pool (0.3.0)
-      rake
-      resque (~> 1.20)
-      trollop (~> 1.16)
-    resque-retry (1.3.2)
+    resque-retry (1.4.0)
       resque (~> 1.25)
-      resque-scheduler (~> 3.0)
-    resque-scheduler (3.0.0)
+      resque-scheduler (~> 4.0)
+    resque-scheduler (4.0.0)
       mono_logger (~> 1.0)
       redis (~> 3.0)
       resque (~> 1.25)
-      rufus-scheduler (~> 2.0)
+      rufus-scheduler (~> 3.0)
     resque_mailer (2.2.7)
       actionmailer (>= 3.0)
+    resqued (0.7.11)
+      kgio (~> 2.6)
+      mono_logger (~> 1.0)
+      resque (>= 1.9.1)
     rest-client (1.6.8)
       mime-types (~> 1.16)
       rdoc (>= 2.4.2)
-    rolify (3.4.1)
-    rspec-core (3.0.4)
-      rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.4)
+    rolify (3.5.2)
+    rspec-core (3.2.0)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.0.0)
-    rspec-mocks (3.0.4)
-      rspec-support (~> 3.0.0)
-    rspec-rails (3.0.2)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      railties (>= 3.0)
-      rspec-core (~> 3.0.0)
-      rspec-expectations (~> 3.0.0)
-      rspec-mocks (~> 3.0.0)
-      rspec-support (~> 3.0.0)
-    rspec-support (3.0.4)
-    rubinius-compiler (2.2.1)
-    rubinius-debugger (2.1.0)
-    rubocop (0.27.1)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-rails (3.2.0)
+      actionpack (>= 3.0, <= 4.2)
+      activesupport (>= 3.0, <= 4.2)
+      railties (>= 3.0, <= 4.2)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.0)
+    rubinius-compiler (2.3.1)
+    rubinius-debugger (2.2.1)
+    rubocop (0.28.0)
       astrolabe (~> 1.3)
       parser (>= 2.2.0.pre.7, < 3.0)
       powerpack (~> 0.0.6)
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-openid (2.6.0)
-    ruby-prof (0.15.2)
-    ruby-progressbar (1.7.0)
+    ruby-prof (0.15.3)
+    ruby-progressbar (1.7.1)
     ruby2ruby (2.1.3)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)
@@ -548,14 +556,14 @@ GEM
     rubysl-csv (2.0.2)
       rubysl-english (~> 2.0)
     rubysl-curses (2.0.1)
-    rubysl-date (2.0.8)
+    rubysl-date (2.0.9)
     rubysl-delegate (2.0.1)
     rubysl-digest (2.0.3)
     rubysl-drb (2.0.1)
     rubysl-e2mmap (2.0.0)
     rubysl-english (2.0.0)
     rubysl-enumerator (2.0.0)
-    rubysl-erb (2.0.1)
+    rubysl-erb (2.0.2)
     rubysl-etc (2.0.3)
       ffi2-generators (~> 0.1)
     rubysl-expect (2.0.0)
@@ -573,8 +581,7 @@ GEM
     rubysl-io-nonblock (2.0.0)
     rubysl-io-wait (2.0.0)
     rubysl-ipaddr (2.0.0)
-    rubysl-irb (2.1.0)
-      rb-readline (~> 0.5)
+    rubysl-irb (2.1.1)
       rubysl-e2mmap (~> 2.0)
       rubysl-mathn (~> 2.0)
       rubysl-thread (~> 2.0)
@@ -611,7 +618,7 @@ GEM
     rubysl-profile (2.0.0)
     rubysl-profiler (2.0.1)
     rubysl-pstore (2.0.0)
-    rubysl-pty (2.0.2)
+    rubysl-pty (2.0.3)
     rubysl-rational (2.0.1)
     rubysl-resolv (2.1.0)
     rubysl-rexml (2.0.4)
@@ -642,53 +649,49 @@ GEM
     rubysl-weakref (2.0.0)
     rubysl-webrick (2.0.0)
     rubysl-xmlrpc (2.0.0)
-    rubysl-yaml (2.0.4)
+    rubysl-yaml (2.1.0)
     rubysl-zlib (2.0.1)
-    rufus-scheduler (2.0.24)
-      tzinfo (>= 0.3.22)
-    sass (3.2.19)
-    sass-rails (4.0.4)
+    rufus-scheduler (3.0.9)
+      tzinfo
+    sass (3.4.11)
+    sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2.2)
-      sprockets (~> 2.8, < 2.12)
-      sprockets-rails (~> 2.0)
+      sass (~> 3.1)
+      sprockets (>= 2.8, < 4.0)
+      sprockets-rails (>= 2.0, < 4.0)
+      tilt (~> 1.1)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sexp_processor (4.4.4)
-    simple_oauth (0.3.0)
+    sexp_processor (4.4.5)
+    simple_oauth (0.3.1)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
-    slim (2.1.0)
-      temple (~> 0.6.9)
-      tilt (>= 1.3.3, < 2.1)
-    slop (3.6.0)
-    sprockets (2.11.3)
+    sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.2.0)
+    sprockets-rails (2.2.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sshkit (1.5.1)
-      colorize
+    sshkit (1.6.1)
+      colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     state_machine (1.2.0)
-    strip_attributes (1.5.1)
+    strip_attributes (1.6.0)
       activemodel (>= 3.0, < 5.0)
-    stripe (1.16.0)
+    stripe (1.18.0)
       json (~> 1.8.1)
       mime-types (>= 1.25, < 3.0)
       rest-client (~> 1.4)
     stripe_event (1.4.0)
       activesupport (>= 3.1)
       stripe (~> 1.6)
-    temple (0.6.10)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
     terminal-table (1.4.5)
@@ -699,8 +702,7 @@ GEM
     thread_safe (0.3.4)
     tilt (1.4.1)
     tins (1.3.3)
-    trollop (1.16.2)
-    turbolinks (2.5.2)
+    turbolinks (2.5.3)
       coffee-rails
     twitter (5.13.0)
       addressable (~> 2.3)
@@ -713,11 +715,11 @@ GEM
       memoizable (~> 0.4.0)
       naught (~> 1.0)
       simple_oauth (~> 0.3.0)
-    typhoeus (0.6.9)
+    typhoeus (0.7.1)
       ethon (>= 0.7.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.5.3)
+    uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     uncoil (1.2.0)
@@ -738,98 +740,100 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  Empact-activerecord-import (>= 0.4.1)
+  Empact-activerecord-import
   active_paypal_adaptive_payment
   activemerchant
   airbrake
   amazon_flex_pay
-  bcrypt (>= 3.0.1)
+  bcrypt
   bettertabs
   bitpay-client
   brakeman
   bundler-audit
   cancancan
-  capistrano (>= 3.0.1)
+  capistrano
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
-  coffee-rails (>= 4.0.0)
-  coinbase (>= 1.3.2)
+  coffee-rails
+  coinbase
   cucumber-rails
   database_cleaner
   debugger
-  devise (>= 3.1.1)
-  devise-encryptable (>= 0.1.1c)
-  execjs (>= 1.3.0)
+  devise
+  devise-encryptable
+  execjs
   ffi
-  friendly_id (>= 5.0.0)
+  friendly_id
   geokit-rails
   groupdate
   hashie_rails
-  it (>= 0.2.3)
-  jbuilder (>= 1.2)
-  jquery-rails (>= 3.0.0)
+  it
+  jbuilder
+  jquery-rails
   jquery-turbolinks
-  jquery-ui-rails (>= 5.0.0)
-  json (>= 1.6.6)
+  jquery-ui-rails
+  json
   jwt
   kramdown
   mailhopper
-  money (>= 5.0.0)
-  money-rails (>= 0.8.1)
-  myl-fech (>= 1.0.2)
+  money
+  money-rails
+  myl-fech
   mysql2
   newrelic_rpm
   offsite_payments
-  omniauth (>= 1.1.0)
+  omniauth
   omniauth-coinbase
-  omniauth-facebook (>= 1.2.0)
-  omniauth-github (>= 1.0.1)
-  omniauth-google-oauth2 (>= 0.1.9)
-  omniauth-openid (>= 1.0.1)
-  omniauth-paypal (>= 1.2.1)
-  omniauth-twitter (>= 0.0.10)
-  paper_trail (>= 3.0.0)
+  omniauth-facebook
+  omniauth-github
+  omniauth-google-oauth2
+  omniauth-openid
+  omniauth-paypal
+  omniauth-twitter
+  paper_trail
   paperclip
   paperclip-meta
   phone
   postmaster
   psych
   puma
-  rack (>= 1.4.1)
+  rack
   rack-attack
   rack-cache
-  rack-tor-tag (>= 0.1)
-  rails (>= 4.0.1)
-  rails_email_validator (>= 0.1.4)
-  rake (>= 0.9.2.2)
+  rack-tor-tag
+  rails
+  rails_email_validator
+  rake
   redis-rack-cache
   redis-rails
   resque
   resque-async-method-enhanced
+  resque-cleaner
+  resque-ensure-connected
   resque-job-stats
   resque-lock-timeout
-  resque-pool
   resque-retry
   resque-scheduler
   resque_mailer
+  resqued
   rolify
-  rspec-rails (~> 3.0.0.beta)
+  rspec-rails
   rubinius-compiler
   rubinius-debugger
   rubocop
   ruby-prof
   rubysl
-  sass-rails (>= 4.0.0)
+  sass-rails
   sdoc
   state_machine
-  strip_attributes (>= 1.1.0)
+  strip_attributes
   stripe
   stripe_event
   term-ansicolor
   therubyracer
   turbolinks
   twitter
-  uglifier (>= 1.3.0)
+  uglifier
   uncoil
-  webrat (>= 0.7.3)
+  webrat
