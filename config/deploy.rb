@@ -1,6 +1,6 @@
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :rvm_ruby_string, 'rbx'
+set :rvm_ruby_string, 'rbx-2.3.0'
 set :rvm_type, :system # using system level, not userspace, install of rvm
 
 set :application, 'mylfrontend'  # Required
@@ -50,20 +50,20 @@ set :keep_releases, 15
 # before :deploy, "ci:verify"
 
 namespace :resque do
-  resque_options = { start:         'Starts resque-pool daemon.',
-                     stop:          'Sends INT to resque-pool daemon to close master, ' \
+  resque_options = { start:         'Starts resqued daemon.',
+                     stop:          'Sends INT to resqued daemon to close master, ' \
                                      'letting workers finish their jobs.',
-                     graceful_stop: 'Gracefully stop resque-pool',
-                     quick_stop:    'Quick stop resque-pool',
-                     reload:        'Reloads resque-pool for log rotation etc',
-                     restart:       'Restart resque-pool',
-                     status:        "Checks resque-pool's status" }
+                     graceful_stop: 'Gracefully stop resqued',
+                     quick_stop:    'Quick stop resqued',
+                     reload:        'Reloads resqued for log rotation etc',
+                     restart:       'Restart resqued',
+                     status:        "Checks resqued's status" }
 
   resque_options.each do |cmd, txt|
     desc txt
     task cmd do
       on roles(:resque_worker) do
-        execute :sudo, "service mylfrontend_resque #{cmd}"
+        execute :sudo, "/usr/sbin/service mylfrontend_resque #{cmd}"
       end
     end
   end
@@ -71,15 +71,16 @@ namespace :resque do
   desc 'List all resque processes.'
   task :ps do
     on roles(:resque_worker) do
-      info capture('ps -ef f | grep -E "[r]esque-(pool|[0-9])" || ' \
+      info capture('ps -ef f | ps -ef f | grep -E "[r]esque-([0-9])" || ' \
                     'echo "No workers found" && exit 1')
     end
   end
 
-  desc 'List all resque pool processes.'
+  desc 'List all resqued processes.'
   task :psm do
     on roles(:resque_worker) do
-      info capture('ps -ef f | grep -E "[r]esque-pool" || echo "No resque-pool found" && exit 1')
+      info capture('ps -ef f | grep -E "[r]esqued-.*listener" || \
+                    echo "No resqued found" && exit 1')
     end
   end
 
@@ -93,7 +94,7 @@ namespace :resque do
       desc txt
       task cmd do
         on roles(:resque_scheduler) do
-          execute :sudo, "service mylfrontend_resque_scheduler #{cmd}"
+          execute :sudo, "/usr/sbin/service mylfrontend_resque_scheduler #{cmd}"
         end
       end
     end
@@ -111,7 +112,7 @@ namespace :puma do
    desc txt
    task cmd do
      on roles(:web) do
-       execute :sudo, "service puma #{cmd} #{deploy_to}"
+       execute :sudo, "/usr/sbin/service puma #{cmd} #{current_path.to_s[-1] == '/' ? current_path.to_s[0..-2] : current_path.to_s}"
      end
    end
   end
@@ -145,18 +146,18 @@ namespace :deploy do
       ['bin', 'bundle', 'config', 'db', 'log', 'tmp', 'tmp/cache', 'tmp/pids', 'vendor', 'vendor/bundle'].each do |i|
         execute "chmod 2751 #{shared_path}/#{i}"
       end
-      ['tmp/sockets', 'public'].each do |i|
-        execute "chmod 2755 #{shared_path}/#{i}"
+      ['tmp/sockets', 'tmp/sockets/*.sock'].each do |i|
+        execute "chmod 2770 #{shared_path}/#{i}"
       end
-      execute "chmod 2775 #{shared_path}/tmp/sockets/*.sock"
+      execute "chmod 2755 #{shared_path}/public"
     end
   end
 
   before :updating, 'deploy:sync_keys'
-  after :sync_keys, 'deploy:set_permissions'
+  # after :sync_keys, 'deploy:set_permissions'
 
-  before :restart, 'deploy:set_permissions'
-  after :restart, 'deploy:set_permissions'
+  # before :restart, 'deploy:set_permissions'
+  before :finishing, 'deploy:set_permissions'
 
   after :publishing, 'deploy:restart'
 

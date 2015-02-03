@@ -3,6 +3,7 @@ class DailyActiveUsers
   extend Resque::Plugins::JobStats
   extend Resque::Plugins::LockTimeout
   @loner = true
+  @lock_timeout = 120
 
   # extend Resque::Plugins::Retry
   # @retry_delay = 60
