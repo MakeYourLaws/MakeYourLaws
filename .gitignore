@@ -8,7 +8,6 @@ config/keys/*
 !config/keys/*.fake
 !config/keys/tor_hostname
 .sass-cache/
-vendor/cache/
 .project
 *.sql
 db/data/
