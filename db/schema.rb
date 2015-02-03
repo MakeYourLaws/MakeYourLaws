@@ -527,10 +527,10 @@ ActiveRecord::Schema.define(version: 20140929203604) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.string   "name",                                null: false
-    t.integer  "lock_version",           default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name",                                null: false
+    t.integer  "lock_version",           default: 0
     t.string   "unconfirmed_email"
   end
 
