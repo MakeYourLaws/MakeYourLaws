@@ -3,7 +3,7 @@ require 'resque/scheduler/tasks'
 require 'resque-retry'
 require 'resque/failure/redis'
 require 'resque/failure/airbrake'
-require 'resque/pool/tasks'
+# require 'resque/pool/tasks'
 
 Resque::Failure::MultipleWithRetrySuppression.classes = [Resque::Failure::Redis, Resque::Failure::Airbrake]
 Resque::Failure.backend = Resque::Failure::MultipleWithRetrySuppression
@@ -31,13 +31,13 @@ def reset_log log_name
   Resque.logger = ActiveSupport::Logger.new(logfile)
   Resque.logger.level = Logger::INFO
   Resque.logger.formatter = Resque::VeryVerboseFormatter.new
+  Resque.logger.info "#{log_name} logger initiated"
 end
 
 reset_log 'resque_base.log'
-Resque.logger.info 'base logger initiated'
 
 task 'resque:setup' => :environment do
-  Resque.logger.info 'setup initiated'
+  reset_log 'resque_setup.log'
 
   # Proc.new instead of lambda because args might not be passed
   #  (and lambda does strict argument checking)
@@ -67,13 +67,16 @@ end
 #  # or partial matching
 #  Resque.remove_delayed_selection { |args| args[0]['user_id'] == current_user.id }
 
-task 'resque:pool:setup' do
-  # close any sockets or files in pool manager
-  ActiveRecord::Base.connection.disconnect!
-  # and re-open them in the resque worker parent
-  Resque::Pool.after_prefork do |_job|
-    reset_log 'resque_pool.log'
-    ActiveRecord::Base.establish_connection
-    Resque.redis.client.reconnect
-  end
-end
+# task 'resque:pool:setup' do
+#   reset_log 'resque_pool_setup.log'
+#
+#   Rails.application.eager_load!
+#   # close any sockets or files in pool manager
+#   ActiveRecord::Base.connection.disconnect!
+#   # and re-open them in the resque worker parent
+#   Resque::Pool.after_prefork do |_job|
+#     reset_log 'resque_pool.log'
+#     ActiveRecord::Base.establish_connection
+#     Resque.redis.client.reconnect
+#   end
+# end
