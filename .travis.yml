@@ -24,3 +24,6 @@ script:
 cache:
   - bundler
   - apt
+os:
+  - linux
+  - osx
