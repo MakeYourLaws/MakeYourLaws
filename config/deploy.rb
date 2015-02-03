@@ -50,14 +50,14 @@ set :keep_releases, 15
 # before :deploy, "ci:verify"
 
 namespace :resque do
-  resque_options = { start:         'Starts resque-pool daemon.',
-                     stop:          'Sends INT to resque-pool daemon to close master, ' \
+  resque_options = { start:         'Starts resqued daemon.',
+                     stop:          'Sends INT to resqued daemon to close master, ' \
                                      'letting workers finish their jobs.',
-                     graceful_stop: 'Gracefully stop resque-pool',
-                     quick_stop:    'Quick stop resque-pool',
-                     reload:        'Reloads resque-pool for log rotation etc',
-                     restart:       'Restart resque-pool',
-                     status:        "Checks resque-pool's status" }
+                     graceful_stop: 'Gracefully stop resqued',
+                     quick_stop:    'Quick stop resqued',
+                     reload:        'Reloads resqued for log rotation etc',
+                     restart:       'Restart resqued',
+                     status:        "Checks resqued's status" }
 
   resque_options.each do |cmd, txt|
     desc txt
@@ -71,15 +71,16 @@ namespace :resque do
   desc 'List all resque processes.'
   task :ps do
     on roles(:resque_worker) do
-      info capture('ps -ef f | grep -E "[r]esque-(pool|[0-9])" || ' \
+      info capture('ps -ef f | ps -ef f | grep -E "[r]esque-([0-9])" || ' \
                     'echo "No workers found" && exit 1')
     end
   end
 
-  desc 'List all resque pool processes.'
+  desc 'List all resqued processes.'
   task :psm do
     on roles(:resque_worker) do
-      info capture('ps -ef f | grep -E "[r]esque-pool" || echo "No resque-pool found" && exit 1')
+      info capture('ps -ef f | grep -E "[r]esqued-.*listener" || \
+                    echo "No resqued found" && exit 1')
     end
   end
 
