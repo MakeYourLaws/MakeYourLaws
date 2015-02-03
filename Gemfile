@@ -42,7 +42,8 @@ gem 'resque_mailer'
 gem 'resque-scheduler', require: 'resque/scheduler/server'
 gem 'resque-retry', require: ['resque-retry', 'resque-retry/server']
 gem 'resque-job-stats', require: ['resque-job-stats/server', 'resque/plugins/job_stats']
-gem 'resque-pool'
+gem 'resqued'
+# gem 'resque-pool'
 gem 'resque-lock-timeout'
 gem 'resque-async-method-enhanced'
 
