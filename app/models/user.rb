@@ -4,10 +4,15 @@ class User < ActiveRecord::Base
          :encryptable, :confirmable, # :async,
          :lockable, :timeoutable, :omniauthable,
          authentication_keys: [:email]
-  rolify # :after_add => :after_role_add, :after_remove => :after_role_remove
-  # resourcify  # Currently broken. https://github.com/EppO/rolify/issues/102
-  has_many :users_roles
-  has_many :roles, through: :users_roles
+
+  # Guard for migration purposes (e.g. in travis testing)
+  if ActiveRecord::Base.connection.table_exists? 'roles'
+    resourcify  # MUST come before rolify.
+    rolify
+     # :after_add => :after_role_add, :after_remove => :after_role_remove
+    has_many :users_roles
+    has_many :roles, through: :users_roles
+  end
 
   has_many :identities
   has_many :carts
