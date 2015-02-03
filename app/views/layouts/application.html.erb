@@ -15,7 +15,7 @@
 		<meta name="title" content="Make Your Laws: <%= yield :title %>" />
 		<title>Make Your Laws: <%= yield :title %></title>
 <% cache ['body-preheader', tor_s] do %>
-		<%= render :partial => '/layouts/mixpanel' unless tor? %>
+		<%= render :partial => '/layouts/mixpanel' unless (tor? || (user_signed_in? && current_user.is_admin?)) %>
 	</head>
 	<body>
 		<% unless tor? %>
@@ -69,7 +69,7 @@
 			</div>
 		</div><!--doc -->
 
-		<%= render :partial => 'layouts/google_analytics' unless tor? %>
+		<%= render :partial => 'layouts/google_analytics' unless (tor? || (user_signed_in? && current_user.is_admin?)) %>
 	</body>
 </html>
 <% end %>
