@@ -1,4 +1,6 @@
 language: ruby
+env:
+  - DB=mysql
 rvm:
   # - 2.1
   - rbx
@@ -15,3 +17,7 @@ after_install:
 services:
   - redis-server
   - mysql
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec spec/
