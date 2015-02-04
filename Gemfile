@@ -108,6 +108,7 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'bundler-audit', require: false
   gem 'rspec-rails'#, '~> 3.0.0.beta'
+  gem 'spring'
 end
 
 group :test do
