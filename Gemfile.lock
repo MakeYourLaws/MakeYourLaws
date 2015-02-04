@@ -406,6 +406,9 @@ GEM
       redis-actionpack (~> 4)
       redis-activesupport (~> 4)
       redis-store (~> 1.1.0)
+    redis-session-store (0.8.0)
+      actionpack (>= 3, < 5)
+      redis
     redis-store (1.1.4)
       redis (>= 2.2)
     ref (1.0.5)
@@ -847,6 +850,7 @@ DEPENDENCIES
   rake
   redis-rack-cache
   redis-rails
+  redis-session-store
   resque
   resque-async-method-enhanced
   resque-cleaner

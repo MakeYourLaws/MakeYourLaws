@@ -36,6 +36,7 @@ gem 'hashie_rails'  # see https://github.com/intridea/hashie/blob/master/UPGRADI
 
 gem 'redis-rails' # switching out for dalli/memcached
 gem "redis-rack-cache"
+gem 'redis-session-store'
 
 gem "resque", require: "resque/server"
 gem 'resque_mailer'
