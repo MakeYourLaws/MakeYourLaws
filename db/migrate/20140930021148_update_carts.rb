@@ -4,7 +4,7 @@ class UpdateCarts < ActiveRecord::Migration
       t.remove_index :user_id
 
       t.rename :user_id, :owner_id
-      t.string :owner_type # polymorphic - User or Profile
+      t.string :owner_type, default: 'User' # polymorphic - User or Profile
       t.remove_references :disbursement # (parent) transaction should reference cart, not vice versa
       # t.string :state
 
@@ -19,10 +19,22 @@ class UpdateCarts < ActiveRecord::Migration
 
       # t.integer :lock_version
       # t.timestamps
-      t.index [:owner_id, :owner_type, :name]
+      t.index [:owner_type, :owner_id, :name]
       t.index :state
     end
 
+    # A cart item is either a recipient or a proxy bundle (i.e. another cart).
+    # Carts are the notional bundling and weighting of recipients. They are
+    # instantiated through a transaction, which de-normalizes them into an
+    # actual set of specific payments.
+
+    # There are two special cases:
+    # 1. Donations to MYL.
+    #  These are automatically added and can be changed, but raise warning if low,
+    #   and are ignored/reset from proxies.
+    # 2. Mandatory payments to MYL for processing costs.
+    #  These are not cart items, but rather transactional items. The amount is taken
+    #   off the top, based on cost to process payment, cost to disburse, etc.
     change_table :cart_items do |t|
       t.remove_index [:cart_id, :committee_id]
       # t.references :cart, :null => false
@@ -41,7 +53,11 @@ class UpdateCarts < ActiveRecord::Migration
       t.text :message # to be sent to the recipient
 
       t.remove :amount_cents
-      # t.float :proportion # 0..1, proportion of cart total to be spent on this item
+      t.remove :proportion
+      t.integer :weight, defaut: 1, null: false
+
+      t.integer :lock_version
+      t.timestamps
 
       t.index [:cart_id, :item_type, :item_id], unique: true
       t.index [:item_type, :item_id]

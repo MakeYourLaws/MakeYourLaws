@@ -4,7 +4,7 @@ class Cart < ActiveRecord::Base
   validates :user, :cart_items_count, :state, presence: true
 
   # counter_cache set on CartItem
-  has_many :cart_items, -> {includes :item}, inverse_of: :cart, inverse_of: :cart,
+  has_many :cart_items, -> {includes :item}, inverse_of: :cart,
     autosave: true, dependent: :destroy
   validates_associated :cart_items
   # has_many :items, through: :cart_items, polymoprhic: true # doesn't work :(
@@ -18,39 +18,40 @@ class Cart < ActiveRecord::Base
   strip_attributes
   has_paper_trail
 
-  state_machine initial: :empty do
-    event :fill do
-      transition [:empty, :filled, :checked_out] => :filled, :if => ->(c) { c.cart_items > 0 }
-    end
-
-    # Clear actually just mothballs the cart and creates a new one.
-    event :clear do
-      transition filled: :abandoned, if: ->(c) { c.cart_items == 0 }
-    end
-
-    event :check_out do
-      transition filled: :checked_out, if: ->(c) { c.cart_items > 0 }
-    end
-
-    event :publish do
-      transition [:filled, :checked_out, :recurring, :paid] => :published
-    end
-
-    event :recur do
-      transition checked_out: :recurring
-    end
-
-    event :pay do
-      transition checked_out: :paid
-    end
-
-    # event :refund do
-    #   transition paid: :filled
-    # end
-
-    # event :disburse do
-    #   transition paid: :disbursed
-    # end
-
-  end
+  # TODO: Move most of this state into transactions. Carts per se have a different lifecycle.
+  # state_machine initial: :empty do
+  #   event :fill do
+  #     transition [:empty, :filled, :checked_out] => :filled, :if => ->(c) { c.cart_items > 0 }
+  #   end
+  #
+  #   # Clear actually just mothballs the cart and creates a new one.
+  #   event :clear do
+  #     transition filled: :abandoned, if: ->(c) { c.cart_items == 0 }
+  #   end
+  #
+  #   event :check_out do
+  #     transition filled: :checked_out
+  #   end
+  #
+  #   event :publish do
+  #     transition [:filled, :checked_out, :recurring, :paid] => :published
+  #   end
+  #
+  #   event :recur do
+  #     transition checked_out: :recurring
+  #   end
+  #
+  #   event :pay do
+  #     transition checked_out: :paid
+  #   end
+  #
+  #   # event :refund do
+  #   #   transition paid: :filled
+  #   # end
+  #
+  #   # event :disburse do
+  #   #   transition paid: :disbursed
+  #   # end
+  #
+  # end
 end

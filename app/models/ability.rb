@@ -7,10 +7,6 @@ class Ability
     # resource: :all or class name
     # final: conditions hash
 
-    # can :read, User
-    can :create, [Payments::Paypal::Transaction] # , Paypal::Preapproval]
-    can :create, [Payments::Stripe::Charge] # , Paypal::Preapproval]
-
     # user ||= User.new # guest user (not logged in)
     if user
       can :manage, User, id: user.id
