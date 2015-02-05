@@ -56,10 +56,17 @@ GEM
     ast (2.0.0)
     astrolabe (1.3.0)
       parser (>= 2.2.0.pre.3, < 3.0)
+    awesome_print (1.6.1)
     bcrypt (3.1.10)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     bettertabs (1.4.2)
       jquery-rails
       rails (>= 3.1.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bitly (0.10.4)
       httparty (>= 0.7.6)
       multi_json (~> 1.3)
@@ -89,6 +96,10 @@ GEM
     bundler-audit (0.3.1)
       bundler (~> 1.2)
       thor (~> 0.18)
+    byebug (3.5.1)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+      slop (~> 3.6)
     cancancan (1.10.1)
     capistrano (3.3.5)
       capistrano-stats (~> 1.1.0)
@@ -115,6 +126,7 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.5)
       climate_control (>= 0.0.3, < 1.0)
+    coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -146,12 +158,8 @@ GEM
       nokogiri (~> 1.5)
       rails (>= 3, < 5)
     database_cleaner (1.4.0)
-    debugger (1.6.8)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.3.5)
+    debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.3.8)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -162,12 +170,13 @@ GEM
     devise-encryptable (0.2.0)
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
+    diffy (3.0.7)
     ecdsa (1.2.0)
     equalizer (0.0.9)
     erubis (2.7.0)
     ethon (0.7.2)
       ffi (>= 1.3.0)
-    execjs (2.2.2)
+    execjs (2.3.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
@@ -182,6 +191,10 @@ GEM
       rails (>= 3.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
+    grit (2.5.0)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
+      posix-spawn (~> 0.3.6)
     groupdate (2.4.0)
       activesupport (>= 3)
     haml (4.0.6)
@@ -199,6 +212,7 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.11)
+    interception (0.5)
     it (0.2.5)
       actionpack (>= 3.0.0)
     jbuilder (2.2.6)
@@ -224,6 +238,7 @@ GEM
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     metaclass (0.0.4)
+    method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.6.2)
     minitest (5.5.1)
@@ -316,10 +331,33 @@ GEM
     people (0.2.1)
     phone (1.2.3)
     polyglot (0.3.4)
+    posix-spawn (0.3.9)
     postmaster (1.3.2)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
     powerpack (0.0.9)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.0.0)
+      byebug (~> 3.4)
+      pry (~> 0.10)
+    pry-doc (0.6.0)
+      pry (~> 0.9)
+      yard (~> 0.8)
+    pry-git (0.2.3)
+      diffy
+      grit
+      pry (>= 0.9.8)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
+    pry-rescue (1.4.1)
+      interception (>= 0.5)
+      pry
+    pry-stack_explorer (0.4.9.1)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     psych (2.0.12)
     puma (2.11.0)
       rack (>= 1.1, < 2.0)
@@ -377,6 +415,9 @@ GEM
       redis-actionpack (~> 4)
       redis-activesupport (~> 4)
       redis-store (~> 1.1.0)
+    redis-session-store (0.8.0)
+      actionpack (>= 3, < 5)
+      redis
     redis-store (1.1.4)
       redis (>= 2.2)
     ref (1.0.5)
@@ -411,7 +452,7 @@ GEM
       rufus-scheduler (~> 3.0)
     resque_mailer (2.2.7)
       actionmailer (>= 3.0)
-    resqued (0.7.11)
+    resqued (0.7.12)
       kgio (~> 2.6)
       mono_logger (~> 1.0)
       resque (>= 1.9.1)
@@ -669,6 +710,8 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    slop (3.6.0)
+    spring (1.2.0)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -701,7 +744,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    tins (1.3.3)
+    tins (1.3.4)
     turbolinks (2.5.3)
       coffee-rails
     twitter (5.13.0)
@@ -735,6 +778,7 @@ GEM
       rack-test (>= 0.5.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    yard (0.8.7.6)
 
 PLATFORMS
   ruby
@@ -745,11 +789,15 @@ DEPENDENCIES
   activemerchant
   airbrake
   amazon_flex_pay
+  awesome_print
   bcrypt
+  better_errors
   bettertabs
+  binding_of_caller
   bitpay-client
   brakeman
   bundler-audit
+  byebug
   cancancan
   capistrano
   capistrano-bundler
@@ -759,7 +807,6 @@ DEPENDENCIES
   coinbase
   cucumber-rails
   database_cleaner
-  debugger
   devise
   devise-encryptable
   execjs
@@ -796,6 +843,13 @@ DEPENDENCIES
   paperclip-meta
   phone
   postmaster
+  pry
+  pry-byebug
+  pry-doc
+  pry-git
+  pry-rails
+  pry-rescue
+  pry-stack_explorer
   psych
   puma
   rack
@@ -807,6 +861,7 @@ DEPENDENCIES
   rake
   redis-rack-cache
   redis-rails
+  redis-session-store
   resque
   resque-async-method-enhanced
   resque-cleaner
@@ -826,6 +881,7 @@ DEPENDENCIES
   rubysl
   sass-rails
   sdoc
+  spring
   state_machine
   strip_attributes
   stripe
