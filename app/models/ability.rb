@@ -7,10 +7,6 @@ class Ability
     # resource: :all or class name
     # final: conditions hash
 
-    # can :read, User
-    can :create, [Payments::Paypal::Transaction] # , Paypal::Preapproval]
-    can :create, [Payments::Stripe::Charge] # , Paypal::Preapproval]
-
     # user ||= User.new # guest user (not logged in)
     if user
       can :manage, User, id: user.id
@@ -20,9 +16,11 @@ class Ability
         can :create, Profile
         can :read, Profile
         can :manage, [Initiative, Committee]
-        can :manage, [Payments::Paypal::Transaction, Cart], # Paypal::Preapproval],
+        # can :manage, [Payments::Paypal::Transaction], # Paypal::Preapproval],
+        #     user_id: user.id
+        can :manage, [Payments::Stripe::Charge],
             user_id: user.id
-        can :manage, [Payments::Stripe::Charge, Cart],
+        can :manage, [Cart, CartItem],
             user_id: user.id
       end
     end

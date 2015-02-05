@@ -1,0 +1,5 @@
+<div class="header">
+	<% if @cart = current_user.try(:current_cart) %>
+		<%= link_to 'Cart', @cart %>: <%= @cart.cart_items_count %> items
+	<% end %>
+</div>

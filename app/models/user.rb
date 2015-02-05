@@ -15,8 +15,9 @@ class User < ActiveRecord::Base
   end
 
   has_many :identities
-  has_many :carts
-  has_one :current_cart, -> { where(state: [:empty, :filled, :checked_out]) }, class_name: 'Cart'
+  has_many :carts, as: :owner
+  has_one :current_cart, -> { where(state: [:empty, :filled, :checked_out]) },
+    class_name: 'Cart', as: :owner
 
   belongs_to :legal_identity
 

@@ -1,0 +1,8 @@
+<% if @profile.legal_identity %>
+    <% if !current_cart || !current_cart.legal_identity_items.include?(@profile.legal_identity) %>
+    	<%= button_to 'Add to cart', cart_items_path(:legal_identity_id => @profile.legal_identity.id), :remote => true %>
+    <% else %>
+    	Added to cart
+    	<%= link_to 'Check out', current_cart %>
+    <% end %>
+<% end %>
