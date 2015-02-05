@@ -2,7 +2,9 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-Bundler.require(:default, Rails.env)
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
 
 require 'activerecord-import' # doesn't auto-require properly
 
@@ -49,6 +51,10 @@ module MakeyourlawsOrg
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.enforce_available_locales = true
     config.i18n.default_locale = :en
+
+    # Rails 4.2.0+. Current coinbase & bitpay not yet compatible.
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    # config.active_record.raise_in_transactional_callbacks = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = 'utf-8'
