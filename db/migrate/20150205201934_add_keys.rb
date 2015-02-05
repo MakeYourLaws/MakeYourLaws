@@ -1,0 +1,26 @@
+class AddKeys < ActiveRecord::Migration
+  def change
+    add_foreign_key "cart_items", "carts", name: "cart_items_cart_id_fk"
+    add_foreign_key "cart_items", "committees", name: "cart_items_committee_id_fk"
+    add_foreign_key "carts", "users", name: "carts_user_id_fk"
+    add_foreign_key "fec_candidates", "fec_committees", name: "fec_candidates_principal_campaign_committee_fk", column: "principal_campaign_committee", primary_key: "fec_id"
+    add_foreign_key "fec_committees", "fec_candidates", name: "fec_committees_candidate_id_fk", column: "candidate_id", primary_key: "fec_id"
+    add_foreign_key "fec_committees", "fec_committees", name: "fec_committees_connected_organization_name_fk", column: "connected_organization_name", primary_key: "name"
+    add_foreign_key "identities", "users", name: "identities_user_id_fk"
+    add_foreign_key "links", "links", name: "links_duplicate_of_id_fk", column: "duplicate_of_id"
+    add_foreign_key "paypal_notifications", "paypal_transactions", name: "paypal_notifications_paypal_transaction_id_fk"
+    add_foreign_key "paypal_notifications", "paypal_transactions", name: "paypal_notifications_transaction_id_fk", column: "transaction_id"
+    add_foreign_key "paypal_subtransactions", "paypal_transactions", name: "paypal_subtransactions_paypal_transaction_id_fk"
+    add_foreign_key "paypal_subtransactions", "paypal_transactions", name: "paypal_subtransactions_transaction_id_fk", column: "transaction_id"
+    add_foreign_key "paypal_subtransactions", "users", name: "paypal_subtransactions_user_id_fk"
+    add_foreign_key "paypal_transaction_notifications", "paypal_subtransactions", name: "paypal_transaction_notifications_subtransaction_id_fk", column: "subtransaction_id"
+    add_foreign_key "paypal_transactions", "users", name: "paypal_transactions_user_id_fk"
+    add_foreign_key "profiles", "legal_identities", name: "profiles_legal_identity_id_fk"
+    add_foreign_key "search_results", "searches", name: "search_results_search_id_fk"
+    add_foreign_key "stripe_customers", "users", name: "stripe_customers_user_id_fk"
+    add_foreign_key "tweet_links", "links", name: "tweet_links_link_id_fk"
+    add_foreign_key "tweet_links", "tweets", name: "tweet_links_tweet_id_fk"
+    add_foreign_key "users_roles", "roles", name: "users_roles_role_id_fk"
+    add_foreign_key "users_roles", "users", name: "users_roles_user_id_fk"
+  end
+end
