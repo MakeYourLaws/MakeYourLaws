@@ -36,6 +36,7 @@ gem 'hashie_rails'  # see https://github.com/intridea/hashie/blob/master/UPGRADI
 
 gem 'redis-rails' # switching out for dalli/memcached
 gem "redis-rack-cache"
+gem 'redis-session-store'
 
 gem "resque", require: "resque/server"
 gem 'resque_mailer'
@@ -76,11 +77,26 @@ group :development do
 
   # gem 'capistrano-ci' # not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
   gem 'term-ansicolor'
-  platform(:mri) { gem 'debugger' }
+  platform(:mri) do # Ruby 2.0+ required.
+    gem 'byebug'
+    gem 'pry-byebug'
+  end
   platform(:rbx) do
     gem 'rubinius-compiler'
     gem 'rubinius-debugger'
   end
+
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-git'
+  gem 'awesome_print'
+
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
+
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 # Bundle gems for the local environment. Make sure to
@@ -93,6 +109,7 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'bundler-audit', require: false
   gem 'rspec-rails'#, '~> 3.0.0.beta'
+  gem 'spring'
 end
 
 group :test do
