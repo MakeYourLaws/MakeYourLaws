@@ -1,4 +1,4 @@
-MakeyourlawsOrg::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -24,7 +24,7 @@ MakeyourlawsOrg::Application.configure do
   }
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -33,11 +33,9 @@ MakeyourlawsOrg::Application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
-  # Generate digests for assets URLs.
+  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
+  # yet still be able to expire them through the digest params.
   config.assets.digest = true
-
-  # Version of your assets, change this if you want to expire all your assets.
-  config.assets.version = '1.0'
 
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -109,4 +107,7 @@ MakeyourlawsOrg::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   Paperclip.options[:command_path] = "/usr/bin/"
+
+  # Do not dump schema after migrations.
+  config.active_record.dump_schema_after_migration = false
 end
