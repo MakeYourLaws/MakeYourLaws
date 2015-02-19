@@ -44,7 +44,7 @@ gem 'resque-scheduler', require: 'resque/scheduler/server'
 gem 'resque-retry', require: ['resque-retry', 'resque-retry/server']
 gem 'resque-job-stats', require: ['resque-job-stats/server', 'resque/plugins/job_stats']
 gem 'resque-cleaner', require: 'resque-cleaner'
-gem 'resque-ensure-connected'
+# gem 'resque-ensure-connected' # undefined method `verify_active_connections!' on an instance of ActiveRecord::ConnectionAdapters::ConnectionHandler
 gem 'resqued'
 # gem 'resque-pool'
 gem 'resque-lock-timeout'
