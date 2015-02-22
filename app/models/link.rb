@@ -60,7 +60,7 @@ class Link < ActiveRecord::Base
     uri = Addressable::URI.parse(url)
 
     blacklist = %w(utm_source utm_medium utm_term utm_content utm_campaign s_campaign dlvrit
-                   utm_cid refid feature hp)
+                   utm_cid refid feature hp slreturn cmp)
     params = uri.query_values
     if params
       blacklist.each { |w| params.delete w }
