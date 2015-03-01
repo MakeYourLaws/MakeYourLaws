@@ -1,3 +1,3 @@
-%div= "You must agree to the following #{@needed_agreements.size == 1 ? 'agreement' : 'agreements'} for the role #{@role.name}:"
+%div= "You must agree to the following #{'agreement'.pluralize(@needed_agreements.size)} for the role #{@role.name}:" # TODO words
 - @needed_agreements.map do |agreement|
   = render :partial => 'show', :locals => {:agreement => agreement}
