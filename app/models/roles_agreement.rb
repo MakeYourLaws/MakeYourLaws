@@ -14,6 +14,7 @@ class RolesAgreement < ActiveRecord::Base
   end
 
   validates :agreement_name, :uniqueness => {:scope => :role_id, :message => "is already required for this role", :if => :role_id}
+  validates :role_id, :presence => true
 
   # most current active agreement 
   def latest_agreement
