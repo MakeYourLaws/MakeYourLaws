@@ -1,7 +1,7 @@
 class RolesAgreement < ActiveRecord::Base
   # active agreements for this role agreement (by name)
   def agreements
-    @agreements ||= Agreement.active.where(:name => agreement_name)
+    Agreement.active.where(:name => agreement_name)
   end
 
   # most current active agreement 
