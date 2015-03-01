@@ -7,6 +7,12 @@ class RolesAgreement < ActiveRecord::Base
     Agreement.active.where(:name => agreement_name)
   end
 
+  validate do
+    unless agreements.any?
+      errors.add :agreement_name, "must refer to an existing agreement"
+    end
+  end
+
   # most current active agreement 
   def latest_agreement
     agreements.last
