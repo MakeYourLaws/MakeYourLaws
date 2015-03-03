@@ -1,7 +1,7 @@
 # worker 'high'
 # worker 'low', :interval => 30
 
-worker_pool 2, :interval => 1
+worker_pool 1, :interval => 1
 # queue 'high', 'almosthigh'
 # queue 'low', :percent => 20
 # queue 'normal', :count => 4
