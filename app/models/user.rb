@@ -11,8 +11,41 @@ class User < ActiveRecord::Base
     rolify
      # :after_add => :after_role_add, :after_remove => :after_role_remove
     has_many :users_roles
-    has_many :roles, through: :users_roles
   end
+
+  has_many :users_agreements
+  has_many :agreements, :through => :users_agreements
+
+  has_many :active_agreements, -> { where(Agreement::WHERE_ACTIVE) }, :through => :users_agreements, :source => :agreement
+
+  has_many :offered_roles, :through => :users_roles, :source => :role
+
+  active_roles_scope = -> do
+    # roles which are offered to the user (i.e. have a users_roles entry for the user) 
+    # where
+    where(
+      # none of the required agreements 
+      'NOT EXISTS (' +
+        'SELECT * FROM `roles_agreements` ' +
+        # for that role
+        'WHERE `roles_agreements`.`role_id` = `roles`.`id` ' +
+        # do not have any (accepted) agreements 
+        'AND NOT EXISTS (' +
+          'SELECT * FROM `users_agreements` ' +
+          'INNER JOIN `agreements` ON `users_agreements`.`agreement_id` = `agreements`.`id` ' +
+          # by this user
+          'WHERE `users_agreements`.`user_id` = `users_roles`.`user_id` ' +
+          # for that agreement
+          'AND `agreements`.`name` = `roles_agreements`.`agreement_name` ' +
+          "AND #{Agreement::WHERE_ACTIVE}" +
+        ')' +
+      ')'
+    )
+    # essentially: roles where none of the required agreements aren't agreed to (in an active version), 
+    # or equivalently, 
+    # all of the required agreements have some active version agreed to (but expressed that way is trickier in sql) 
+  end
+  has_many :roles, active_roles_scope, :through => :users_roles
 
   has_many :identities
   has_many :carts

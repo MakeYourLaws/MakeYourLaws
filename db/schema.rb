@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929203604) do
+ActiveRecord::Schema.define(version: 20141117095244) do
+
+  create_table "agreements", force: true do |t|
+    t.string   "name"
+    t.string   "version"
+    t.text     "short"
+    t.text     "explanation"
+    t.text     "full"
+    t.datetime "activates_at"
+    t.datetime "expires_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "agreements", ["name", "version"], name: "index_agreements_on_name_and_version", unique: true, using: :btree
+  add_index "agreements", ["name"], name: "index_agreements_on_name", using: :btree
 
   create_table "cart_items", force: true do |t|
     t.integer "cart_id",                 null: false
@@ -426,6 +441,16 @@ ActiveRecord::Schema.define(version: 20140929203604) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
+  create_table "roles_agreements", force: true do |t|
+    t.string   "agreement_name"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles_agreements", ["agreement_name"], name: "index_roles_agreements_on_agreement_name", using: :btree
+  add_index "roles_agreements", ["role_id"], name: "index_roles_agreements_on_role_id", using: :btree
+
   create_table "search_results", force: true do |t|
     t.integer  "search_id"
     t.integer  "result_id"
@@ -541,6 +566,17 @@ ActiveRecord::Schema.define(version: 20140929203604) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unconfirmed_email"], name: "index_users_on_unconfirmed_email", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+
+  create_table "users_agreements", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "agreement_id"
+    t.text     "signature"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_agreements", ["agreement_id"], name: "index_users_agreements_on_agreement_id", using: :btree
+  add_index "users_agreements", ["user_id"], name: "index_users_agreements_on_user_id", using: :btree
 
   create_table "users_roles", force: true do |t|
     t.integer  "user_id"
