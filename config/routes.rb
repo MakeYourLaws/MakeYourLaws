@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     get 'tos'
     get 'privacy'
     namespace :press do
+      get 'BNA-2015-03-19'
       get 'BNA-2014-05-09'
       get 'BNA-2013-11-15'
     end
