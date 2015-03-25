@@ -83,7 +83,10 @@ module MakeyourlawsOrg
     config.cache_store = :redis_store, { db: 1 }
 
     # Enable the asset pipeline
-    config.assets.enabled = true
+    # config.assets.enabled = true
+
+    # Disabling to allow mod_pagespeed to take over
+    config.assets.enabled = false
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
