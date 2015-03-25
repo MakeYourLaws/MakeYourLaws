@@ -18,17 +18,25 @@ Rails.application.configure do
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx,
   #   varnish or squid.
-  config.action_dispatch.rack_cache = {
-    metastore:   'redis://localhost:6379/3',
-    entitystore: 'redis://localhost:6379/4'
-  }
+  # config.action_dispatch.rack_cache = {
+  #   metastore:   'redis://localhost:6379/3',
+  #   entitystore: 'redis://localhost:6379/4'
+  # }
+
+  # Disabling Rails asset munging to hand it off to mod_pagespeed instead
+  config.assets.compress = false # normally true
+  config.assets.configure do |env| # normally not set
+    env.cache = ActiveSupport::Cache.lookup_store(:null_store)
+  end
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.serve_static_files = false # ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
-  config.assets.css_compressor = :sass
+  # config.assets.js_compressor = :uglifier # normally turned on
+  # config.assets.css_compressor = :sass
+
+  # -- end mod_pagespeed punting
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
