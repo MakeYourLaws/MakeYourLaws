@@ -33,7 +33,9 @@ source 'https://rubygems.org' do
   #    /active_merchant/billing/gateways/paypal_adaptive_payments/ext.rb:7
   # Haven't diagnosed why. Works fine without.
 
-  gem 'hashie_rails'  # see https://github.com/intridea/hashie/blob/master/UPGRADING.md
+  gem 'hashie-forbidden_attributes'
+  # moved from hashie-rails
+  # see https://github.com/intridea/hashie/blob/master/UPGRADING.md
 
   gem 'redis-rails' # switching out for dalli/memcached
   gem "redis-rack-cache"
@@ -155,7 +157,9 @@ source 'https://rubygems.org' do
   gem 'amazon_flex_pay'
 
   gem 'bitpay-client', '>= 2.0.1', :require => 'bitpay'
-  gem 'coinbase', ">= 2.1.1"
+  # FIXME: pending gem bump https://github.com/coinbase/coinbase-ruby/issues/63
+  gem 'coinbase', ">= 2.1.1" #, github: 'coinbase/coinbase-ruby', branch: 'v3'
+  # omniauth-coinbase depends on coinbase ~>2.0
 
   gem "devise"#, ">= 3.1.1"
   gem "devise-encryptable"#, ">= 0.1.1c"
