@@ -141,8 +141,8 @@ source 'https://rubygems.org' do
   # gem 'apotomo' # provides cells. not rails 4 compatible
   gem 'state_machine'
 
-  # use MYL's fork of NYT's Fech gem, since it has bugfixes and other features that NYT hasn't committed
-  gem 'myl-fech', :require => 'fech'#, '>= 1.0.2'
+  gem 'fech', :require => 'fech'#, '>= 1.0.2'
+  gem 'activerecord-mysql-unsigned'
 
   gem 'money'#, '>= 5.0.0'
   gem 'money-rails'#, '>= 0.8.1'
