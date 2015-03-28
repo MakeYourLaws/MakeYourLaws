@@ -5,7 +5,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       t.string :record_type, limit: 3
       t.string :ef_type, limit: 3
@@ -26,12 +26,10 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :change_of_committee_name, limit: 1
@@ -54,7 +52,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :signature_middle_name, limit: 20
       t.string :signature_prefix, limit: 10
       t.string :signature_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
       t.string :committee_type, limit: 1
       t.string :candidate_id_number, limit: 9
       t.index :candidate_id_number
@@ -92,7 +90,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :affiliated_city, limit: 30
       t.string :affiliated_state, limit: 2
       t.string :affiliated_zip_code, limit: 9
-      t.string :affiliated_relationship_code, limit: 3
+      t.string :affiliated_relationship_code, limit: 38
       t.string :custodian_last_name, limit: 30
       t.string :custodian_first_name, limit: 20
       t.string :custodian_middle_name, limit: 20
@@ -170,13 +168,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # (^f1m[a|n])
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :committee_name, limit: 200
@@ -188,7 +184,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :state, limit: 2
       t.string :zip_code, limit: 9
       t.string :committee_type, limit: 1
-      t.string :affiliated_date_f1_filed, limit: 8 # FIXME: convert to date
+      t.date :affiliated_date_f1_filed
       t.string :affiliated_committee_id_number, limit: 9
       t.index :affiliated_committee_id_number
 
@@ -271,7 +267,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :treasurer_middle_name, limit: 20
       t.string :treasurer_prefix, limit: 10
       t.string :treasurer_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
 
       t.string :first_candidate_name, limit: 200
       t.index :first_candidate_name
@@ -298,13 +294,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f1s
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :joint_fund_participant_committee_name, limit: 200
@@ -332,7 +326,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :affiliated_city, limit: 30
       t.string :affiliated_state, limit: 2
       t.string :affiliated_zip_code, limit: 9
-      t.string :affiliated_relationship_code, limit: 3
+      t.string :affiliated_relationship_code, limit: 38
       t.string :agent_last_name, limit: 30
       t.string :agent_first_name, limit: 20
       t.string :agent_middle_name, limit: 20
@@ -361,7 +355,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # (^f2$)|(^f2[^4])
       t.string :form_type, limit: 8
@@ -410,10 +404,10 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :candidate_signature_middle_name, limit: 20
       t.string :candidate_signature_prefix, limit: 10
       t.string :candidate_signature_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
 
-      t.decimal :primary_personal_funds_declared
-      t.decimal :general_personal_funds_declared
+      t.decimal :primary_personal_funds_declared, precision: 12, scale: 2
+      t.decimal :general_personal_funds_declared, precision: 12, scale: 2
       t.string :candidate_name, limit: 200
       t.index :candidate_name
 
@@ -428,13 +422,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # (^f24$)|(^f24[an])
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :report_type, limit: 3
@@ -452,7 +444,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :treasurer_middle_name, limit: 20
       t.string :treasurer_prefix, limit: 10
       t.string :treasurer_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
     end
 
     # report of receipts & disbursements - authorized committee
@@ -461,13 +453,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f3[a|n|t]
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :committee_name, limit: 200
@@ -492,75 +482,76 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :treasurer_middle_name, limit: 20
       t.string :treasurer_prefix, limit: 10
       t.string :treasurer_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
-      t.decimal :col_a_total_contributions_no_loans
-      t.decimal :col_a_total_contributions_refunds
-      t.decimal :col_a_net_contributions
-      t.decimal :col_a_total_operating_expenditures
-      t.decimal :col_a_total_offset_to_operating_expenditures
-      t.decimal :col_a_net_operating_expenditures
-      t.decimal :col_a_cash_on_hand_close_of_period
-      t.decimal :col_a_debts_to
-      t.decimal :col_a_debts_by
-      t.decimal :col_a_individual_contributions_itemized
-      t.decimal :col_a_individual_contributions_unitemized
-      t.decimal :col_a_total_individual_contributions
-      t.decimal :col_a_political_party_contributions
-      t.decimal :col_a_pac_contributions
-      t.decimal :col_a_candidate_contributions
-      t.decimal :col_a_total_contributions
-      t.decimal :col_a_transfers_from_authorized
-      t.decimal :col_a_candidate_loans
-      t.decimal :col_a_other_loans
-      t.decimal :col_a_total_loans
-      t.decimal :col_a_offset_to_operating_expenditures
-      t.decimal :col_a_other_receipts
-      t.decimal :col_a_total_receipts
-      t.decimal :col_a_operating_expenditures
-      t.decimal :col_a_transfers_to_authorized
-      t.decimal :col_a_candidate_loan_repayments
-      t.decimal :col_a_other_loan_repayments
-      t.decimal :col_a_total_loan_repayments
-      t.decimal :col_a_refunds_to_individuals
-      t.decimal :col_a_refunds_to_party_committees
-      t.decimal :col_a_refunds_to_other_committees
-      t.decimal :col_a_total_refunds
-      t.decimal :col_a_other_disbursements
-      t.decimal :col_a_total_disbursements
-      t.decimal :col_a_cash_beginning_reporting_period
-      t.decimal :col_a_total_disbursements_period
-      t.decimal :col_a_cash_on_hand_close
-      t.decimal :col_b_total_contributions_no_loans
-      t.decimal :col_b_total_contributions_refunds
-      t.decimal :col_b_net_contributions
-      t.decimal :col_b_total_operating_expenditures
-      t.decimal :col_b_total_offset_to_operating_expenditures
-      t.decimal :col_b_net_operating_expenditures
-      t.decimal :col_b_individual_contributions_itemized
-      t.decimal :col_b_individual_contributions_unitemized
-      t.decimal :col_b_total_individual_contributions
-      t.decimal :col_b_political_party_contributions
-      t.decimal :col_b_pac_contributions
-      t.decimal :col_b_candidate_contributions
-      t.decimal :col_b_total_contributions
-      t.decimal :col_b_transfers_from_authorized
-      t.decimal :col_b_candidate_loans
-      t.decimal :col_b_other_loans
-      t.decimal :col_b_total_loans
-      t.decimal :col_b_offset_to_operating_expenditures
-      t.decimal :col_b_other_receipts
-      t.decimal :col_b_total_receipts
-      t.decimal :col_b_operating_expenditures
-      t.decimal :col_b_transfers_to_authorized
-      t.decimal :col_b_candidate_loan_repayments
-      t.decimal :col_b_other_loan_repayments
-      t.decimal :col_b_total_loan_repayments
-      t.decimal :col_b_refunds_to_individuals
-      t.decimal :col_b_refunds_to_party_committees
-      t.decimal :col_b_refunds_to_other_committees
-      t.decimal :col_b_total_refunds
-      t.decimal :col_b_other_disbursements
-      t.decimal :col_b_total_disbursements
+      t.date :date_signed
+      t.decimal :col_a_total_contributions_no_loans, precision: 12, scale: 2
+      t.decimal :col_a_total_contributions_refunds, precision: 12, scale: 2
+      t.decimal :col_a_net_contributions, precision: 12, scale: 2
+      t.decimal :col_a_total_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_total_offset_to_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_net_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_cash_on_hand_close_of_period, precision: 12, scale: 2
+      t.decimal :col_a_debts_to, precision: 12, scale: 2
+      t.decimal :col_a_debts_by, precision: 12, scale: 2
+      t.decimal :col_a_individual_contributions_itemized, precision: 12, scale: 2
+      t.decimal :col_a_individual_contributions_unitemized, precision: 12, scale: 2
+      t.decimal :col_a_total_individual_contributions, precision: 12, scale: 2
+      t.decimal :col_a_political_party_contributions, precision: 12, scale: 2
+      t.decimal :col_a_pac_contributions, precision: 12, scale: 2
+      t.decimal :col_a_candidate_contributions, precision: 12, scale: 2
+      t.decimal :col_a_total_contributions, precision: 12, scale: 2
+      t.decimal :col_a_transfers_from_authorized, precision: 12, scale: 2
+      t.decimal :col_a_candidate_loans, precision: 12, scale: 2
+      t.decimal :col_a_other_loans, precision: 12, scale: 2
+      t.decimal :col_a_total_loans, precision: 12, scale: 2
+      t.decimal :col_a_offset_to_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_other_receipts, precision: 12, scale: 2
+      t.decimal :col_a_total_receipts, precision: 12, scale: 2
+      t.decimal :col_a_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_transfers_to_authorized, precision: 12, scale: 2
+      t.decimal :col_a_candidate_loan_repayments, precision: 12, scale: 2
+      t.decimal :col_a_other_loan_repayments, precision: 12, scale: 2
+      t.decimal :col_a_total_loan_repayments, precision: 12, scale: 2
+      t.decimal :col_a_refunds_to_individuals, precision: 12, scale: 2
+      t.decimal :col_a_refunds_to_party_committees, precision: 12, scale: 2
+      t.decimal :col_a_refunds_to_other_committees, precision: 12, scale: 2
+      t.decimal :col_a_total_refunds, precision: 12, scale: 2
+      t.decimal :col_a_other_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_total_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_cash_beginning_reporting_period, precision: 12, scale: 2
+      t.decimal :col_a_total_disbursements_period, precision: 12, scale: 2
+      t.decimal :col_a_cash_on_hand_close, precision: 12, scale: 2
+      t.decimal :col_b_total_contributions_no_loans, precision: 12, scale: 2
+      t.decimal :col_b_total_contributions_refunds, precision: 12, scale: 2
+      t.decimal :col_b_net_contributions, precision: 12, scale: 2
+      t.decimal :col_b_total_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_total_offset_to_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_net_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_individual_contributions_itemized, precision: 12, scale: 2
+      t.decimal :col_b_individual_contributions_unitemized, precision: 12, scale: 2
+      t.decimal :col_b_total_individual_contributions, precision: 12, scale: 2
+      t.decimal :col_b_political_party_contributions, precision: 12, scale: 2
+      t.decimal :col_b_pac_contributions, precision: 12, scale: 2
+      t.decimal :col_b_candidate_contributions, precision: 12, scale: 2
+      t.decimal :col_b_total_contributions, precision: 12, scale: 2
+      t.decimal :col_b_transfers_from_authorized, precision: 12, scale: 2
+      t.decimal :col_b_candidate_loans, precision: 12, scale: 2
+      t.decimal :col_b_other_loans, precision: 12, scale: 2
+      t.decimal :col_b_total_loans, precision: 12, scale: 2
+      t.decimal :col_b_offset_to_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_other_receipts, precision: 12, scale: 2
+      t.decimal :col_b_total_receipts, precision: 12, scale: 2
+      t.decimal :col_b_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_transfers_to_authorized, precision: 12, scale: 2
+      t.decimal :col_b_candidate_loan_repayments, precision: 12, scale: 2
+      t.decimal :col_b_other_loan_repayments, precision: 12, scale: 2
+      t.decimal :col_b_total_loan_repayments, precision: 12, scale: 2
+      t.decimal :col_b_refunds_to_individuals, precision: 12, scale: 2
+      t.decimal :col_b_refunds_to_party_committees, precision: 12, scale: 2
+      t.decimal :col_b_refunds_to_other_committees, precision: 12, scale: 2
+      t.decimal :col_b_total_refunds, precision: 12, scale: 2
+      t.decimal :col_b_other_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_total_disbursements, precision: 12, scale: 2
+
       t.string :candidate_id_number, limit: 9
       t.index :candidate_id_number
 
@@ -570,12 +561,13 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :candidate_prefix, limit: 10
       t.string :candidate_suffix, limit: 10
       t.string :report_type, limit: 3
-      t.decimal :col_b_gross_receipts_authorized_primary
-      t.decimal :col_b_aggregate_personal_funds_primary
-      t.decimal :col_b_gross_receipts_minus_personal_funds_primary
-      t.decimal :col_b_gross_receipts_authorized_general
-      t.decimal :col_b_aggregate_personal_funds_general
-      t.decimal :col_b_gross_receipts_minus_personal_funds_general
+
+      t.decimal :col_b_gross_receipts_authorized_primary, precision: 12, scale: 2
+      t.decimal :col_b_aggregate_personal_funds_primary, precision: 12, scale: 2
+      t.decimal :col_b_gross_receipts_minus_personal_funds_primary, precision: 12, scale: 2
+      t.decimal :col_b_gross_receipts_authorized_general, precision: 12, scale: 2
+      t.decimal :col_b_aggregate_personal_funds_general, precision: 12, scale: 2
+      t.decimal :col_b_gross_receipts_minus_personal_funds_general, precision: 12, scale: 2
 
       t.string :primary_election, limit: 1
       t.string :general_election, limit: 1
@@ -595,13 +587,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # (^f3p$)|(^f3p[^s|3])
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :committee_name, limit: 200
@@ -617,7 +607,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :activity_general, limit: 1
       t.string :report_code, limit: 3
       t.string :election_code, limit: 5
-      t.string :date_of_election, limit: 8 # FIXME: convert to date
+      t.date :date_of_election
       t.string :state_of_election, limit: 2
       t.date :coverage_from_date
       t.date :coverage_through_date
@@ -626,188 +616,188 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :treasurer_middle_name, limit: 20
       t.string :treasurer_prefix, limit: 10
       t.string :treasurer_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
-      t.decimal :col_a_cash_on_hand_beginning_period
-      t.decimal :col_a_total_receipts
-      t.decimal :col_a_subtotal
-      t.decimal :col_a_total_disbursements
-      t.decimal :col_a_cash_on_hand_close_of_period
-      t.decimal :col_a_debts_to
-      t.decimal :col_a_debts_by
-      t.decimal :col_a_expenditures_subject_to_limits
-      t.decimal :col_a_net_contributions
-      t.decimal :col_a_net_operating_expenditures
-      t.decimal :col_a_federal_funds
-      t.decimal :col_a_individuals_itemized
-      t.decimal :col_a_individuals_unitemized
-      t.decimal :col_a_individual_contribution_total
-      t.decimal :col_a_political_party_committees_receipts
-      t.decimal :col_a_other_political_committees_pacs
-      t.decimal :col_a_the_candidate
-      t.decimal :col_a_total_contributions
-      t.decimal :col_a_transfers_from_aff_other_party_cmttees
-      t.decimal :col_a_received_from_or_guaranteed_by_cand
-      t.decimal :col_a_other_loans
-      t.decimal :col_a_total_loans
-      t.decimal :col_a_operating
-      t.decimal :col_a_fundraising
-      t.decimal :col_a_legal_and_accounting
-      t.decimal :col_a_total_offsets_to_expenditures
-      t.decimal :col_a_other_receipts
-      t.decimal :col_a_operating_expenditures
-      t.decimal :col_a_transfers_to_other_authorized_committees
-      t.decimal :col_a_fundraising_disbursements
-      t.decimal :col_a_exempt_legal_accounting_disbursement
-      t.decimal :col_a_made_or_guaranteed_by_candidate
-      t.decimal :col_a_other_repayments
-      t.decimal :col_a_total_loan_repayments_made
-      t.decimal :col_a_individuals
-      t.decimal :col_a_political_party_committees_refunds
-      t.decimal :col_a_other_political_committees
-      t.decimal :col_a_total_contributions_refunds
-      t.decimal :col_a_other_disbursements
-      t.decimal :col_a_items_on_hand_to_be_liquidated
-      t.decimal :col_a_alabama
-      t.decimal :col_a_alaska
-      t.decimal :col_a_arizona
-      t.decimal :col_a_arkansas
-      t.decimal :col_a_california
-      t.decimal :col_a_colorado
-      t.decimal :col_a_connecticut
-      t.decimal :col_a_delaware
-      t.decimal :col_a_dist_of_columbia
-      t.decimal :col_a_florida
-      t.decimal :col_a_georgia
-      t.decimal :col_a_hawaii
-      t.decimal :col_a_idaho
-      t.decimal :col_a_illinois
-      t.decimal :col_a_indiana
-      t.decimal :col_a_iowa
-      t.decimal :col_a_kansas
-      t.decimal :col_a_kentucky
-      t.decimal :col_a_louisiana
-      t.decimal :col_a_maine
-      t.decimal :col_a_maryland
-      t.decimal :col_a_massachusetts
-      t.decimal :col_a_michigan
-      t.decimal :col_a_minnesota
-      t.decimal :col_a_mississippi
-      t.decimal :col_a_missouri
-      t.decimal :col_a_montana
-      t.decimal :col_a_nebraska
-      t.decimal :col_a_nevada
-      t.decimal :col_a_new_hampshire
-      t.decimal :col_a_new_jersey
-      t.decimal :col_a_new_mexico
-      t.decimal :col_a_new_york
-      t.decimal :col_a_north_carolina
-      t.decimal :col_a_north_dakota
-      t.decimal :col_a_ohio
-      t.decimal :col_a_oklahoma
-      t.decimal :col_a_oregon
-      t.decimal :col_a_pennsylvania
-      t.decimal :col_a_rhode_island
-      t.decimal :col_a_south_carolina
-      t.decimal :col_a_south_dakota
-      t.decimal :col_a_tennessee
-      t.decimal :col_a_texas
-      t.decimal :col_a_utah
-      t.decimal :col_a_vermont
-      t.decimal :col_a_virginia
-      t.decimal :col_a_washington
-      t.decimal :col_a_west_virginia
-      t.decimal :col_a_wisconsin
-      t.decimal :col_a_wyoming
-      t.decimal :col_a_puerto_rico
-      t.decimal :col_a_guam
-      t.decimal :col_a_virgin_islands
-      t.decimal :col_a_totals
-      t.decimal :col_b_federal_funds
-      t.decimal :col_b_individuals_itemized
-      t.decimal :col_b_individuals_unitemized
-      t.decimal :col_b_individual_contribution_total
-      t.decimal :col_b_political_party_committees_receipts
-      t.decimal :col_b_other_political_committees_pacs
-      t.decimal :col_b_the_candidate
-      t.decimal :col_b_total_contributions_other_than_loans
-      t.decimal :col_b_transfers_from_aff_other_party_cmttees
-      t.decimal :col_b_received_from_or_guaranteed_by_cand
-      t.decimal :col_b_other_loans
-      t.decimal :col_b_total_loans
-      t.decimal :col_b_operating
-      t.decimal :col_b_fundraising
-      t.decimal :col_b_legal_and_accounting
-      t.decimal :col_b_total_offsets_to_operating_expenditures
-      t.decimal :col_b_other_receipts
-      t.decimal :col_b_total_receipts
-      t.decimal :col_b_operating_expenditures
-      t.decimal :col_b_transfers_to_other_authorized_committees
-      t.decimal :col_b_fundraising_disbursements
-      t.decimal :col_b_exempt_legal_accounting_disbursement
-      t.decimal :col_b_made_or_guaranteed_by_the_candidate
-      t.decimal :col_b_other_repayments
-      t.decimal :col_b_total_loan_repayments_made
-      t.decimal :col_b_individuals
-      t.decimal :col_b_political_party_committees_refunds
-      t.decimal :col_b_other_political_committees
-      t.decimal :col_b_total_contributions_refunds
-      t.decimal :col_b_other_disbursements
-      t.decimal :col_b_total_disbursements
-      t.decimal :col_b_alabama
-      t.decimal :col_b_alaska
-      t.decimal :col_b_arizona
-      t.decimal :col_b_arkansas
-      t.decimal :col_b_california
-      t.decimal :col_b_colorado
-      t.decimal :col_b_connecticut
-      t.decimal :col_b_delaware
-      t.decimal :col_b_dist_of_columbia
-      t.decimal :col_b_florida
-      t.decimal :col_b_georgia
-      t.decimal :col_b_hawaii
-      t.decimal :col_b_idaho
-      t.decimal :col_b_illinois
-      t.decimal :col_b_indiana
-      t.decimal :col_b_iowa
-      t.decimal :col_b_kansas
-      t.decimal :col_b_kentucky
-      t.decimal :col_b_louisiana
-      t.decimal :col_b_maine
-      t.decimal :col_b_maryland
-      t.decimal :col_b_massachusetts
-      t.decimal :col_b_michigan
-      t.decimal :col_b_minnesota
-      t.decimal :col_b_mississippi
-      t.decimal :col_b_missouri
-      t.decimal :col_b_montana
-      t.decimal :col_b_nebraska
-      t.decimal :col_b_nevada
-      t.decimal :col_b_new_hampshire
-      t.decimal :col_b_new_jersey
-      t.decimal :col_b_new_mexico
-      t.decimal :col_b_new_york
-      t.decimal :col_b_north_carolina
-      t.decimal :col_b_north_dakota
-      t.decimal :col_b_ohio
-      t.decimal :col_b_oklahoma
-      t.decimal :col_b_oregon
-      t.decimal :col_b_pennsylvania
-      t.decimal :col_b_rhode_island
-      t.decimal :col_b_south_carolina
-      t.decimal :col_b_south_dakota
-      t.decimal :col_b_tennessee
-      t.decimal :col_b_texas
-      t.decimal :col_b_utah
-      t.decimal :col_b_vermont
-      t.decimal :col_b_virginia
-      t.decimal :col_b_washington
-      t.decimal :col_b_west_virginia
-      t.decimal :col_b_wisconsin
-      t.decimal :col_b_wyoming
-      t.decimal :col_b_puerto_rico
-      t.decimal :col_b_guam
-      t.decimal :col_b_virgin_islands
-      t.decimal :col_b_totals
+      t.date :date_signed
+      t.decimal :col_a_cash_on_hand_beginning_period, precision: 12, scale: 2
+      t.decimal :col_a_total_receipts, precision: 12, scale: 2
+      t.decimal :col_a_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_total_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_cash_on_hand_close_of_period, precision: 12, scale: 2
+      t.decimal :col_a_debts_to, precision: 12, scale: 2
+      t.decimal :col_a_debts_by, precision: 12, scale: 2
+      t.decimal :col_a_expenditures_subject_to_limits, precision: 12, scale: 2
+      t.decimal :col_a_net_contributions, precision: 12, scale: 2
+      t.decimal :col_a_net_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_federal_funds, precision: 12, scale: 2
+      t.decimal :col_a_individuals_itemized, precision: 12, scale: 2
+      t.decimal :col_a_individuals_unitemized, precision: 12, scale: 2
+      t.decimal :col_a_individual_contribution_total, precision: 12, scale: 2
+      t.decimal :col_a_political_party_committees_receipts, precision: 12, scale: 2
+      t.decimal :col_a_other_political_committees_pacs, precision: 12, scale: 2
+      t.decimal :col_a_the_candidate, precision: 12, scale: 2
+      t.decimal :col_a_total_contributions, precision: 12, scale: 2
+      t.decimal :col_a_transfers_from_aff_other_party_cmttees, precision: 12, scale: 2
+      t.decimal :col_a_received_from_or_guaranteed_by_cand, precision: 12, scale: 2
+      t.decimal :col_a_other_loans, precision: 12, scale: 2
+      t.decimal :col_a_total_loans, precision: 12, scale: 2
+      t.decimal :col_a_operating, precision: 12, scale: 2
+      t.decimal :col_a_fundraising, precision: 12, scale: 2
+      t.decimal :col_a_legal_and_accounting, precision: 12, scale: 2
+      t.decimal :col_a_total_offsets_to_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_other_receipts, precision: 12, scale: 2
+      t.decimal :col_a_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_transfers_to_other_authorized_committees, precision: 12, scale: 2
+      t.decimal :col_a_fundraising_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_exempt_legal_accounting_disbursement, precision: 12, scale: 2
+      t.decimal :col_a_made_or_guaranteed_by_candidate, precision: 12, scale: 2
+      t.decimal :col_a_other_repayments, precision: 12, scale: 2
+      t.decimal :col_a_total_loan_repayments_made, precision: 12, scale: 2
+      t.decimal :col_a_individuals, precision: 12, scale: 2
+      t.decimal :col_a_political_party_committees_refunds, precision: 12, scale: 2
+      t.decimal :col_a_other_political_committees, precision: 12, scale: 2
+      t.decimal :col_a_total_contributions_refunds, precision: 12, scale: 2
+      t.decimal :col_a_other_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_items_on_hand_to_be_liquidated, precision: 12, scale: 2
+      t.decimal :col_a_alabama, precision: 12, scale: 2
+      t.decimal :col_a_alaska, precision: 12, scale: 2
+      t.decimal :col_a_arizona, precision: 12, scale: 2
+      t.decimal :col_a_arkansas, precision: 12, scale: 2
+      t.decimal :col_a_california, precision: 12, scale: 2
+      t.decimal :col_a_colorado, precision: 12, scale: 2
+      t.decimal :col_a_connecticut, precision: 12, scale: 2
+      t.decimal :col_a_delaware, precision: 12, scale: 2
+      t.decimal :col_a_dist_of_columbia, precision: 12, scale: 2
+      t.decimal :col_a_florida, precision: 12, scale: 2
+      t.decimal :col_a_georgia, precision: 12, scale: 2
+      t.decimal :col_a_hawaii, precision: 12, scale: 2
+      t.decimal :col_a_idaho, precision: 12, scale: 2
+      t.decimal :col_a_illinois, precision: 12, scale: 2
+      t.decimal :col_a_indiana, precision: 12, scale: 2
+      t.decimal :col_a_iowa, precision: 12, scale: 2
+      t.decimal :col_a_kansas, precision: 12, scale: 2
+      t.decimal :col_a_kentucky, precision: 12, scale: 2
+      t.decimal :col_a_louisiana, precision: 12, scale: 2
+      t.decimal :col_a_maine, precision: 12, scale: 2
+      t.decimal :col_a_maryland, precision: 12, scale: 2
+      t.decimal :col_a_massachusetts, precision: 12, scale: 2
+      t.decimal :col_a_michigan, precision: 12, scale: 2
+      t.decimal :col_a_minnesota, precision: 12, scale: 2
+      t.decimal :col_a_mississippi, precision: 12, scale: 2
+      t.decimal :col_a_missouri, precision: 12, scale: 2
+      t.decimal :col_a_montana, precision: 12, scale: 2
+      t.decimal :col_a_nebraska, precision: 12, scale: 2
+      t.decimal :col_a_nevada, precision: 12, scale: 2
+      t.decimal :col_a_new_hampshire, precision: 12, scale: 2
+      t.decimal :col_a_new_jersey, precision: 12, scale: 2
+      t.decimal :col_a_new_mexico, precision: 12, scale: 2
+      t.decimal :col_a_new_york, precision: 12, scale: 2
+      t.decimal :col_a_north_carolina, precision: 12, scale: 2
+      t.decimal :col_a_north_dakota, precision: 12, scale: 2
+      t.decimal :col_a_ohio, precision: 12, scale: 2
+      t.decimal :col_a_oklahoma, precision: 12, scale: 2
+      t.decimal :col_a_oregon, precision: 12, scale: 2
+      t.decimal :col_a_pennsylvania, precision: 12, scale: 2
+      t.decimal :col_a_rhode_island, precision: 12, scale: 2
+      t.decimal :col_a_south_carolina, precision: 12, scale: 2
+      t.decimal :col_a_south_dakota, precision: 12, scale: 2
+      t.decimal :col_a_tennessee, precision: 12, scale: 2
+      t.decimal :col_a_texas, precision: 12, scale: 2
+      t.decimal :col_a_utah, precision: 12, scale: 2
+      t.decimal :col_a_vermont, precision: 12, scale: 2
+      t.decimal :col_a_virginia, precision: 12, scale: 2
+      t.decimal :col_a_washington, precision: 12, scale: 2
+      t.decimal :col_a_west_virginia, precision: 12, scale: 2
+      t.decimal :col_a_wisconsin, precision: 12, scale: 2
+      t.decimal :col_a_wyoming, precision: 12, scale: 2
+      t.decimal :col_a_puerto_rico, precision: 12, scale: 2
+      t.decimal :col_a_guam, precision: 12, scale: 2
+      t.decimal :col_a_virgin_islands, precision: 12, scale: 2
+      t.decimal :col_a_totals, precision: 12, scale: 2
+      t.decimal :col_b_federal_funds, precision: 12, scale: 2
+      t.decimal :col_b_individuals_itemized, precision: 12, scale: 2
+      t.decimal :col_b_individuals_unitemized, precision: 12, scale: 2
+      t.decimal :col_b_individual_contribution_total, precision: 12, scale: 2
+      t.decimal :col_b_political_party_committees_receipts, precision: 12, scale: 2
+      t.decimal :col_b_other_political_committees_pacs, precision: 12, scale: 2
+      t.decimal :col_b_the_candidate, precision: 12, scale: 2
+      t.decimal :col_b_total_contributions_other_than_loans, precision: 12, scale: 2
+      t.decimal :col_b_transfers_from_aff_other_party_cmttees, precision: 12, scale: 2
+      t.decimal :col_b_received_from_or_guaranteed_by_cand, precision: 12, scale: 2
+      t.decimal :col_b_other_loans, precision: 12, scale: 2
+      t.decimal :col_b_total_loans, precision: 12, scale: 2
+      t.decimal :col_b_operating, precision: 12, scale: 2
+      t.decimal :col_b_fundraising, precision: 12, scale: 2
+      t.decimal :col_b_legal_and_accounting, precision: 12, scale: 2
+      t.decimal :col_b_total_offsets_to_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_other_receipts, precision: 12, scale: 2
+      t.decimal :col_b_total_receipts, precision: 12, scale: 2
+      t.decimal :col_b_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_transfers_to_other_authorized_committees, precision: 12, scale: 2
+      t.decimal :col_b_fundraising_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_exempt_legal_accounting_disbursement, precision: 12, scale: 2
+      t.decimal :col_b_made_or_guaranteed_by_the_candidate, precision: 12, scale: 2
+      t.decimal :col_b_other_repayments, precision: 12, scale: 2
+      t.decimal :col_b_total_loan_repayments_made, precision: 12, scale: 2
+      t.decimal :col_b_individuals, precision: 12, scale: 2
+      t.decimal :col_b_political_party_committees_refunds, precision: 12, scale: 2
+      t.decimal :col_b_other_political_committees, precision: 12, scale: 2
+      t.decimal :col_b_total_contributions_refunds, precision: 12, scale: 2
+      t.decimal :col_b_other_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_total_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_alabama, precision: 12, scale: 2
+      t.decimal :col_b_alaska, precision: 12, scale: 2
+      t.decimal :col_b_arizona, precision: 12, scale: 2
+      t.decimal :col_b_arkansas, precision: 12, scale: 2
+      t.decimal :col_b_california, precision: 12, scale: 2
+      t.decimal :col_b_colorado, precision: 12, scale: 2
+      t.decimal :col_b_connecticut, precision: 12, scale: 2
+      t.decimal :col_b_delaware, precision: 12, scale: 2
+      t.decimal :col_b_dist_of_columbia, precision: 12, scale: 2
+      t.decimal :col_b_florida, precision: 12, scale: 2
+      t.decimal :col_b_georgia, precision: 12, scale: 2
+      t.decimal :col_b_hawaii, precision: 12, scale: 2
+      t.decimal :col_b_idaho, precision: 12, scale: 2
+      t.decimal :col_b_illinois, precision: 12, scale: 2
+      t.decimal :col_b_indiana, precision: 12, scale: 2
+      t.decimal :col_b_iowa, precision: 12, scale: 2
+      t.decimal :col_b_kansas, precision: 12, scale: 2
+      t.decimal :col_b_kentucky, precision: 12, scale: 2
+      t.decimal :col_b_louisiana, precision: 12, scale: 2
+      t.decimal :col_b_maine, precision: 12, scale: 2
+      t.decimal :col_b_maryland, precision: 12, scale: 2
+      t.decimal :col_b_massachusetts, precision: 12, scale: 2
+      t.decimal :col_b_michigan, precision: 12, scale: 2
+      t.decimal :col_b_minnesota, precision: 12, scale: 2
+      t.decimal :col_b_mississippi, precision: 12, scale: 2
+      t.decimal :col_b_missouri, precision: 12, scale: 2
+      t.decimal :col_b_montana, precision: 12, scale: 2
+      t.decimal :col_b_nebraska, precision: 12, scale: 2
+      t.decimal :col_b_nevada, precision: 12, scale: 2
+      t.decimal :col_b_new_hampshire, precision: 12, scale: 2
+      t.decimal :col_b_new_jersey, precision: 12, scale: 2
+      t.decimal :col_b_new_mexico, precision: 12, scale: 2
+      t.decimal :col_b_new_york, precision: 12, scale: 2
+      t.decimal :col_b_north_carolina, precision: 12, scale: 2
+      t.decimal :col_b_north_dakota, precision: 12, scale: 2
+      t.decimal :col_b_ohio, precision: 12, scale: 2
+      t.decimal :col_b_oklahoma, precision: 12, scale: 2
+      t.decimal :col_b_oregon, precision: 12, scale: 2
+      t.decimal :col_b_pennsylvania, precision: 12, scale: 2
+      t.decimal :col_b_rhode_island, precision: 12, scale: 2
+      t.decimal :col_b_south_carolina, precision: 12, scale: 2
+      t.decimal :col_b_south_dakota, precision: 12, scale: 2
+      t.decimal :col_b_tennessee, precision: 12, scale: 2
+      t.decimal :col_b_texas, precision: 12, scale: 2
+      t.decimal :col_b_utah, precision: 12, scale: 2
+      t.decimal :col_b_vermont, precision: 12, scale: 2
+      t.decimal :col_b_virginia, precision: 12, scale: 2
+      t.decimal :col_b_washington, precision: 12, scale: 2
+      t.decimal :col_b_west_virginia, precision: 12, scale: 2
+      t.decimal :col_b_wisconsin, precision: 12, scale: 2
+      t.decimal :col_b_wyoming, precision: 12, scale: 2
+      t.decimal :col_b_puerto_rico, precision: 12, scale: 2
+      t.decimal :col_b_guam, precision: 12, scale: 2
+      t.decimal :col_b_virgin_islands, precision: 12, scale: 2
+      t.decimal :col_b_totals, precision: 12, scale: 2
 
       t.string :treasurer_name, limit: 200
       t.index :treasurer_name
@@ -823,8 +813,6 @@ class CreateFecFilings < ActiveRecord::Migration
       # ^f3p31
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -845,7 +833,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :election_code, limit: 5
       t.string :item_description, limit: 100
       t.date :item_contribution_aquired_date
-      t.decimal :item_fair_market_value
+      t.decimal :item_fair_market_value, precision: 12, scale: 2
       t.string :contributor_employer, limit: 38
       t.string :contributor_occupation, limit: 38
       t.string :memo_code, limit: 1
@@ -883,104 +871,102 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f3ps
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
       t.index :filer_committee_id_number
 
-      t.index :filer_committee_id_number
-
-      t.string :date_general_election, limit: 8 # FIXME: convert to date
-      t.string :date_day_after_general_election, limit: 8 # FIXME: convert to date
-      t.decimal :net_contributions
-      t.decimal :net_expenditures
-      t.decimal :federal_funds
-      t.decimal :a_i_individuals_itemized
-      t.decimal :a_ii_individuals_unitemized
-      t.decimal :a_iii_individual_contribution_total
-      t.decimal :b_political_party_committees
-      t.decimal :c_other_political_committees_pacs
-      t.decimal :d_the_candidate
-      t.decimal :e_total_contributions_other_than_loans
-      t.decimal :transfers_from_aff_other_party_committees
-      t.decimal :a_received_from_or_guaranteed_by_candidate
-      t.decimal :b_other_loans
-      t.decimal :c_total_loans
-      t.decimal :a_operating
-      t.decimal :b_fundraising
-      t.decimal :c_legal_and_accounting
-      t.decimal :d_total_offsets_to_operating_expenditures
-      t.decimal :other_receipts
-      t.decimal :total_receipts
-      t.decimal :operating_expenditures
-      t.decimal :transfers_to_other_authorized_committees
-      t.decimal :fundraising_disbursements
-      t.decimal :exempt_legal_and_accounting_disbursements
-      t.decimal :a_made_or_guaranteed_by_the_candidate
-      t.decimal :b_other_repayments
-      t.decimal :c_total_loan_repayments_made
-      t.decimal :a_individuals
-      t.decimal :c_other_political_committees
-      t.decimal :d_total_contributions_refunds
-      t.decimal :other_disbursements
-      t.decimal :total_disbursements
-      t.decimal :alabama
-      t.decimal :alaska
-      t.decimal :arizona
-      t.decimal :arkansas
-      t.decimal :california
-      t.decimal :colorado
-      t.decimal :connecticut
-      t.decimal :delaware
-      t.decimal :dist_of_columbia
-      t.decimal :florida
-      t.decimal :georgia
-      t.decimal :hawaii
-      t.decimal :idaho
-      t.decimal :illinois
-      t.decimal :indiana
-      t.decimal :iowa
-      t.decimal :kansas
-      t.decimal :kentucky
-      t.decimal :louisiana
-      t.decimal :maine
-      t.decimal :maryland
-      t.decimal :massachusetts
-      t.decimal :michigan
-      t.decimal :minnesota
-      t.decimal :mississippi
-      t.decimal :missouri
-      t.decimal :montana
-      t.decimal :nebraska
-      t.decimal :nevada
-      t.decimal :new_hampshire
-      t.decimal :new_jersey
-      t.decimal :new_mexico
-      t.decimal :new_york
-      t.decimal :north_carolina
-      t.decimal :north_dakota
-      t.decimal :ohio
-      t.decimal :oklahoma
-      t.decimal :oregon
-      t.decimal :pennsylvania
-      t.decimal :rhode_island
-      t.decimal :south_carolina
-      t.decimal :south_dakota
-      t.decimal :tennessee
-      t.decimal :texas
-      t.decimal :utah
-      t.decimal :vermont
-      t.decimal :virginia
-      t.decimal :washington
-      t.decimal :west_virginia
-      t.decimal :wisconsin
-      t.decimal :wyoming
-      t.decimal :puerto_rico
-      t.decimal :guam
-      t.decimal :virgin_islands
-      t.decimal :totals
+      t.date :date_general_election
+      t.date :date_day_after_general_election
+      t.decimal :net_contributions, precision: 12, scale: 2
+      t.decimal :net_expenditures, precision: 12, scale: 2
+      t.decimal :federal_funds, precision: 12, scale: 2
+      t.decimal :a_i_individuals_itemized, precision: 12, scale: 2
+      t.decimal :a_ii_individuals_unitemized, precision: 12, scale: 2
+      t.decimal :a_iii_individual_contribution_total, precision: 12, scale: 2
+      t.decimal :b_political_party_committees, precision: 12, scale: 2
+      t.decimal :c_other_political_committees_pacs, precision: 12, scale: 2
+      t.decimal :d_the_candidate, precision: 12, scale: 2
+      t.decimal :e_total_contributions_other_than_loans, precision: 12, scale: 2
+      t.decimal :transfers_from_aff_other_party_committees, precision: 12, scale: 2
+      t.decimal :a_received_from_or_guaranteed_by_candidate, precision: 12, scale: 2
+      t.decimal :b_other_loans, precision: 12, scale: 2
+      t.decimal :c_total_loans, precision: 12, scale: 2
+      t.decimal :a_operating, precision: 12, scale: 2
+      t.decimal :b_fundraising, precision: 12, scale: 2
+      t.decimal :c_legal_and_accounting, precision: 12, scale: 2
+      t.decimal :d_total_offsets_to_operating_expenditures, precision: 12, scale: 2
+      t.decimal :other_receipts, precision: 12, scale: 2
+      t.decimal :total_receipts, precision: 12, scale: 2
+      t.decimal :operating_expenditures, precision: 12, scale: 2
+      t.decimal :transfers_to_other_authorized_committees, precision: 12, scale: 2
+      t.decimal :fundraising_disbursements, precision: 12, scale: 2
+      t.decimal :exempt_legal_and_accounting_disbursements, precision: 12, scale: 2
+      t.decimal :a_made_or_guaranteed_by_the_candidate, precision: 12, scale: 2
+      t.decimal :b_other_repayments, precision: 12, scale: 2
+      t.decimal :c_total_loan_repayments_made, precision: 12, scale: 2
+      t.decimal :a_individuals, precision: 12, scale: 2
+      t.decimal :c_other_political_committees, precision: 12, scale: 2
+      t.decimal :d_total_contributions_refunds, precision: 12, scale: 2
+      t.decimal :other_disbursements, precision: 12, scale: 2
+      t.decimal :total_disbursements, precision: 12, scale: 2
+      t.decimal :alabama, precision: 12, scale: 2
+      t.decimal :alaska, precision: 12, scale: 2
+      t.decimal :arizona, precision: 12, scale: 2
+      t.decimal :arkansas, precision: 12, scale: 2
+      t.decimal :california, precision: 12, scale: 2
+      t.decimal :colorado, precision: 12, scale: 2
+      t.decimal :connecticut, precision: 12, scale: 2
+      t.decimal :delaware, precision: 12, scale: 2
+      t.decimal :dist_of_columbia, precision: 12, scale: 2
+      t.decimal :florida, precision: 12, scale: 2
+      t.decimal :georgia, precision: 12, scale: 2
+      t.decimal :hawaii, precision: 12, scale: 2
+      t.decimal :idaho, precision: 12, scale: 2
+      t.decimal :illinois, precision: 12, scale: 2
+      t.decimal :indiana, precision: 12, scale: 2
+      t.decimal :iowa, precision: 12, scale: 2
+      t.decimal :kansas, precision: 12, scale: 2
+      t.decimal :kentucky, precision: 12, scale: 2
+      t.decimal :louisiana, precision: 12, scale: 2
+      t.decimal :maine, precision: 12, scale: 2
+      t.decimal :maryland, precision: 12, scale: 2
+      t.decimal :massachusetts, precision: 12, scale: 2
+      t.decimal :michigan, precision: 12, scale: 2
+      t.decimal :minnesota, precision: 12, scale: 2
+      t.decimal :mississippi, precision: 12, scale: 2
+      t.decimal :missouri, precision: 12, scale: 2
+      t.decimal :montana, precision: 12, scale: 2
+      t.decimal :nebraska, precision: 12, scale: 2
+      t.decimal :nevada, precision: 12, scale: 2
+      t.decimal :new_hampshire, precision: 12, scale: 2
+      t.decimal :new_jersey, precision: 12, scale: 2
+      t.decimal :new_mexico, precision: 12, scale: 2
+      t.decimal :new_york, precision: 12, scale: 2
+      t.decimal :north_carolina, precision: 12, scale: 2
+      t.decimal :north_dakota, precision: 12, scale: 2
+      t.decimal :ohio, precision: 12, scale: 2
+      t.decimal :oklahoma, precision: 12, scale: 2
+      t.decimal :oregon, precision: 12, scale: 2
+      t.decimal :pennsylvania, precision: 12, scale: 2
+      t.decimal :rhode_island, precision: 12, scale: 2
+      t.decimal :south_carolina, precision: 12, scale: 2
+      t.decimal :south_dakota, precision: 12, scale: 2
+      t.decimal :tennessee, precision: 12, scale: 2
+      t.decimal :texas, precision: 12, scale: 2
+      t.decimal :utah, precision: 12, scale: 2
+      t.decimal :vermont, precision: 12, scale: 2
+      t.decimal :virginia, precision: 12, scale: 2
+      t.decimal :washington, precision: 12, scale: 2
+      t.decimal :west_virginia, precision: 12, scale: 2
+      t.decimal :wisconsin, precision: 12, scale: 2
+      t.decimal :wyoming, precision: 12, scale: 2
+      t.decimal :puerto_rico, precision: 12, scale: 2
+      t.decimal :guam, precision: 12, scale: 2
+      t.decimal :virgin_islands, precision: 12, scale: 2
+      t.decimal :totals, precision: 12, scale: 2
     end
 
     # F3P31 (Items to be Liquidated)
@@ -990,48 +976,46 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f3s
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
       t.index :filer_committee_id_number
 
-      t.index :filer_committee_id_number
-
-      t.string :date_general_election, limit: 8 # FIXME: convert to date
-      t.string :date_day_after_general_election, limit: 8 # FIXME: convert to date
-      t.decimal :a_total_contributions_no_loans
-      t.decimal :b_total_contribution_refunds
-      t.decimal :c_net_contributions
-      t.decimal :a_total_operating_expenditures
-      t.decimal :b_total_offsets_to_operating_expenditures
-      t.decimal :c_net_operating_expenditures
-      t.decimal :a_i_individuals_itemized
-      t.decimal :a_ii_individuals_unitemized
-      t.decimal :a_iii_individuals_total
-      t.decimal :b_political_party_committees
-      t.decimal :c_all_other_political_committees_pacs
-      t.decimal :d_the_candidate
-      t.decimal :e_total_contributions
-      t.decimal :transfers_from_other_auth_committees
-      t.decimal :a_loans_made_or_guarn_by_the_candidate
-      t.decimal :b_all_other_loans
-      t.decimal :c_total_loans
-      t.decimal :offsets_to_operating_expenditures
-      t.decimal :other_receipts
-      t.decimal :total_receipts
-      t.decimal :operating_expenditures
-      t.decimal :transfers_to_other_auth_committees
-      t.decimal :a_loan_repayment_by_candidate
-      t.decimal :b_loan_repayments_all_other_loans
-      t.decimal :c_total_loan_repayments
-      t.decimal :a_refund_individuals_other_than_pol_cmtes
-      t.decimal :b_refund_political_party_committees
-      t.decimal :c_refund_other_political_committees
-      t.decimal :d_total_contributions_refunds
-      t.decimal :other_disbursements
-      t.decimal :total_disbursements
+      t.date :date_general_election
+      t.date :date_day_after_general_election
+      t.decimal :a_total_contributions_no_loans, precision: 12, scale: 2
+      t.decimal :b_total_contribution_refunds, precision: 12, scale: 2
+      t.decimal :c_net_contributions, precision: 12, scale: 2
+      t.decimal :a_total_operating_expenditures, precision: 12, scale: 2
+      t.decimal :b_total_offsets_to_operating_expenditures, precision: 12, scale: 2
+      t.decimal :c_net_operating_expenditures, precision: 12, scale: 2
+      t.decimal :a_i_individuals_itemized, precision: 12, scale: 2
+      t.decimal :a_ii_individuals_unitemized, precision: 12, scale: 2
+      t.decimal :a_iii_individuals_total, precision: 12, scale: 2
+      t.decimal :b_political_party_committees, precision: 12, scale: 2
+      t.decimal :c_all_other_political_committees_pacs, precision: 12, scale: 2
+      t.decimal :d_the_candidate, precision: 12, scale: 2
+      t.decimal :e_total_contributions, precision: 12, scale: 2
+      t.decimal :transfers_from_other_auth_committees, precision: 12, scale: 2
+      t.decimal :a_loans_made_or_guarn_by_the_candidate, precision: 12, scale: 2
+      t.decimal :b_all_other_loans, precision: 12, scale: 2
+      t.decimal :c_total_loans, precision: 12, scale: 2
+      t.decimal :offsets_to_operating_expenditures, precision: 12, scale: 2
+      t.decimal :other_receipts, precision: 12, scale: 2
+      t.decimal :total_receipts, precision: 12, scale: 2
+      t.decimal :operating_expenditures, precision: 12, scale: 2
+      t.decimal :transfers_to_other_auth_committees, precision: 12, scale: 2
+      t.decimal :a_loan_repayment_by_candidate, precision: 12, scale: 2
+      t.decimal :b_loan_repayments_all_other_loans, precision: 12, scale: 2
+      t.decimal :c_total_loan_repayments, precision: 12, scale: 2
+      t.decimal :a_refund_individuals_other_than_pol_cmtes, precision: 12, scale: 2
+      t.decimal :b_refund_political_party_committees, precision: 12, scale: 2
+      t.decimal :c_refund_other_political_committees, precision: 12, scale: 2
+      t.decimal :d_total_contributions_refunds, precision: 12, scale: 2
+      t.decimal :other_disbursements, precision: 12, scale: 2
+      t.decimal :total_disbursements, precision: 12, scale: 2
     end
 
     # report of receipts & disbursements - non-authorized committee
@@ -1040,13 +1024,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # (^f3x$)|(^f3x[ant])
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :committee_name, limit: 200
@@ -1060,7 +1042,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :zip_code, limit: 9
       t.string :report_code, limit: 3
       t.string :election_code, limit: 5
-      t.string :date_of_election, limit: 8 # FIXME: convert to date
+      t.date :date_of_election
       t.string :state_of_election, limit: 2
       t.date :coverage_from_date
       t.date :coverage_through_date
@@ -1070,100 +1052,100 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :treasurer_middle_name, limit: 20
       t.string :treasurer_prefix, limit: 10
       t.string :treasurer_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
-      t.decimal :col_a_cash_on_hand_beginning_period
-      t.decimal :col_a_total_receipts
-      t.decimal :col_a_subtotal
-      t.decimal :col_a_total_disbursements
-      t.decimal :col_a_cash_on_hand_close_of_period
-      t.decimal :col_a_debts_to
-      t.decimal :col_a_debts_by
-      t.decimal :col_a_individuals_itemized
-      t.decimal :col_a_individuals_unitemized
-      t.decimal :col_a_individual_contribution_total
-      t.decimal :col_a_political_party_committees
-      t.decimal :col_a_other_political_committees_pacs
-      t.decimal :col_a_total_contributions
-      t.decimal :col_a_transfers_from_aff_other_party_cmttees
-      t.decimal :col_a_total_loans
-      t.decimal :col_a_total_loan_repayments_received
-      t.decimal :col_a_offsets_to_expenditures
-      t.decimal :col_a_total_contributions_refunds
-      t.decimal :col_a_other_federal_receipts
-      t.decimal :col_a_transfers_from_nonfederal_h3
-      t.decimal :col_a_levin_funds
-      t.decimal :col_a_total_nonfederal_transfers
-      t.decimal :col_a_total_federal_receipts
-      t.decimal :col_a_shared_operating_expenditures_federal
-      t.decimal :col_a_shared_operating_expenditures_nonfederal
-      t.decimal :col_a_other_federal_operating_expenditures
-      t.decimal :col_a_total_operating_expenditures
-      t.decimal :col_a_transfers_to_affiliated
-      t.decimal :col_a_contributions_to_candidates
-      t.decimal :col_a_independent_expenditures
-      t.decimal :col_a_coordinated_expenditures_by_party_committees
-      t.decimal :col_a_total_loan_repayments_made
-      t.decimal :col_a_loans_made
-      t.decimal :col_a_refunds_to_individuals
-      t.decimal :col_a_refunds_to_party_committees
-      t.decimal :col_a_refunds_to_other_committees
-      t.decimal :col_a_total_refunds
-      t.decimal :col_a_other_disbursements
-      t.decimal :col_a_federal_election_activity_federal_share
-      t.decimal :col_a_federal_election_activity_levin_share
-      t.decimal :col_a_federal_election_activity_all_federal
-      t.decimal :col_a_federal_election_activity_total
-      t.decimal :col_a_total_federal_disbursements
-      t.decimal :col_a_net_contributions
-      t.decimal :col_a_total_federal_operating_expenditures
-      t.decimal :col_a_total_offsets_to_expenditures
-      t.decimal :col_a_net_operating_expenditures
-      t.decimal :col_b_cash_on_hand_jan_1
+      t.date :date_signed
+      t.decimal :col_a_cash_on_hand_beginning_period, precision: 12, scale: 2
+      t.decimal :col_a_total_receipts, precision: 12, scale: 2
+      t.decimal :col_a_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_total_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_cash_on_hand_close_of_period, precision: 12, scale: 2
+      t.decimal :col_a_debts_to, precision: 12, scale: 2
+      t.decimal :col_a_debts_by, precision: 12, scale: 2
+      t.decimal :col_a_individuals_itemized, precision: 12, scale: 2
+      t.decimal :col_a_individuals_unitemized, precision: 12, scale: 2
+      t.decimal :col_a_individual_contribution_total, precision: 12, scale: 2
+      t.decimal :col_a_political_party_committees, precision: 12, scale: 2
+      t.decimal :col_a_other_political_committees_pacs, precision: 12, scale: 2
+      t.decimal :col_a_total_contributions, precision: 12, scale: 2
+      t.decimal :col_a_transfers_from_aff_other_party_cmttees, precision: 12, scale: 2
+      t.decimal :col_a_total_loans, precision: 12, scale: 2
+      t.decimal :col_a_total_loan_repayments_received, precision: 12, scale: 2
+      t.decimal :col_a_offsets_to_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_total_contributions_refunds, precision: 12, scale: 2
+      t.decimal :col_a_other_federal_receipts, precision: 12, scale: 2
+      t.decimal :col_a_transfers_from_nonfederal_h3, precision: 12, scale: 2
+      t.decimal :col_a_levin_funds, precision: 12, scale: 2
+      t.decimal :col_a_total_nonfederal_transfers, precision: 12, scale: 2
+      t.decimal :col_a_total_federal_receipts, precision: 12, scale: 2
+      t.decimal :col_a_shared_operating_expenditures_federal, precision: 12, scale: 2
+      t.decimal :col_a_shared_operating_expenditures_nonfederal, precision: 12, scale: 2
+      t.decimal :col_a_other_federal_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_total_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_transfers_to_affiliated, precision: 12, scale: 2
+      t.decimal :col_a_contributions_to_candidates, precision: 12, scale: 2
+      t.decimal :col_a_independent_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_coordinated_expenditures_by_party_committees, precision: 12, scale: 2
+      t.decimal :col_a_total_loan_repayments_made, precision: 12, scale: 2
+      t.decimal :col_a_loans_made, precision: 12, scale: 2
+      t.decimal :col_a_refunds_to_individuals, precision: 12, scale: 2
+      t.decimal :col_a_refunds_to_party_committees, precision: 12, scale: 2
+      t.decimal :col_a_refunds_to_other_committees, precision: 12, scale: 2
+      t.decimal :col_a_total_refunds, precision: 12, scale: 2
+      t.decimal :col_a_other_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_federal_election_activity_federal_share, precision: 12, scale: 2
+      t.decimal :col_a_federal_election_activity_levin_share, precision: 12, scale: 2
+      t.decimal :col_a_federal_election_activity_all_federal, precision: 12, scale: 2
+      t.decimal :col_a_federal_election_activity_total, precision: 12, scale: 2
+      t.decimal :col_a_total_federal_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_net_contributions, precision: 12, scale: 2
+      t.decimal :col_a_total_federal_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_total_offsets_to_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_net_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_cash_on_hand_jan_1, precision: 12, scale: 2
       t.integer :col_b_year, unsigned: true
-      t.decimal :col_b_total_receipts
-      t.decimal :col_b_subtotal
-      t.decimal :col_b_total_disbursements
-      t.decimal :col_b_cash_on_hand_close_of_period
-      t.decimal :col_b_individuals_itemized
-      t.decimal :col_b_individuals_unitemized
-      t.decimal :col_b_individual_contribution_total
-      t.decimal :col_b_political_party_committees
-      t.decimal :col_b_other_political_committees_pacs
-      t.decimal :col_b_total_contributions
-      t.decimal :col_b_transfers_from_aff_other_party_cmttees
-      t.decimal :col_b_total_loans
-      t.decimal :col_b_total_loan_repayments_received
-      t.decimal :col_b_offsets_to_expenditures
-      t.decimal :col_b_total_contributions_refunds
-      t.decimal :col_b_other_federal_receipts
-      t.decimal :col_b_transfers_from_nonfederal_h3
-      t.decimal :col_b_levin_funds
-      t.decimal :col_b_total_nonfederal_transfers
-      t.decimal :col_b_total_federal_receipts
-      t.decimal :col_b_shared_operating_expenditures_federal
-      t.decimal :col_b_shared_operating_expenditures_nonfederal
-      t.decimal :col_b_other_federal_operating_expenditures
-      t.decimal :col_b_total_operating_expenditures
-      t.decimal :col_b_transfers_to_affiliated
-      t.decimal :col_b_contributions_to_candidates
-      t.decimal :col_b_independent_expenditures
-      t.decimal :col_b_coordinated_expenditures_by_party_committees
-      t.decimal :col_b_total_loan_repayments_made
-      t.decimal :col_b_loans_made
-      t.decimal :col_b_refunds_to_individuals
-      t.decimal :col_b_refunds_to_party_committees
-      t.decimal :col_b_refunds_to_other_committees
-      t.decimal :col_b_total_refunds
-      t.decimal :col_b_other_disbursements
-      t.decimal :col_b_federal_election_activity_federal_share
-      t.decimal :col_b_federal_election_activity_levin_share
-      t.decimal :col_b_federal_election_activity_all_federal
-      t.decimal :col_b_federal_election_activity_total
-      t.decimal :col_b_total_federal_disbursements
-      t.decimal :col_b_net_contributions
-      t.decimal :col_b_total_federal_operating_expenditures
-      t.decimal :col_b_total_offsets_to_expenditures
-      t.decimal :col_b_net_operating_expenditures
+      t.decimal :col_b_total_receipts, precision: 12, scale: 2
+      t.decimal :col_b_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_total_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_cash_on_hand_close_of_period, precision: 12, scale: 2
+      t.decimal :col_b_individuals_itemized, precision: 12, scale: 2
+      t.decimal :col_b_individuals_unitemized, precision: 12, scale: 2
+      t.decimal :col_b_individual_contribution_total, precision: 12, scale: 2
+      t.decimal :col_b_political_party_committees, precision: 12, scale: 2
+      t.decimal :col_b_other_political_committees_pacs, precision: 12, scale: 2
+      t.decimal :col_b_total_contributions, precision: 12, scale: 2
+      t.decimal :col_b_transfers_from_aff_other_party_cmttees, precision: 12, scale: 2
+      t.decimal :col_b_total_loans, precision: 12, scale: 2
+      t.decimal :col_b_total_loan_repayments_received, precision: 12, scale: 2
+      t.decimal :col_b_offsets_to_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_total_contributions_refunds, precision: 12, scale: 2
+      t.decimal :col_b_other_federal_receipts, precision: 12, scale: 2
+      t.decimal :col_b_transfers_from_nonfederal_h3, precision: 12, scale: 2
+      t.decimal :col_b_levin_funds, precision: 12, scale: 2
+      t.decimal :col_b_total_nonfederal_transfers, precision: 12, scale: 2
+      t.decimal :col_b_total_federal_receipts, precision: 12, scale: 2
+      t.decimal :col_b_shared_operating_expenditures_federal, precision: 12, scale: 2
+      t.decimal :col_b_shared_operating_expenditures_nonfederal, precision: 12, scale: 2
+      t.decimal :col_b_other_federal_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_total_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_transfers_to_affiliated, precision: 12, scale: 2
+      t.decimal :col_b_contributions_to_candidates, precision: 12, scale: 2
+      t.decimal :col_b_independent_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_coordinated_expenditures_by_party_committees, precision: 12, scale: 2
+      t.decimal :col_b_total_loan_repayments_made, precision: 12, scale: 2
+      t.decimal :col_b_loans_made, precision: 12, scale: 2
+      t.decimal :col_b_refunds_to_individuals, precision: 12, scale: 2
+      t.decimal :col_b_refunds_to_party_committees, precision: 12, scale: 2
+      t.decimal :col_b_refunds_to_other_committees, precision: 12, scale: 2
+      t.decimal :col_b_total_refunds, precision: 12, scale: 2
+      t.decimal :col_b_other_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_federal_election_activity_federal_share, precision: 12, scale: 2
+      t.decimal :col_b_federal_election_activity_levin_share, precision: 12, scale: 2
+      t.decimal :col_b_federal_election_activity_all_federal, precision: 12, scale: 2
+      t.decimal :col_b_federal_election_activity_total, precision: 12, scale: 2
+      t.decimal :col_b_total_federal_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_net_contributions, precision: 12, scale: 2
+      t.decimal :col_b_total_federal_operating_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_total_offsets_to_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_net_operating_expenditures, precision: 12, scale: 2
 
       t.string :treasurer_name, limit: 200
       t.index :treasurer_name
@@ -1176,13 +1158,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f3l[a|n]
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :committee_name, limit: 200
@@ -1203,14 +1183,14 @@ class CreateFecFilings < ActiveRecord::Migration
       t.date :coverage_through_date
       t.string :semi_annual_period_jan_june, limit: 1
       t.string :semi_annual_period_jul_dec, limit: 1
-      t.decimal :quarterly_monthly_bundled_contributions
-      t.decimal :semi_annual_bundled_contributions
+      t.decimal :quarterly_monthly_bundled_contributions, precision: 12, scale: 2
+      t.decimal :semi_annual_bundled_contributions, precision: 12, scale: 2
       t.string :treasurer_last_name, limit: 30
       t.string :treasurer_first_name, limit: 20
       t.string :treasurer_middle_name, limit: 20
       t.string :treasurer_prefix, limit: 10
       t.string :treasurer_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
     end
 
     # report of receipts & disbursements - convention committee
@@ -1219,13 +1199,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f4[na]
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :committee_name, limit: 200
@@ -1246,67 +1224,67 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :treasurer_middle_name, limit: 20
       t.string :treasurer_prefix, limit: 10
       t.string :treasurer_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
-      t.decimal :col_a_cash_on_hand_beginning_reporting_period
-      t.decimal :col_a_total_receipts
-      t.decimal :col_a_subtotal
-      t.decimal :col_a_total_disbursements
-      t.decimal :col_a_cash_on_hand_close_of_period
-      t.decimal :col_a_debts_to
-      t.decimal :col_a_debts_by
-      t.decimal :col_a_convention_expenditures
-      t.decimal :col_a_convention_refunds
-      t.decimal :col_a_expenditures_subject_to_limits
-      t.decimal :col_a_prior_expenditures_subject_to_limits
-      t.decimal :col_a_federal_funds
-      t.decimal :col_a_contributions_itemized
-      t.decimal :col_a_contributions_unitemized
-      t.decimal :col_a_contributions_subtotal
-      t.decimal :col_b_transfers_from_affiliated
-      t.decimal :col_a_loans_received
-      t.decimal :col_a_loan_repayments_received
-      t.decimal :col_a_loan_receipts_subtotal
-      t.decimal :col_a_convention_refunds_itemized
-      t.decimal :col_a_convention_refunds_unitemized
-      t.decimal :col_a_convention_refunds_subtotal
-      t.decimal :col_a_other_refunds_itemized
-      t.decimal :col_a_other_refunds_unitemized
-      t.decimal :col_a_other_refunds_subtotal
-      t.decimal :col_a_other_income_itemized
-      t.decimal :col_a_other_income_unitemized
-      t.decimal :col_a_other_income_subtotal
-      t.decimal :col_a_convention_expenses_itemized
-      t.decimal :col_a_convention_expenses_unitemized
-      t.decimal :col_a_convention_expenses_subtotal
-      t.decimal :col_a_transfers_to_affiliated
-      t.decimal :col_a_loans_made
-      t.decimal :col_a_loan_repayments_made
-      t.decimal :col_a_loan_disbursements_subtotal
-      t.decimal :col_a_other_disbursements_itemized
-      t.decimal :col_a_other_disbursements_unitemized
-      t.decimal :col_a_other_disbursements_subtotal
+      t.date :date_signed
+      t.decimal :col_a_cash_on_hand_beginning_reporting_period, precision: 12, scale: 2
+      t.decimal :col_a_total_receipts, precision: 12, scale: 2
+      t.decimal :col_a_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_total_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_cash_on_hand_close_of_period, precision: 12, scale: 2
+      t.decimal :col_a_debts_to, precision: 12, scale: 2
+      t.decimal :col_a_debts_by, precision: 12, scale: 2
+      t.decimal :col_a_convention_expenditures, precision: 12, scale: 2
+      t.decimal :col_a_convention_refunds, precision: 12, scale: 2
+      t.decimal :col_a_expenditures_subject_to_limits, precision: 12, scale: 2
+      t.decimal :col_a_prior_expenditures_subject_to_limits, precision: 12, scale: 2
+      t.decimal :col_a_federal_funds, precision: 12, scale: 2
+      t.decimal :col_a_contributions_itemized, precision: 12, scale: 2
+      t.decimal :col_a_contributions_unitemized, precision: 12, scale: 2
+      t.decimal :col_a_contributions_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_transfers_from_affiliated, precision: 12, scale: 2
+      t.decimal :col_a_loans_received, precision: 12, scale: 2
+      t.decimal :col_a_loan_repayments_received, precision: 12, scale: 2
+      t.decimal :col_a_loan_receipts_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_convention_refunds_itemized, precision: 12, scale: 2
+      t.decimal :col_a_convention_refunds_unitemized, precision: 12, scale: 2
+      t.decimal :col_a_convention_refunds_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_other_refunds_itemized, precision: 12, scale: 2
+      t.decimal :col_a_other_refunds_unitemized, precision: 12, scale: 2
+      t.decimal :col_a_other_refunds_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_other_income_itemized, precision: 12, scale: 2
+      t.decimal :col_a_other_income_unitemized, precision: 12, scale: 2
+      t.decimal :col_a_other_income_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_convention_expenses_itemized, precision: 12, scale: 2
+      t.decimal :col_a_convention_expenses_unitemized, precision: 12, scale: 2
+      t.decimal :col_a_convention_expenses_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_transfers_to_affiliated, precision: 12, scale: 2
+      t.decimal :col_a_loans_made, precision: 12, scale: 2
+      t.decimal :col_a_loan_repayments_made, precision: 12, scale: 2
+      t.decimal :col_a_loan_disbursements_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_other_disbursements_itemized, precision: 12, scale: 2
+      t.decimal :col_a_other_disbursements_unitemized, precision: 12, scale: 2
+      t.decimal :col_a_other_disbursements_subtotal, precision: 12, scale: 2
       t.integer :col_b_cash_on_hand_beginning_year, unsigned: true
       t.integer :col_b_beginning_year, unsigned: true
-      t.decimal :col_b_total_receipts
-      t.decimal :col_b_subtotal
-      t.decimal :col_b_total_disbursements
-      t.decimal :col_b_cash_on_hand_close_of_period
-      t.decimal :col_b_convention_expenditures
-      t.decimal :col_b_convention_refunds
-      t.decimal :col_b_expenditures_subject_to_limits
-      t.decimal :col_b_prior_expendiutres_subject_to_limits
-      t.decimal :col_b_total_expenditures_subject_to_limits
-      t.decimal :col_b_federal_funds
-      t.decimal :col_b_contributions_subtotal
-      t.decimal :col_b_loan_receipts_subtotal
-      t.decimal :col_b_convention_refunds_subtotal
-      t.decimal :col_b_other_refunds_subtotal
-      t.decimal :col_b_other_income_subtotal
-      t.decimal :col_b_convention_expenses_subtotal
-      t.decimal :col_b_transfers_to_affiliated
-      t.decimal :col_b_loan_disbursements_subtotal
-      t.decimal :col_b_other_disbursements_subtotal
-      t.decimal :col_a_total_expenditures_subject_to_limits
+      t.decimal :col_b_total_receipts, precision: 12, scale: 2
+      t.decimal :col_b_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_total_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_cash_on_hand_close_of_period, precision: 12, scale: 2
+      t.decimal :col_b_convention_expenditures, precision: 12, scale: 2
+      t.decimal :col_b_convention_refunds, precision: 12, scale: 2
+      t.decimal :col_b_expenditures_subject_to_limits, precision: 12, scale: 2
+      t.decimal :col_b_prior_expendiutres_subject_to_limits, precision: 12, scale: 2
+      t.decimal :col_b_total_expenditures_subject_to_limits, precision: 12, scale: 2
+      t.decimal :col_b_federal_funds, precision: 12, scale: 2
+      t.decimal :col_b_contributions_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_loan_receipts_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_convention_refunds_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_other_refunds_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_other_income_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_convention_expenses_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_transfers_to_affiliated, precision: 12, scale: 2
+      t.decimal :col_b_loan_disbursements_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_other_disbursements_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_total_expenditures_subject_to_limits, precision: 12, scale: 2
 
       t.string :treasurer_name, limit: 200
       t.index :treasurer_name
@@ -1319,13 +1297,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f5[na]
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :entity_type, limit: 3
@@ -1350,14 +1326,14 @@ class CreateFecFilings < ActiveRecord::Migration
       t.date :original_amendment_date
       t.date :coverage_from_date
       t.date :coverage_through_date
-      t.decimal :total_contribution
-      t.decimal :total_independent_expenditure
+      t.decimal :total_contribution, precision: 12, scale: 2
+      t.decimal :total_independent_expenditure, precision: 12, scale: 2
       t.string :person_completing_last_name, limit: 30
       t.string :person_completing_first_name, limit: 20
       t.string :person_completing_middle_name, limit: 20
       t.string :person_completing_prefix, limit: 10
       t.string :person_completing_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
 
       t.string :qualified_nonprofit, limit: 1
       t.string :committee_name, limit: 200
@@ -1369,8 +1345,8 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :report_pgi, limit: 5
       t.date :election_date
       t.string :election_state, limit: 2
-      t.string :date_notarized, limit: 8 # FIXME: convert to date
-      t.string :date_notary_commission_expires, limit: 8 # FIXME: convert to date
+      t.date :date_notarized
+      t.date :date_notary_commission_expires
       t.string :notary_name, limit: 200
       t.index :notary_name
 
@@ -1382,13 +1358,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f56
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -1408,7 +1382,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :contributor_zip_code, limit: 9
       t.string :contributor_fec_id, limit: 9
       t.date :contribution_date
-      t.decimal :contribution_amount
+      t.decimal :contribution_amount, precision: 12, scale: 2
       t.string :contributor_employer, limit: 38
       t.string :contributor_occupation, limit: 38
 
@@ -1438,13 +1412,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f57
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -1465,8 +1437,8 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :election_code, limit: 5
       t.string :election_other_description, limit: 20
       t.date :dissemination_date
-      t.decimal :expenditure_amount
-      t.decimal :calendar_y_t_d_per_election_office
+      t.decimal :expenditure_amount, precision: 12, scale: 2
+      t.decimal :calendar_y_t_d_per_election_office, precision: 12, scale: 2
       t.string :expenditure_purpose_descrip, limit: 100
       t.string :category_code, limit: 3
       t.string :payee_cmtte_fec_id_number, limit: 9
@@ -1509,13 +1481,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # (^f6$)|(^f6[an])
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.date :original_amendment_date
@@ -1543,7 +1513,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :signer_middle_name, limit: 20
       t.string :signer_prefix, limit: 10
       t.string :signer_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
 
       t.string :candidate_name, limit: 200
       t.index :candidate_name
@@ -1556,13 +1526,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f65
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -1582,7 +1550,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :contributor_zip_code, limit: 9
       t.string :contributor_fec_id, limit: 9
       t.date :contribution_date
-      t.decimal :contribution_amount
+      t.decimal :contribution_amount, precision: 12, scale: 2
       t.string :contributor_employer, limit: 38
       t.string :contributor_occupation, limit: 38
 
@@ -1612,13 +1580,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f7[na]
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :organization_name, limit: 200
@@ -1635,14 +1601,14 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :election_state, limit: 2
       t.date :coverage_from_date
       t.date :coverage_through_date
-      t.decimal :total_costs
+      t.decimal :total_costs, precision: 12, scale: 2
       t.string :person_designated_last_name, limit: 30
       t.string :person_designated_first_name, limit: 20
       t.string :person_designated_middle_name, limit: 20
       t.string :person_designated_prefix, limit: 10
       t.string :person_designated_suffix, limit: 10
       t.string :person_designated_title, limit: 20
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
 
       t.string :person_designated_name, limit: 200
       t.index :person_designated_name
@@ -1654,13 +1620,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f76
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -1668,7 +1632,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :communication_type_description, limit: 40
       t.string :communication_class, limit: 1
       t.date :communication_date
-      t.decimal :communication_cost
+      t.decimal :communication_cost, precision: 12, scale: 2
       t.string :election_code, limit: 5
       t.string :election_other_description, limit: 20
       t.string :support_oppose_code, limit: 1
@@ -1702,13 +1666,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f9
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :entity_type, limit: 3
@@ -1730,7 +1692,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :individual_occupation, limit: 38
       t.date :coverage_from_date
       t.date :coverage_through_date
-      t.string :date_public_distribution, limit: 8 # FIXME: convert to date
+      t.date :date_public_distribution
       t.string :communication_title, limit: 40
       t.string :filer_code, limit: 3
       t.string :filer_code_description, limit: 20
@@ -1747,14 +1709,14 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :custodian_zip_code, limit: 9
       t.string :custodian_employer, limit: 38
       t.string :custodian_occupation, limit: 38
-      t.decimal :total_donations
-      t.decimal :total_disbursements
+      t.decimal :total_donations, precision: 12, scale: 2
+      t.decimal :total_disbursements, precision: 12, scale: 2
       t.string :person_completing_last_name, limit: 30
       t.string :person_completing_first_name, limit: 20
       t.string :person_completing_middle_name, limit: 20
       t.string :person_completing_prefix, limit: 10
       t.string :person_completing_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
 
       t.string :qualified_non_profit, limit: 1
     end
@@ -1765,7 +1727,7 @@ class CreateFecFilings < ActiveRecord::Migration
     #   t.integer :row_number, null: false, unsigned: true
     #   t.integer :lock_version, null: false, default: 0, unsigned: true
     #   t.timestamps
-    #   t.index [:fec_record_number, :row_number]
+    #   t.index [:fec_record_number, :row_number], unique: true
     # end
 
     # report of donations accepted for inaugural committee
@@ -1774,13 +1736,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f13[an]
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :committee_name, limit: 200
@@ -1796,15 +1756,15 @@ class CreateFecFilings < ActiveRecord::Migration
       t.date :amendment_date
       t.date :coverage_from_date
       t.date :coverage_through_date
-      t.decimal :total_donations_accepted
-      t.decimal :total_donations_refunded
-      t.decimal :net_donations
+      t.decimal :total_donations_accepted, precision: 12, scale: 2
+      t.decimal :total_donations_refunded, precision: 12, scale: 2
+      t.decimal :net_donations, precision: 12, scale: 2
       t.string :designated_last_name, limit: 30
       t.string :designated_first_name, limit: 20
       t.string :designated_middle_name, limit: 20
       t.string :designated_prefix, limit: 10
       t.string :designated_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
     end
 
     create_table :fec_filing_f132 do |t|
@@ -1812,13 +1772,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f132
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -1839,8 +1797,8 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :contributor_state, limit: 2
       t.string :contributor_zip, limit: 9
       t.date :donation_date
-      t.decimal :donation_amount
-      t.decimal :donation_aggregate_amount
+      t.decimal :donation_amount, precision: 12, scale: 2
+      t.decimal :donation_aggregate_amount, precision: 12, scale: 2
       t.string :memo_code, limit: 1
       t.string :memo_text_description, limit: 100
     end
@@ -1850,13 +1808,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f133
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -1877,7 +1833,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :contributor_state, limit: 2
       t.string :contributor_zip, limit: 9
       t.date :refund_date
-      t.decimal :refund_amount
+      t.decimal :refund_amount, precision: 12, scale: 2
       t.string :memo_code, limit: 1
       t.string :memo_text_description, limit: 100
     end
@@ -1888,13 +1844,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f91
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -1920,13 +1874,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f92
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -1947,7 +1899,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :contributor_state, limit: 2
       t.string :contributor_zip_code, limit: 9
       t.date :contribution_date
-      t.decimal :contribution_amount
+      t.decimal :contribution_amount, precision: 12, scale: 2
 
       t.string :contributor_employer, limit: 38
       t.string :contributor_occupation, limit: 38
@@ -1960,13 +1912,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f93
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -1989,7 +1939,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :election_code, limit: 5
       t.string :election_other_description, limit: 20
       t.date :expenditure_date
-      t.decimal :expenditure_amount
+      t.decimal :expenditure_amount, precision: 12, scale: 2
       t.string :expenditure_purpose_descrip, limit: 100
       t.string :payee_employer, limit: 38
       t.string :payee_occupation, limit: 38
@@ -2004,13 +1954,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f94
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -2041,13 +1989,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^f99
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :committee_name, limit: 200
@@ -2063,7 +2009,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :treasurer_middle_name, limit: 20
       t.string :treasurer_prefix, limit: 10
       t.string :treasurer_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
       t.string :text_code, limit: 3
       t.text :text
 
@@ -2078,13 +2024,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^h1
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -2100,16 +2044,24 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :public_communications_referencing_party_ratio_applies, limit: 1
 
       t.integer :national_party_committee_percentage, unsigned: true
-      t.integer :house_senate_party_committees_minimum_federal_percentage, unsigned: true
+    #   t.integer :house_senate_party_committees_minimum_federal_percentage, unsigned: true
+      t.integer :hsp_committees_minimum_federal_percentage, unsigned: true
       # FIXME: mysql only allows identifiers of 64 char; this is too long :(
-      t.integer :house_senate_party_committees_percentage_federal_candidate_support, unsigned: true
-      t.integer :house_senate_party_committees_percentage_nonfederal_candidate_support, unsigned: true
-      t.decimal :house_senate_party_committees_actual_federal_candidate_support
-      t.decimal :house_senate_party_committees_actual_nonfederal_candidate_support
-      t.integer :house_senate_party_committees_percentage_actual_federal, unsigned: true
-      t.decimal :actual_direct_candidate_support_federal
-      t.decimal :actual_direct_candidate_support_nonfederal
-      t.decimal :actual_direct_candidate_support_federal_percent
+    #   t.integer :house_senate_party_committees_percentage_federal_candidate_support, unsigned: true
+      t.integer :hsp_committees_percentage_federal_candidate_support, unsigned: true
+    #   t.integer :house_senate_party_committees_percentage_nonfederal_candidate_support, unsigned: true
+      t.integer :hsp_committees_percentage_nonfederal_candidate_support, unsigned: true
+    #   t.integer :house_senate_party_committees_percentage_nonfederal_candidate_support, unsigned: true
+      t.integer :hsp_committees_percentage_nonfederal_candidate_support, unsigned: true
+    #   t.decimal :house_senate_party_committees_actual_federal_candidate_support, precision: 12, scale: 2
+      t.decimal :hsp_committees_actual_federal_candidate_support, precision: 12, scale: 2
+    #   t.decimal :house_senate_party_committees_actual_nonfederal_candidate_support, precision: 12, scale: 2
+      t.decimal :hsp_committees_actual_nonfederal_candidate_support, precision: 12, scale: 2
+    #   t.integer :house_senate_party_committees_percentage_actual_federal, unsigned: true
+      t.integer :hsp_committees_percentage_actual_federal, unsigned: true
+      t.decimal :actual_direct_candidate_support_federal, precision: 12, scale: 2
+      t.decimal :actual_direct_candidate_support_nonfederal, precision: 12, scale: 2
+      t.decimal :actual_direct_candidate_support_federal_percent, precision: 12, scale: 2
       t.integer :ballot_presidential
       t.integer :ballot_senate
       t.integer :ballot_house
@@ -2130,13 +2082,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^h2
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -2156,13 +2106,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^h3
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -2171,8 +2119,8 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :event_type, limit: 2
       t.string :event_activity_name, limit: 90
       t.date :receipt_date
-      t.decimal :total_amount_transferred
-      t.decimal :transferred_amount
+      t.decimal :total_amount_transferred, precision: 12, scale: 2
+      t.decimal :transferred_amount, precision: 12, scale: 2
     end
 
     # H4 (Disbursements for Allocated Federal/Non-Federal Activity)
@@ -2181,13 +2129,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^h4
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -2209,10 +2155,10 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :payee_zip_code, limit: 9
       t.string :account_identifier, limit: 90
       t.date :expenditure_date
-      t.decimal :total_amount
-      t.decimal :federal_share
-      t.decimal :nonfederal_share
-      t.decimal :event_year_to_date
+      t.decimal :total_amount, precision: 12, scale: 2
+      t.decimal :federal_share, precision: 12, scale: 2
+      t.decimal :nonfederal_share, precision: 12, scale: 2
+      t.decimal :event_year_to_date, precision: 12, scale: 2
       t.string :expenditure_purpose_description, limit: 100
       t.string :category_code, limit: 3
       t.string :administrative_voter_drive_activity, limit: 1
@@ -2257,23 +2203,21 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^h5
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
       t.index :filer_committee_id_number
 
-      t.index :filer_committee_id_number
-
       t.string :transaction_id, limit: 20
       t.string :account_name, limit: 90
       t.date :receipt_date
-      t.decimal :total_amount_transferred
-      t.decimal :voter_registration_amount
-      t.decimal :voter_id_amount
-      t.decimal :gotv_amount
-      t.decimal :generic_campaign_amount
+      t.decimal :total_amount_transferred, precision: 12, scale: 2
+      t.decimal :voter_registration_amount, precision: 12, scale: 2
+      t.decimal :voter_id_amount, precision: 12, scale: 2
+      t.decimal :gotv_amount, precision: 12, scale: 2
+      t.decimal :generic_campaign_amount, precision: 12, scale: 2
     end
 
     # H6 (Disbursements from Levin Funds)
@@ -2282,13 +2226,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^h6
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -2310,10 +2252,10 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :payee_zip_code, limit: 9
       t.string :account_identifier, limit: 90
       t.date :expenditure_date
-      t.decimal :total_amount
-      t.decimal :federal_share
-      t.decimal :levin_share
-      t.decimal :event_year_to_date
+      t.decimal :total_amount, precision: 12, scale: 2
+      t.decimal :federal_share, precision: 12, scale: 2
+      t.decimal :levin_share, precision: 12, scale: 2
+      t.decimal :event_year_to_date, precision: 12, scale: 2
       t.string :expenditure_purpose_description, limit: 100
       t.string :category_code, limit: 3
       t.string :voter_registration_activity, limit: 1
@@ -2356,13 +2298,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^sa
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id, limit: 20
@@ -2385,8 +2325,8 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :election_code, limit: 5
       t.string :election_other_description, limit: 20
       t.date :contribution_date
-      t.decimal :contribution_amount
-      t.decimal :contribution_aggregate
+      t.decimal :contribution_amount, precision: 12, scale: 2
+      t.decimal :contribution_aggregate, precision: 12, scale: 2
       t.string :contribution_purpose_descrip, limit: 100
       t.string :contributor_employer, limit: 38
       t.string :contributor_occupation, limit: 38
@@ -2431,13 +2371,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^sb
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -2460,8 +2398,8 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :election_code, limit: 5
       t.string :election_other_description, limit: 20
       t.date :expenditure_date
-      t.decimal :expenditure_amount
-      t.decimal :semi_annual_refunded_bundled_amt
+      t.decimal :expenditure_amount, precision: 12, scale: 2
+      t.decimal :semi_annual_refunded_bundled_amt, precision: 12, scale: 2
       t.string :expenditure_purpose_descrip, limit: 100
       t.string :category_code, limit: 3
       t.string :beneficiary_committee_fec_id, limit: 9
@@ -2506,13 +2444,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^sc[^1-2]
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -2533,9 +2469,9 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :lender_zip_code, limit: 9
       t.string :election_code, limit: 5
       t.string :election_other_description, limit: 20
-      t.decimal :loan_amount_original
-      t.decimal :loan_payment_to_date
-      t.decimal :loan_balance
+      t.decimal :loan_amount_original, precision: 12, scale: 2
+      t.decimal :loan_payment_to_date, precision: 12, scale: 2
+      t.decimal :loan_balance, precision: 12, scale: 2
       t.integer :loan_incurred_date_terms
       t.string :loan_due_date_terms, limit: 15
       t.string :loan_interest_rate_terms, limit: 15
@@ -2572,13 +2508,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^sc1
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -2591,21 +2525,21 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :lender_city, limit: 30
       t.string :lender_state, limit: 2
       t.string :lender_zip_code, limit: 9
-      t.decimal :loan_amount
+      t.decimal :loan_amount, precision: 12, scale: 2
       t.string :loan_interest_rate, limit: 15
       t.date :loan_incurred_date
       t.string :loan_due_date, limit: 15 # TODO: Check. This is what the docs say, though.
       t.string :loan_restructured, limit: 1
-      t.string :loan_inccured_date_original, limit: 8 # FIXME: convert to date
-      t.decimal :credit_amount_this_draw
-      t.decimal :total_balance
+      t.date :loan_inccured_date_original
+      t.decimal :credit_amount_this_draw, precision: 12, scale: 2
+      t.decimal :total_balance, precision: 12, scale: 2
       t.string :others_liable, limit: 1
       t.string :collateral, limit: 1
       t.string :description, limit: 100
-      t.decimal :collateral_value_amount
+      t.decimal :collateral_value_amount, precision: 12, scale: 2
       t.string :perfected_interest, limit: 1
       t.string :future_income, limit: 1
-      t.decimal :estimated_value
+      t.decimal :estimated_value, precision: 12, scale: 2
       t.date :established_date
       t.string :account_location_name, limit: 200
       t.index :account_location_name
@@ -2615,14 +2549,14 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :city, limit: 30
       t.string :state, limit: 2
       t.string :zip_code, limit: 9
-      t.string :deposit_acct_auth_date_presidential, limit: 8 # FIXME: convert to date
+      t.date :deposit_acct_auth_date_presidential
       t.string :f_basis_of_loan_description
       t.string :treasurer_last_name, limit: 30
       t.string :treasurer_first_name, limit: 20
       t.string :treasurer_middle_name, limit: 20
       t.string :treasurer_prefix, limit: 10
       t.string :treasurer_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
       t.string :authorized_last_name, limit: 30
       t.string :authorized_first_name, limit: 20
       t.string :authorized_middle_name, limit: 20
@@ -2645,13 +2579,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^sc2
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -2668,7 +2600,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :guarantor_zip_code, limit: 9
       t.string :guarantor_employer, limit: 38
       t.string :guarantor_occupation, limit: 38
-      t.decimal :guaranteed_amount
+      t.decimal :guaranteed_amount, precision: 12, scale: 2
 
       t.string :guarantor_name, limit: 200
       t.index :guarantor_name
@@ -2681,13 +2613,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^sd
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -2706,10 +2636,10 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :creditor_state, limit: 2
       t.string :creditor_zip_code, limit: 9
       t.string :purpose_of_debt_or_obligation, limit: 100
-      t.decimal :beginning_balance_this_period
-      t.decimal :incurred_amount_this_period
-      t.decimal :payment_amount_this_period
-      t.decimal :balance_at_close_this_period
+      t.decimal :beginning_balance_this_period, precision: 12, scale: 2
+      t.decimal :incurred_amount_this_period, precision: 12, scale: 2
+      t.decimal :payment_amount_this_period, precision: 12, scale: 2
+      t.decimal :balance_at_close_this_period, precision: 12, scale: 2
 
       t.string :creditor_name, limit: 200
       t.index :creditor_name
@@ -2742,13 +2672,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^se
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -2771,9 +2699,9 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :election_code, limit: 5
       t.string :election_other_description, limit: 20
       t.date :dissemination_date
-      t.decimal :expenditure_amount
+      t.decimal :expenditure_amount, precision: 12, scale: 2
       t.date :disbursement_date
-      t.decimal :calendar_y_t_d_per_election_office
+      t.decimal :calendar_y_t_d_per_election_office, precision: 12, scale: 2
       t.string :expenditure_purpose_descrip, limit: 100
       t.string :category_code, limit: 3
       t.string :payee_cmtte_fec_id_number, limit: 9
@@ -2796,7 +2724,7 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :completing_middle_name, limit: 20
       t.string :completing_prefix, limit: 10
       t.string :completing_suffix, limit: 10
-      t.string :date_signed, limit: 8 # FIXME: convert to date
+      t.date :date_signed
       t.string :memo_code, limit: 1
       t.string :memo_text_description, limit: 100
 
@@ -2816,8 +2744,8 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :conduit_state, limit: 2
       t.string :conduit_zip_code, limit: 9
       t.string :ind_name_as_signed, limit: 200
-      t.string :date_notarized, limit: 8 # FIXME: convert to date
-      t.string :date_notary_commission_expires, limit: 8 # FIXME: convert to date
+      t.date :date_notarized
+      t.date :date_notary_commission_expires
       t.string :ind_name_notary, limit: 200
     end
 
@@ -2827,13 +2755,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^sf
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -2872,8 +2798,8 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :payee_state, limit: 2
       t.string :payee_zip_code, limit: 9
       t.date :expenditure_date
-      t.decimal :expenditure_amount
-      t.decimal :aggregate_general_elec_expended
+      t.decimal :expenditure_amount, precision: 12, scale: 2
+      t.decimal :aggregate_general_elec_expended, precision: 12, scale: 2
       t.string :expenditure_purpose_descrip, limit: 100
       t.string :category_code, limit: 3
       t.string :payee_committee_id_number, limit: 9
@@ -2917,13 +2843,11 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^sl
       t.string :form_type, limit: 8
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
@@ -2933,38 +2857,38 @@ class CreateFecFilings < ActiveRecord::Migration
       t.string :account_name, limit: 90
       t.date :coverage_from_date
       t.date :coverage_through_date
-      t.decimal :col_a_itemized_receipts_persons
-      t.decimal :col_a_unitemized_receipts_persons
-      t.decimal :col_a_total_receipts_persons
-      t.decimal :col_a_other_receipts
-      t.decimal :col_a_total_receipts
-      t.decimal :col_a_voter_registration_disbursements
-      t.decimal :col_a_voter_id_disbursements
-      t.decimal :col_a_gotv_disbursements
-      t.decimal :col_a_generic_campaign_disbursements
-      t.decimal :col_a_disbursements_subtotal
-      t.decimal :col_a_other_disbursements
-      t.decimal :col_a_total_disbursements
-      t.decimal :col_a_cash_on_hand_beginning_period
-      t.decimal :col_a_receipts_period
-      t.decimal :col_a_subtotal_period
-      t.decimal :col_b_disbursements_period
-      t.decimal :col_b_cash_on_hand_close_of_period
-      t.decimal :col_b_itemized_receipts_persons
-      t.decimal :col_b_unitemized_receipts_persons
-      t.decimal :col_b_total_receipts_persons
-      t.decimal :col_b_other_receipts
-      t.decimal :col_b_total_receipts
-      t.decimal :col_b_voter_registration_disbursements
-      t.decimal :col_b_voter_id_disbursements
-      t.decimal :col_b_gotv_disbursements
-      t.decimal :col_b_generic_campaign_disbursements
-      t.decimal :col_b_disbursements_subtotal
-      t.decimal :col_b_other_disbursements
-      t.decimal :col_b_total_disbursements
-      t.decimal :col_b_cash_on_hand_beginning_period
-      t.decimal :col_b_receipts_period
-      t.decimal :col_b_subtotal_period
+      t.decimal :col_a_itemized_receipts_persons, precision: 12, scale: 2
+      t.decimal :col_a_unitemized_receipts_persons, precision: 12, scale: 2
+      t.decimal :col_a_total_receipts_persons, precision: 12, scale: 2
+      t.decimal :col_a_other_receipts, precision: 12, scale: 2
+      t.decimal :col_a_total_receipts, precision: 12, scale: 2
+      t.decimal :col_a_voter_registration_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_voter_id_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_gotv_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_generic_campaign_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_disbursements_subtotal, precision: 12, scale: 2
+      t.decimal :col_a_other_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_total_disbursements, precision: 12, scale: 2
+      t.decimal :col_a_cash_on_hand_beginning_period, precision: 12, scale: 2
+      t.decimal :col_a_receipts_period, precision: 12, scale: 2
+      t.decimal :col_a_subtotal_period, precision: 12, scale: 2
+      t.decimal :col_b_disbursements_period, precision: 12, scale: 2
+      t.decimal :col_b_cash_on_hand_close_of_period, precision: 12, scale: 2
+      t.decimal :col_b_itemized_receipts_persons, precision: 12, scale: 2
+      t.decimal :col_b_unitemized_receipts_persons, precision: 12, scale: 2
+      t.decimal :col_b_total_receipts_persons, precision: 12, scale: 2
+      t.decimal :col_b_other_receipts, precision: 12, scale: 2
+      t.decimal :col_b_total_receipts, precision: 12, scale: 2
+      t.decimal :col_b_voter_registration_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_voter_id_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_gotv_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_generic_campaign_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_disbursements_subtotal, precision: 12, scale: 2
+      t.decimal :col_b_other_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_total_disbursements, precision: 12, scale: 2
+      t.decimal :col_b_cash_on_hand_beginning_period, precision: 12, scale: 2
+      t.decimal :col_b_receipts_period, precision: 12, scale: 2
+      t.decimal :col_b_subtotal_period, precision: 12, scale: 2
     end
 
     create_table :fec_filing_text do |t|
@@ -2972,14 +2896,12 @@ class CreateFecFilings < ActiveRecord::Migration
       t.integer :row_number, null: false, unsigned: true
       t.integer :lock_version, null: false, default: 0, unsigned: true
       t.timestamps
-      t.index [:fec_record_number, :row_number]
+      t.index [:fec_record_number, :row_number], unique: true
 
       # ^text
       t.string :form_type, limit: 8
       t.string :rec_type, limit: 4
       t.string :filer_committee_id_number, limit: 9
-      t.index :filer_committee_id_number
-
       t.index :filer_committee_id_number
 
       t.string :transaction_id_number, limit: 20
