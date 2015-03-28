@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326161951) do
+ActiveRecord::Schema.define(version: 20150328121139) do
 
   create_table "address_usages", force: true do |t|
     t.integer  "legal_identity_id", null: false
@@ -2060,21 +2060,21 @@ ActiveRecord::Schema.define(version: 20150326161951) do
     t.string   "senate_only_election_year",                              limit: 1
     t.string   "non_presidential_non_senate_election_year",              limit: 1
     t.string   "flat_minimum_federal_percentage",                        limit: 1
-    t.integer  "federal_percent",                                                                                                     unsigned: true
-    t.integer  "nonfederal_percent",                                                                                                  unsigned: true
+    t.decimal  "federal_percent",                                                   precision: 8,  scale: 5
+    t.decimal  "nonfederal_percent",                                                precision: 8,  scale: 5
     t.string   "administrative_ratio_applies",                           limit: 1
     t.string   "generic_voter_drive_ratio_applies",                      limit: 1
     t.string   "public_communications_referencing_party_ratio_applies",  limit: 1
-    t.integer  "national_party_committee_percentage",                                                                                 unsigned: true
-    t.integer  "hsp_committees_minimum_federal_percentage",                                                                           unsigned: true
-    t.integer  "hsp_committees_percentage_federal_candidate_support",                                                                 unsigned: true
-    t.integer  "hsp_committees_percentage_nonfederal_candidate_support",                                                              unsigned: true
+    t.decimal  "national_party_committee_percentage",                               precision: 8,  scale: 5
+    t.decimal  "hsp_committees_minimum_federal_percentage",                         precision: 8,  scale: 5
+    t.decimal  "hsp_committees_percentage_federal_candidate_support",               precision: 8,  scale: 5
+    t.decimal  "hsp_committees_percentage_nonfederal_candidate_support",            precision: 8,  scale: 5
     t.decimal  "hsp_committees_actual_federal_candidate_support",                   precision: 12, scale: 2
     t.decimal  "hsp_committees_actual_nonfederal_candidate_support",                precision: 12, scale: 2
-    t.integer  "hsp_committees_percentage_actual_federal",                                                                            unsigned: true
+    t.decimal  "hsp_committees_percentage_actual_federal",                          precision: 8,  scale: 5
     t.decimal  "actual_direct_candidate_support_federal",                           precision: 12, scale: 2
     t.decimal  "actual_direct_candidate_support_nonfederal",                        precision: 12, scale: 2
-    t.decimal  "actual_direct_candidate_support_federal_percent",                   precision: 12, scale: 2
+    t.decimal  "actual_direct_candidate_support_federal_percent",                   precision: 8,  scale: 5
     t.integer  "ballot_presidential"
     t.integer  "ballot_senate"
     t.integer  "ballot_house"
@@ -2093,9 +2093,9 @@ ActiveRecord::Schema.define(version: 20150326161951) do
   add_index "fec_filing_h1", ["filer_committee_id_number"], name: "index_fec_filing_h1_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_h2", force: true do |t|
-    t.integer  "fec_record_number",                                null: false, unsigned: true
-    t.integer  "row_number",                                       null: false, unsigned: true
-    t.integer  "lock_version",                         default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                        null: false, unsigned: true
+    t.integer  "row_number",                                                               null: false, unsigned: true
+    t.integer  "lock_version",                                                 default: 0, null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -2105,8 +2105,8 @@ ActiveRecord::Schema.define(version: 20150326161951) do
     t.string   "direct_fundraising",        limit: 1
     t.string   "direct_candidate_support",  limit: 1
     t.string   "ratio_code",                limit: 1
-    t.integer  "federal_percentage",                                            unsigned: true
-    t.integer  "nonfederal_percentage",                                         unsigned: true
+    t.decimal  "federal_percentage",                   precision: 8, scale: 5
+    t.decimal  "nonfederal_percentage",                precision: 8, scale: 5
     t.string   "exempt_activity",           limit: 1
   end
 
