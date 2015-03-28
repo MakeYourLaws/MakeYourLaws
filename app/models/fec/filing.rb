@@ -11,8 +11,7 @@ class Fec::Filing
   # Fech::Filing.for_all(Fec::Filing::FECH_OPTIONS.merge(:from=> from)) {|filing|
   #   x=filing; Fec::Filing.dostuff filing }
   def self.update_database
-    # record_number = Fec::Filing::Hdr.maximum(:fec_record_number) || Fec::Filing::FIRST_V3_FILING
-    record_number = Fec::Filing::FIRST_V3_FILING
+    record_number = Fec::Filing::Hdr.maximum(:fec_record_number) || Fec::Filing::FIRST_V3_FILING
     record_number -= 1
     threads = []
     while(true) do
