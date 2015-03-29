@@ -116,7 +116,8 @@ class Fec::Filing
 
     if filing.filing_version.to_i >= 3
       # batch = {}
-      filing.rows_like(//).each_with_index do |row, i|
+      filing.each_row_with_index do |raw_array, i|
+        row = filing.map(raw_array, Fec::Filing::FECH_OPTIONS)
         row_error_file = File.join(files_dir, 'row_errors', "#{record_number}_#{i}")
         begin
           if row.empty?
