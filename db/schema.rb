@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150328163048) do
+ActiveRecord::Schema.define(version: 20150329092859) do
 
   create_table "address_usages", force: true do |t|
     t.integer  "legal_identity_id", null: false
@@ -235,9 +235,9 @@ ActiveRecord::Schema.define(version: 20150328163048) do
   add_index "fec_committees", ["updated_at"], name: "index_fec_committees_on_updated_at", using: :btree
 
   create_table "fec_filing_f1", force: true do |t|
-    t.integer  "fec_record_number",                                      null: false, unsigned: true
-    t.integer  "row_number",                                             null: false, unsigned: true
-    t.integer  "lock_version",                               default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                        null: false, unsigned: true
+    t.integer  "row_number",                                               null: false, unsigned: true
+    t.integer  "lock_version",                               default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                      limit: 8
@@ -345,6 +345,7 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "agent_name",                     limit: 200
     t.string   "signature_name",                 limit: 200
     t.string   "committee_fax_number",           limit: 10
+    t.string   "fec_record_type",                limit: 1,   default: "C"
   end
 
   add_index "fec_filing_f1", ["affiliated_candidate_id_number"], name: "index_fec_filing_f1_on_affiliated_candidate_id_number", using: :btree
@@ -357,15 +358,15 @@ ActiveRecord::Schema.define(version: 20150328163048) do
   add_index "fec_filing_f1", ["candidate_name"], name: "index_fec_filing_f1_on_candidate_name", using: :btree
   add_index "fec_filing_f1", ["committee_name"], name: "index_fec_filing_f1_on_committee_name", using: :btree
   add_index "fec_filing_f1", ["custodian_name"], name: "index_fec_filing_f1_on_custodian_name", using: :btree
-  add_index "fec_filing_f1", ["fec_record_number", "row_number"], name: "index_fec_filing_f1_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f1", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f1", ["filer_committee_id_number"], name: "index_fec_filing_f1_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f1", ["signature_name"], name: "index_fec_filing_f1_on_signature_name", using: :btree
   add_index "fec_filing_f1", ["treasurer_name"], name: "index_fec_filing_f1_on_treasurer_name", using: :btree
 
   create_table "fec_filing_f13", force: true do |t|
-    t.integer  "fec_record_number",                                                          null: false, unsigned: true
-    t.integer  "row_number",                                                                 null: false, unsigned: true
-    t.integer  "lock_version",                                                   default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                            null: false, unsigned: true
+    t.integer  "row_number",                                                                   null: false, unsigned: true
+    t.integer  "lock_version",                                                   default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -390,16 +391,17 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "designated_prefix",         limit: 10
     t.string   "designated_suffix",         limit: 10
     t.date     "date_signed"
+    t.string   "fec_record_type",           limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f13", ["committee_name"], name: "index_fec_filing_f13_on_committee_name", using: :btree
-  add_index "fec_filing_f13", ["fec_record_number", "row_number"], name: "index_fec_filing_f13_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f13", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f13", ["filer_committee_id_number"], name: "index_fec_filing_f13_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f132", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -424,16 +426,17 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "donation_aggregate_amount",                 precision: 12, scale: 2
     t.string   "memo_code",                     limit: 1
     t.string   "memo_text_description",         limit: 100
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f132", ["contributor_organization_name"], name: "index_fec_filing_f132_on_contributor_organization_name", using: :btree
-  add_index "fec_filing_f132", ["fec_record_number", "row_number"], name: "index_fec_filing_f132_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f132", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f132", ["filer_committee_id_number"], name: "index_fec_filing_f132_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f133", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -457,16 +460,17 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "refund_amount",                             precision: 12, scale: 2
     t.string   "memo_code",                     limit: 1
     t.string   "memo_text_description",         limit: 100
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f133", ["contributor_organization_name"], name: "index_fec_filing_f133_on_contributor_organization_name", using: :btree
-  add_index "fec_filing_f133", ["fec_record_number", "row_number"], name: "index_fec_filing_f133_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f133", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f133", ["filer_committee_id_number"], name: "index_fec_filing_f133_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f1m", force: true do |t|
-    t.integer  "fec_record_number",                                          null: false, unsigned: true
-    t.integer  "row_number",                                                 null: false, unsigned: true
-    t.integer  "lock_version",                                   default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                            null: false, unsigned: true
+    t.integer  "row_number",                                                   null: false, unsigned: true
+    t.integer  "lock_version",                                   default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                          limit: 8
@@ -546,12 +550,13 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "fourth_candidate_name",              limit: 200
     t.string   "fifth_candidate_name",               limit: 200
     t.string   "treasurer_name",                     limit: 200
+    t.string   "fec_record_type",                    limit: 1,   default: "C"
   end
 
   add_index "fec_filing_f1m", ["affiliated_committee_id_number"], name: "index_fec_filing_f1m_on_affiliated_committee_id_number", using: :btree
   add_index "fec_filing_f1m", ["affiliated_committee_name"], name: "index_fec_filing_f1m_on_affiliated_committee_name", using: :btree
   add_index "fec_filing_f1m", ["committee_name"], name: "index_fec_filing_f1m_on_committee_name", using: :btree
-  add_index "fec_filing_f1m", ["fec_record_number", "row_number"], name: "index_fec_filing_f1m_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f1m", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f1m", ["fifth_candidate_fifth_name"], name: "index_fec_filing_f1m_on_fifth_candidate_fifth_name", using: :btree
   add_index "fec_filing_f1m", ["fifth_candidate_id_number"], name: "index_fec_filing_f1m_on_fifth_candidate_id_number", using: :btree
   add_index "fec_filing_f1m", ["fifth_candidate_name"], name: "index_fec_filing_f1m_on_fifth_candidate_name", using: :btree
@@ -570,9 +575,9 @@ ActiveRecord::Schema.define(version: 20150328163048) do
   add_index "fec_filing_f1m", ["treasurer_name"], name: "index_fec_filing_f1m_on_treasurer_name", using: :btree
 
   create_table "fec_filing_f1s", force: true do |t|
-    t.integer  "fec_record_number",                                                  null: false, unsigned: true
-    t.integer  "row_number",                                                         null: false, unsigned: true
-    t.integer  "lock_version",                                           default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                    null: false, unsigned: true
+    t.integer  "row_number",                                                           null: false, unsigned: true
+    t.integer  "lock_version",                                           default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                  limit: 8
@@ -611,21 +616,22 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "bank_city",                                  limit: 30
     t.string   "bank_state",                                 limit: 2
     t.string   "bank_zip_code",                              limit: 9
+    t.string   "fec_record_type",                            limit: 1,   default: "C"
   end
 
   add_index "fec_filing_f1s", ["affiliated_candidate_id_number"], name: "index_fec_filing_f1s_on_affiliated_candidate_id_number", using: :btree
   add_index "fec_filing_f1s", ["affiliated_committee_id_number"], name: "index_fec_filing_f1s_on_affiliated_committee_id_number", using: :btree
   add_index "fec_filing_f1s", ["affiliated_committee_name"], name: "index_fec_filing_f1s_on_affiliated_committee_name", using: :btree
   add_index "fec_filing_f1s", ["bank_name"], name: "index_fec_filing_f1s_on_bank_name", using: :btree
-  add_index "fec_filing_f1s", ["fec_record_number", "row_number"], name: "index_fec_filing_f1s_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f1s", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f1s", ["filer_committee_id_number"], name: "index_fec_filing_f1s_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f1s", ["joint_fund_participant_committee_id_number"], name: "index_fec_filing_f1s_on_jfp_cid", using: :btree
   add_index "fec_filing_f1s", ["joint_fund_participant_committee_name"], name: "index_fec_filing_f1s_on_jfp_cn", using: :btree
 
   create_table "fec_filing_f2", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                         default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                  null: false, unsigned: true
+    t.integer  "row_number",                                                                         null: false, unsigned: true
+    t.integer  "lock_version",                                                         default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                       limit: 8
@@ -644,7 +650,7 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "candidate_party_code",            limit: 3
     t.string   "candidate_office",                limit: 1
     t.string   "candidate_district",              limit: 2
-    t.integer  "election_year",                                                                                 unsigned: true
+    t.integer  "election_year",                                                                                   unsigned: true
     t.string   "committee_id_number",             limit: 9
     t.string   "committee_name",                  limit: 200
     t.string   "committee_street_1",              limit: 34
@@ -669,6 +675,7 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "general_personal_funds_declared",             precision: 12, scale: 2
     t.string   "candidate_name",                  limit: 200
     t.string   "candidate_signature_name",        limit: 200
+    t.string   "fec_record_type",                 limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f2", ["authorized_committee_id_number"], name: "index_fec_filing_f2_on_authorized_committee_id_number", using: :btree
@@ -678,12 +685,12 @@ ActiveRecord::Schema.define(version: 20150328163048) do
   add_index "fec_filing_f2", ["candidate_signature_name"], name: "index_fec_filing_f2_on_candidate_signature_name", using: :btree
   add_index "fec_filing_f2", ["committee_id_number"], name: "index_fec_filing_f2_on_committee_id_number", using: :btree
   add_index "fec_filing_f2", ["committee_name"], name: "index_fec_filing_f2_on_committee_name", using: :btree
-  add_index "fec_filing_f2", ["fec_record_number", "row_number"], name: "index_fec_filing_f2_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f2", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
 
   create_table "fec_filing_f24", force: true do |t|
-    t.integer  "fec_record_number",                                 null: false, unsigned: true
-    t.integer  "row_number",                                        null: false, unsigned: true
-    t.integer  "lock_version",                          default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                   null: false, unsigned: true
+    t.integer  "row_number",                                          null: false, unsigned: true
+    t.integer  "lock_version",                          default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -702,16 +709,17 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "treasurer_prefix",          limit: 10
     t.string   "treasurer_suffix",          limit: 10
     t.date     "date_signed"
+    t.string   "fec_record_type",           limit: 1,   default: "C"
   end
 
   add_index "fec_filing_f24", ["committee_name"], name: "index_fec_filing_f24_on_committee_name", using: :btree
-  add_index "fec_filing_f24", ["fec_record_number", "row_number"], name: "index_fec_filing_f24_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f24", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f24", ["filer_committee_id_number"], name: "index_fec_filing_f24_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f3", force: true do |t|
-    t.integer  "fec_record_number",                                                                                  null: false, unsigned: true
-    t.integer  "row_number",                                                                                         null: false, unsigned: true
-    t.integer  "lock_version",                                                                           default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                                    null: false, unsigned: true
+    t.integer  "row_number",                                                                                           null: false, unsigned: true
+    t.integer  "lock_version",                                                                           default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                         limit: 8
@@ -824,19 +832,20 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "runoff_election",                                   limit: 1
     t.string   "treasurer_name",                                    limit: 200
     t.string   "candidate_name",                                    limit: 200
+    t.string   "fec_record_type",                                   limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f3", ["candidate_id_number"], name: "index_fec_filing_f3_on_candidate_id_number", using: :btree
   add_index "fec_filing_f3", ["candidate_name"], name: "index_fec_filing_f3_on_candidate_name", using: :btree
   add_index "fec_filing_f3", ["committee_name"], name: "index_fec_filing_f3_on_committee_name", using: :btree
-  add_index "fec_filing_f3", ["fec_record_number", "row_number"], name: "index_fec_filing_f3_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f3", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3", ["filer_committee_id_number"], name: "index_fec_filing_f3_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f3", ["treasurer_name"], name: "index_fec_filing_f3_on_treasurer_name", using: :btree
 
   create_table "fec_filing_f3l", force: true do |t|
-    t.integer  "fec_record_number",                                                                        null: false, unsigned: true
-    t.integer  "row_number",                                                                               null: false, unsigned: true
-    t.integer  "lock_version",                                                                 default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                          null: false, unsigned: true
+    t.integer  "row_number",                                                                                 null: false, unsigned: true
+    t.integer  "lock_version",                                                                 default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                               limit: 8
@@ -865,16 +874,17 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "treasurer_prefix",                        limit: 10
     t.string   "treasurer_suffix",                        limit: 10
     t.date     "date_signed"
+    t.string   "fec_record_type",                         limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f3l", ["committee_name"], name: "index_fec_filing_f3l_on_committee_name", using: :btree
-  add_index "fec_filing_f3l", ["fec_record_number", "row_number"], name: "index_fec_filing_f3l_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f3l", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3l", ["filer_committee_id_number"], name: "index_fec_filing_f3l_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f3p", force: true do |t|
-    t.integer  "fec_record_number",                                                                               null: false, unsigned: true
-    t.integer  "row_number",                                                                                      null: false, unsigned: true
-    t.integer  "lock_version",                                                                        default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                                 null: false, unsigned: true
+    t.integer  "row_number",                                                                                        null: false, unsigned: true
+    t.integer  "lock_version",                                                                        default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                      limit: 8
@@ -1082,17 +1092,18 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "col_b_virgin_islands",                                       precision: 12, scale: 2
     t.decimal  "col_b_totals",                                               precision: 12, scale: 2
     t.string   "treasurer_name",                                 limit: 200
+    t.string   "fec_record_type",                                limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f3p", ["committee_name"], name: "index_fec_filing_f3p_on_committee_name", using: :btree
-  add_index "fec_filing_f3p", ["fec_record_number", "row_number"], name: "index_fec_filing_f3p_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f3p", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3p", ["filer_committee_id_number"], name: "index_fec_filing_f3p_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f3p", ["treasurer_name"], name: "index_fec_filing_f3p_on_treasurer_name", using: :btree
 
   create_table "fec_filing_f3p31", force: true do |t|
-    t.integer  "fec_record_number",                                                               null: false, unsigned: true
-    t.integer  "row_number",                                                                      null: false, unsigned: true
-    t.integer  "lock_version",                                                        default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                 null: false, unsigned: true
+    t.integer  "row_number",                                                                        null: false, unsigned: true
+    t.integer  "lock_version",                                                        default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                      limit: 8
@@ -1133,6 +1144,7 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "conduit_city",                   limit: 30
     t.string   "conduit_state",                  limit: 2
     t.string   "conduit_zip_code",               limit: 9
+    t.string   "fec_record_type",                limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f3p31", ["candidate_name"], name: "index_fec_filing_f3p31_on_candidate_name", using: :btree
@@ -1141,12 +1153,13 @@ ActiveRecord::Schema.define(version: 20150328163048) do
   add_index "fec_filing_f3p31", ["contributor_organization_name"], name: "index_fec_filing_f3p31_on_contributor_organization_name", using: :btree
   add_index "fec_filing_f3p31", ["fec_candidate_id_number"], name: "index_fec_filing_f3p31_on_fec_candidate_id_number", using: :btree
   add_index "fec_filing_f3p31", ["fec_committee_id_number"], name: "index_fec_filing_f3p31_on_fec_committee_id_number", using: :btree
+  add_index "fec_filing_f3p31", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3p31", ["filer_committee_id_number"], name: "index_fec_filing_f3p31_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f3ps", force: true do |t|
-    t.integer  "fec_record_number",                                                                         null: false, unsigned: true
-    t.integer  "row_number",                                                                                null: false, unsigned: true
-    t.integer  "lock_version",                                                                  default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                           null: false, unsigned: true
+    t.integer  "row_number",                                                                                  null: false, unsigned: true
+    t.integer  "lock_version",                                                                  default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                  limit: 8
@@ -1240,15 +1253,16 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "guam",                                                 precision: 12, scale: 2
     t.decimal  "virgin_islands",                                       precision: 12, scale: 2
     t.decimal  "totals",                                               precision: 12, scale: 2
+    t.string   "fec_record_type",                            limit: 1,                          default: "C"
   end
 
-  add_index "fec_filing_f3ps", ["fec_record_number", "row_number"], name: "index_fec_filing_f3ps_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f3ps", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3ps", ["filer_committee_id_number"], name: "index_fec_filing_f3ps_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f3s", force: true do |t|
-    t.integer  "fec_record_number",                                                                        null: false, unsigned: true
-    t.integer  "row_number",                                                                               null: false, unsigned: true
-    t.integer  "lock_version",                                                                 default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                          null: false, unsigned: true
+    t.integer  "row_number",                                                                                 null: false, unsigned: true
+    t.integer  "lock_version",                                                                 default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                 limit: 8
@@ -1286,15 +1300,16 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "d_total_contributions_refunds",                       precision: 12, scale: 2
     t.decimal  "other_disbursements",                                 precision: 12, scale: 2
     t.decimal  "total_disbursements",                                 precision: 12, scale: 2
+    t.string   "fec_record_type",                           limit: 1,                          default: "C"
   end
 
-  add_index "fec_filing_f3s", ["fec_record_number", "row_number"], name: "index_fec_filing_f3s_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f3s", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3s", ["filer_committee_id_number"], name: "index_fec_filing_f3s_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f3x", force: true do |t|
-    t.integer  "fec_record_number",                                                                                   null: false, unsigned: true
-    t.integer  "row_number",                                                                                          null: false, unsigned: true
-    t.integer  "lock_version",                                                                            default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                                     null: false, unsigned: true
+    t.integer  "row_number",                                                                                            null: false, unsigned: true
+    t.integer  "lock_version",                                                                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                          limit: 8
@@ -1367,7 +1382,7 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "col_a_total_offsets_to_expenditures",                            precision: 12, scale: 2
     t.decimal  "col_a_net_operating_expenditures",                               precision: 12, scale: 2
     t.decimal  "col_b_cash_on_hand_jan_1",                                       precision: 12, scale: 2
-    t.integer  "col_b_year",                                                                                                       unsigned: true
+    t.integer  "col_b_year",                                                                                                         unsigned: true
     t.decimal  "col_b_total_receipts",                                           precision: 12, scale: 2
     t.decimal  "col_b_subtotal",                                                 precision: 12, scale: 2
     t.decimal  "col_b_total_disbursements",                                      precision: 12, scale: 2
@@ -1413,17 +1428,18 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "col_b_total_offsets_to_expenditures",                            precision: 12, scale: 2
     t.decimal  "col_b_net_operating_expenditures",                               precision: 12, scale: 2
     t.string   "treasurer_name",                                     limit: 200
+    t.string   "fec_record_type",                                    limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f3x", ["committee_name"], name: "index_fec_filing_f3x_on_committee_name", using: :btree
-  add_index "fec_filing_f3x", ["fec_record_number", "row_number"], name: "index_fec_filing_f3x_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f3x", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3x", ["filer_committee_id_number"], name: "index_fec_filing_f3x_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f3x", ["treasurer_name"], name: "index_fec_filing_f3x_on_treasurer_name", using: :btree
 
   create_table "fec_filing_f4", force: true do |t|
-    t.integer  "fec_record_number",                                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                     limit: 8
@@ -1483,8 +1499,8 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "col_a_other_disbursements_itemized",                        precision: 12, scale: 2
     t.decimal  "col_a_other_disbursements_unitemized",                      precision: 12, scale: 2
     t.decimal  "col_a_other_disbursements_subtotal",                        precision: 12, scale: 2
-    t.integer  "col_b_cash_on_hand_beginning_year",                                                                           unsigned: true
-    t.integer  "col_b_beginning_year",                                                                                        unsigned: true
+    t.integer  "col_b_cash_on_hand_beginning_year",                                                                             unsigned: true
+    t.integer  "col_b_beginning_year",                                                                                          unsigned: true
     t.decimal  "col_b_total_receipts",                                      precision: 12, scale: 2
     t.decimal  "col_b_subtotal",                                            precision: 12, scale: 2
     t.decimal  "col_b_total_disbursements",                                 precision: 12, scale: 2
@@ -1506,17 +1522,18 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "col_b_other_disbursements_subtotal",                        precision: 12, scale: 2
     t.decimal  "col_a_total_expenditures_subject_to_limits",                precision: 12, scale: 2
     t.string   "treasurer_name",                                limit: 200
+    t.string   "fec_record_type",                               limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f4", ["committee_name"], name: "index_fec_filing_f4_on_committee_name", using: :btree
-  add_index "fec_filing_f4", ["fec_record_number", "row_number"], name: "index_fec_filing_f4_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f4", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f4", ["filer_committee_id_number"], name: "index_fec_filing_f4_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f4", ["treasurer_name"], name: "index_fec_filing_f4_on_treasurer_name", using: :btree
 
   create_table "fec_filing_f5", force: true do |t|
-    t.integer  "fec_record_number",                                                               null: false, unsigned: true
-    t.integer  "row_number",                                                                      null: false, unsigned: true
-    t.integer  "lock_version",                                                        default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                 null: false, unsigned: true
+    t.integer  "row_number",                                                                        null: false, unsigned: true
+    t.integer  "lock_version",                                                        default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                      limit: 8
@@ -1558,19 +1575,20 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.date     "date_notarized"
     t.date     "date_notary_commission_expires"
     t.string   "notary_name",                    limit: 200
+    t.string   "fec_record_type",                limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f5", ["committee_name"], name: "index_fec_filing_f5_on_committee_name", using: :btree
-  add_index "fec_filing_f5", ["fec_record_number", "row_number"], name: "index_fec_filing_f5_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f5", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f5", ["filer_committee_id_number"], name: "index_fec_filing_f5_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f5", ["notary_name"], name: "index_fec_filing_f5_on_notary_name", using: :btree
   add_index "fec_filing_f5", ["organization_name"], name: "index_fec_filing_f5_on_organization_name", using: :btree
   add_index "fec_filing_f5", ["person_completing_name"], name: "index_fec_filing_f5_on_person_completing_name", using: :btree
 
   create_table "fec_filing_f56", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -1605,19 +1623,20 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "conduit_city",                  limit: 30
     t.string   "conduit_state",                 limit: 2
     t.string   "conduit_zip_code",              limit: 9
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f56", ["candidate_name"], name: "index_fec_filing_f56_on_candidate_name", using: :btree
   add_index "fec_filing_f56", ["conduit_name"], name: "index_fec_filing_f56_on_conduit_name", using: :btree
   add_index "fec_filing_f56", ["contributor_name"], name: "index_fec_filing_f56_on_contributor_name", using: :btree
   add_index "fec_filing_f56", ["contributor_organization_name"], name: "index_fec_filing_f56_on_contributor_organization_name", using: :btree
-  add_index "fec_filing_f56", ["fec_record_number", "row_number"], name: "index_fec_filing_f56_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f56", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f56", ["filer_committee_id_number"], name: "index_fec_filing_f56_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f57", force: true do |t|
-    t.integer  "fec_record_number",                                                                   null: false, unsigned: true
-    t.integer  "row_number",                                                                          null: false, unsigned: true
-    t.integer  "lock_version",                                                            default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                     null: false, unsigned: true
+    t.integer  "row_number",                                                                            null: false, unsigned: true
+    t.integer  "lock_version",                                                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                          limit: 8
@@ -1663,21 +1682,22 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "conduit_state",                      limit: 2
     t.string   "conduit_zip_code",                   limit: 9
     t.string   "amended_code",                       limit: 1
+    t.string   "fec_record_type",                    limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f57", ["candidate_id_number"], name: "index_fec_filing_f57_on_candidate_id_number", using: :btree
   add_index "fec_filing_f57", ["candidate_name"], name: "index_fec_filing_f57_on_candidate_name", using: :btree
   add_index "fec_filing_f57", ["conduit_name"], name: "index_fec_filing_f57_on_conduit_name", using: :btree
-  add_index "fec_filing_f57", ["fec_record_number", "row_number"], name: "index_fec_filing_f57_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f57", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f57", ["filer_committee_id_number"], name: "index_fec_filing_f57_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f57", ["payee_cmtte_fec_id_number"], name: "index_fec_filing_f57_on_payee_cmtte_fec_id_number", using: :btree
   add_index "fec_filing_f57", ["payee_name"], name: "index_fec_filing_f57_on_payee_name", using: :btree
   add_index "fec_filing_f57", ["payee_organization_name"], name: "index_fec_filing_f57_on_payee_organization_name", using: :btree
 
   create_table "fec_filing_f6", force: true do |t|
-    t.integer  "fec_record_number",                                 null: false, unsigned: true
-    t.integer  "row_number",                                        null: false, unsigned: true
-    t.integer  "lock_version",                          default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                   null: false, unsigned: true
+    t.integer  "row_number",                                          null: false, unsigned: true
+    t.integer  "lock_version",                          default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -1705,18 +1725,19 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "signer_suffix",             limit: 10
     t.date     "date_signed"
     t.string   "candidate_name",            limit: 200
+    t.string   "fec_record_type",           limit: 1,   default: "C"
   end
 
   add_index "fec_filing_f6", ["candidate_id_number"], name: "index_fec_filing_f6_on_candidate_id_number", using: :btree
   add_index "fec_filing_f6", ["candidate_name"], name: "index_fec_filing_f6_on_candidate_name", using: :btree
   add_index "fec_filing_f6", ["committee_name"], name: "index_fec_filing_f6_on_committee_name", using: :btree
-  add_index "fec_filing_f6", ["fec_record_number", "row_number"], name: "index_fec_filing_f6_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f6", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f6", ["filer_committee_id_number"], name: "index_fec_filing_f6_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f65", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -1751,19 +1772,20 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "conduit_city",                  limit: 30
     t.string   "conduit_state",                 limit: 2
     t.string   "conduit_zip_code",              limit: 9
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f65", ["candidate_name"], name: "index_fec_filing_f65_on_candidate_name", using: :btree
   add_index "fec_filing_f65", ["conduit_name"], name: "index_fec_filing_f65_on_conduit_name", using: :btree
   add_index "fec_filing_f65", ["contributor_name"], name: "index_fec_filing_f65_on_contributor_name", using: :btree
   add_index "fec_filing_f65", ["contributor_organization_name"], name: "index_fec_filing_f65_on_contributor_organization_name", using: :btree
-  add_index "fec_filing_f65", ["fec_record_number", "row_number"], name: "index_fec_filing_f65_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f65", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f65", ["filer_committee_id_number"], name: "index_fec_filing_f65_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f7", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -1789,17 +1811,18 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "person_designated_title",       limit: 20
     t.date     "date_signed"
     t.string   "person_designated_name",        limit: 200
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
-  add_index "fec_filing_f7", ["fec_record_number", "row_number"], name: "index_fec_filing_f7_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f7", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f7", ["filer_committee_id_number"], name: "index_fec_filing_f7_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f7", ["organization_name"], name: "index_fec_filing_f7_on_organization_name", using: :btree
   add_index "fec_filing_f7", ["person_designated_name"], name: "index_fec_filing_f7_on_person_designated_name", using: :btree
 
   create_table "fec_filing_f76", force: true do |t|
-    t.integer  "fec_record_number",                                                               null: false, unsigned: true
-    t.integer  "row_number",                                                                      null: false, unsigned: true
-    t.integer  "lock_version",                                                        default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                 null: false, unsigned: true
+    t.integer  "row_number",                                                                        null: false, unsigned: true
+    t.integer  "lock_version",                                                        default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                      limit: 8
@@ -1823,17 +1846,18 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "candidate_state",                limit: 2
     t.string   "candidate_district",             limit: 2
     t.string   "candidate_name",                 limit: 200
+    t.string   "fec_record_type",                limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f76", ["candidate_id_number"], name: "index_fec_filing_f76_on_candidate_id_number", using: :btree
   add_index "fec_filing_f76", ["candidate_name"], name: "index_fec_filing_f76_on_candidate_name", using: :btree
-  add_index "fec_filing_f76", ["fec_record_number", "row_number"], name: "index_fec_filing_f76_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f76", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f76", ["filer_committee_id_number"], name: "index_fec_filing_f76_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f9", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -1881,16 +1905,17 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "person_completing_suffix",      limit: 10
     t.date     "date_signed"
     t.string   "qualified_non_profit",          limit: 1
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
-  add_index "fec_filing_f9", ["fec_record_number", "row_number"], name: "index_fec_filing_f9_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f9", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f9", ["filer_committee_id_number"], name: "index_fec_filing_f9_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f9", ["organization_name"], name: "index_fec_filing_f9_on_organization_name", using: :btree
 
   create_table "fec_filing_f91", force: true do |t|
-    t.integer  "fec_record_number",                                null: false, unsigned: true
-    t.integer  "row_number",                                       null: false, unsigned: true
-    t.integer  "lock_version",                         default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                  null: false, unsigned: true
+    t.integer  "row_number",                                         null: false, unsigned: true
+    t.integer  "lock_version",                         default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -1909,15 +1934,16 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "controller_employer",       limit: 38
     t.string   "controller_occupation",     limit: 38
     t.string   "amended_cd",                limit: 1
+    t.string   "fec_record_type",           limit: 1,  default: "C"
   end
 
-  add_index "fec_filing_f91", ["fec_record_number", "row_number"], name: "index_fec_filing_f91_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f91", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f91", ["filer_committee_id_number"], name: "index_fec_filing_f91_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f92", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -1942,16 +1968,17 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "contributor_employer",          limit: 38
     t.string   "contributor_occupation",        limit: 38
     t.string   "transaction_type",              limit: 3
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_f92", ["contributor_organization_name"], name: "index_fec_filing_f92_on_contributor_organization_name", using: :btree
-  add_index "fec_filing_f92", ["fec_record_number", "row_number"], name: "index_fec_filing_f92_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f92", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f92", ["filer_committee_id_number"], name: "index_fec_filing_f92_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f93", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -1980,16 +2007,17 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "payee_occupation",              limit: 38
     t.date     "communication_date"
     t.string   "expenditure_purpose_code",      limit: 3
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
-  add_index "fec_filing_f93", ["fec_record_number", "row_number"], name: "index_fec_filing_f93_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f93", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f93", ["filer_committee_id_number"], name: "index_fec_filing_f93_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f93", ["payee_organization_name"], name: "index_fec_filing_f93_on_payee_organization_name", using: :btree
 
   create_table "fec_filing_f94", force: true do |t|
-    t.integer  "fec_record_number",                                     null: false, unsigned: true
-    t.integer  "row_number",                                            null: false, unsigned: true
-    t.integer  "lock_version",                              default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                       null: false, unsigned: true
+    t.integer  "row_number",                                              null: false, unsigned: true
+    t.integer  "lock_version",                              default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2009,17 +2037,18 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "election_code",                 limit: 5
     t.string   "election_other_description",    limit: 20
     t.string   "candidate_name",                limit: 200
+    t.string   "fec_record_type",               limit: 1,   default: "C"
   end
 
   add_index "fec_filing_f94", ["candidate_id_number"], name: "index_fec_filing_f94_on_candidate_id_number", using: :btree
   add_index "fec_filing_f94", ["candidate_name"], name: "index_fec_filing_f94_on_candidate_name", using: :btree
-  add_index "fec_filing_f94", ["fec_record_number", "row_number"], name: "index_fec_filing_f94_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f94", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f94", ["filer_committee_id_number"], name: "index_fec_filing_f94_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_f99", force: true do |t|
-    t.integer  "fec_record_number",                                 null: false, unsigned: true
-    t.integer  "row_number",                                        null: false, unsigned: true
-    t.integer  "lock_version",                          default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                   null: false, unsigned: true
+    t.integer  "row_number",                                          null: false, unsigned: true
+    t.integer  "lock_version",                          default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -2039,17 +2068,18 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "text_code",                 limit: 3
     t.text     "text"
     t.string   "treasurer_name",            limit: 200
+    t.string   "fec_record_type",           limit: 1,   default: "C"
   end
 
   add_index "fec_filing_f99", ["committee_name"], name: "index_fec_filing_f99_on_committee_name", using: :btree
-  add_index "fec_filing_f99", ["fec_record_number", "row_number"], name: "index_fec_filing_f99_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_f99", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f99", ["filer_committee_id_number"], name: "index_fec_filing_f99_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f99", ["treasurer_name"], name: "index_fec_filing_f99_on_treasurer_name", using: :btree
 
   create_table "fec_filing_h1", force: true do |t|
-    t.integer  "fec_record_number",                                                                                      null: false, unsigned: true
-    t.integer  "row_number",                                                                                             null: false, unsigned: true
-    t.integer  "lock_version",                                                                               default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                                        null: false, unsigned: true
+    t.integer  "row_number",                                                                                               null: false, unsigned: true
+    t.integer  "lock_version",                                                                               default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                              limit: 8
@@ -2087,15 +2117,16 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.integer  "extra_nonfederal_point"
     t.integer  "subtotal"
     t.integer  "total_points"
+    t.string   "fec_record_type",                                        limit: 1,                           default: "C"
   end
 
-  add_index "fec_filing_h1", ["fec_record_number", "row_number"], name: "index_fec_filing_h1_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_h1", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_h1", ["filer_committee_id_number"], name: "index_fec_filing_h1_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_h2", force: true do |t|
-    t.integer  "fec_record_number",                                                        null: false, unsigned: true
-    t.integer  "row_number",                                                               null: false, unsigned: true
-    t.integer  "lock_version",                                                 default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                          null: false, unsigned: true
+    t.integer  "row_number",                                                                 null: false, unsigned: true
+    t.integer  "lock_version",                                                 default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -2108,15 +2139,16 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "federal_percentage",                   precision: 8, scale: 5
     t.decimal  "nonfederal_percentage",                precision: 8, scale: 5
     t.string   "exempt_activity",           limit: 1
+    t.string   "fec_record_type",           limit: 1,                          default: "C"
   end
 
-  add_index "fec_filing_h2", ["fec_record_number", "row_number"], name: "index_fec_filing_h2_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_h2", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_h2", ["filer_committee_id_number"], name: "index_fec_filing_h2_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_h3", force: true do |t|
-    t.integer  "fec_record_number",                                                             null: false, unsigned: true
-    t.integer  "row_number",                                                                    null: false, unsigned: true
-    t.integer  "lock_version",                                                      default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                               null: false, unsigned: true
+    t.integer  "row_number",                                                                      null: false, unsigned: true
+    t.integer  "lock_version",                                                      default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2129,15 +2161,16 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.date     "receipt_date"
     t.decimal  "total_amount_transferred",                 precision: 12, scale: 2
     t.decimal  "transferred_amount",                       precision: 12, scale: 2
+    t.string   "fec_record_type",               limit: 1,                           default: "C"
   end
 
-  add_index "fec_filing_h3", ["fec_record_number", "row_number"], name: "index_fec_filing_h3_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_h3", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_h3", ["filer_committee_id_number"], name: "index_fec_filing_h3_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_h4", force: true do |t|
-    t.integer  "fec_record_number",                                                                     null: false, unsigned: true
-    t.integer  "row_number",                                                                            null: false, unsigned: true
-    t.integer  "lock_version",                                                              default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                       null: false, unsigned: true
+    t.integer  "row_number",                                                                              null: false, unsigned: true
+    t.integer  "lock_version",                                                              default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                            limit: 8
@@ -2188,21 +2221,22 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "conduit_state",                        limit: 2
     t.string   "conduit_zip_code",                     limit: 9
     t.string   "amended_cd",                           limit: 1
+    t.string   "fec_record_type",                      limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_h4", ["candidate_name"], name: "index_fec_filing_h4_on_candidate_name", using: :btree
   add_index "fec_filing_h4", ["conduit_name"], name: "index_fec_filing_h4_on_conduit_name", using: :btree
   add_index "fec_filing_h4", ["fec_candidate_id_number"], name: "index_fec_filing_h4_on_fec_candidate_id_number", using: :btree
   add_index "fec_filing_h4", ["fec_committee_id_number"], name: "index_fec_filing_h4_on_fec_committee_id_number", using: :btree
-  add_index "fec_filing_h4", ["fec_record_number", "row_number"], name: "index_fec_filing_h4_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_h4", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_h4", ["filer_committee_id_number"], name: "index_fec_filing_h4_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_h4", ["payee_name"], name: "index_fec_filing_h4_on_payee_name", using: :btree
   add_index "fec_filing_h4", ["payee_organization_name"], name: "index_fec_filing_h4_on_payee_organization_name", using: :btree
 
   create_table "fec_filing_h5", force: true do |t|
-    t.integer  "fec_record_number",                                                         null: false, unsigned: true
-    t.integer  "row_number",                                                                null: false, unsigned: true
-    t.integer  "lock_version",                                                  default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                           null: false, unsigned: true
+    t.integer  "row_number",                                                                  null: false, unsigned: true
+    t.integer  "lock_version",                                                  default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -2215,15 +2249,16 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "voter_id_amount",                      precision: 12, scale: 2
     t.decimal  "gotv_amount",                          precision: 12, scale: 2
     t.decimal  "generic_campaign_amount",              precision: 12, scale: 2
+    t.string   "fec_record_type",           limit: 1,                           default: "C"
   end
 
-  add_index "fec_filing_h5", ["fec_record_number", "row_number"], name: "index_fec_filing_h5_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_h5", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_h5", ["filer_committee_id_number"], name: "index_fec_filing_h5_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_h6", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                         default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                  null: false, unsigned: true
+    t.integer  "row_number",                                                                         null: false, unsigned: true
+    t.integer  "lock_version",                                                         default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                       limit: 8
@@ -2272,21 +2307,22 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "conduit_city",                    limit: 30
     t.string   "conduit_state",                   limit: 2
     t.string   "conduit_zip_code",                limit: 9
+    t.string   "fec_record_type",                 limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_h6", ["candidate_name"], name: "index_fec_filing_h6_on_candidate_name", using: :btree
   add_index "fec_filing_h6", ["conduit_name"], name: "index_fec_filing_h6_on_conduit_name", using: :btree
   add_index "fec_filing_h6", ["fec_candidate_id_number"], name: "index_fec_filing_h6_on_fec_candidate_id_number", using: :btree
   add_index "fec_filing_h6", ["fec_committee_id_number"], name: "index_fec_filing_h6_on_fec_committee_id_number", using: :btree
-  add_index "fec_filing_h6", ["fec_record_number", "row_number"], name: "index_fec_filing_h6_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_h6", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_h6", ["filer_committee_id_number"], name: "index_fec_filing_h6_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_h6", ["payee_name"], name: "index_fec_filing_h6_on_payee_name", using: :btree
   add_index "fec_filing_h6", ["payee_organization_name"], name: "index_fec_filing_h6_on_payee_organization_name", using: :btree
 
   create_table "fec_filing_hdr", force: true do |t|
-    t.integer  "fec_record_number",                         null: false, unsigned: true
-    t.integer  "row_number",                                null: false, unsigned: true
-    t.integer  "lock_version",                  default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                           null: false, unsigned: true
+    t.integer  "row_number",                                  null: false, unsigned: true
+    t.integer  "lock_version",                  default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "record_type",       limit: 3
@@ -2295,18 +2331,19 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "soft_name",         limit: 90
     t.string   "soft_ver",          limit: 16
     t.string   "report_id",         limit: 16
-    t.integer  "report_number",                                          unsigned: true
+    t.integer  "report_number",                                            unsigned: true
     t.string   "comment",           limit: 200
     t.string   "name_delim",        limit: 1
+    t.string   "fec_record_type",   limit: 1,   default: "C"
   end
 
-  add_index "fec_filing_hdr", ["fec_record_number", "row_number"], name: "index_fec_filing_hdr_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_hdr", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_hdr", ["report_id"], name: "index_fec_filing_hdr_on_report_id", using: :btree
 
   create_table "fec_filing_sa", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2358,6 +2395,7 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "increased_limit_code",          limit: 3
     t.string   "contributor_name",              limit: 200
     t.string   "donor_candidate_name",          limit: 200
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_sa", ["conduit_name"], name: "index_fec_filing_sa_on_conduit_name", using: :btree
@@ -2365,13 +2403,13 @@ ActiveRecord::Schema.define(version: 20150328163048) do
   add_index "fec_filing_sa", ["contributor_organization_name"], name: "index_fec_filing_sa_on_contributor_organization_name", using: :btree
   add_index "fec_filing_sa", ["donor_candidate_name"], name: "index_fec_filing_sa_on_donor_candidate_name", using: :btree
   add_index "fec_filing_sa", ["donor_committee_name"], name: "index_fec_filing_sa_on_donor_committee_name", using: :btree
-  add_index "fec_filing_sa", ["fec_record_number", "row_number"], name: "index_fec_filing_sa_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_sa", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_sa", ["filer_committee_id_number"], name: "index_fec_filing_sa_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_sb", force: true do |t|
-    t.integer  "fec_record_number",                                                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                                     limit: 8
@@ -2423,20 +2461,21 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.date     "communication_date"
     t.string   "payee_name",                                                    limit: 200
     t.string   "beneficiary_candidate_name",                                    limit: 200
+    t.string   "fec_record_type",                                               limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_sb", ["beneficiary_candidate_name"], name: "index_fec_filing_sb_on_beneficiary_candidate_name", using: :btree
   add_index "fec_filing_sb", ["beneficiary_committee_name"], name: "index_fec_filing_sb_on_beneficiary_committee_name", using: :btree
   add_index "fec_filing_sb", ["conduit_name"], name: "index_fec_filing_sb_on_conduit_name", using: :btree
-  add_index "fec_filing_sb", ["fec_record_number", "row_number"], name: "index_fec_filing_sb_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_sb", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_sb", ["filer_committee_id_number"], name: "index_fec_filing_sb_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_sb", ["payee_name"], name: "index_fec_filing_sb_on_payee_name", using: :btree
   add_index "fec_filing_sb", ["payee_organization_name"], name: "index_fec_filing_sb_on_payee_organization_name", using: :btree
 
   create_table "fec_filing_sc", force: true do |t|
-    t.integer  "fec_record_number",                                                             null: false, unsigned: true
-    t.integer  "row_number",                                                                    null: false, unsigned: true
-    t.integer  "lock_version",                                                      default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                               null: false, unsigned: true
+    t.integer  "row_number",                                                                      null: false, unsigned: true
+    t.integer  "lock_version",                                                      default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                    limit: 8
@@ -2479,9 +2518,10 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "memo_text_description",        limit: 100
     t.string   "lender_name",                  limit: 200
     t.string   "lender_candidate_name",        limit: 200
+    t.string   "fec_record_type",              limit: 1,                            default: "C"
   end
 
-  add_index "fec_filing_sc", ["fec_record_number", "row_number"], name: "index_fec_filing_sc_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_sc", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_sc", ["filer_committee_id_number"], name: "index_fec_filing_sc_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_sc", ["lender_candidate_id_number"], name: "index_fec_filing_sc_on_lender_candidate_id_number", using: :btree
   add_index "fec_filing_sc", ["lender_candidate_name"], name: "index_fec_filing_sc_on_lender_candidate_name", using: :btree
@@ -2490,9 +2530,9 @@ ActiveRecord::Schema.define(version: 20150328163048) do
   add_index "fec_filing_sc", ["lender_organization_name"], name: "index_fec_filing_sc_on_lender_organization_name", using: :btree
 
   create_table "fec_filing_sc1", force: true do |t|
-    t.integer  "fec_record_number",                                                                    null: false, unsigned: true
-    t.integer  "row_number",                                                                           null: false, unsigned: true
-    t.integer  "lock_version",                                                             default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                      null: false, unsigned: true
+    t.integer  "row_number",                                                                             null: false, unsigned: true
+    t.integer  "lock_version",                                                             default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                           limit: 8
@@ -2544,19 +2584,20 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "entity_type",                         limit: 3
     t.string   "treasurer_name",                      limit: 200
     t.string   "authorized_name",                     limit: 200
+    t.string   "fec_record_type",                     limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_sc1", ["account_location_name"], name: "index_fec_filing_sc1_on_account_location_name", using: :btree
   add_index "fec_filing_sc1", ["authorized_name"], name: "index_fec_filing_sc1_on_authorized_name", using: :btree
-  add_index "fec_filing_sc1", ["fec_record_number", "row_number"], name: "index_fec_filing_sc1_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_sc1", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_sc1", ["filer_committee_id_number"], name: "index_fec_filing_sc1_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_sc1", ["lender_organization_name"], name: "index_fec_filing_sc1_on_lender_organization_name", using: :btree
   add_index "fec_filing_sc1", ["treasurer_name"], name: "index_fec_filing_sc1_on_treasurer_name", using: :btree
 
   create_table "fec_filing_sc2", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2577,16 +2618,17 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "guarantor_occupation",          limit: 38
     t.decimal  "guaranteed_amount",                         precision: 12, scale: 2
     t.string   "guarantor_name",                limit: 200
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
-  add_index "fec_filing_sc2", ["fec_record_number", "row_number"], name: "index_fec_filing_sc2_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_sc2", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_sc2", ["filer_committee_id_number"], name: "index_fec_filing_sc2_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_sc2", ["guarantor_name"], name: "index_fec_filing_sc2_on_guarantor_name", using: :btree
 
   create_table "fec_filing_sd", force: true do |t|
-    t.integer  "fec_record_number",                                                              null: false, unsigned: true
-    t.integer  "row_number",                                                                     null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                null: false, unsigned: true
+    t.integer  "row_number",                                                                       null: false, unsigned: true
+    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2622,6 +2664,7 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "conduit_city",                  limit: 30
     t.string   "conduit_state",                 limit: 2
     t.string   "conduit_zip_code",              limit: 9
+    t.string   "fec_record_type",               limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_sd", ["candidate_name"], name: "index_fec_filing_sd_on_candidate_name", using: :btree
@@ -2630,13 +2673,13 @@ ActiveRecord::Schema.define(version: 20150328163048) do
   add_index "fec_filing_sd", ["creditor_organization_name"], name: "index_fec_filing_sd_on_creditor_organization_name", using: :btree
   add_index "fec_filing_sd", ["fec_candidate_id_number"], name: "index_fec_filing_sd_on_fec_candidate_id_number", using: :btree
   add_index "fec_filing_sd", ["fec_committee_id_number"], name: "index_fec_filing_sd_on_fec_committee_id_number", using: :btree
-  add_index "fec_filing_sd", ["fec_record_number", "row_number"], name: "index_fec_filing_sd_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_sd", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_sd", ["filer_committee_id_number"], name: "index_fec_filing_sd_on_filer_committee_id_number", using: :btree
 
   create_table "fec_filing_se", force: true do |t|
-    t.integer  "fec_record_number",                                                                   null: false, unsigned: true
-    t.integer  "row_number",                                                                          null: false, unsigned: true
-    t.integer  "lock_version",                                                            default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                     null: false, unsigned: true
+    t.integer  "row_number",                                                                            null: false, unsigned: true
+    t.integer  "lock_version",                                                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                          limit: 8
@@ -2696,21 +2739,22 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.date     "date_notarized"
     t.date     "date_notary_commission_expires"
     t.string   "ind_name_notary",                    limit: 200
+    t.string   "fec_record_type",                    limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_se", ["candidate_id_number"], name: "index_fec_filing_se_on_candidate_id_number", using: :btree
   add_index "fec_filing_se", ["candidate_name"], name: "index_fec_filing_se_on_candidate_name", using: :btree
   add_index "fec_filing_se", ["conduit_name"], name: "index_fec_filing_se_on_conduit_name", using: :btree
-  add_index "fec_filing_se", ["fec_record_number", "row_number"], name: "index_fec_filing_se_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_se", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_se", ["filer_committee_id_number"], name: "index_fec_filing_se_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_se", ["payee_cmtte_fec_id_number"], name: "index_fec_filing_se_on_payee_cmtte_fec_id_number", using: :btree
   add_index "fec_filing_se", ["payee_name"], name: "index_fec_filing_se_on_payee_name", using: :btree
   add_index "fec_filing_se", ["payee_organization_name"], name: "index_fec_filing_se_on_payee_organization_name", using: :btree
 
   create_table "fec_filing_sf", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                         default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                  null: false, unsigned: true
+    t.integer  "row_number",                                                                         null: false, unsigned: true
+    t.integer  "lock_version",                                                         default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                       limit: 8
@@ -2767,12 +2811,13 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "conduit_city",                    limit: 30
     t.string   "conduit_state",                   limit: 2
     t.string   "conduit_zip_code",                limit: 9
+    t.string   "fec_record_type",                 limit: 1,                            default: "C"
   end
 
   add_index "fec_filing_sf", ["conduit_name"], name: "index_fec_filing_sf_on_conduit_name", using: :btree
   add_index "fec_filing_sf", ["designating_committee_id_number"], name: "index_fec_filing_sf_on_designating_committee_id_number", using: :btree
   add_index "fec_filing_sf", ["designating_committee_name"], name: "index_fec_filing_sf_on_designating_committee_name", using: :btree
-  add_index "fec_filing_sf", ["fec_record_number", "row_number"], name: "index_fec_filing_sf_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_sf", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_sf", ["filer_committee_id_number"], name: "index_fec_filing_sf_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_sf", ["payee_candidate_id_number"], name: "index_fec_filing_sf_on_payee_candidate_id_number", using: :btree
   add_index "fec_filing_sf", ["payee_candidate_name"], name: "index_fec_filing_sf_on_payee_candidate_name", using: :btree
@@ -2783,9 +2828,9 @@ ActiveRecord::Schema.define(version: 20150328163048) do
   add_index "fec_filing_sf", ["subordinate_committee_name"], name: "index_fec_filing_sf_on_subordinate_committee_name", using: :btree
 
   create_table "fec_filing_sl", force: true do |t|
-    t.integer  "fec_record_number",                                                                      null: false, unsigned: true
-    t.integer  "row_number",                                                                             null: false, unsigned: true
-    t.integer  "lock_version",                                                               default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                                                        null: false, unsigned: true
+    t.integer  "row_number",                                                                               null: false, unsigned: true
+    t.integer  "lock_version",                                                               default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                              limit: 8
@@ -2827,16 +2872,17 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.decimal  "col_b_cash_on_hand_beginning_period",               precision: 12, scale: 2
     t.decimal  "col_b_receipts_period",                             precision: 12, scale: 2
     t.decimal  "col_b_subtotal_period",                             precision: 12, scale: 2
+    t.string   "fec_record_type",                        limit: 1,                           default: "C"
   end
 
-  add_index "fec_filing_sl", ["fec_record_number", "row_number"], name: "index_fec_filing_sl_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_sl", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_sl", ["filer_committee_id_number"], name: "index_fec_filing_sl_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_sl", ["record_id_number"], name: "index_fec_filing_sl_on_record_id_number", using: :btree
 
   create_table "fec_filing_text", force: true do |t|
-    t.integer  "fec_record_number",                                     null: false, unsigned: true
-    t.integer  "row_number",                                            null: false, unsigned: true
-    t.integer  "lock_version",                              default: 0, null: false, unsigned: true
+    t.integer  "fec_record_number",                                       null: false, unsigned: true
+    t.integer  "row_number",                                              null: false, unsigned: true
+    t.integer  "lock_version",                              default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                      limit: 8
@@ -2846,9 +2892,10 @@ ActiveRecord::Schema.define(version: 20150328163048) do
     t.string   "back_reference_tran_id_number",  limit: 20
     t.string   "back_reference_sched_form_name", limit: 8
     t.text     "text"
+    t.string   "fec_record_type",                limit: 1,  default: "C"
   end
 
-  add_index "fec_filing_text", ["fec_record_number", "row_number"], name: "index_fec_filing_text_on_fec_record_number_and_row_number", unique: true, using: :btree
+  add_index "fec_filing_text", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_text", ["filer_committee_id_number"], name: "index_fec_filing_text_on_filer_committee_id_number", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
