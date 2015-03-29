@@ -108,8 +108,8 @@ class Fec::Filing
         end
       end
     end
+
     http_error_file = File.join(files_dir, 'http_error', "#{record_number}")
-    http_error = false
     begin
       File.delete(http_error_file) if File.exists?(http_error_file)
       filing.download
