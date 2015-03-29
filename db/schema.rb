@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329092859) do
+ActiveRecord::Schema.define(version: 20150329113203) do
 
   create_table "address_usages", force: true do |t|
     t.integer  "legal_identity_id", null: false
@@ -1662,7 +1662,7 @@ ActiveRecord::Schema.define(version: 20150329092859) do
     t.string   "expenditure_purpose_descrip",        limit: 100
     t.string   "category_code",                      limit: 3
     t.string   "payee_cmtte_fec_id_number",          limit: 9
-    t.string   "support_oppose_code",                limit: 1
+    t.string   "support_oppose_code",                limit: 3
     t.string   "candidate_id_number",                limit: 9
     t.string   "candidate_last_name",                limit: 30
     t.string   "candidate_first_name",               limit: 20
@@ -1835,7 +1835,7 @@ ActiveRecord::Schema.define(version: 20150329092859) do
     t.decimal  "communication_cost",                         precision: 12, scale: 2
     t.string   "election_code",                  limit: 5
     t.string   "election_other_description",     limit: 20
-    t.string   "support_oppose_code",            limit: 1
+    t.string   "support_oppose_code",            limit: 3
     t.string   "candidate_id_number",            limit: 9
     t.string   "candidate_last_name",            limit: 30
     t.string   "candidate_first_name",           limit: 20
@@ -2708,7 +2708,7 @@ ActiveRecord::Schema.define(version: 20150329092859) do
     t.string   "expenditure_purpose_descrip",        limit: 100
     t.string   "category_code",                      limit: 3
     t.string   "payee_cmtte_fec_id_number",          limit: 9
-    t.string   "support_oppose_code",                limit: 1
+    t.string   "support_oppose_code",                limit: 3
     t.string   "candidate_id_number",                limit: 9
     t.string   "candidate_last_name",                limit: 30
     t.string   "candidate_first_name",               limit: 20
