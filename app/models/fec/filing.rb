@@ -24,7 +24,7 @@ class Fec::Filing
       raise 'Unknown FEC record type'
     end
     if recs == []
-      rowerrors = `egrep "(support_oppose_code|cadidate_prefix|ConnectionNotEstablished|Bad file descriptor' on nil:NilClass|ENOENT|HTTPError)" #{files_dir}/errors/* #{files_dir}/row_errors/*  | egrep -o '/fec/[^0-9]*[0-9_]+[^0-9_]*' | egrep -o '[0-9_]+' | sort | uniq`
+      rowerrors = `egrep "(index' on nil:NilClass|support_oppose_code|cadidate_prefix|ConnectionNotEstablished|Bad file descriptor' on nil:NilClass|ENOENT|HTTPError)" #{files_dir}/errors/* #{files_dir}/row_errors/*  | egrep -o '/fec/[^0-9]*[0-9_]+[^0-9_]*' | egrep -o '[0-9_]+' | sort | uniq`
       (rowerrors.split("\n") - ['_']).map{|r| n1, n2 = r.split('_').map(&:to_i); recs << n1}
       recfiles = `ls #{files_dir}/*.fec | egrep -o "[0-9]+"`
       recs += recfiles.split("\n").map(&:to_i)
@@ -108,10 +108,12 @@ class Fec::Filing
         end
       end
     end
+    http_error_file = File.join(files_dir, 'http_error', "#{record_number}")
     begin
+      File.delete(http_error_file) if File.exists?(http_error_file)
       filing.download
     rescue OpenURI::HTTPError => e
-      File.write(File.join(files_dir, 'http_error', "#{record_number}"), e.inspect.to_s + "\n\n" + e.awesome_backtrace.to_s)
+      File.write(http_error_file, e.inspect.to_s + "\n\n" + e.awesome_backtrace.to_s)
     end
 
     if filing.filing_version.to_i >= 3
