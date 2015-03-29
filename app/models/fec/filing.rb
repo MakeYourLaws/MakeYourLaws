@@ -10,7 +10,6 @@ class Fec::Filing
     end
   end
 
-
   def self.base_type row_type
     FechUtils::ROW_TYPES.sort{|x,y| y[1].to_s.length <=> x[1].to_s.length }.find{|k,v| k if row_type =~ v }.first
   end
@@ -24,32 +23,36 @@ class Fec::Filing
       raise 'Unknown FEC record type'
     end
     if recs == []
-      rowerrors = `egrep "(index' on nil:NilClass|support_oppose_code|cadidate_prefix|ConnectionNotEstablished|Bad file descriptor' on nil:NilClass|ENOENT|HTTPError)" #{files_dir}/errors/* #{files_dir}/row_errors/*  | egrep -o '/fec/[^0-9]*[0-9_]+[^0-9_]*' | egrep -o '[0-9_]+' | sort | uniq`
+      rowerrors = `egrep "(col_a_total_receipts_period|index' on nil:NilClass|support_oppose_code|cadidate_prefix|ConnectionNotEstablished|Bad file descriptor' on nil:NilClass|ENOENT|HTTPError)" #{files_dir}/errors/* #{files_dir}/row_errors/*  | egrep -o '/fec/[^0-9]*[0-9_]+[^0-9_]*' | egrep -o '[0-9_]+' | sort | uniq`
       (rowerrors.split("\n") - ['_']).map{|r| n1, n2 = r.split('_').map(&:to_i); recs << n1}
       recfiles = `ls #{files_dir}/*.fec | egrep -o "[0-9]+"`
       recs += recfiles.split("\n").map(&:to_i)
       recs = recs.uniq
+
+      puts recs.to_s
     end
 
+    recs_dup =recs.dup
     recs.each do |record_number|
       begin
-        print ' ' + record_number.to_s
+        print " : r#{record_number}"
         file_path = File.join(files_dir, "#{record_number}.fec")
         file_error_path = File.join(files_dir, 'errors', record_number.to_s)
         http_error_path = File.join(files_dir, 'http_error', "#{record_number}")
         File.delete(http_error_path) if File.exists?(http_error_path)
         File.delete(file_error_path) if File.exists?(file_error_path)
         self.download_and_save record_number, record_type
-        recs.delete(record_number)
+        recs_dup.delete(record_number)
         File.delete(file_path) if File.exists?(file_path)
       rescue => e
+        puts "erroring: #{record_number}, #{file_path}"
         File.write(file_error_path, e.inspect.to_s + "\n\n" + e.awesome_backtrace.to_s)
         # puts e.inspect.to_s + "\n\n" + e.awesome_backtrace.to_s
         File.delete(file_path) if File.exists? file_path
       end
     end
 
-    recs
+    recs_dup
   end
 
   # from=1; x=nil;
