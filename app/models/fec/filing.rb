@@ -59,9 +59,9 @@ class Fec::Filing
     if record_type == 'C'
       record_number = Fec::Filing::Hdr.maximum(:fec_record_number) || Fech::Filing::FIRST_V3_FILING
       record_number -= 4
-      files_dir = FILES_DIR
+      files_dir = Fec::Filing::FILES_DIR
     elsif record_type == 'S'
-      files_dir = SENATE_FILES_DIR
+      files_dir = Fec::Filing::SENATE_FILES_DIR
       record_number = -1
     else
       raise 'Unknown FEC record type'
@@ -90,10 +90,10 @@ class Fec::Filing
   def self.download_and_save record_number, record_type = 'C'
     case record_type
     when 'C'
-      files_dir = FILES_DIR
+      files_dir = Fec::Filing::FILES_DIR
       filing = Fech::Filing.new(record_number, Fec::Filing::FECH_OPTIONS.merge(download_dir: files_dir))
     when 'S'
-      files_dir = SENATE_FILES_DIR
+      files_dir = Fec::Filing::SENATE_FILES_DIR
       filing = Fech::SenateFiling.new(record_number, Fec::Filing::FECH_OPTIONS.merge(download_dir: files_dir))
     end
     filing.translate do |t|
@@ -109,11 +109,14 @@ class Fec::Filing
       end
     end
     http_error_file = File.join(files_dir, 'http_error', "#{record_number}")
+    http_error = false
     begin
       File.delete(http_error_file) if File.exists?(http_error_file)
       filing.download
     rescue OpenURI::HTTPError => e
       File.write(http_error_file, e.inspect.to_s + "\n\n" + e.awesome_backtrace.to_s)
+      File.delete(filing.file_path) if File.exists?(filing.file_path)
+      return false
     end
 
     if filing.filing_version.to_i >= 3
