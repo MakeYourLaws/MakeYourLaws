@@ -37,6 +37,7 @@ class Fec::Filing
       begin
         print " : r#{record_number}"
         file_path = File.join(files_dir, "#{record_number}.fec")
+        custom_file_path = File.join(files_dir, "fech_#{record_number}.fec")
         file_error_path = File.join(files_dir, 'errors', record_number.to_s)
         http_error_path = File.join(files_dir, 'http_error', "#{record_number}")
         File.delete(http_error_path) if File.exists?(http_error_path)
@@ -44,11 +45,13 @@ class Fec::Filing
         self.download_and_save record_number, record_type
         recs_dup.delete(record_number)
         File.delete(file_path) if File.exists?(file_path)
+        File.delete(custom_file_path) if File.exists?(custom_file_path)
       rescue => e
         puts "erroring: #{record_number}, #{file_path}"
         File.write(file_error_path, e.inspect.to_s + "\n\n" + e.awesome_backtrace.to_s)
         # puts e.inspect.to_s + "\n\n" + e.awesome_backtrace.to_s
         File.delete(file_path) if File.exists? file_path
+        File.delete(custom_file_path) if File.exists?(custom_file_path)
       end
     end
 
@@ -83,7 +86,9 @@ class Fec::Filing
           rescue => e
             File.write(File.join(files_dir, 'errors', "#{record_number}"), e.inspect.to_s + "\n\n" + e.awesome_backtrace.to_s)
             file_path = File.join(files_dir, "#{record_number}.fec")
+            custom_file_path = File.join(files_dir, "fech_#{record_number}.fec")
             File.delete(file_path) if File.exists? file_path
+            File.delete(custom_file_path) if File.exists?(custom_file_path)
           end
         end
       end
@@ -119,6 +124,7 @@ class Fec::Filing
     rescue OpenURI::HTTPError => e
       File.write(http_error_file, e.inspect.to_s + "\n\n" + e.awesome_backtrace.to_s)
       File.delete(filing.file_path) if File.exists?(filing.file_path)
+      File.delete(filing.custom_file_path) if File.exists?(filing.custom_file_path)
       return false
     end
 
@@ -154,10 +160,12 @@ class Fec::Filing
       #   kklass.import bbatch, on_duplicate_key_update: []  # ignore duplicates
       # end
 
-      File.delete filing.file_path if File.exists? filing.file_path
+      File.delete(filing.file_path) if File.exists? filing.file_path
+      File.delete(filing.custom_file_path) if File.exists?(filing.custom_file_path)
     else
       File.write(File.join(files_dir, 'not_v3', "#{record_number}"), filing.filing_version)
-      File.delete filing.file_path if File.exists? filing.file_path
+      File.delete(filing.file_path) if File.exists? filing.file_path
+      File.delete(filing.custom_file_path) if File.exists?(filing.custom_file_path)
     end
   end
 
