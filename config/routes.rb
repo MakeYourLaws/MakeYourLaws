@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       get 'earmarks/aor', to: redirect(
         'https://docs.google.com/document/d/1YeVdRxEqC8fWnJGl9DgkcNVY6HmkCPEzyRxB_0wttU0/',
         status: 302)
+      get 'laundering'
       get 'tplf'
       get 'volunteer_ip'
     end
