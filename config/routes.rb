@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       get 'BNA-2013-11-15'
     end
     namespace :fec do
+      get 'accessibility'
       get 'bitcoin'
       get 'bitcoin/caf', action: 'bitcoin_caf'
       get 'bitcoin/pacs', action: 'bitcoin_pacs'
