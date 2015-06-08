@@ -14,7 +14,7 @@ source 'https://rubygems.org' do
 
   gem 'puma'
 
-  gem 'rails'#, '>= 4.0.1'
+  gem 'rails', '>= 4.2.1' #, '>= 4.0.1'
   gem 'rake'#, '>= 0.9.2.2'
   gem 'rack'#, '>= 1.4.1'
 
@@ -110,13 +110,18 @@ source 'https://rubygems.org' do
   # put test-only gems in this group so their generators
   # and rake tasks are available in development mode:
   group :development, :test do
-    platform(:mri) { gem 'ruby-prof' }
+    platform(:mri) {
+      gem 'ruby-prof'
+      # rubinius doesn't support ripper. https://github.com/rubinius/rubinius/issues/2377
+      gem 'rails_best_practices'
+    }
     gem 'webrat'#, '>= 0.7.3'
     gem "brakeman", '>= 3.0.2', require: false  # Rails security scanner
     gem 'rubocop', require: false
     gem 'bundler-audit', require: false
     gem 'rspec-rails'#, '~> 3.0.0.beta'
     gem 'spring'
+    gem 'coveralls', require: false
   end
 
   group :test do
@@ -149,7 +154,8 @@ source 'https://rubygems.org' do
   gem 'activerecord-mysql-unsigned'
 
   gem 'money'#, '>= 5.0.0'
-  gem 'money-rails'#, '>= 0.8.1'
+  # FIXME: pending monetize bump: https://github.com/RubyMoney/money-rails/pull/331
+  # gem 'money-rails'#, '>= 1.4.1'#, '>= 0.8.1'
   gem 'activemerchant'
   gem 'offsite_payments'
   gem "active_paypal_adaptive_payment"
@@ -160,9 +166,9 @@ source 'https://rubygems.org' do
 
   gem 'amazon_flex_pay'
 
-  gem 'bitpay-client', '>= 2.0.1', :require => 'bitpay'
-  # FIXME: pending gem bump https://github.com/coinbase/coinbase-ruby/issues/63
-  gem 'coinbase', ">= 2.1.1" #, github: 'coinbase/coinbase-ruby', branch: 'v3'
+  # FIXME: pending gem bump https://github.com/bitpay/ruby-client/pull/45
+  # gem 'bitpay-client', '>= 2.2.0', :require => 'bitpay'
+  gem 'coinbase', ">= 2.2.1" #, github: 'coinbase/coinbase-ruby', branch: 'v3'
   # omniauth-coinbase depends on coinbase ~>2.0
 
   gem "devise"#, ">= 3.1.1"
