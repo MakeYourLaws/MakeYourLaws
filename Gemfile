@@ -155,7 +155,8 @@ source 'https://rubygems.org' do
 
   gem 'money'#, '>= 5.0.0'
   # FIXME: pending monetize bump: https://github.com/RubyMoney/money-rails/pull/331
-  # gem 'money-rails'#, '>= 1.4.1'#, '>= 0.8.1'
+  gem 'money-rails'#, '>= 1.4.1'#, '>= 0.8.1'
+  # gem 'monetize'
   gem 'activemerchant'
   gem 'offsite_payments'
   gem "active_paypal_adaptive_payment"
@@ -166,8 +167,7 @@ source 'https://rubygems.org' do
 
   gem 'amazon_flex_pay'
 
-  # FIXME: pending gem bump https://github.com/bitpay/ruby-client/pull/45
-  # gem 'bitpay-client', '>= 2.2.0', :require => 'bitpay'
+  # gem 'bitpay-rails', :require => 'bit_pay_rails'
   gem 'coinbase', ">= 2.2.1" #, github: 'coinbase/coinbase-ruby', branch: 'v3'
   # omniauth-coinbase depends on coinbase ~>2.0
 

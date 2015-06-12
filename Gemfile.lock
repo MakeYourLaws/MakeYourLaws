@@ -261,8 +261,12 @@ GEM
       money (~> 6.5.0)
     money (6.5.1)
       i18n (>= 0.6.4, <= 0.7.0)
+    money-rails (0.0.1)
+      activesupport (>= 3.0)
+      money (>= 4.0.2)
+      railties (>= 3.0)
     mono_logger (1.1.0)
-    multi_json (1.11.0)
+    multi_json (1.11.1)
     multi_test (0.1.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -438,7 +442,7 @@ GEM
     redis-session-store (0.8.0)
       actionpack (>= 3, < 5)
       redis
-    redis-store (1.1.4)
+    redis-store (1.1.5)
       redis (>= 2.2)
     ref (1.0.5)
     require_all (1.3.2)
@@ -751,7 +755,7 @@ GEM
     state_machine (1.2.0)
     strip_attributes (1.7.0)
       activemodel (>= 3.0, < 5.0)
-    stripe (1.21.0)
+    stripe (1.22.0)
       json (~> 1.8.1)
       rest-client (~> 1.4)
     stripe_event (1.5.0)
@@ -851,6 +855,7 @@ DEPENDENCIES
   kramdown!
   mailhopper!
   money!
+  money-rails!
   mysql2!
   newrelic_rpm!
   offsite_payments!
