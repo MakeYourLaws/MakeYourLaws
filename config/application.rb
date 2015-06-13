@@ -77,7 +77,7 @@ module MakeyourlawsOrg
     # config.active_record.whitelist_attributes = true
 
     config.action_mailer.default_options = {
-      from: 'MYL <notifications@makeyourlaws.org>'
+      from: 'MYL Robot <no-reply@makeyourlaws.org>'
     }
 
     config.cache_store = :redis_store, { db: 1 }

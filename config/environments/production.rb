@@ -75,20 +75,17 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :mailhopper
   # defaults to -i -t. However, Mail::Sendmail actually puts recipients on the command line, so
   #  if -t gets them from the headers, it screws things up. Thus, no -t.
-  config.action_mailer.sendmail_settings = { arguments: '-i ' }
+  # config.action_mailer.sendmail_settings = { arguments: '-i ' }
 
-  # config.action_mailer.smtp_settings = {
-  #   :address => 'mail.makeyourlaws.org',
-  #   :port => 587,
-  #   :domain => 'makeyourlaws.org',
-  #   :authentication => :login,
-  #   :user_name => Keys.get("mail_user"),
-  #   :password => Keys.get("mail_password"),
-  #   :enable_starttls_auto => false
-  #   # FIXME: disabling TLS is a horrible but effective way to fix
-  #   #  OpenSSL::SSL::SSLError (hostname was not match with the server certificate)
-  #   # There has to be something we can do to make DreamHost's SSL certs not crap out.
-  # }
+  config.action_mailer.smtp_settings = {
+    :address => 'gmail-smtp-relay.l.google.com',
+    :port => 587,
+    :domain => 'makeyourlaws.org',
+    :authentication => :login,
+    :user_name => 'no-reply@makeyourlaws.org',
+    :password => Keys.get("google_smtp_password"),
+    :enable_starttls_auto => true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
