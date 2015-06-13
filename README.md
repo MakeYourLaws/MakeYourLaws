@@ -4,6 +4,7 @@
 [![security](https://hakiri.io/github/MakeYourLaws/MakeYourLaws/master.svg)](https://hakiri.io/github/MakeYourLaws/MakeYourLaws/master)
 [![Code Climate](https://codeclimate.com/github/MakeYourLaws/MakeYourLaws/badges/gpa.svg)](https://codeclimate.com/github/MakeYourLaws/MakeYourLaws)
 [![Test Coverage](https://codeclimate.com/github/MakeYourLaws/MakeYourLaws/badges/coverage.svg)](https://codeclimate.com/github/MakeYourLaws/MakeYourLaws/coverage)
+[![Brakeman](http://rails-brakeman.com/MakeYourLaws/MakeYourLaws.png)](http://rails-brakeman.com/MakeYourLaws/MakeYourLaws)
 
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/9217)
 
