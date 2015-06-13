@@ -121,8 +121,10 @@ source 'https://rubygems.org' do
     gem 'bundler-audit', require: false
     gem 'rspec-rails'#, '~> 3.0.0.beta'
     gem 'spring'
-    gem 'coveralls', require: false
   end
+
+  # moved out of above group for coveralls.io compatibility
+  gem 'coveralls', require: false
 
   group :test do
     gem 'cucumber-rails', :require => false
