@@ -78,7 +78,7 @@ Rails.application.configure do
   # config.action_mailer.sendmail_settings = { arguments: '-i ' }
 
   config.action_mailer.smtp_settings = {
-    :address => 'gmail-smtp-relay.l.google.com',
+    :address => 'smtp-relay.gmail.com',
     :port => 587,
     :domain => 'makeyourlaws.org',
     :authentication => :login,
