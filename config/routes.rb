@@ -104,6 +104,8 @@ Rails.application.routes.draw do
     # end
   end
 
+  resources :bit_pay_clients
+
   namespace :stripe do
     resources :charges
   end

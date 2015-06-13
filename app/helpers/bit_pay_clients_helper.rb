@@ -1,0 +1,2 @@
+module BitPayClientsHelper
+end

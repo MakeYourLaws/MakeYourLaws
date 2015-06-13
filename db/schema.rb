@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329172737) do
+ActiveRecord::Schema.define(version: 20150608134954) do
 
-  create_table "address_usages", force: true do |t|
-    t.integer  "legal_identity_id", null: false
-    t.integer  "address_id",        null: false
-    t.string   "usage"
+  create_table "address_usages", force: :cascade do |t|
+    t.integer  "legal_identity_id", limit: 4,   null: false
+    t.integer  "address_id",        limit: 4,   null: false
+    t.string   "usage",             limit: 255
     t.date     "from"
     t.date     "to"
     t.datetime "confirmed"
-    t.integer  "lock_version"
+    t.integer  "lock_version",      limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "address_usages", ["address_id", "legal_identity_id"], name: "index_address_usages_on_address_id_and_legal_identity_id", using: :btree
   add_index "address_usages", ["legal_identity_id", "usage"], name: "index_address_usages_on_legal_identity_id_and_usage", using: :btree
 
-  create_table "addresses", force: true do |t|
-    t.string  "country",                     default: "United States", null: false
+  create_table "addresses", force: :cascade do |t|
+    t.string  "country",          limit: 255, default: "United States", null: false
     t.string  "street_address_1", limit: 34
-    t.string  "city",             limit: 30,                           null: false
-    t.string  "state",            limit: 2,                            null: false
-    t.integer "zip"
+    t.string  "city",             limit: 30,                            null: false
+    t.string  "state",            limit: 2,                             null: false
+    t.integer "zip",              limit: 4
     t.float   "lat",              limit: 24
     t.float   "lng",              limit: 24
   end
@@ -41,17 +41,26 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "addresses", ["country", "state", "city"], name: "index_addresses_on_country_and_state_and_city", using: :btree
   add_index "addresses", ["lat", "lng"], name: "index_addresses_on_lat_and_lng", using: :btree
 
-  create_table "bit_pay_invoices", force: true do |t|
-    t.string   "bitpay_id"
-    t.string   "url"
+  create_table "bit_pay_clients", force: :cascade do |t|
+    t.string   "api_uri",      limit: 255
+    t.string   "pem",          limit: 255
+    t.string   "facade",       limit: 255, default: "merchant"
+    t.integer  "lock_version", limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
+
+  create_table "bit_pay_invoices", force: :cascade do |t|
+    t.string   "bitpay_id",       limit: 255
+    t.string   "url",             limit: 255
     t.string   "pos_data",        limit: 100
-    t.string   "state",           limit: 10,                           default: "new", null: false
-    t.decimal  "price",                       precision: 10, scale: 0,                 null: false
-    t.string   "currency",        limit: 3,                                            null: false
+    t.string   "state",           limit: 10,                 default: "new", null: false
+    t.decimal  "price",                       precision: 10,                 null: false
+    t.string   "currency",        limit: 3,                                  null: false
     t.string   "order_id",        limit: 100
     t.string   "item_desc",       limit: 100
     t.string   "item_code",       limit: 100
-    t.boolean  "physical",                                             default: false, null: false
+    t.boolean  "physical",        limit: 1,                  default: false, null: false
     t.string   "buyer_name",      limit: 100
     t.string   "buyer_address_1", limit: 100
     t.string   "buyer_address_2", limit: 100
@@ -61,88 +70,88 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.string   "buyer_country",   limit: 100
     t.string   "buyer_email",     limit: 100
     t.string   "buyer_phone",     limit: 100
-    t.decimal  "btc_price",                   precision: 10, scale: 0
+    t.decimal  "btc_price",                   precision: 10
     t.datetime "invoice_time"
     t.datetime "expiration_time"
     t.datetime "current_time"
   end
 
-  create_table "bit_pay_rates", force: true do |t|
-    t.string  "name"
+  create_table "bit_pay_rates", force: :cascade do |t|
+    t.string  "name", limit: 255
     t.string  "code", limit: 3
-    t.decimal "rate",           precision: 10, scale: 0
+    t.decimal "rate",             precision: 10
   end
 
-  create_table "cart_items", force: true do |t|
-    t.integer "cart_id",                  null: false
+  create_table "cart_items", force: :cascade do |t|
+    t.integer "cart_id",      limit: 4,     null: false
     t.float   "proportion",   limit: 24
-    t.integer "item_id",                  null: false
-    t.string  "item_type",                null: false
-    t.text    "reason"
+    t.integer "item_id",      limit: 4,     null: false
+    t.string  "item_type",    limit: 255,   null: false
+    t.text    "reason",       limit: 65535
     t.string  "short_reason", limit: 140
-    t.text    "message"
+    t.text    "message",      limit: 65535
   end
 
   add_index "cart_items", ["cart_id", "item_type", "item_id"], name: "index_cart_items_on_cart_id_and_item_type_and_item_id", unique: true, using: :btree
   add_index "cart_items", ["item_type", "item_id"], name: "index_cart_items_on_item_type_and_item_id", using: :btree
 
-  create_table "carts", force: true do |t|
-    t.integer  "owner_id"
-    t.string   "state"
-    t.integer  "cart_items_count", default: 0
-    t.integer  "lock_version"
+  create_table "carts", force: :cascade do |t|
+    t.integer  "owner_id",         limit: 4
+    t.string   "state",            limit: 255
+    t.integer  "cart_items_count", limit: 4,     default: 0
+    t.integer  "lock_version",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "owner_type"
-    t.string   "name"
-    t.text     "reason"
-    t.text     "short_reason"
+    t.string   "owner_type",       limit: 255
+    t.string   "name",             limit: 255
+    t.text     "reason",           limit: 65535
+    t.text     "short_reason",     limit: 65535
   end
 
   add_index "carts", ["owner_id", "owner_type", "name"], name: "index_carts_on_owner_id_and_owner_type_and_name", using: :btree
   add_index "carts", ["state"], name: "index_carts_on_state", using: :btree
 
-  create_table "committees", force: true do |t|
-    t.integer  "legal_committee_id"
-    t.string   "legal_committee_type"
-    t.string   "jurisdiction",                               null: false
-    t.string   "acronym"
-    t.string   "short_name"
-    t.string   "full_name",                                  null: false
-    t.string   "type"
-    t.string   "legal_id"
-    t.string   "corporation_acronym"
-    t.string   "corporation_full_name"
-    t.string   "corporation_type"
-    t.string   "corporation_ein"
-    t.string   "contact_name"
-    t.string   "contact_title"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "url"
-    t.string   "party"
-    t.string   "address"
-    t.string   "paypal_email"
-    t.string   "status"
-    t.text     "notes"
-    t.boolean  "foreign_contributions_okay", default: false
-    t.integer  "lock_version"
+  create_table "committees", force: :cascade do |t|
+    t.integer  "legal_committee_id",         limit: 4
+    t.string   "legal_committee_type",       limit: 255
+    t.string   "jurisdiction",               limit: 255,                   null: false
+    t.string   "acronym",                    limit: 255
+    t.string   "short_name",                 limit: 255
+    t.string   "full_name",                  limit: 255,                   null: false
+    t.string   "type",                       limit: 255
+    t.string   "legal_id",                   limit: 255
+    t.string   "corporation_acronym",        limit: 255
+    t.string   "corporation_full_name",      limit: 255
+    t.string   "corporation_type",           limit: 255
+    t.string   "corporation_ein",            limit: 255
+    t.string   "contact_name",               limit: 255
+    t.string   "contact_title",              limit: 255
+    t.string   "email",                      limit: 255
+    t.string   "phone",                      limit: 255
+    t.string   "url",                        limit: 255
+    t.string   "party",                      limit: 255
+    t.string   "address",                    limit: 255
+    t.string   "paypal_email",               limit: 255
+    t.string   "status",                     limit: 255
+    t.text     "notes",                      limit: 65535
+    t.boolean  "foreign_contributions_okay", limit: 1,     default: false
+    t.integer  "lock_version",               limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "death_master_files", force: true do |t|
-    t.string   "social_security_number"
-    t.string   "last_name"
-    t.string   "name_suffix"
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "verify_proof_code"
+  create_table "death_master_files", force: :cascade do |t|
+    t.string   "social_security_number",   limit: 255
+    t.string   "last_name",                limit: 255
+    t.string   "name_suffix",              limit: 255
+    t.string   "first_name",               limit: 255
+    t.string   "middle_name",              limit: 255
+    t.string   "verify_proof_code",        limit: 255
     t.date     "date_of_death"
     t.date     "date_of_birth"
-    t.string   "state_of_residence"
-    t.string   "last_known_zip_residence"
-    t.string   "last_known_zip_payment"
+    t.string   "state_of_residence",       limit: 255
+    t.string   "last_known_zip_residence", limit: 255
+    t.string   "last_known_zip_payment",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "as_of"
@@ -151,14 +160,14 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "death_master_files", ["as_of"], name: "idx_as_of", using: :btree
   add_index "death_master_files", ["social_security_number"], name: "idx_ssn", unique: true, using: :btree
 
-  create_table "emails", force: true do |t|
-    t.string   "from_address",                        null: false
-    t.string   "reply_to_address"
-    t.string   "subject"
-    t.text     "to_address"
-    t.text     "cc_address"
-    t.text     "bcc_address"
-    t.text     "content",          limit: 2147483647
+  create_table "emails", force: :cascade do |t|
+    t.string   "from_address",     limit: 255,        null: false
+    t.string   "reply_to_address", limit: 255
+    t.string   "subject",          limit: 255
+    t.text     "to_address",       limit: 65535
+    t.text     "cc_address",       limit: 65535
+    t.text     "bcc_address",      limit: 65535
+    t.text     "content",          limit: 4294967295
     t.datetime "sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -168,7 +177,7 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "emails", ["from_address", "subject"], name: "index_emails_on_from_address_and_subject", using: :btree
   add_index "emails", ["sent_at"], name: "index_emails_on_sent_at", using: :btree
 
-  create_table "fec_candidates", force: true do |t|
+  create_table "fec_candidates", force: :cascade do |t|
     t.string   "fec_id",                       limit: 9,              null: false
     t.string   "name",                         limit: 38
     t.string   "party",                        limit: 3
@@ -183,8 +192,8 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.string   "principal_campaign_committee", limit: 9
     t.string   "year",                         limit: 2
     t.string   "district",                     limit: 2
-    t.integer  "last_update_year"
-    t.integer  "lock_version",                            default: 0
+    t.integer  "last_update_year",             limit: 4
+    t.integer  "lock_version",                 limit: 4,  default: 0
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
   end
@@ -201,7 +210,7 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_candidates", ["updated_at"], name: "index_fec_candidates_on_updated_at", using: :btree
   add_index "fec_candidates", ["year"], name: "index_fec_candidates_on_year", using: :btree
 
-  create_table "fec_committees", force: true do |t|
+  create_table "fec_committees", force: :cascade do |t|
     t.string   "fec_id",                      limit: 9,              null: false
     t.string   "name",                        limit: 90,             null: false
     t.string   "treasurer_name",              limit: 38
@@ -217,8 +226,8 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.string   "interest_group_category",     limit: 1
     t.string   "connected_organization_name", limit: 38
     t.string   "candidate_id",                limit: 9
-    t.integer  "last_update_year"
-    t.integer  "lock_version",                           default: 0
+    t.integer  "last_update_year",            limit: 4
+    t.integer  "lock_version",                limit: 4,  default: 0
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
   end
@@ -234,10 +243,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_committees", ["treasurer_name"], name: "index_fec_committees_on_treasurer_name", using: :btree
   add_index "fec_committees", ["updated_at"], name: "index_fec_committees_on_updated_at", using: :btree
 
-  create_table "fec_filing_f1", force: true do |t|
-    t.integer  "fec_record_number",                                        null: false, unsigned: true
-    t.integer  "row_number",                                               null: false, unsigned: true
-    t.integer  "lock_version",                               default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f1", force: :cascade do |t|
+    t.integer  "fec_record_number",              limit: 4,                 null: false, unsigned: true
+    t.integer  "row_number",                     limit: 4,                 null: false, unsigned: true
+    t.integer  "lock_version",                   limit: 4,   default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                      limit: 8
@@ -363,10 +372,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f1", ["signature_name"], name: "index_fec_filing_f1_on_signature_name", using: :btree
   add_index "fec_filing_f1", ["treasurer_name"], name: "index_fec_filing_f1_on_treasurer_name", using: :btree
 
-  create_table "fec_filing_f13", force: true do |t|
-    t.integer  "fec_record_number",                                                            null: false, unsigned: true
-    t.integer  "row_number",                                                                   null: false, unsigned: true
-    t.integer  "lock_version",                                                   default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f13", force: :cascade do |t|
+    t.integer  "fec_record_number",         limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",              limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -398,10 +407,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f13", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f13", ["filer_committee_id_number"], name: "index_fec_filing_f13_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f132", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f132", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -433,10 +442,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f132", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f132", ["filer_committee_id_number"], name: "index_fec_filing_f132_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f133", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f133", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -467,10 +476,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f133", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f133", ["filer_committee_id_number"], name: "index_fec_filing_f133_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f1m", force: true do |t|
-    t.integer  "fec_record_number",                                            null: false, unsigned: true
-    t.integer  "row_number",                                                   null: false, unsigned: true
-    t.integer  "lock_version",                                   default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f1m", force: :cascade do |t|
+    t.integer  "fec_record_number",                  limit: 4,                 null: false, unsigned: true
+    t.integer  "row_number",                         limit: 4,                 null: false, unsigned: true
+    t.integer  "lock_version",                       limit: 4,   default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                          limit: 8
@@ -574,10 +583,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f1m", ["third_candidate_third_name"], name: "index_fec_filing_f1m_on_third_candidate_third_name", using: :btree
   add_index "fec_filing_f1m", ["treasurer_name"], name: "index_fec_filing_f1m_on_treasurer_name", using: :btree
 
-  create_table "fec_filing_f1s", force: true do |t|
-    t.integer  "fec_record_number",                                                    null: false, unsigned: true
-    t.integer  "row_number",                                                           null: false, unsigned: true
-    t.integer  "lock_version",                                           default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f1s", force: :cascade do |t|
+    t.integer  "fec_record_number",                          limit: 4,                 null: false, unsigned: true
+    t.integer  "row_number",                                 limit: 4,                 null: false, unsigned: true
+    t.integer  "lock_version",                               limit: 4,   default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                  limit: 8
@@ -628,10 +637,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f1s", ["joint_fund_participant_committee_id_number"], name: "index_fec_filing_f1s_on_jfp_cid", using: :btree
   add_index "fec_filing_f1s", ["joint_fund_participant_committee_name"], name: "index_fec_filing_f1s_on_jfp_cn", using: :btree
 
-  create_table "fec_filing_f2", force: true do |t|
-    t.integer  "fec_record_number",                                                                  null: false, unsigned: true
-    t.integer  "row_number",                                                                         null: false, unsigned: true
-    t.integer  "lock_version",                                                         default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f2", force: :cascade do |t|
+    t.integer  "fec_record_number",               limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                      limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                    limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                       limit: 8
@@ -650,7 +659,7 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.string   "candidate_party_code",            limit: 3
     t.string   "candidate_office",                limit: 1
     t.string   "candidate_district",              limit: 2
-    t.integer  "election_year",                                                                                   unsigned: true
+    t.integer  "election_year",                   limit: 4,                                                       unsigned: true
     t.string   "committee_id_number",             limit: 9
     t.string   "committee_name",                  limit: 200
     t.string   "committee_street_1",              limit: 34
@@ -687,10 +696,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f2", ["committee_name"], name: "index_fec_filing_f2_on_committee_name", using: :btree
   add_index "fec_filing_f2", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
 
-  create_table "fec_filing_f24", force: true do |t|
-    t.integer  "fec_record_number",                                   null: false, unsigned: true
-    t.integer  "row_number",                                          null: false, unsigned: true
-    t.integer  "lock_version",                          default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f24", force: :cascade do |t|
+    t.integer  "fec_record_number",         limit: 4,                 null: false, unsigned: true
+    t.integer  "row_number",                limit: 4,                 null: false, unsigned: true
+    t.integer  "lock_version",              limit: 4,   default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -716,10 +725,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f24", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f24", ["filer_committee_id_number"], name: "index_fec_filing_f24_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f3", force: true do |t|
-    t.integer  "fec_record_number",                                                                                    null: false, unsigned: true
-    t.integer  "row_number",                                                                                           null: false, unsigned: true
-    t.integer  "lock_version",                                                                           default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f3", force: :cascade do |t|
+    t.integer  "fec_record_number",                                 limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                                        limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                                      limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                         limit: 8
@@ -844,10 +853,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f3", ["filer_committee_id_number"], name: "index_fec_filing_f3_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f3", ["treasurer_name"], name: "index_fec_filing_f3_on_treasurer_name", using: :btree
 
-  create_table "fec_filing_f3l", force: true do |t|
-    t.integer  "fec_record_number",                                                                          null: false, unsigned: true
-    t.integer  "row_number",                                                                                 null: false, unsigned: true
-    t.integer  "lock_version",                                                                 default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f3l", force: :cascade do |t|
+    t.integer  "fec_record_number",                       limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                              limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                            limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                               limit: 8
@@ -883,10 +892,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f3l", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3l", ["filer_committee_id_number"], name: "index_fec_filing_f3l_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f3p", force: true do |t|
-    t.integer  "fec_record_number",                                                                                 null: false, unsigned: true
-    t.integer  "row_number",                                                                                        null: false, unsigned: true
-    t.integer  "lock_version",                                                                        default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f3p", force: :cascade do |t|
+    t.integer  "fec_record_number",                              limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                                     limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                                   limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                      limit: 8
@@ -1102,10 +1111,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f3p", ["filer_committee_id_number"], name: "index_fec_filing_f3p_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f3p", ["treasurer_name"], name: "index_fec_filing_f3p_on_treasurer_name", using: :btree
 
-  create_table "fec_filing_f3p31", force: true do |t|
-    t.integer  "fec_record_number",                                                                 null: false, unsigned: true
-    t.integer  "row_number",                                                                        null: false, unsigned: true
-    t.integer  "lock_version",                                                        default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f3p31", force: :cascade do |t|
+    t.integer  "fec_record_number",              limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                     limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                   limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                      limit: 8
@@ -1158,10 +1167,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f3p31", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3p31", ["filer_committee_id_number"], name: "index_fec_filing_f3p31_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f3ps", force: true do |t|
-    t.integer  "fec_record_number",                                                                           null: false, unsigned: true
-    t.integer  "row_number",                                                                                  null: false, unsigned: true
-    t.integer  "lock_version",                                                                  default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f3ps", force: :cascade do |t|
+    t.integer  "fec_record_number",                          limit: 4,                                        null: false, unsigned: true
+    t.integer  "row_number",                                 limit: 4,                                        null: false, unsigned: true
+    t.integer  "lock_version",                               limit: 4,                          default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                  limit: 8
@@ -1261,10 +1270,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f3ps", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3ps", ["filer_committee_id_number"], name: "index_fec_filing_f3ps_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f3s", force: true do |t|
-    t.integer  "fec_record_number",                                                                          null: false, unsigned: true
-    t.integer  "row_number",                                                                                 null: false, unsigned: true
-    t.integer  "lock_version",                                                                 default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f3s", force: :cascade do |t|
+    t.integer  "fec_record_number",                         limit: 4,                                        null: false, unsigned: true
+    t.integer  "row_number",                                limit: 4,                                        null: false, unsigned: true
+    t.integer  "lock_version",                              limit: 4,                          default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                 limit: 8
@@ -1308,10 +1317,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f3s", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3s", ["filer_committee_id_number"], name: "index_fec_filing_f3s_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f3x", force: true do |t|
-    t.integer  "fec_record_number",                                                                                     null: false, unsigned: true
-    t.integer  "row_number",                                                                                            null: false, unsigned: true
-    t.integer  "lock_version",                                                                            default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f3x", force: :cascade do |t|
+    t.integer  "fec_record_number",                                  limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                                         limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                                       limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                          limit: 8
@@ -1384,7 +1393,7 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.decimal  "col_a_total_offsets_to_expenditures",                            precision: 12, scale: 2
     t.decimal  "col_a_net_operating_expenditures",                               precision: 12, scale: 2
     t.decimal  "col_b_cash_on_hand_jan_1",                                       precision: 12, scale: 2
-    t.integer  "col_b_year",                                                                                                         unsigned: true
+    t.integer  "col_b_year",                                         limit: 4,                                                       unsigned: true
     t.decimal  "col_b_total_receipts",                                           precision: 12, scale: 2
     t.decimal  "col_b_subtotal",                                                 precision: 12, scale: 2
     t.decimal  "col_b_total_disbursements",                                      precision: 12, scale: 2
@@ -1438,11 +1447,11 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f3x", ["filer_committee_id_number"], name: "index_fec_filing_f3x_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f3x", ["treasurer_name"], name: "index_fec_filing_f3x_on_treasurer_name", using: :btree
 
-  create_table "fec_filing_f3z", force: true do |t|
+  create_table "fec_filing_f3z", force: :cascade do |t|
     t.string   "fec_record_type",                         limit: 1,                            default: "C"
-    t.integer  "fec_record_number",                                                                          null: false, unsigned: true
-    t.integer  "row_number",                                                                                 null: false, unsigned: true
-    t.integer  "lock_version",                                                                 default: 0,   null: false, unsigned: true
+    t.integer  "fec_record_number",                       limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                              limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                            limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                               limit: 8
@@ -1488,10 +1497,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f3z", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f3z", ["filer_committee_id_number"], name: "index_fec_filing_f3z_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f4", force: true do |t|
-    t.integer  "fec_record_number",                                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f4", force: :cascade do |t|
+    t.integer  "fec_record_number",                             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                     limit: 8
@@ -1551,8 +1560,8 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.decimal  "col_a_other_disbursements_itemized",                        precision: 12, scale: 2
     t.decimal  "col_a_other_disbursements_unitemized",                      precision: 12, scale: 2
     t.decimal  "col_a_other_disbursements_subtotal",                        precision: 12, scale: 2
-    t.integer  "col_b_cash_on_hand_beginning_year",                                                                             unsigned: true
-    t.integer  "col_b_beginning_year",                                                                                          unsigned: true
+    t.integer  "col_b_cash_on_hand_beginning_year",             limit: 4,                                                       unsigned: true
+    t.integer  "col_b_beginning_year",                          limit: 4,                                                       unsigned: true
     t.decimal  "col_b_total_receipts",                                      precision: 12, scale: 2
     t.decimal  "col_b_subtotal",                                            precision: 12, scale: 2
     t.decimal  "col_b_total_disbursements",                                 precision: 12, scale: 2
@@ -1582,10 +1591,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f4", ["filer_committee_id_number"], name: "index_fec_filing_f4_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f4", ["treasurer_name"], name: "index_fec_filing_f4_on_treasurer_name", using: :btree
 
-  create_table "fec_filing_f5", force: true do |t|
-    t.integer  "fec_record_number",                                                                 null: false, unsigned: true
-    t.integer  "row_number",                                                                        null: false, unsigned: true
-    t.integer  "lock_version",                                                        default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f5", force: :cascade do |t|
+    t.integer  "fec_record_number",              limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                     limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                   limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                      limit: 8
@@ -1637,10 +1646,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f5", ["organization_name"], name: "index_fec_filing_f5_on_organization_name", using: :btree
   add_index "fec_filing_f5", ["person_completing_name"], name: "index_fec_filing_f5_on_person_completing_name", using: :btree
 
-  create_table "fec_filing_f56", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f56", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -1685,10 +1694,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f56", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f56", ["filer_committee_id_number"], name: "index_fec_filing_f56_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f57", force: true do |t|
-    t.integer  "fec_record_number",                                                                     null: false, unsigned: true
-    t.integer  "row_number",                                                                            null: false, unsigned: true
-    t.integer  "lock_version",                                                            default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f57", force: :cascade do |t|
+    t.integer  "fec_record_number",                  limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                         limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                       limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                          limit: 8
@@ -1746,10 +1755,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f57", ["payee_name"], name: "index_fec_filing_f57_on_payee_name", using: :btree
   add_index "fec_filing_f57", ["payee_organization_name"], name: "index_fec_filing_f57_on_payee_organization_name", using: :btree
 
-  create_table "fec_filing_f6", force: true do |t|
-    t.integer  "fec_record_number",                                   null: false, unsigned: true
-    t.integer  "row_number",                                          null: false, unsigned: true
-    t.integer  "lock_version",                          default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f6", force: :cascade do |t|
+    t.integer  "fec_record_number",         limit: 4,                 null: false, unsigned: true
+    t.integer  "row_number",                limit: 4,                 null: false, unsigned: true
+    t.integer  "lock_version",              limit: 4,   default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -1786,10 +1795,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f6", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f6", ["filer_committee_id_number"], name: "index_fec_filing_f6_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f65", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f65", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -1834,10 +1843,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f65", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f65", ["filer_committee_id_number"], name: "index_fec_filing_f65_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f7", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f7", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -1871,10 +1880,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f7", ["organization_name"], name: "index_fec_filing_f7_on_organization_name", using: :btree
   add_index "fec_filing_f7", ["person_designated_name"], name: "index_fec_filing_f7_on_person_designated_name", using: :btree
 
-  create_table "fec_filing_f76", force: true do |t|
-    t.integer  "fec_record_number",                                                                 null: false, unsigned: true
-    t.integer  "row_number",                                                                        null: false, unsigned: true
-    t.integer  "lock_version",                                                        default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f76", force: :cascade do |t|
+    t.integer  "fec_record_number",              limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                     limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                   limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                      limit: 8
@@ -1906,10 +1915,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f76", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f76", ["filer_committee_id_number"], name: "index_fec_filing_f76_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f9", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f9", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -1964,10 +1973,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f9", ["filer_committee_id_number"], name: "index_fec_filing_f9_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f9", ["organization_name"], name: "index_fec_filing_f9_on_organization_name", using: :btree
 
-  create_table "fec_filing_f91", force: true do |t|
-    t.integer  "fec_record_number",                                  null: false, unsigned: true
-    t.integer  "row_number",                                         null: false, unsigned: true
-    t.integer  "lock_version",                         default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f91", force: :cascade do |t|
+    t.integer  "fec_record_number",         limit: 4,                null: false, unsigned: true
+    t.integer  "row_number",                limit: 4,                null: false, unsigned: true
+    t.integer  "lock_version",              limit: 4,  default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -1992,10 +2001,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f91", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f91", ["filer_committee_id_number"], name: "index_fec_filing_f91_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f92", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f92", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2027,10 +2036,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f92", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f92", ["filer_committee_id_number"], name: "index_fec_filing_f92_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f93", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f93", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2066,10 +2075,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f93", ["filer_committee_id_number"], name: "index_fec_filing_f93_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f93", ["payee_organization_name"], name: "index_fec_filing_f93_on_payee_organization_name", using: :btree
 
-  create_table "fec_filing_f94", force: true do |t|
-    t.integer  "fec_record_number",                                       null: false, unsigned: true
-    t.integer  "row_number",                                              null: false, unsigned: true
-    t.integer  "lock_version",                              default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f94", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                 null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                 null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,   default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2097,10 +2106,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f94", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_f94", ["filer_committee_id_number"], name: "index_fec_filing_f94_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_f99", force: true do |t|
-    t.integer  "fec_record_number",                                   null: false, unsigned: true
-    t.integer  "row_number",                                          null: false, unsigned: true
-    t.integer  "lock_version",                          default: 0,   null: false, unsigned: true
+  create_table "fec_filing_f99", force: :cascade do |t|
+    t.integer  "fec_record_number",         limit: 4,                   null: false, unsigned: true
+    t.integer  "row_number",                limit: 4,                   null: false, unsigned: true
+    t.integer  "lock_version",              limit: 4,     default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -2118,9 +2127,9 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.string   "treasurer_suffix",          limit: 10
     t.date     "date_signed"
     t.string   "text_code",                 limit: 3
-    t.text     "text"
+    t.text     "text",                      limit: 65535
     t.string   "treasurer_name",            limit: 200
-    t.string   "fec_record_type",           limit: 1,   default: "C"
+    t.string   "fec_record_type",           limit: 1,     default: "C"
   end
 
   add_index "fec_filing_f99", ["committee_name"], name: "index_fec_filing_f99_on_committee_name", using: :btree
@@ -2128,10 +2137,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_f99", ["filer_committee_id_number"], name: "index_fec_filing_f99_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_f99", ["treasurer_name"], name: "index_fec_filing_f99_on_treasurer_name", using: :btree
 
-  create_table "fec_filing_h1", force: true do |t|
-    t.integer  "fec_record_number",                                                                                        null: false, unsigned: true
-    t.integer  "row_number",                                                                                               null: false, unsigned: true
-    t.integer  "lock_version",                                                                               default: 0,   null: false, unsigned: true
+  create_table "fec_filing_h1", force: :cascade do |t|
+    t.integer  "fec_record_number",                                      limit: 4,                                         null: false, unsigned: true
+    t.integer  "row_number",                                             limit: 4,                                         null: false, unsigned: true
+    t.integer  "lock_version",                                           limit: 4,                           default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                              limit: 8
@@ -2157,28 +2166,28 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.decimal  "actual_direct_candidate_support_federal",                           precision: 12, scale: 2
     t.decimal  "actual_direct_candidate_support_nonfederal",                        precision: 12, scale: 2
     t.decimal  "actual_direct_candidate_support_federal_percent",                   precision: 8,  scale: 5
-    t.integer  "ballot_presidential"
-    t.integer  "ballot_senate"
-    t.integer  "ballot_house"
-    t.integer  "subtotal_federal"
-    t.integer  "ballot_governor"
-    t.integer  "ballot_other_statewide"
-    t.integer  "ballot_state_senate"
-    t.integer  "ballot_state_representative"
-    t.integer  "ballot_local_candidates"
-    t.integer  "extra_nonfederal_point"
-    t.integer  "subtotal"
-    t.integer  "total_points"
+    t.integer  "ballot_presidential",                                    limit: 4
+    t.integer  "ballot_senate",                                          limit: 4
+    t.integer  "ballot_house",                                           limit: 4
+    t.integer  "subtotal_federal",                                       limit: 4
+    t.integer  "ballot_governor",                                        limit: 4
+    t.integer  "ballot_other_statewide",                                 limit: 4
+    t.integer  "ballot_state_senate",                                    limit: 4
+    t.integer  "ballot_state_representative",                            limit: 4
+    t.integer  "ballot_local_candidates",                                limit: 4
+    t.integer  "extra_nonfederal_point",                                 limit: 4
+    t.integer  "subtotal",                                               limit: 4
+    t.integer  "total_points",                                           limit: 4
     t.string   "fec_record_type",                                        limit: 1,                           default: "C"
   end
 
   add_index "fec_filing_h1", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_h1", ["filer_committee_id_number"], name: "index_fec_filing_h1_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_h2", force: true do |t|
-    t.integer  "fec_record_number",                                                          null: false, unsigned: true
-    t.integer  "row_number",                                                                 null: false, unsigned: true
-    t.integer  "lock_version",                                                 default: 0,   null: false, unsigned: true
+  create_table "fec_filing_h2", force: :cascade do |t|
+    t.integer  "fec_record_number",         limit: 4,                                        null: false, unsigned: true
+    t.integer  "row_number",                limit: 4,                                        null: false, unsigned: true
+    t.integer  "lock_version",              limit: 4,                          default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -2197,10 +2206,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_h2", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_h2", ["filer_committee_id_number"], name: "index_fec_filing_h2_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_h3", force: true do |t|
-    t.integer  "fec_record_number",                                                               null: false, unsigned: true
-    t.integer  "row_number",                                                                      null: false, unsigned: true
-    t.integer  "lock_version",                                                      default: 0,   null: false, unsigned: true
+  create_table "fec_filing_h3", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                         null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                         null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                           default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2219,10 +2228,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_h3", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_h3", ["filer_committee_id_number"], name: "index_fec_filing_h3_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_h4", force: true do |t|
-    t.integer  "fec_record_number",                                                                       null: false, unsigned: true
-    t.integer  "row_number",                                                                              null: false, unsigned: true
-    t.integer  "lock_version",                                                              default: 0,   null: false, unsigned: true
+  create_table "fec_filing_h4", force: :cascade do |t|
+    t.integer  "fec_record_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                           limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                         limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                            limit: 8
@@ -2285,10 +2294,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_h4", ["payee_name"], name: "index_fec_filing_h4_on_payee_name", using: :btree
   add_index "fec_filing_h4", ["payee_organization_name"], name: "index_fec_filing_h4_on_payee_organization_name", using: :btree
 
-  create_table "fec_filing_h5", force: true do |t|
-    t.integer  "fec_record_number",                                                           null: false, unsigned: true
-    t.integer  "row_number",                                                                  null: false, unsigned: true
-    t.integer  "lock_version",                                                  default: 0,   null: false, unsigned: true
+  create_table "fec_filing_h5", force: :cascade do |t|
+    t.integer  "fec_record_number",         limit: 4,                                         null: false, unsigned: true
+    t.integer  "row_number",                limit: 4,                                         null: false, unsigned: true
+    t.integer  "lock_version",              limit: 4,                           default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                 limit: 8
@@ -2307,10 +2316,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_h5", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_h5", ["filer_committee_id_number"], name: "index_fec_filing_h5_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_h6", force: true do |t|
-    t.integer  "fec_record_number",                                                                  null: false, unsigned: true
-    t.integer  "row_number",                                                                         null: false, unsigned: true
-    t.integer  "lock_version",                                                         default: 0,   null: false, unsigned: true
+  create_table "fec_filing_h6", force: :cascade do |t|
+    t.integer  "fec_record_number",               limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                      limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                    limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                       limit: 8
@@ -2371,10 +2380,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_h6", ["payee_name"], name: "index_fec_filing_h6_on_payee_name", using: :btree
   add_index "fec_filing_h6", ["payee_organization_name"], name: "index_fec_filing_h6_on_payee_organization_name", using: :btree
 
-  create_table "fec_filing_hdr", force: true do |t|
-    t.integer  "fec_record_number",                           null: false, unsigned: true
-    t.integer  "row_number",                                  null: false, unsigned: true
-    t.integer  "lock_version",                  default: 0,   null: false, unsigned: true
+  create_table "fec_filing_hdr", force: :cascade do |t|
+    t.integer  "fec_record_number", limit: 4,                 null: false, unsigned: true
+    t.integer  "row_number",        limit: 4,                 null: false, unsigned: true
+    t.integer  "lock_version",      limit: 4,   default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "record_type",       limit: 3
@@ -2383,7 +2392,7 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.string   "soft_name",         limit: 90
     t.string   "soft_ver",          limit: 16
     t.string   "report_id",         limit: 16
-    t.integer  "report_number",                                            unsigned: true
+    t.integer  "report_number",     limit: 4,                              unsigned: true
     t.string   "comment",           limit: 200
     t.string   "name_delim",        limit: 1
     t.string   "fec_record_type",   limit: 1,   default: "C"
@@ -2392,10 +2401,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_hdr", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_hdr", ["report_id"], name: "index_fec_filing_hdr_on_report_id", using: :btree
 
-  create_table "fec_filing_sa", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_sa", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2458,11 +2467,11 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_sa", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_sa", ["filer_committee_id_number"], name: "index_fec_filing_sa_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_sa3l", force: true do |t|
+  create_table "fec_filing_sa3l", force: :cascade do |t|
     t.string   "fec_record_type",                       limit: 1,                            default: "C"
-    t.integer  "fec_record_number",                                                                        null: false, unsigned: true
-    t.integer  "row_number",                                                                               null: false, unsigned: true
-    t.integer  "lock_version",                                                               default: 0,   null: false, unsigned: true
+    t.integer  "fec_record_number",                     limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                            limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                          limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                             limit: 8
@@ -2519,10 +2528,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_sa3l", ["filer_committee_id_number"], name: "index_fec_filing_sa3l_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_sa3l", ["lobbyist_registrant_organization_name"], name: "index_fec_filing_sa3l_on_lobbyist_registrant_organization_name", using: :btree
 
-  create_table "fec_filing_sb", force: true do |t|
-    t.integer  "fec_record_number",                                                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_sb", force: :cascade do |t|
+    t.integer  "fec_record_number",                                             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                                                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                                                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                                                     limit: 8
@@ -2585,10 +2594,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_sb", ["payee_name"], name: "index_fec_filing_sb_on_payee_name", using: :btree
   add_index "fec_filing_sb", ["payee_organization_name"], name: "index_fec_filing_sb_on_payee_organization_name", using: :btree
 
-  create_table "fec_filing_sc", force: true do |t|
-    t.integer  "fec_record_number",                                                               null: false, unsigned: true
-    t.integer  "row_number",                                                                      null: false, unsigned: true
-    t.integer  "lock_version",                                                      default: 0,   null: false, unsigned: true
+  create_table "fec_filing_sc", force: :cascade do |t|
+    t.integer  "fec_record_number",            limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                   limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                 limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                    limit: 8
@@ -2612,7 +2621,7 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.decimal  "loan_amount_original",                     precision: 12, scale: 2
     t.decimal  "loan_payment_to_date",                     precision: 12, scale: 2
     t.decimal  "loan_balance",                             precision: 12, scale: 2
-    t.integer  "loan_incurred_date_terms"
+    t.integer  "loan_incurred_date_terms",     limit: 4
     t.string   "loan_due_date_terms",          limit: 15
     t.string   "loan_interest_rate_terms",     limit: 15
     t.string   "secured",                      limit: 1
@@ -2621,7 +2630,7 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.string   "lender_candidate_id_number",   limit: 9
     t.string   "lender_candidate_last_name",   limit: 30
     t.string   "lender_candidate_first_name",  limit: 20
-    t.string   "lender_candidate_middle_name"
+    t.string   "lender_candidate_middle_name", limit: 255
     t.string   "lender_candidate_prefix",      limit: 10
     t.string   "lender_candidate_suffix",      limit: 10
     t.string   "lender_candidate_office",      limit: 1
@@ -2642,10 +2651,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_sc", ["lender_name"], name: "index_fec_filing_sc_on_lender_name", using: :btree
   add_index "fec_filing_sc", ["lender_organization_name"], name: "index_fec_filing_sc_on_lender_organization_name", using: :btree
 
-  create_table "fec_filing_sc1", force: true do |t|
-    t.integer  "fec_record_number",                                                                      null: false, unsigned: true
-    t.integer  "row_number",                                                                             null: false, unsigned: true
-    t.integer  "lock_version",                                                             default: 0,   null: false, unsigned: true
+  create_table "fec_filing_sc1", force: :cascade do |t|
+    t.integer  "fec_record_number",                   limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                          limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                        limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                           limit: 8
@@ -2681,7 +2690,7 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.string   "state",                               limit: 2
     t.string   "zip_code",                            limit: 9
     t.date     "deposit_acct_auth_date_presidential"
-    t.string   "f_basis_of_loan_description"
+    t.string   "f_basis_of_loan_description",         limit: 255
     t.string   "treasurer_last_name",                 limit: 30
     t.string   "treasurer_first_name",                limit: 20
     t.string   "treasurer_middle_name",               limit: 20
@@ -2707,10 +2716,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_sc1", ["lender_organization_name"], name: "index_fec_filing_sc1_on_lender_organization_name", using: :btree
   add_index "fec_filing_sc1", ["treasurer_name"], name: "index_fec_filing_sc1_on_treasurer_name", using: :btree
 
-  create_table "fec_filing_sc2", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_sc2", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2738,10 +2747,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_sc2", ["filer_committee_id_number"], name: "index_fec_filing_sc2_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_sc2", ["guarantor_name"], name: "index_fec_filing_sc2_on_guarantor_name", using: :btree
 
-  create_table "fec_filing_sd", force: true do |t|
-    t.integer  "fec_record_number",                                                                null: false, unsigned: true
-    t.integer  "row_number",                                                                       null: false, unsigned: true
-    t.integer  "lock_version",                                                       default: 0,   null: false, unsigned: true
+  create_table "fec_filing_sd", force: :cascade do |t|
+    t.integer  "fec_record_number",             limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                    limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                  limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                     limit: 8
@@ -2789,10 +2798,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_sd", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_sd", ["filer_committee_id_number"], name: "index_fec_filing_sd_on_filer_committee_id_number", using: :btree
 
-  create_table "fec_filing_se", force: true do |t|
-    t.integer  "fec_record_number",                                                                     null: false, unsigned: true
-    t.integer  "row_number",                                                                            null: false, unsigned: true
-    t.integer  "lock_version",                                                            default: 0,   null: false, unsigned: true
+  create_table "fec_filing_se", force: :cascade do |t|
+    t.integer  "fec_record_number",                  limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                         limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                       limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                          limit: 8
@@ -2864,10 +2873,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_se", ["payee_name"], name: "index_fec_filing_se_on_payee_name", using: :btree
   add_index "fec_filing_se", ["payee_organization_name"], name: "index_fec_filing_se_on_payee_organization_name", using: :btree
 
-  create_table "fec_filing_sf", force: true do |t|
-    t.integer  "fec_record_number",                                                                  null: false, unsigned: true
-    t.integer  "row_number",                                                                         null: false, unsigned: true
-    t.integer  "lock_version",                                                         default: 0,   null: false, unsigned: true
+  create_table "fec_filing_sf", force: :cascade do |t|
+    t.integer  "fec_record_number",               limit: 4,                                          null: false, unsigned: true
+    t.integer  "row_number",                      limit: 4,                                          null: false, unsigned: true
+    t.integer  "lock_version",                    limit: 4,                            default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                       limit: 8
@@ -2940,10 +2949,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_sf", ["subordinate_committee_id_number"], name: "index_fec_filing_sf_on_subordinate_committee_id_number", using: :btree
   add_index "fec_filing_sf", ["subordinate_committee_name"], name: "index_fec_filing_sf_on_subordinate_committee_name", using: :btree
 
-  create_table "fec_filing_sl", force: true do |t|
-    t.integer  "fec_record_number",                                                                        null: false, unsigned: true
-    t.integer  "row_number",                                                                               null: false, unsigned: true
-    t.integer  "lock_version",                                                               default: 0,   null: false, unsigned: true
+  create_table "fec_filing_sl", force: :cascade do |t|
+    t.integer  "fec_record_number",                      limit: 4,                                         null: false, unsigned: true
+    t.integer  "row_number",                             limit: 4,                                         null: false, unsigned: true
+    t.integer  "lock_version",                           limit: 4,                           default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                              limit: 8
@@ -2992,10 +3001,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "fec_filing_sl", ["filer_committee_id_number"], name: "index_fec_filing_sl_on_filer_committee_id_number", using: :btree
   add_index "fec_filing_sl", ["record_id_number"], name: "index_fec_filing_sl_on_record_id_number", using: :btree
 
-  create_table "fec_filing_text", force: true do |t|
-    t.integer  "fec_record_number",                                       null: false, unsigned: true
-    t.integer  "row_number",                                              null: false, unsigned: true
-    t.integer  "lock_version",                              default: 0,   null: false, unsigned: true
+  create_table "fec_filing_text", force: :cascade do |t|
+    t.integer  "fec_record_number",              limit: 4,                   null: false, unsigned: true
+    t.integer  "row_number",                     limit: 4,                   null: false, unsigned: true
+    t.integer  "lock_version",                   limit: 4,     default: 0,   null: false, unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "form_type",                      limit: 8
@@ -3004,18 +3013,18 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.string   "transaction_id_number",          limit: 20
     t.string   "back_reference_tran_id_number",  limit: 20
     t.string   "back_reference_sched_form_name", limit: 8
-    t.text     "text"
-    t.string   "fec_record_type",                limit: 1,  default: "C"
+    t.text     "text",                           limit: 65535
+    t.string   "fec_record_type",                limit: 1,     default: "C"
   end
 
   add_index "fec_filing_text", ["fec_record_type", "fec_record_number", "row_number"], name: "record_index", unique: true, using: :btree
   add_index "fec_filing_text", ["filer_committee_id_number"], name: "index_fec_filing_text_on_filer_committee_id_number", using: :btree
 
-  create_table "friendly_id_slugs", force: true do |t|
-    t.string   "slug",                      null: false
-    t.integer  "sluggable_id",              null: false
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",           limit: 255, null: false
+    t.integer  "sluggable_id",   limit: 4,   null: false
     t.string   "sluggable_type", limit: 50
-    t.string   "scope"
+    t.string   "scope",          limit: 255
     t.datetime "created_at"
   end
 
@@ -3024,27 +3033,27 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
-  create_table "identities", force: true do |t|
-    t.integer  "user_id"
-    t.string   "provider",                 null: false
-    t.string   "uid",                      null: false
-    t.string   "name"
-    t.string   "email"
-    t.string   "nickname"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "location"
-    t.text     "description"
-    t.string   "image"
-    t.string   "phone"
-    t.text     "urls"
-    t.string   "token"
-    t.string   "secret"
-    t.text     "raw_info"
-    t.integer  "lock_version", default: 0
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.string   "provider",     limit: 255,               null: false
+    t.string   "uid",          limit: 255,               null: false
+    t.string   "name",         limit: 255
+    t.string   "email",        limit: 255
+    t.string   "nickname",     limit: 255
+    t.string   "first_name",   limit: 255
+    t.string   "last_name",    limit: 255
+    t.string   "location",     limit: 255
+    t.text     "description",  limit: 65535
+    t.string   "image",        limit: 255
+    t.string   "phone",        limit: 255
+    t.text     "urls",         limit: 65535
+    t.string   "token",        limit: 255
+    t.string   "secret",       limit: 255
+    t.text     "raw_info",     limit: 65535
+    t.integer  "lock_version", limit: 4,     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "url"
+    t.string   "url",          limit: 255
   end
 
   add_index "identities", ["email"], name: "index_identities_on_email", using: :btree
@@ -3053,41 +3062,41 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "identities", ["provider", "uid"], name: "index_identities_on_provider_and_uid", unique: true, using: :btree
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
-  create_table "initiative_support", force: true do |t|
-    t.integer  "initiative_id",                 null: false
-    t.integer  "committee_id",                  null: false
-    t.boolean  "support"
-    t.boolean  "primary",       default: false
-    t.text     "statement"
-    t.string   "url"
-    t.integer  "lock_version"
+  create_table "initiative_support", force: :cascade do |t|
+    t.integer  "initiative_id", limit: 4,                     null: false
+    t.integer  "committee_id",  limit: 4,                     null: false
+    t.boolean  "support",       limit: 1
+    t.boolean  "primary",       limit: 1,     default: false
+    t.text     "statement",     limit: 65535
+    t.string   "url",           limit: 255
+    t.integer  "lock_version",  limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "initiatives", force: true do |t|
-    t.string   "jurisdiction",                    null: false
+  create_table "initiatives", force: :cascade do |t|
+    t.string   "jurisdiction",         limit: 255,   null: false
     t.date     "election_date"
     t.string   "election_type",        limit: 15
-    t.string   "status"
+    t.string   "status",               limit: 255
     t.string   "initiator_type",       limit: 30
     t.string   "initiative_type",      limit: 30
-    t.boolean  "indirect"
-    t.string   "initiative_name"
-    t.string   "proposition_name"
-    t.string   "title",                           null: false
-    t.string   "informal_title"
-    t.text     "short_summary"
-    t.text     "summary"
-    t.text     "analysis"
-    t.text     "text"
-    t.string   "wikipedia_url"
-    t.string   "ballotpedia_url"
+    t.boolean  "indirect",             limit: 1
+    t.string   "initiative_name",      limit: 255
+    t.string   "proposition_name",     limit: 255
+    t.string   "title",                limit: 255,   null: false
+    t.string   "informal_title",       limit: 255
+    t.text     "short_summary",        limit: 65535
+    t.text     "summary",              limit: 65535
+    t.text     "analysis",             limit: 65535
+    t.text     "text",                 limit: 65535
+    t.string   "wikipedia_url",        limit: 255
+    t.string   "ballotpedia_url",      limit: 255
     t.date     "filing_date"
     t.date     "summary_date"
     t.date     "circulation_deadline"
     t.date     "full_check_deadline"
-    t.integer  "lock_version"
+    t.integer  "lock_version",         limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3100,27 +3109,27 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "initiatives", ["status"], name: "index_initiatives_on_status", using: :btree
   add_index "initiatives", ["title"], name: "index_initiatives_on_title", using: :btree
 
-  create_table "legal_identities", force: true do |t|
-    t.boolean  "human",                   null: false
+  create_table "legal_identities", force: :cascade do |t|
+    t.boolean  "human",                   limit: 1, null: false
     t.date     "birthdate"
-    t.integer  "irs_id"
-    t.boolean  "govt_contractor"
-    t.boolean  "us_citizen_or_greencard"
-    t.integer  "lock_version"
+    t.integer  "irs_id",                  limit: 4
+    t.boolean  "govt_contractor",         limit: 1
+    t.boolean  "us_citizen_or_greencard", limit: 1
+    t.integer  "lock_version",            limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "legal_identities", ["irs_id"], name: "index_legal_identities_on_irs_id", unique: true, using: :btree
 
-  create_table "legal_name_usages", force: true do |t|
-    t.integer  "legal_name_id",     null: false
-    t.integer  "legal_identity_id", null: false
+  create_table "legal_name_usages", force: :cascade do |t|
+    t.integer  "legal_name_id",     limit: 4,   null: false
+    t.integer  "legal_identity_id", limit: 4,   null: false
     t.date     "from"
     t.date     "to"
-    t.string   "authority"
+    t.string   "authority",         limit: 255
     t.datetime "confirmed"
-    t.integer  "lock_version"
+    t.integer  "lock_version",      limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3128,77 +3137,77 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "legal_name_usages", ["legal_identity_id"], name: "index_legal_name_usages_on_legal_identity_id", using: :btree
   add_index "legal_name_usages", ["legal_name_id"], name: "index_legal_name_usages_on_legal_name_id", using: :btree
 
-  create_table "legal_names", force: true do |t|
-    t.string "full_name"
-    t.string "name_prefix"
-    t.string "first_name"
-    t.string "middle_name"
-    t.string "last_name"
-    t.string "name_suffix"
+  create_table "legal_names", force: :cascade do |t|
+    t.string "full_name",   limit: 255
+    t.string "name_prefix", limit: 255
+    t.string "first_name",  limit: 255
+    t.string "middle_name", limit: 255
+    t.string "last_name",   limit: 255
+    t.string "name_suffix", limit: 255
   end
 
   add_index "legal_names", ["full_name"], name: "index_legal_names_on_full_name", using: :btree
   add_index "legal_names", ["last_name", "first_name"], name: "index_legal_names_on_last_name_and_first_name", using: :btree
 
-  create_table "links", force: true do |t|
-    t.string   "url",                             null: false
-    t.integer  "duplicate_of_id"
-    t.integer  "lock_version"
+  create_table "links", force: :cascade do |t|
+    t.string   "url",             limit: 255,                 null: false
+    t.integer  "duplicate_of_id", limit: 4
+    t.integer  "lock_version",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "checked",         default: false, null: false
+    t.boolean  "checked",         limit: 1,   default: false, null: false
   end
 
   add_index "links", ["url", "duplicate_of_id"], name: "index_links_on_url_and_duplicate_of_id", using: :btree
   add_index "links", ["url"], name: "index_links_on_url", unique: true, using: :btree
 
-  create_table "ny_voters", force: true do |t|
-    t.string   "last_name"
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "name_suffix"
-    t.string   "residence_house_number"
-    t.string   "residence_fractional_number"
-    t.string   "residence_apartment"
-    t.string   "residence_pre_street_direction"
-    t.string   "residence_street_name"
-    t.string   "residence_post_street_direction"
-    t.string   "residence_city"
-    t.string   "residence_zip5"
-    t.string   "residence_zip4"
-    t.string   "mailing_address_1"
-    t.string   "mailing_address_2"
-    t.string   "mailing_address_3"
-    t.string   "mailing_address_4"
-    t.string   "dob"
-    t.string   "gender"
-    t.string   "enrollment"
-    t.string   "other_party"
-    t.integer  "county_code"
-    t.integer  "election_district"
-    t.integer  "legislative_district"
-    t.string   "town_city"
-    t.string   "ward"
-    t.integer  "congressional_district"
-    t.integer  "senate_district"
-    t.integer  "assembly_district"
-    t.string   "last_date_voted"
-    t.string   "last_year_voted"
-    t.string   "last_county_voted"
-    t.string   "last_registered_address"
-    t.string   "last_registered_name"
-    t.string   "county_voter_registration_number"
-    t.string   "application_date"
-    t.string   "application_source"
-    t.string   "id_required"
-    t.string   "id_verification_met"
-    t.string   "status"
-    t.string   "reason"
-    t.string   "inactive_date"
-    t.string   "purged_date"
-    t.string   "voter_id"
-    t.text     "voter_history"
-    t.integer  "lock_version"
+  create_table "ny_voters", force: :cascade do |t|
+    t.string   "last_name",                        limit: 255
+    t.string   "first_name",                       limit: 255
+    t.string   "middle_name",                      limit: 255
+    t.string   "name_suffix",                      limit: 255
+    t.string   "residence_house_number",           limit: 255
+    t.string   "residence_fractional_number",      limit: 255
+    t.string   "residence_apartment",              limit: 255
+    t.string   "residence_pre_street_direction",   limit: 255
+    t.string   "residence_street_name",            limit: 255
+    t.string   "residence_post_street_direction",  limit: 255
+    t.string   "residence_city",                   limit: 255
+    t.string   "residence_zip5",                   limit: 255
+    t.string   "residence_zip4",                   limit: 255
+    t.string   "mailing_address_1",                limit: 255
+    t.string   "mailing_address_2",                limit: 255
+    t.string   "mailing_address_3",                limit: 255
+    t.string   "mailing_address_4",                limit: 255
+    t.string   "dob",                              limit: 255
+    t.string   "gender",                           limit: 255
+    t.string   "enrollment",                       limit: 255
+    t.string   "other_party",                      limit: 255
+    t.integer  "county_code",                      limit: 4
+    t.integer  "election_district",                limit: 4
+    t.integer  "legislative_district",             limit: 4
+    t.string   "town_city",                        limit: 255
+    t.string   "ward",                             limit: 255
+    t.integer  "congressional_district",           limit: 4
+    t.integer  "senate_district",                  limit: 4
+    t.integer  "assembly_district",                limit: 4
+    t.string   "last_date_voted",                  limit: 255
+    t.string   "last_year_voted",                  limit: 255
+    t.string   "last_county_voted",                limit: 255
+    t.string   "last_registered_address",          limit: 255
+    t.string   "last_registered_name",             limit: 255
+    t.string   "county_voter_registration_number", limit: 255
+    t.string   "application_date",                 limit: 255
+    t.string   "application_source",               limit: 255
+    t.string   "id_required",                      limit: 255
+    t.string   "id_verification_met",              limit: 255
+    t.string   "status",                           limit: 255
+    t.string   "reason",                           limit: 255
+    t.string   "inactive_date",                    limit: 255
+    t.string   "purged_date",                      limit: 255
+    t.string   "voter_id",                         limit: 255
+    t.text     "voter_history",                    limit: 65535
+    t.integer  "lock_version",                     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3221,14 +3230,14 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "ny_voters", ["voter_id"], name: "index_ny_voters_on_voter_id", unique: true, using: :btree
   add_index "ny_voters", ["ward"], name: "index_ny_voters_on_ward", using: :btree
 
-  create_table "occupation_usages", force: true do |t|
-    t.integer  "employee_id",   null: false
-    t.integer  "employer_id"
-    t.integer  "occupation_id", null: false
+  create_table "occupation_usages", force: :cascade do |t|
+    t.integer  "employee_id",   limit: 4, null: false
+    t.integer  "employer_id",   limit: 4
+    t.integer  "occupation_id", limit: 4, null: false
     t.date     "from"
     t.date     "to"
     t.datetime "confirmed"
-    t.integer  "lock_version"
+    t.integer  "lock_version",  limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3236,44 +3245,44 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "occupation_usages", ["employee_id", "employer_id"], name: "index_occupation_usages_on_employee_id_and_employer_id", using: :btree
   add_index "occupation_usages", ["employer_id", "occupation_id"], name: "index_occupation_usages_on_employer_id_and_occupation_id", using: :btree
 
-  create_table "occupations", force: true do |t|
-    t.string "name", null: false
+  create_table "occupations", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
   end
 
   add_index "occupations", ["name"], name: "index_occupations_on_name", using: :btree
 
-  create_table "ofac_sdns", force: true do |t|
-    t.text     "name"
-    t.string   "sdn_type"
-    t.string   "program"
-    t.string   "title"
-    t.string   "vessel_call_sign"
-    t.string   "vessel_type"
-    t.string   "vessel_tonnage"
-    t.string   "gross_registered_tonnage"
-    t.string   "vessel_flag"
-    t.string   "vessel_owner"
-    t.text     "remarks"
-    t.text     "address"
-    t.string   "city"
-    t.string   "country"
-    t.string   "address_remarks"
-    t.string   "alternate_identity_type"
-    t.text     "alternate_identity_name"
-    t.string   "alternate_identity_remarks"
+  create_table "ofac_sdns", force: :cascade do |t|
+    t.text     "name",                       limit: 65535
+    t.string   "sdn_type",                   limit: 255
+    t.string   "program",                    limit: 255
+    t.string   "title",                      limit: 255
+    t.string   "vessel_call_sign",           limit: 255
+    t.string   "vessel_type",                limit: 255
+    t.string   "vessel_tonnage",             limit: 255
+    t.string   "gross_registered_tonnage",   limit: 255
+    t.string   "vessel_flag",                limit: 255
+    t.string   "vessel_owner",               limit: 255
+    t.text     "remarks",                    limit: 65535
+    t.text     "address",                    limit: 65535
+    t.string   "city",                       limit: 255
+    t.string   "country",                    limit: 255
+    t.string   "address_remarks",            limit: 255
+    t.string   "alternate_identity_type",    limit: 255
+    t.text     "alternate_identity_name",    limit: 65535
+    t.string   "alternate_identity_remarks", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "ofac_sdns", ["sdn_type"], name: "index_ofac_sdns_on_sdn_type", using: :btree
 
-  create_table "paypal_notifications", force: true do |t|
-    t.integer  "transaction_id"
-    t.boolean  "legit"
-    t.boolean  "test"
-    t.string   "pay_key"
+  create_table "paypal_notifications", force: :cascade do |t|
+    t.integer  "transaction_id", limit: 4
+    t.boolean  "legit",          limit: 1
+    t.boolean  "test",           limit: 1
+    t.string   "pay_key",        limit: 255
     t.string   "status",         limit: 20
-    t.text     "details_json"
+    t.text     "details_json",   limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3283,18 +3292,18 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "paypal_notifications", ["status"], name: "index_paypal_notifications_on_status", using: :btree
   add_index "paypal_notifications", ["transaction_id"], name: "index_paypal_notifications_on_transaction_id", using: :btree
 
-  create_table "paypal_subtransactions", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "transaction_id",                                   null: false
-    t.string   "paypal_transaction_id"
-    t.string   "sender_transaction_id"
-    t.string   "receiver"
-    t.integer  "amount_cents",                                     null: false
-    t.string   "currency",              limit: 3,  default: "USD", null: false
+  create_table "paypal_subtransactions", force: :cascade do |t|
+    t.integer  "user_id",               limit: 4
+    t.integer  "transaction_id",        limit: 4,                   null: false
+    t.string   "paypal_transaction_id", limit: 255
+    t.string   "sender_transaction_id", limit: 255
+    t.string   "receiver",              limit: 255
+    t.integer  "amount_cents",          limit: 4,                   null: false
+    t.string   "currency",              limit: 3,   default: "USD", null: false
     t.string   "status",                limit: 20
     t.string   "sender_status",         limit: 20
-    t.integer  "refunded_amount_cents"
-    t.boolean  "pending_refund"
+    t.integer  "refunded_amount_cents", limit: 4
+    t.boolean  "pending_refund",        limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3309,13 +3318,13 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "paypal_subtransactions", ["transaction_id"], name: "index_paypal_subtransactions_on_transaction_id", using: :btree
   add_index "paypal_subtransactions", ["user_id"], name: "index_paypal_subtransactions_on_user_id", using: :btree
 
-  create_table "paypal_transaction_notifications", force: true do |t|
-    t.integer  "subtransaction_id"
-    t.boolean  "legit"
-    t.boolean  "test"
-    t.string   "paypal_transaction_id",            null: false
+  create_table "paypal_transaction_notifications", force: :cascade do |t|
+    t.integer  "subtransaction_id",     limit: 4
+    t.boolean  "legit",                 limit: 1
+    t.boolean  "test",                  limit: 1
+    t.string   "paypal_transaction_id", limit: 255,   null: false
     t.string   "status",                limit: 20
-    t.text     "details_json"
+    t.text     "details_json",          limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3325,18 +3334,18 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "paypal_transaction_notifications", ["status"], name: "index_paypal_transaction_notifications_on_status", using: :btree
   add_index "paypal_transaction_notifications", ["subtransaction_id"], name: "index_paypal_transaction_notifications_on_subtransaction_id", using: :btree
 
-  create_table "paypal_transactions", force: true do |t|
-    t.integer  "user_id"
-    t.string   "source"
-    t.string   "pay_key"
-    t.integer  "amount_cents",                              null: false
-    t.string   "currency",       limit: 3,  default: "USD", null: false
+  create_table "paypal_transactions", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.string   "source",         limit: 255
+    t.string   "pay_key",        limit: 255
+    t.integer  "amount_cents",   limit: 4,                     null: false
+    t.string   "currency",       limit: 3,     default: "USD", null: false
     t.string   "status",         limit: 20
-    t.text     "details_json"
+    t.text     "details_json",   limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "correlation_id"
-    t.string   "memo"
+    t.string   "correlation_id", limit: 255
+    t.string   "memo",           limit: 255
   end
 
   add_index "paypal_transactions", ["correlation_id"], name: "index_paypal_transactions_on_correlation_id", using: :btree
@@ -3345,29 +3354,29 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "paypal_transactions", ["status"], name: "index_paypal_transactions_on_status", using: :btree
   add_index "paypal_transactions", ["user_id"], name: "index_paypal_transactions_on_user_id", using: :btree
 
-  create_table "profiles", force: true do |t|
-    t.string   "handle",              null: false
-    t.string   "handle_lowercase",    null: false
-    t.string   "name",                null: false
-    t.text     "bio"
-    t.string   "type",                null: false
-    t.integer  "legal_identity_id"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
+  create_table "profiles", force: :cascade do |t|
+    t.string   "handle",              limit: 255,   null: false
+    t.string   "handle_lowercase",    limit: 255,   null: false
+    t.string   "name",                limit: 255,   null: false
+    t.text     "bio",                 limit: 65535
+    t.string   "type",                limit: 255,   null: false
+    t.integer  "legal_identity_id",   limit: 4
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
-    t.text     "avatar_meta"
-    t.string   "avatar_fingerprint"
+    t.text     "avatar_meta",         limit: 65535
+    t.string   "avatar_fingerprint",  limit: 255
   end
 
   add_index "profiles", ["handle_lowercase"], name: "index_profiles_on_handle_lowercase", unique: true, using: :btree
   add_index "profiles", ["legal_identity_id"], name: "index_profiles_on_legal_identity_id", using: :btree
   add_index "profiles", ["name"], name: "index_profiles_on_name", using: :btree
 
-  create_table "roles", force: true do |t|
-    t.string   "name"
-    t.integer  "resource_id"
-    t.string   "resource_type"
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",          limit: 255
+    t.integer  "resource_id",   limit: 4
+    t.string   "resource_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3375,21 +3384,21 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
-  create_table "search_results", force: true do |t|
-    t.integer  "search_id"
-    t.integer  "result_id"
-    t.string   "result_type"
+  create_table "search_results", force: :cascade do |t|
+    t.integer  "search_id",   limit: 4
+    t.integer  "result_id",   limit: 4
+    t.string   "result_type", limit: 255
     t.datetime "created_at"
   end
 
   add_index "search_results", ["search_id", "result_type", "result_id"], name: "index_search_results_on_search_id_and_result_type_and_result_id", unique: true, using: :btree
 
-  create_table "searches", force: true do |t|
-    t.string   "term",                                 null: false
-    t.string   "source",                               null: false
-    t.string   "status",           default: "created", null: false
-    t.integer  "update_frequency"
-    t.integer  "lock_version"
+  create_table "searches", force: :cascade do |t|
+    t.string   "term",             limit: 255,                     null: false
+    t.string   "source",           limit: 255,                     null: false
+    t.string   "status",           limit: 255, default: "created", null: false
+    t.integer  "update_frequency", limit: 4
+    t.integer  "lock_version",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3397,10 +3406,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "searches", ["source", "term"], name: "index_searches_on_source_and_term", unique: true, using: :btree
   add_index "searches", ["status"], name: "index_searches_on_status", using: :btree
 
-  create_table "sessions", force: true do |t|
-    t.string   "session_id",               null: false
-    t.text     "data"
-    t.integer  "lock_version", default: 0
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id",   limit: 255,               null: false
+    t.text     "data",         limit: 65535
+    t.integer  "lock_version", limit: 4,     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3408,9 +3417,9 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
-  create_table "ssn_death_records", force: true do |t|
+  create_table "ssn_death_records", force: :cascade do |t|
     t.string  "change_type",        limit: 1
-    t.integer "ssn"
+    t.integer "ssn",                limit: 4
     t.string  "last_name",          limit: 20
     t.string  "name_suffix",        limit: 4
     t.string  "first_name",         limit: 15
@@ -3418,11 +3427,11 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.string  "verified",           limit: 1
     t.date    "death_date"
     t.date    "birth_date"
-    t.boolean "death_date_noday"
-    t.boolean "death_date_badleap"
-    t.boolean "birth_date_noday"
-    t.boolean "birth_date_badleap"
-    t.integer "age_in_days"
+    t.boolean "death_date_noday",   limit: 1
+    t.boolean "death_date_badleap", limit: 1
+    t.boolean "birth_date_noday",   limit: 1
+    t.boolean "birth_date_badleap", limit: 1
+    t.integer "age_in_days",        limit: 4
   end
 
   add_index "ssn_death_records", ["birth_date", "death_date"], name: "index_ssn_death_records_on_birth_date_and_death_date", using: :btree
@@ -3431,10 +3440,10 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "ssn_death_records", ["last_name", "first_name"], name: "index_ssn_death_records_on_last_name_and_first_name", using: :btree
   add_index "ssn_death_records", ["ssn", "change_type"], name: "index_ssn_death_records_on_ssn_and_change_type", unique: true, using: :btree
 
-  create_table "ssn_high_group_codes", force: true do |t|
+  create_table "ssn_high_group_codes", force: :cascade do |t|
     t.date     "as_of"
-    t.string   "area"
-    t.string   "group"
+    t.string   "area",       limit: 255
+    t.string   "group",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -3442,220 +3451,220 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "ssn_high_group_codes", ["area", "as_of"], name: "idx_area_as_of", using: :btree
   add_index "ssn_high_group_codes", ["area"], name: "idx_area", using: :btree
 
-  create_table "states", force: true do |t|
+  create_table "states", force: :cascade do |t|
     t.string "abbreviation", limit: 2
-    t.string "name",                                             null: false
-    t.string "country",                default: "United States", null: false
+    t.string "name",         limit: 255,                           null: false
+    t.string "country",      limit: 255, default: "United States", null: false
   end
 
   add_index "states", ["country", "abbreviation"], name: "index_states_on_country_and_abbreviation", unique: true, using: :btree
   add_index "states", ["country", "name"], name: "index_states_on_country_and_name", unique: true, using: :btree
 
-  create_table "stripe_accounts", force: true do |t|
-    t.string  "stripe_id",            null: false
-    t.boolean "charge_enabled",       null: false
-    t.string  "currencies_enabled",   null: false
-    t.boolean "details_submitted",    null: false
-    t.boolean "transfer_enabled",     null: false
-    t.string  "email",                null: false
-    t.string  "statement_descriptor"
+  create_table "stripe_accounts", force: :cascade do |t|
+    t.string  "stripe_id",            limit: 255, null: false
+    t.boolean "charge_enabled",       limit: 1,   null: false
+    t.string  "currencies_enabled",   limit: 255, null: false
+    t.boolean "details_submitted",    limit: 1,   null: false
+    t.boolean "transfer_enabled",     limit: 1,   null: false
+    t.string  "email",                limit: 255, null: false
+    t.string  "statement_descriptor", limit: 255
   end
 
-  create_table "stripe_bank_accounts", force: true do |t|
-    t.string  "stripe_id",             null: false
-    t.string  "bank_name"
+  create_table "stripe_bank_accounts", force: :cascade do |t|
+    t.string  "stripe_id",   limit: 255, null: false
+    t.string  "bank_name",   limit: 255
     t.string  "country",     limit: 2
-    t.string  "last4"
-    t.string  "fingerprint"
-    t.boolean "validated"
+    t.string  "last4",       limit: 255
+    t.string  "fingerprint", limit: 255
+    t.boolean "validated",   limit: 1
   end
 
-  create_table "stripe_cards", force: true do |t|
-    t.integer  "exp_month",           limit: 1,  null: false
-    t.integer  "exp_year",            limit: 2,  null: false
-    t.string   "fingerprint",                    null: false
-    t.string   "last4",               limit: 4,  null: false
-    t.string   "type",                limit: 20, null: false
-    t.string   "address_city"
-    t.string   "address_country"
-    t.string   "address_line1"
-    t.string   "adress_line2"
-    t.string   "address_state"
-    t.string   "address_zip"
-    t.boolean  "address_line1_check"
-    t.boolean  "address_zip_check"
-    t.boolean  "cvc_check"
+  create_table "stripe_cards", force: :cascade do |t|
+    t.integer  "exp_month",           limit: 1,   null: false
+    t.integer  "exp_year",            limit: 2,   null: false
+    t.string   "fingerprint",         limit: 255, null: false
+    t.string   "last4",               limit: 4,   null: false
+    t.string   "type",                limit: 20,  null: false
+    t.string   "address_city",        limit: 255
+    t.string   "address_country",     limit: 255
+    t.string   "address_line1",       limit: 255
+    t.string   "adress_line2",        limit: 255
+    t.string   "address_state",       limit: 255
+    t.string   "address_zip",         limit: 255
+    t.boolean  "address_line1_check", limit: 1
+    t.boolean  "address_zip_check",   limit: 1
+    t.boolean  "cvc_check",           limit: 1
     t.string   "country",             limit: 2
-    t.string   "name"
+    t.string   "name",                limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "stripe_charges", force: true do |t|
-    t.string   "stripe_id"
-    t.boolean  "test"
-    t.integer  "amount"
-    t.boolean  "captured"
-    t.integer  "stripe_card_id"
+  create_table "stripe_charges", force: :cascade do |t|
+    t.string   "stripe_id",          limit: 255
+    t.boolean  "test",               limit: 1
+    t.integer  "amount",             limit: 4
+    t.boolean  "captured",           limit: 1
+    t.integer  "stripe_card_id",     limit: 4
     t.datetime "stripe_created_at"
-    t.string   "currency",           default: "usd"
-    t.integer  "fee_amount"
-    t.integer  "stripe_fee_id"
-    t.boolean  "paid"
-    t.boolean  "refunded"
-    t.integer  "amount_refunded"
-    t.integer  "stripe_customer_id"
-    t.string   "description"
-    t.string   "failure_code"
-    t.string   "failure_message"
-    t.integer  "stripe_invoice_id"
+    t.string   "currency",           limit: 255, default: "usd"
+    t.integer  "fee_amount",         limit: 4
+    t.integer  "stripe_fee_id",      limit: 4
+    t.boolean  "paid",               limit: 1
+    t.boolean  "refunded",           limit: 1
+    t.integer  "amount_refunded",    limit: 4
+    t.integer  "stripe_customer_id", limit: 4
+    t.string   "description",        limit: 255
+    t.string   "failure_code",       limit: 255
+    t.string   "failure_message",    limit: 255
+    t.integer  "stripe_invoice_id",  limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "stripe_coupons", force: true do |t|
-    t.string   "stripe_id",                                    null: false
-    t.boolean  "test",                                         null: false
-    t.string   "duration",                                     null: false
-    t.integer  "amount_off"
-    t.string   "currency",           limit: 3, default: "usd"
-    t.integer  "duration_in_months"
-    t.integer  "max_redemptions"
+  create_table "stripe_coupons", force: :cascade do |t|
+    t.string   "stripe_id",          limit: 255,                 null: false
+    t.boolean  "test",               limit: 1,                   null: false
+    t.string   "duration",           limit: 255,                 null: false
+    t.integer  "amount_off",         limit: 4
+    t.string   "currency",           limit: 3,   default: "usd"
+    t.integer  "duration_in_months", limit: 4
+    t.integer  "max_redemptions",    limit: 4
     t.integer  "percent_off",        limit: 1
     t.datetime "redeem_by"
-    t.integer  "times_redeemed",               default: 0,     null: false
+    t.integer  "times_redeemed",     limit: 4,   default: 0,     null: false
   end
 
-  create_table "stripe_customers", force: true do |t|
-    t.string   "stripe_id",                              null: false
-    t.boolean  "test",                                   null: false
-    t.datetime "stripe_created_at",                      null: false
-    t.integer  "account_balance",        default: 0,     null: false
-    t.integer  "stripe_card_id",                         null: false
-    t.boolean  "delinquent",             default: false, null: false
-    t.string   "description"
-    t.integer  "stripe_discount_id"
-    t.string   "email"
-    t.integer  "stripe_subscription_id"
-    t.boolean  "deleted"
+  create_table "stripe_customers", force: :cascade do |t|
+    t.string   "stripe_id",              limit: 255,                 null: false
+    t.boolean  "test",                   limit: 1,                   null: false
+    t.datetime "stripe_created_at",                                  null: false
+    t.integer  "account_balance",        limit: 4,   default: 0,     null: false
+    t.integer  "stripe_card_id",         limit: 4,                   null: false
+    t.boolean  "delinquent",             limit: 1,   default: false, null: false
+    t.string   "description",            limit: 255
+    t.integer  "stripe_discount_id",     limit: 4
+    t.string   "email",                  limit: 255
+    t.integer  "stripe_subscription_id", limit: 4
+    t.boolean  "deleted",                limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "stripe_discounts", force: true do |t|
-    t.integer  "stripe_coupon_id",   null: false
-    t.integer  "stripe_customer_id", null: false
-    t.datetime "start",              null: false
+  create_table "stripe_discounts", force: :cascade do |t|
+    t.integer  "stripe_coupon_id",   limit: 4, null: false
+    t.integer  "stripe_customer_id", limit: 4, null: false
+    t.datetime "start",                        null: false
     t.datetime "end"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "stripe_disputes", force: true do |t|
-    t.boolean  "test",                                         null: false
-    t.integer  "amount",                                       null: false
-    t.integer  "stripe_charge_id",                             null: false
-    t.datetime "stripe_created_at",                            null: false
-    t.string   "currency",          limit: 3,  default: "usd", null: false
-    t.string   "reason",            limit: 25,                 null: false
-    t.string   "status",            limit: 15,                 null: false
-    t.text     "evidence"
+  create_table "stripe_disputes", force: :cascade do |t|
+    t.boolean  "test",              limit: 1,                     null: false
+    t.integer  "amount",            limit: 4,                     null: false
+    t.integer  "stripe_charge_id",  limit: 4,                     null: false
+    t.datetime "stripe_created_at",                               null: false
+    t.string   "currency",          limit: 3,     default: "usd", null: false
+    t.string   "reason",            limit: 25,                    null: false
+    t.string   "status",            limit: 15,                    null: false
+    t.text     "evidence",          limit: 65535
     t.datetime "evidence_due_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "stripe_events", force: true do |t|
-    t.string   "stripe_id",                       null: false
-    t.boolean  "test",                            null: false
-    t.datetime "stripe_created_at",               null: false
-    t.integer  "pending_webhooks",    default: 0, null: false
-    t.string   "type"
-    t.string   "request"
-    t.text     "object"
-    t.text     "previous_attributes"
+  create_table "stripe_events", force: :cascade do |t|
+    t.string   "stripe_id",           limit: 255,               null: false
+    t.boolean  "test",                limit: 1,                 null: false
+    t.datetime "stripe_created_at",                             null: false
+    t.integer  "pending_webhooks",    limit: 4,     default: 0, null: false
+    t.string   "type",                limit: 255
+    t.string   "request",             limit: 255
+    t.text     "object",              limit: 65535
+    t.text     "previous_attributes", limit: 65535
   end
 
-  create_table "stripe_fees", force: true do |t|
-    t.integer  "amount",                                    null: false
-    t.string   "currency",        limit: 3, default: "usd", null: false
-    t.string   "type",                                      null: false
-    t.integer  "amount_refunded"
-    t.string   "application"
-    t.string   "description"
+  create_table "stripe_fees", force: :cascade do |t|
+    t.integer  "amount",          limit: 4,                   null: false
+    t.string   "currency",        limit: 3,   default: "usd", null: false
+    t.string   "type",            limit: 255,                 null: false
+    t.integer  "amount_refunded", limit: 4
+    t.string   "application",     limit: 255
+    t.string   "description",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "stripe_invoice_lines", force: true do |t|
-    t.integer  "stripe_invoice_id_id"
-    t.integer  "stripe_customer_id_id",                            null: false
-    t.string   "stripe_id"
-    t.boolean  "test",                                             null: false
-    t.integer  "amount",                                           null: false
-    t.string   "currency",                         default: "usd", null: false
+  create_table "stripe_invoice_lines", force: :cascade do |t|
+    t.integer  "stripe_invoice_id_id",  limit: 4
+    t.integer  "stripe_customer_id_id", limit: 4,                   null: false
+    t.string   "stripe_id",             limit: 255
+    t.boolean  "test",                  limit: 1,                   null: false
+    t.integer  "amount",                limit: 4,                   null: false
+    t.string   "currency",              limit: 255, default: "usd", null: false
     t.string   "type",                  limit: 15
-    t.string   "description"
-    t.integer  "stripe_plan_id"
-    t.integer  "quantity"
+    t.string   "description",           limit: 255
+    t.integer  "stripe_plan_id",        limit: 4
+    t.integer  "quantity",              limit: 4
     t.datetime "period_start"
     t.datetime "period_end"
-    t.boolean  "proration"
+    t.boolean  "proration",             limit: 1
   end
 
-  create_table "stripe_invoices", force: true do |t|
-    t.string   "stripe_id",                                      null: false
-    t.boolean  "test",                                           null: false
-    t.integer  "amount_due",                                     null: false
-    t.integer  "attempt_count",                                  null: false
-    t.boolean  "attempted",                      default: false, null: false
-    t.boolean  "closed",                         default: false, null: false
-    t.string   "currency",             limit: 3, default: "usd", null: false
-    t.integer  "stripe_customer_id"
+  create_table "stripe_invoices", force: :cascade do |t|
+    t.string   "stripe_id",            limit: 255,                 null: false
+    t.boolean  "test",                 limit: 1,                   null: false
+    t.integer  "amount_due",           limit: 4,                   null: false
+    t.integer  "attempt_count",        limit: 4,                   null: false
+    t.boolean  "attempted",            limit: 1,   default: false, null: false
+    t.boolean  "closed",               limit: 1,   default: false, null: false
+    t.string   "currency",             limit: 3,   default: "usd", null: false
+    t.integer  "stripe_customer_id",   limit: 4
     t.datetime "date"
-    t.boolean  "paid",                           default: false, null: false
-    t.datetime "period_end",                                     null: false
-    t.datetime "period_start",                                   null: false
-    t.integer  "starting_balance",                               null: false
-    t.integer  "subtotal",                                       null: false
-    t.integer  "total",                                          null: false
-    t.integer  "stripe_charge_id"
-    t.integer  "stripe_discount_id"
-    t.integer  "ending_balance"
+    t.boolean  "paid",                 limit: 1,   default: false, null: false
+    t.datetime "period_end",                                       null: false
+    t.datetime "period_start",                                     null: false
+    t.integer  "starting_balance",     limit: 4,                   null: false
+    t.integer  "subtotal",             limit: 4,                   null: false
+    t.integer  "total",                limit: 4,                   null: false
+    t.integer  "stripe_charge_id",     limit: 4
+    t.integer  "stripe_discount_id",   limit: 4
+    t.integer  "ending_balance",       limit: 4
     t.datetime "next_payment_attempt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "stripe_plans", force: true do |t|
-    t.string   "stripe_id",                                   null: false
-    t.boolean  "test",                                        null: false
-    t.integer  "amount",                                      null: false
-    t.string   "currency",          limit: 3, default: "usd", null: false
-    t.string   "interval",          limit: 5,                 null: false
-    t.integer  "interval_count",              default: 1,     null: false
-    t.string   "name",                                        null: false
-    t.integer  "trial_period_days"
+  create_table "stripe_plans", force: :cascade do |t|
+    t.string   "stripe_id",         limit: 255,                 null: false
+    t.boolean  "test",              limit: 1,                   null: false
+    t.integer  "amount",            limit: 4,                   null: false
+    t.string   "currency",          limit: 3,   default: "usd", null: false
+    t.string   "interval",          limit: 5,                   null: false
+    t.integer  "interval_count",    limit: 4,   default: 1,     null: false
+    t.string   "name",              limit: 255,                 null: false
+    t.integer  "trial_period_days", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "stripe_recipients", force: true do |t|
-    t.string   "stripe_id",                         null: false
-    t.boolean  "test",                              null: false
+  create_table "stripe_recipients", force: :cascade do |t|
+    t.string   "stripe_id",              limit: 255, null: false
+    t.boolean  "test",                   limit: 1,   null: false
     t.datetime "stripe_created_at"
     t.string   "type",                   limit: 15
-    t.integer  "stripe_bank_account_id"
-    t.string   "description"
-    t.string   "email"
-    t.string   "name"
+    t.integer  "stripe_bank_account_id", limit: 4
+    t.string   "description",            limit: 255
+    t.string   "email",                  limit: 255
+    t.string   "name",                   limit: 255
   end
 
-  create_table "stripe_subscriptions", force: true do |t|
-    t.boolean  "cancel_at_period_end",            default: false, null: false
-    t.integer  "stripe_customer_id",                              null: false
-    t.integer  "stripe_plan_id",                                  null: false
-    t.integer  "quantity",                        default: 1,     null: false
+  create_table "stripe_subscriptions", force: :cascade do |t|
+    t.boolean  "cancel_at_period_end", limit: 1,  default: false, null: false
+    t.integer  "stripe_customer_id",   limit: 4,                  null: false
+    t.integer  "stripe_plan_id",       limit: 4,                  null: false
+    t.integer  "quantity",             limit: 4,  default: 1,     null: false
     t.datetime "start",                                           null: false
     t.string   "status",               limit: 10,                 null: false
     t.datetime "canceled_at"
@@ -3668,38 +3677,38 @@ ActiveRecord::Schema.define(version: 20150329172737) do
     t.datetime "updated_at"
   end
 
-  create_table "stripe_transfers", force: true do |t|
-    t.string   "stripe_id",                                       null: false
-    t.boolean  "test",                                            null: false
-    t.integer  "amount",                                          null: false
-    t.string   "currency",             limit: 3,  default: "usd", null: false
-    t.datetime "date",                                            null: false
-    t.integer  "fee",                                             null: false
-    t.string   "status",               limit: 10,                 null: false
-    t.string   "description"
-    t.integer  "stripe_recipient_id"
-    t.string   "statement_descriptor"
+  create_table "stripe_transfers", force: :cascade do |t|
+    t.string   "stripe_id",            limit: 255,                 null: false
+    t.boolean  "test",                 limit: 1,                   null: false
+    t.integer  "amount",               limit: 4,                   null: false
+    t.string   "currency",             limit: 3,   default: "usd", null: false
+    t.datetime "date",                                             null: false
+    t.integer  "fee",                  limit: 4,                   null: false
+    t.string   "status",               limit: 10,                  null: false
+    t.string   "description",          limit: 255
+    t.integer  "stripe_recipient_id",  limit: 4
+    t.string   "statement_descriptor", limit: 255
   end
 
-  create_table "tweet_links", force: true do |t|
-    t.integer "tweet_id", null: false
-    t.integer "link_id",  null: false
+  create_table "tweet_links", force: :cascade do |t|
+    t.integer "tweet_id", limit: 4, null: false
+    t.integer "link_id",  limit: 4, null: false
   end
 
   add_index "tweet_links", ["link_id", "tweet_id"], name: "index_tweet_links_on_link_id_and_tweet_id", using: :btree
   add_index "tweet_links", ["tweet_id", "link_id"], name: "index_tweet_links_on_tweet_id_and_link_id", unique: true, using: :btree
 
-  create_table "tweets", force: true do |t|
-    t.integer  "twitter_id",   limit: 8,                     null: false
-    t.string   "text",                                       null: false
-    t.string   "user",                                       null: false
-    t.integer  "favorited",              default: 0
-    t.integer  "retweeted",              default: 0
-    t.text     "raw",                                        null: false
-    t.integer  "lock_version"
+  create_table "tweets", force: :cascade do |t|
+    t.integer  "twitter_id",   limit: 8,                         null: false
+    t.string   "text",         limit: 255,                       null: false
+    t.string   "user",         limit: 255,                       null: false
+    t.integer  "favorited",    limit: 4,     default: 0
+    t.integer  "retweeted",    limit: 4,     default: 0
+    t.text     "raw",          limit: 65535,                     null: false
+    t.integer  "lock_version", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",                 default: "created"
+    t.string   "status",       limit: 255,   default: "created"
   end
 
   add_index "tweets", ["favorited", "retweeted"], name: "index_tweets_on_favorited_and_retweeted", using: :btree
@@ -3707,30 +3716,30 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "tweets", ["twitter_id"], name: "index_tweets_on_twitter_id", unique: true, using: :btree
   add_index "tweets", ["user"], name: "index_tweets_on_user", using: :btree
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: ""
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: ""
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
+    t.integer  "sign_in_count",          limit: 4,   default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "password_salt"
-    t.string   "confirmation_token"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "password_salt",          limit: 255
+    t.string   "confirmation_token",     limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.integer  "failed_attempts",        default: 0
-    t.string   "unlock_token"
+    t.integer  "failed_attempts",        limit: 4,   default: 0
+    t.string   "unlock_token",           limit: 255
     t.datetime "locked_at"
-    t.string   "authentication_token"
-    t.string   "name",                                null: false
-    t.integer  "lock_version",           default: 0
+    t.string   "authentication_token",   limit: 255
+    t.string   "name",                   limit: 255,              null: false
+    t.integer  "lock_version",           limit: 4,   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "unconfirmed_email"
+    t.string   "unconfirmed_email",      limit: 255
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
@@ -3741,23 +3750,23 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "users", ["unconfirmed_email"], name: "index_users_on_unconfirmed_email", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
-  create_table "users_roles", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
+  create_table "users_roles", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "role_id",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
-  create_table "versions", force: true do |t|
-    t.string   "item_type",      null: false
-    t.integer  "item_id",        null: false
-    t.string   "event",          null: false
-    t.string   "whodunnit"
-    t.string   "ip"
-    t.text     "object"
-    t.text     "object_changes"
+  create_table "versions", force: :cascade do |t|
+    t.string   "item_type",      limit: 255,   null: false
+    t.integer  "item_id",        limit: 4,     null: false
+    t.string   "event",          limit: 255,   null: false
+    t.string   "whodunnit",      limit: 255
+    t.string   "ip",             limit: 255
+    t.text     "object",         limit: 65535
+    t.text     "object_changes", limit: 65535
     t.datetime "created_at"
   end
 
@@ -3765,4 +3774,5 @@ ActiveRecord::Schema.define(version: 20150329172737) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   add_index "versions", ["whodunnit"], name: "index_versions_on_whodunnit", using: :btree
 
+  add_foreign_key "cart_items", "carts", name: "cart_items_cart_id_fk"
 end

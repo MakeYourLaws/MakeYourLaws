@@ -1,0 +1,21 @@
+<%= form_for(@bit_pay_client) do |f| %>
+  <% if @bit_pay_client.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bit_pay_client.errors.count, "error") %> prohibited this bit_pay_client from being saved:</h2>
+
+      <ul>
+      <% @bit_pay_client.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :api_uri %><br>
+    <%= f.text_field :api_uri %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

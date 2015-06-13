@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Bit Pay Clients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Api uri</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bit_pay_clients.each do |bit_pay_client| %>
+      <tr>
+        <td><%= bit_pay_client.api_uri %></td>
+        <td><%= link_to 'Show', bit_pay_client %></td>
+        <td><%= link_to 'Edit', edit_bit_pay_client_path(bit_pay_client) %></td>
+        <td><%= link_to 'Destroy', bit_pay_client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bit pay client', new_bit_pay_client_path %>
