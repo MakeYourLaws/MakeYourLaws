@@ -18,9 +18,7 @@ source 'https://rubygems.org' do
   gem 'rake'#, '>= 0.9.2.2'
   gem 'rack'#, '>= 1.4.1'
 
-  # FIXME: sprockets 3 breaks cap rails
-  # https://github.com/capistrano/rails/issues/111
-  gem 'sprockets', '~> 2'
+  gem 'sprockets'
 
   group :doc do
     # bundle exec rake doc:rails generates the API under doc/api.
@@ -82,7 +80,7 @@ source 'https://rubygems.org' do
     gem 'capistrano-rvm', require: false
     # gem 'capistrano-puma', require: false # use service instead
 
-    # gem 'capistrano-ci' # not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
+    gem 'capistrano-ci'
     gem 'term-ansicolor'
     platform(:mri) do # Ruby 2.0+ required.
       gem 'byebug'

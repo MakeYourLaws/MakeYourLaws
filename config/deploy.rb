@@ -46,8 +46,7 @@ set :linked_dirs,  %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle publi
 
 set :keep_releases, 15
 
-# not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
-# before :deploy, "ci:verify"
+before :deploy, "ci:verify"
 
 namespace :resque do
   resque_options = { start:         'Starts resqued daemon.',
