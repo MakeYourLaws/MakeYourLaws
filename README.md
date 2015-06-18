@@ -5,6 +5,7 @@
 [![Code Climate](https://codeclimate.com/github/MakeYourLaws/MakeYourLaws/badges/gpa.svg)](https://codeclimate.com/github/MakeYourLaws/MakeYourLaws)
 [![Test Coverage](https://codeclimate.com/github/MakeYourLaws/MakeYourLaws/badges/coverage.svg)](https://codeclimate.com/github/MakeYourLaws/MakeYourLaws/coverage)
 [![Brakeman](http://rails-brakeman.com/MakeYourLaws/MakeYourLaws.png)](http://rails-brakeman.com/MakeYourLaws/MakeYourLaws)
+[![Dependency Status](https://gemnasium.com/MakeYourLaws/MakeYourLaws.svg)](https://gemnasium.com/MakeYourLaws/MakeYourLaws)
 
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/9217)
 

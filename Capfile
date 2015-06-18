@@ -19,12 +19,12 @@ require 'capistrano/rvm'
 require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'airbrake/capistrano3'
-# require 'capistrano/ci/recipes' # pending cap3 compatibility https://github.com/railsware/capistrano-ci/pull/4
-# require 'capistrano/puma'
+require 'capistrano/ci/recipes'
+# require 'capistrano/puma' # use service instead
 
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
-# require 'new_relic/recipes'
+require 'new_relic/recipes'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 # Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
