@@ -59,6 +59,7 @@ source 'https://rubygems.org' do
   gem 'airbrake'
   # gem 'exception_notification', '>= 4.0.1' # deprecated for airbrake.io
   # gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
+  gem 'rubinius-rails_logger'#,
 
   gem 'rack-cache'
   gem 'rack-tor-tag'#, '>= 0.1'
@@ -89,6 +90,7 @@ source 'https://rubygems.org' do
     platform(:rbx) do
       gem 'rubinius-compiler'
       gem 'rubinius-debugger'
+      gem 'rubinius-profiler'
     end
 
     gem 'pry'
