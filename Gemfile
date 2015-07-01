@@ -123,10 +123,8 @@ source 'https://rubygems.org' do
     gem 'spring'
   end
 
-  # moved out of above group for coveralls.io compatibility
-  gem 'coveralls', require: false
-
   group :test do
+    gem 'codeclimate-test-reporter', require: nil
     gem 'cucumber-rails', :require => false
     gem 'database_cleaner'
   end

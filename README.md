@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/MakeYourLaws/MakeYourLaws.png)](https://makeyourlaws.org/travis-link)
-[![Coverage Status](https://coveralls.io/repos/MakeYourLaws/MakeYourLaws/badge.svg)](https://coveralls.io/r/MakeYourLaws/MakeYourLaws)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/MakeYourLaws/MakeYourLaws/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/MakeYourLaws/MakeYourLaws/?branch=master)
 [![security](https://hakiri.io/github/MakeYourLaws/MakeYourLaws/master.svg)](https://hakiri.io/github/MakeYourLaws/MakeYourLaws/master)
 [![Code Climate](https://codeclimate.com/github/MakeYourLaws/MakeYourLaws/badges/gpa.svg)](https://codeclimate.com/github/MakeYourLaws/MakeYourLaws)
