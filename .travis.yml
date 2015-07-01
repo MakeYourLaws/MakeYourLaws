@@ -3,7 +3,7 @@ env:
   - DB=mysql
 rvm:
   - 2.2.1
-  - rbx-2.5.5
+  - rbx-2.5.7
 bundler_args: --without production  --binstubs --full-index
 before_script:
   - mysql -e 'create database myl_test'

@@ -1,6 +1,6 @@
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :rvm_ruby_string, 'rbx-2.5.5'
+set :rvm_ruby_string, 'rbx-2.5.7'
 set :rvm_type, :system # using system level, not userspace, install of rvm
 
 set :application, 'mylfrontend'  # Required
