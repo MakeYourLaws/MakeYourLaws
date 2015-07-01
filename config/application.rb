@@ -21,7 +21,9 @@ end
 
 module MakeyourlawsOrg
   class Application < Rails::Application
-    config.logger = Rubinius::RailsLogger.new 'mylfrontend'
+    if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx'
+      config.logger = Rubinius::RailsLogger.new 'mylfrontend'
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
