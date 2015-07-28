@@ -27,3 +27,4 @@ cache:
 os:
   - linux
   - osx
+sudo: false
