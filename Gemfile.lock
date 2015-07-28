@@ -852,7 +852,6 @@ DEPENDENCIES
   json!
   jwt!
   kramdown!
-  libv8 (>= 3.16.14.11)!
   mailhopper!
   money!
   money-rails!
