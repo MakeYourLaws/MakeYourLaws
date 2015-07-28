@@ -22,8 +22,11 @@ script:
   - bundle exec rake db:test:prepare
   - bundle exec rspec spec/
 cache:
-  - bundler
-  - apt
+  bundler: true
+  apt: true
+  directories:
+  - vendor/cache
+  - vendor/assets
 os:
   - linux
   - osx
