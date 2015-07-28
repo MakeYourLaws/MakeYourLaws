@@ -193,6 +193,7 @@ source 'https://rubygems.org' do
 
   gem 'execjs'#, '>= 1.3.0' # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', platforms: :ruby
+  gem 'libv8', '>= 3.16.14.11'
 
   gem 'uglifier'#, '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
   gem 'coffee-rails'#, '>= 4.0.0' # Use CoffeeScript for .js.coffee assets and views
