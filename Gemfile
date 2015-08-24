@@ -143,6 +143,7 @@ source 'https://rubygems.org' do
 
   gem 'groupdate' # https://github.com/ankane/groupdate
   gem 'mailhopper' # https://github.com/cerebris/mailhopper
+  gem 'mechanize'
 
   # NoMethodError: undefined method `[]' for #<ActiveRecord::Reflection::AssociationReflection:0x007fe9a2743860>
   # gem 'has_many_polymorphs', github => 'jystewart/has_many_polymorphs'
