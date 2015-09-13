@@ -3,6 +3,9 @@
 DailyActiveUsers:
   cron: "0 1 * * *"
 
+UpdateFecAoDocs:
+  cron: "10 * * * *"
+
 TwitterScraper:
   cron: "* * * * *"
 

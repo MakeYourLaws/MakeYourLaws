@@ -1,19 +1,22 @@
+<% cache ['body-top'] do -%>
 <!DOCTYPE html>
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
 	<head>
 		<meta http-equiv="Content-Type" Content="text/html;charset=UTF-8">
+        <link href="https://www.makeyourlaws.org/fec_ao_docs/index.rss" rel="alternate" title="FEC AO docs" type="application/rss+xml" />
 		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-		<% unless tor? %>
-			<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-			<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-		<% end %>
 		<%= favicon_link_tag %>
 		<meta name="robots" content="all" />
 		<link href="https://plus.google.com/100183759660923071401" rel="publisher" />
+<% end %>
 		<%= csrf_meta_tags %>
 		<meta name="title" content="Make Your Laws: <%= yield :title %>" />
 		<title>Make Your Laws: <%= yield :title %></title>
 <% cache ['body-preheader', tor_s] do %>
+		<% unless tor? %>
+			<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+			<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+		<% end %>
 		<%= render :partial => '/layouts/mixpanel' unless (tor? || (user_signed_in? && current_user.is_admin?)) %>
 	</head>
 	<body>
