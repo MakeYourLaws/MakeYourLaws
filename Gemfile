@@ -170,6 +170,7 @@ source 'https://rubygems.org' do
 
   # gem 'bitpay-rails', :require => 'bit_pay_rails'
   gem 'coinbase', ">= 2.2.1" #, github: 'coinbase/coinbase-ruby', branch: 'v3'
+  gem 'em-http-request'
   # omniauth-coinbase depends on coinbase ~>2.0
 
   gem "devise"#, ">= 3.1.1"
