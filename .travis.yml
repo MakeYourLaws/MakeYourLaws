@@ -10,9 +10,9 @@ before_script:
 before_install:
   - gem update --system
   - gem --version
-  - 'command -v brew && brew update || echo "no brew"'
+  # - 'command -v brew && brew update || echo "no brew"'
   - 'command -v brew && brew install mysql || echo "no brew"'
-  - 'command -v apt-get && sudo apt-get update -qq || echo "no apt-get"'
+  # - 'command -v apt-get && sudo apt-get update -qq || echo "no apt-get"'
 after_install:
   - bundle-audit update
   - bundle-audit
