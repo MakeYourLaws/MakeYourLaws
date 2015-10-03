@@ -1,7 +1,7 @@
 class Fec::Filing
   FILES_DIR = Rails.root.join('db', 'data', 'fec', 'filings')
   SENATE_FILES_DIR = Rails.root.join('db', 'data', 'fec', 'senate_filings')
-  FECH_OPTIONS = { translate: [:names], csv_parser: Fech::CsvDoctor}
+  FECH_OPTIONS = { csv_parser: Fech::CsvDoctor} #  translate: [:names]
 
   [FILES_DIR, SENATE_FILES_DIR].each do |base_dir|
     %w(errors row_errors http_error not_v3 /).each do |sub_dir|
@@ -129,7 +129,9 @@ class Fec::Filing
     end
 
     if filing.filing_version.to_i >= 3
-      # batch = {}
+      batch = {}
+      cols = {}
+      time = Time.now
       filing.each_row_with_index do |raw_array, i|
         begin
           row_error_file = File.join(files_dir, 'row_errors', "#{record_number}_#{i}")
@@ -139,16 +141,22 @@ class Fec::Filing
             next
           end
           print ' ' + i.to_s
-          # mapped_row = filing.map row
-          t = self.base_type (row[:rec_type] || row[:record_type] || row[:form_type]) ||
-           (row[:form_type] = row.delete(:ballot_local_candidates)) # Some records are malformed,
-                                                # eg 12104 row 536; 12164 5; 12298 17; 12302 17
+          # Some records are malformed, eg 12104 row 536; 12164 5; 12298 17; 12302 17
+          t = Fec::Filing.base_type (row[:rec_type] || row[:record_type] || row[:form_type]) # ||
+           # (row[:form_type] = row.delete(:ballot_local_candidates))
           klass = "Fec::Filing::#{t[0].upcase}#{t[1..-1]}".constantize
-          rec = klass.find_or_initialize_by(fec_record_number: record_number, row_number: i, fec_record_type: record_type)
-          row.delete(nil)
-          rec.assign_attributes row
-          rec.save
-          # batch[klass] ||= []
+          cols[klass] ||= (klass.column_names - %w(id lock_version)).map(&:to_sym)
+          # rec = klass.find_or_initialize_by(fec_record_number: record_number, row_number: i, fec_record_type: record_type)
+          # rec.assign_attributes row
+          merged_row = row.merge(fec_record_number: record_number, row_number: i, fec_record_type: record_type, updated_at: time, created_at: time)
+          merged_row.map{|k,v| merged_row[k] = nil if v.blank?}
+          array = cols[klass].map{|c| merged_row.delete(c)}
+          raise "Unused columns: #{merged_row.to_s}" unless merged_row.blank?
+
+          # rec = klass.new(merged_row)
+          # rec.save
+          batch[klass] ||= []
+          batch[klass] << array
           # batch[klass] << rec
           File.delete(row_error_file) if File.exists?(row_error_file)
         rescue => e
@@ -156,9 +164,10 @@ class Fec::Filing
         end
       end
 
-      # batch.each do |kklass, bbatch|
-      #   kklass.import bbatch, on_duplicate_key_update: []  # ignore duplicates
-      # end
+      batch.each do |kklass, bbatch|
+        kklass.import cols[kklass], bbatch, on_duplicate_key_update: (cols[kklass] - [:updated_at]), validate: false, timestamps: false
+        # puts kklass.to_s, bbatch.count, cols[kklass].first.to_s
+      end
 
       File.delete(filing.file_path) if File.exists? filing.file_path
       File.delete(filing.custom_file_path) if File.exists?(filing.custom_file_path)
