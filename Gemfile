@@ -65,7 +65,7 @@ source 'https://rubygems.org' do
   gem 'rack-tor-tag'#, '>= 0.1'
   gem 'rack-attack'
 
-  gem 'mysql2'
+  gem 'mysql2', '~> 0.3.13' # currently required by ActiveRecord; see https://github.com/rails/rails/issues/21544
   gem 'json'#, '>= 1.6.6'
   gem 'jbuilder'#, '>= 1.2' # JSON APIs. https://github.com/rails/jbuilder
 
