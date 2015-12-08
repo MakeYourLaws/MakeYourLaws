@@ -6,7 +6,7 @@ rvm:
   - rbx-2.5.8
 bundler_args: --without production  --binstubs --full-index
 before_script:
-  - mysql -e 'create database myl_test'
+  - mysql -u root -e 'create database myl_test'
 before_install:
   - gem update --system
   - gem --version
