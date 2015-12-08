@@ -34,15 +34,15 @@ development:
 # Do not set this db to the same as development or production.
 test: &test
   <<: *basics
-  database: myl_test
   username: travis
+  password: ''
+  database: myl_test
   socket: <%= [
       '/var/lib/mysql/mysql.sock',
       '/var/run/mysqld/mysqld.sock',
       '/tmp/mysqld.sock',
       '/tmp/mysql.sock',
     ].detect { |socket| File.exist?(socket) } %>
-  password: ''
 
 production:
   <<: *basics
