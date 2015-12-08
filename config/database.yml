@@ -1,5 +1,5 @@
 <% # sometimes it thinks we're in root rather than /config
-  file =  File.join File.dirname(__FILE__), '..', 'lib', 'keys.rb'   
+  file =  File.join File.dirname(__FILE__), '..', 'lib', 'keys.rb'
   File.exists?(file) ? require(file) : require(File.join(File.dirname(__FILE__), 'lib', 'keys.rb'))
 %>
 
@@ -35,7 +35,7 @@ development:
 test: &test
   <<: *basics
   database: myl_test
-  username:  travis
+  username: travis
 #  username: myl_test
   socket: <%= [
       '/var/lib/mysql/mysql.sock',
