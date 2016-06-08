@@ -35,6 +35,7 @@ source 'https://rubygems.org' do
   #    /active_merchant/billing/gateways/paypal_adaptive_payments/ext.rb:7
   # Haven't diagnosed why. Works fine without.
 
+  # gem 'hashie_rails'  # see https://github.com/intridea/hashie/blob/master/UPGRADING.md
   gem 'hashie-forbidden_attributes'
   # moved from hashie-rails
   # see https://github.com/intridea/hashie/blob/master/UPGRADING.md
@@ -59,7 +60,7 @@ source 'https://rubygems.org' do
   gem 'airbrake'
   # gem 'exception_notification', '>= 4.0.1' # deprecated for airbrake.io
   # gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
-  gem 'rubinius-rails_logger'#,
+  gem 'rubinius-rails_logger'
 
   gem 'rack-cache'
   gem 'rack-tor-tag'#, '>= 0.1'
@@ -131,7 +132,7 @@ source 'https://rubygems.org' do
 
   # Bundle the extra gems:
   # gem 'bj'
-  # gem 'nokogiri'
+  gem 'nokogiri', '>= 1.6.8' # >1.6.8 required to fix CVE-2015-8806 et al
   # gem 'sqlite3-ruby', :require => 'sqlite3'
   # gem 'aws-s3', :require => 'aws/s3'
 
