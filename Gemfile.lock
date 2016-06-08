@@ -278,7 +278,7 @@ GEM
     multi_test (0.1.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mysql2 (0.3.21)
+    mysql2 (0.4.4)
     naught (1.1.0)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
@@ -873,7 +873,7 @@ DEPENDENCIES
   mechanize!
   money!
   money-rails!
-  mysql2 (~> 0.3.13)!
+  mysql2!
   newrelic_rpm!
   nokogiri (>= 1.6.8)!
   offsite_payments!
