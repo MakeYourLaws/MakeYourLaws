@@ -57,7 +57,7 @@ source 'https://rubygems.org' do
   gem 'resque-async-method-enhanced'
 
   gem 'newrelic_rpm'
-  gem 'airbrake'
+  # gem 'airbrake'
   # gem 'exception_notification', '>= 4.0.1' # deprecated for airbrake.io
   # gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
   gem 'rubinius-rails_logger'

@@ -18,7 +18,7 @@ require 'capistrano/deploy'
 require 'capistrano/rvm'
 require 'capistrano/bundler'
 require 'capistrano/rails'
-require 'airbrake/capistrano3'
+# require 'airbrake/capistrano3'
 require 'capistrano/ci/recipes'
 # require 'capistrano/puma' # use service instead
 

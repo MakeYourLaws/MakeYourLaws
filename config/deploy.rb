@@ -178,7 +178,7 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
-  after :finishing, 'airbrake:deploy'
+  # after :finishing, 'airbrake:deploy'
   after :finishing, 'puma:status'
   after :finishing, 'resque:status'
   after :finishing, 'resque:scheduler:status'

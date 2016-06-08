@@ -58,9 +58,6 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    airbrake (5.4.0)
-      airbrake-ruby (~> 1.4)
-    airbrake-ruby (1.4.1)
     airbrussh (1.0.2)
       sshkit (>= 1.6.1, != 1.7.0)
     amazon_flex_pay (0.11.0)
@@ -835,7 +832,6 @@ DEPENDENCIES
   active_paypal_adaptive_payment!
   activemerchant!
   activerecord-mysql-unsigned!
-  airbrake!
   amazon_flex_pay!
   awesome_print!
   bcrypt!
