@@ -4,6 +4,7 @@ env:
 rvm:
   - 2.3.1
   - rbx-2.5.8
+  - rbx-2.11
   - rbx-3.39
 bundler_args: --without production  --binstubs --full-index
 before_script:
