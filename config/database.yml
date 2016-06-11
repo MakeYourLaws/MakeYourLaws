@@ -37,12 +37,13 @@ test: &test
   username: travis
   password: ''
   database: myl_test
-  socket: <%= [
-      '/var/lib/mysql/mysql.sock',
-      '/var/run/mysqld/mysqld.sock',
-      '/tmp/mysqld.sock',
-      '/tmp/mysql.sock',
-    ].detect { |socket| File.exist?(socket) } %>
+  host: 127.0.0.1
+#  socket: <%= [
+#      '/var/lib/mysql/mysql.sock',
+#      '/var/run/mysqld/mysqld.sock',
+#      '/tmp/mysqld.sock',
+#      '/tmp/mysql.sock',
+#    ].detect { |socket| File.exist?(socket) } %>
 
 production:
   <<: *basics
