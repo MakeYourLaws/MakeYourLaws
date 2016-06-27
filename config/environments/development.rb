@@ -1,4 +1,4 @@
-MakeyourlawsOrg::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -32,8 +32,7 @@ MakeyourlawsOrg::Application.configure do
 
   # # Do not compress assets
   config.assets.compress = true # make assets faster when not working on them
-  config.assets.digest = true
-  config.serve_static_assets = true
+  config.serve_static_files = true
   config.assets.compile = true
 
   # Debug mode disables concatenation and preprocessing of assets.
@@ -41,5 +40,12 @@ MakeyourlawsOrg::Application.configure do
   # number of complex assets.
   config.assets.debug = false # turn off when not debugging it
 
+  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
+  # yet still be able to expire them through the digest params.
+  config.assets.digest = true
+
   Paperclip.options[:command_path] = "/opt/local/bin/convert"
+
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
 end
