@@ -71,6 +71,7 @@ Rails.application.routes.draw do
         'https://docs.google.com/document/d/1YeVdRxEqC8fWnJGl9DgkcNVY6HmkCPEzyRxB_0wttU0/',
         status: 302)
       get 'laundering'
+      get 'ravel_weintraub'
       get 'tplf'
       get 'volunteer_ip'
     end

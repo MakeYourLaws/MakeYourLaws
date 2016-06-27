@@ -21,6 +21,10 @@ end
 
 module MakeyourlawsOrg
   class Application < Rails::Application
+    # if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx'
+    #   config.logger = Rubinius::RailsLogger.new 'mylfrontend'
+    # end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -77,7 +81,7 @@ module MakeyourlawsOrg
     # config.active_record.whitelist_attributes = true
 
     config.action_mailer.default_options = {
-      from: 'MYL <notifications@makeyourlaws.org>'
+      from: 'MYL Robot <no-reply@makeyourlaws.org>'
     }
 
     config.cache_store = :redis_store, { db: 1 }
