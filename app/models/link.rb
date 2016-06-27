@@ -21,6 +21,7 @@ class Link < ActiveRecord::Base
         bestlink = Link.add_by_url(uncoiled)
         longlink = Link.add_by_url(long)
         longlink.update_attribute :duplicate_of_id, bestlink.id
+        longlink.update_attribute :checked, true
       else
         bestlink = Link.add_by_url(long)
       end
@@ -39,6 +40,7 @@ class Link < ActiveRecord::Base
 
     # needs to be updated post creation to get its own link
     shortlink.update_attribute(:duplicate_of_id, bestlink.id)
+    shortlink.update_attribute(:checked, true)
     bestlink
   end
 
@@ -60,7 +62,7 @@ class Link < ActiveRecord::Base
     uri = Addressable::URI.parse(url)
 
     blacklist = %w(utm_source utm_medium utm_term utm_content utm_campaign s_campaign dlvrit
-                   utm_cid refid feature hp)
+                   utm_cid refid feature hp slreturn cmp mc_cid mc_eid ml m)
     params = uri.query_values
     if params
       blacklist.each { |w| params.delete w }
