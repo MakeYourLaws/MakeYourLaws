@@ -1,6 +1,6 @@
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :rvm_ruby_string, 'rbx-2.3.0'
+set :rvm_ruby_string, 'rbx-3.41'
 set :rvm_type, :system # using system level, not userspace, install of rvm
 
 set :application, 'mylfrontend'  # Required
@@ -46,8 +46,7 @@ set :linked_dirs,  %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle publi
 
 set :keep_releases, 15
 
-# not cap3 compatible yet https://github.com/railsware/capistrano-ci/pull/4
-# before :deploy, "ci:verify"
+before :deploy, "ci:verify"
 
 namespace :resque do
   resque_options = { start:         'Starts resqued daemon.',
@@ -170,7 +169,7 @@ namespace :deploy do
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
-      execute 'curl -s https://makeyourlaws.org > /dev/null' # Warm up the server
+      execute 'curl -s https://www.makeyourlaws.org > /dev/null' # Warm up the server
       # Here we can do anything such as:
       # within release_path do
       #   execute :rake, 'cache:clear'
@@ -179,7 +178,7 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
-  after :finishing, 'airbrake:deploy'
+  # after :finishing, 'airbrake:deploy'
   after :finishing, 'puma:status'
   after :finishing, 'resque:status'
   after :finishing, 'resque:scheduler:status'
