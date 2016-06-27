@@ -1,5 +1,5 @@
 <% # sometimes it thinks we're in root rather than /config
-  file =  File.join File.dirname(__FILE__), '..', 'lib', 'keys.rb'   
+  file =  File.join File.dirname(__FILE__), '..', 'lib', 'keys.rb'
   File.exists?(file) ? require(file) : require(File.join(File.dirname(__FILE__), 'lib', 'keys.rb'))
 %>
 
@@ -34,16 +34,17 @@ development:
 # Do not set this db to the same as development or production.
 test: &test
   <<: *basics
+  username: travis
+  password: ''
   database: myl_test
-  username:  travis
-#  username: myl_test
-  socket: <%= [
-      '/var/lib/mysql/mysql.sock',
-      '/var/run/mysqld/mysqld.sock',
-      '/tmp/mysqld.sock',
-      '/tmp/mysql.sock',
-    ].detect { |socket| File.exist?(socket) } %>
-#  password: <%= Keys.get "database" %>
+  host: 127.0.0.1
+
+#  socket: <%= [
+#      '/var/lib/mysql/mysql.sock',
+#      '/var/run/mysqld/mysqld.sock',
+#      '/tmp/mysqld.sock',
+#      '/tmp/mysql.sock',
+#    ].detect { |socket| File.exist?(socket) } %>
 
 production:
   <<: *basics

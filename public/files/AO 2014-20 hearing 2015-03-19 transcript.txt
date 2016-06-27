@@ -1,0 +1,108 @@
+Make Your Laws - FEC hearing on foreign national volunteer services IP contribution
+AO 2014-20 2015-03-19
+
+FEC Chair Ann M. Ravel: Item number two is the draft advisory opinion request 2014-20 submitted by Make Your Laws PAC, Inc., by Sai, President and Treasurer.
+
+And I understand that Sai is attending by phone, Madam Secretary?
+
+Sai: Yes.
+
+Ravel: Ah. 
+
+FEC Secretary Shawn Werth: Yes.
+
+Ravel: You're there, Sai?
+
+Sai: Yes, Madam Chair.
+
+Ravel: Okay. Thank you very much. Welcome to the meeting. We also have Neven Stipanović from OGC [Office of General Counsel] here, and … would you like to augment your previous comments about this matter?
+
+FEC Attorney Neven Stipanović: Sure. Thank you Madam Chair, and good morning Commissioners. This request was held over from the last open session, and there were a couple updates I wanted to bring to your attention.
+
+The requester has submitted an additional comment since the last open session, and yesterday the Commission released another draft, Revised Draft C, which is labeled as agenda document 15-10-C-2. Should the Commission approve a draft, we ask for authority to make technical and conforming amendments, and I would be happy to answer any questions that you may have. Thank you.
+
+Ravel: Thank you. Are there any questions for Mr. Stipanović?
+
+Any comments that anybody would like to make? Commissioner Weintraub.
+
+FEC Commissioner Ellen L. Weintraub: Thank you. Actually, this is a question for the requester, since we have him on the phone.
+
+There's something I'm a little unclear about, Sai: have you identified specific individuals who are foreign nationals that you believe want to provide these services to you, should you get a positive response from the Commission?
+
+Sai: Yes, Commissioner Weintraub.
+
+Weintraub: So there are … we're talking about real people here, this isn't a hypothetical?
+
+Sai: Yes.
+
+Ravel: Any other comments … questions … with regard to this matter?
+
+Hearing none, is there a motion? Mr. Vice-Chair.
+
+FEC Vice-Chair Matthew S. Petersen: Thank you, Madam Chair. I move approval of agenda document number 15-10-C-2, known as Revised Draft C, in connection with draft advisory opinion 2014-20, which is Make Your Laws PAC, and authorize the Office of General Counsel to make any technical and conforming amendments.
+
+Ravel: Thank you, Mr. Vice-Chair. Are there any comments, questions? Commissioner Weintraub.
+
+Weintraub: Thank you, Madam Chair. I will not be supporting the motion, for reasons that I've alluded to when this came up previously.
+
+I think it would be possible to answer this requester's question and give him most of what he wants without doing damage to the Commission's prior precedents, and I don't think that what the Commission has said in the past … I believe it can all be read in harmony. I think that … probably … a good portion of what the requester seeks could be covered by the Internet exemption, in terms of the coding services that will be incorporated into the web-based platform that Make Your Laws PAC has.
+
+I think that the place where I differ is to the extent that intellectual property rights in logos or trademarks would be conveyed, and those would be used off the Internet, to sell t-shirts or any other paraphernalia … I think that is … intellectual property is a thing of value. It's well established in other parts of the law, and I don't think that the statute permits foreign nationals to donate things of value.
+
+I don't think this is inconsistent with the MUR [Matter Under Review] that gets cited involving Elton John. 
+
+It's one thing for Elton John to sing personally at a campaign event; I think it's quite a different thing were he to say "I'm going to give you the rights to Candle in the Wind, and you can draw the profits from that for the next year while you're running for office" to some candidate — because that's an intellectual property right, it's a thing of value, it generates money. And we don't generally allow foreigners to contribute money to campaigns in this country.
+
+Similarly, if somebody wanted to volunteer their services to paint someone's office, they could do that, but as I believe the Metzenbaum AO [Advisory Opinion] rightly held — and I think it's unfortunate that this AO will supersede that — if somebody gives a painting that can be sold, that is again a thing of value, and could be, you know, if you're a famous artist, potentially a very valuable thing of value that would be donated to the campaign.
+
+So, I don't think that it is necessary to supersede the prior AOs in order to interpret the law in a way that would continue to permit foreign nationals to volunteer their personal services. We have a long history of allowing that, of saying that those kinds of personal services aren't contributions.
+
+But just as I think we would say — at least, I hope we would still say — that if somebody donated a valuable painting to a campaign, that'a thing of value, that's a contribution — an in-kind contribution — that would have to be valued. I don't know why we would draw a different conclusion if it's coming from a foreign national.
+
+So, I will be dissenting from the AO.
+
+Ravel: Any other comments? Commissioner Goodman.
+
+FEC Commissioner Lee E. Goodman: Let me just respond. All along, I thought the Internet exemption could cover this, as well as the volunteer exemption, but I haven't been a stickler for which exemption we use to do it. However, an American political committee can employ a foreign citizen to be an employee of the committee, and if the individual then performs this very work, as an employee, it becomes a work for hire. And the employer always owns the work of the employee.
+
+And so to say that the foreign national can volunteer in lieu of being employed … and that the work that the individual performs is part and parcel of the creation of the website or the intellectual property … and indeed we do have the Internet exemption, which would encompass this as well. So I don't think we're treading significant new ground in terms of allowing foreign nationals to make contributions to campaigns in America.
+
+Ravel: Any other comments on this? Let me weigh in on this as well. 
+
+It is a great occasion when I can agree with Commissioner Goodman on this matter with respect to the volunteer part of this request. It seems to me that the volunteer exemption is there because what we want to encourage is volunteer participation in political campaigns. That is a high value that we place on participation of the public in political activity in this country. And no distinction is made whether that participation is from foreign individuals or individuals who are residents or citizens of the United States.
+
+So the way that we are reading this particular AO is actually very consistent with what the law has been. I disagree with my fellow Commissioner Weintraub that this is an extension. It is not an extension; it is clearly representative of what the law has provided in the past. And furthermore, I would say that the results of the AOs that are in conflict are almost nonsensical, because what would happen in this circumstance is if someone were, as Sai has indicated, wanting to provide this service to the committee, it would be of no value whatsoever unless the committee were able to use that. It would be meaningless and thus would prevent this volunteer activity.
+
+So I have a number of feelings as well about the Elton John matter, and the distinction between having, you know, one of the most highly sold singer — or whatever he does, I'm not a pop culture person; I know he wears glasses, but you know — to have, it's okay to have him in a huge convention center giving a free concert for a campaign, but it's not okay for somebody to provide some coding to a PAC? It makes no sense whatsoever. Those distinctions make no sense.
+
+So I will be voting yes on this … C, I believe it is.
+
+Yes, Commissioner Weintraub.
+
+Weintraub: Sorry, not to belabor the point, but… and I didn't vote on the Elton John MUR, but you know, it's out there and I think it can be harmonized. I mean, we are specifically superseding at least one prior AO, so it's not entirely consistent with what the Commission has said in the past.
+
+But I just want to be clear that I think the coding is not a problem, because I think it's covered under the Internet exemption. The place where I disagree with my colleagues is to the extent that logos or trademarks or other intellectual property is being conveyed, and that again… you know, if someone's going to sell t-shirts and whatever, and maybe that won't happen, but that was part of the request. I think that's where the distinction lies in my mind. People can, when they are employees, convey as part of their contractual arrangement with their employer — they can say, you know, "if I create intellectual property, you get the rights to it" — but that's a contractual right that you engage in. It's not…
+
+Goodman: Not necessarily. You employ somebody, and the work for hire doctrine is the presumptive treatment of the work they perform while they're employed by you. If the individual is an employee.
+
+Weintraub: Well, thank you for the interruption, Commissioner Goodman, but … I don't usually interrupt you when you're speaking … but to the extent that there are particular intellectual property rights that are created, I think that's probably a matter of state by state analysis, as to whether automatically, you know, if you work for GE and you create something and it's patented, I think that may well be part of your employment contract, but I don't think that it is an automatic… that you cede all rights to intellectual property that you create when you work for for someone.
+
+But that's … that is a small part of this analysis. I do think that we are creating a new exemption here. And, you know, we'll see where it goes, if indeed it goes anywhere.
+
+I guess on the issue of whether we want to encourage volunteer participation… It's an interesting question. Do we… Yes, we place a very high value on volunteer participation in this country. Do we place as high a value on foreign citizens participating in our election? I'm not sure. I'm not sure at all that we place quite as high a value on that, because I think a lot of people think American elections are for Americans to participate in.
+
+But that's fine, I'll stop now.
+
+Ravel: Any other comments? All right. All those in favor of the motion, please indicate by saying "aye".
+
+Commissioners Hunter, Petersen, Goodman, Ravel: Aye.
+
+Ravel: All those opposed?
+
+Commissioner Walther: Nay.
+
+Ravel: Okay. Madam Secretary, the vote is four to two, with Commissioners Walther and Weintraub voting no, and the motion passes.
+
+[other agenda items discussed; omitted from this video]
+
+Ravel: Okay. Is Sai still on the phone? No? I forgot to say goodbye… but I know we'll see him again, or hear from him again.
