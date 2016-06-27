@@ -1,6 +1,6 @@
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :rvm_ruby_string, 'rbx-2.5.8'
+set :rvm_ruby_string, 'rbx-3.41'
 set :rvm_type, :system # using system level, not userspace, install of rvm
 
 set :application, 'mylfrontend'  # Required
@@ -178,7 +178,7 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
-  after :finishing, 'airbrake:deploy'
+  # after :finishing, 'airbrake:deploy'
   after :finishing, 'puma:status'
   after :finishing, 'resque:status'
   after :finishing, 'resque:scheduler:status'

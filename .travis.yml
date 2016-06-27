@@ -1,26 +1,28 @@
 language: ruby
 env:
-  - DB=mysql
+- DB=mysql
 rvm:
-  - 2.2.3
-  - rbx-2.5.8
-bundler_args: --without production  --binstubs --full-index
+- 2.3.1
+- rbx-2.5.8
+- rbx-2.11
+- rbx-3.41
+bundler_args: "--without production  --binstubs --full-index"
 before_script:
-  - mysql -e 'create database myl_test'
+- mysql -u root -e 'create database myl_test'
 before_install:
-  - gem update --system
-  - gem --version
-  # - sudo apt-get update -qq
+- gem update --system
+- gem --version
+- command -v brew && brew install mysql && mysql.server start || echo "no brew"
 after_install:
-  - bundle-audit update
-  - bundle-audit
+- bundle-audit update
+- bundle-audit
 services:
-  - redis-server
-  - mysql
+- redis-server
+- mysql
 script:
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - bundle exec rspec spec/
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec spec/
 cache:
   bundler: true
   apt: true
@@ -29,6 +31,9 @@ cache:
   - vendor/bundle
   - vendor/cache
 os:
-  - linux
-  - osx
+- linux
+- osx
 sudo: false
+notifications:
+  slack:
+    secure: x9EVEUQZ0o0Hc4Pxe8icBeNLuDHPPrBvcVnAUzR4d1ReztbsMeimJhPSZCQJ17wCq2+Z5y38lXdOrcSyHxzjEQkAI/PZpAcWzGVvaoL9e42vM56PsDNxKX8a80OhOD0hqFOErYNAR6gQqqEeuQjO+uPNPDRFL1IzcLRNA6abi+U=
