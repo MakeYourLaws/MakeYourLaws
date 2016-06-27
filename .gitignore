@@ -1,4 +1,5 @@
 .DS_Store
+Icon?
 db/*.sqlite3
 log/*.log
 tmp/
