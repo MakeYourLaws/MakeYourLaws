@@ -1,4 +1,4 @@
-MakeyourlawsOrg::Application.routes.draw do
+Rails.application.routes.draw do
   resources :initiatives
   resources :committees
   resources :identities
@@ -54,10 +54,12 @@ MakeyourlawsOrg::Application.routes.draw do
     get 'tos'
     get 'privacy'
     namespace :press do
+      get 'BNA-2015-03-19'
       get 'BNA-2014-05-09'
       get 'BNA-2013-11-15'
     end
     namespace :fec do
+      get 'accessibility'
       get 'bitcoin'
       get 'bitcoin/caf', action: 'bitcoin_caf'
       get 'bitcoin/pacs', action: 'bitcoin_pacs'
@@ -68,6 +70,8 @@ MakeyourlawsOrg::Application.routes.draw do
       get 'earmarks/aor', to: redirect(
         'https://docs.google.com/document/d/1YeVdRxEqC8fWnJGl9DgkcNVY6HmkCPEzyRxB_0wttU0/',
         status: 302)
+      get 'laundering'
+      get 'ravel_weintraub'
       get 'tplf'
       get 'volunteer_ip'
     end

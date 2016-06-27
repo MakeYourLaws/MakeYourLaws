@@ -1,4 +1,4 @@
-MakeyourlawsOrg::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -18,26 +18,29 @@ MakeyourlawsOrg::Application.configure do
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx,
   #   varnish or squid.
-  config.action_dispatch.rack_cache = {
-    metastore:   'redis://localhost:6379/3',
-    entitystore: 'redis://localhost:6379/4'
-  }
+  # config.action_dispatch.rack_cache = {
+  #   metastore:   'redis://localhost:6379/3',
+  #   entitystore: 'redis://localhost:6379/4'
+  # }
+
+  # Disabling Rails asset munging to hand it off to mod_pagespeed instead
+  config.assets.compress = false # normally true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_files = false # ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
-  config.assets.css_compressor = :sass
+  # config.assets.js_compressor = :uglifier # normally turned on
+  # config.assets.css_compressor = :sass
+
+  # -- end mod_pagespeed punting
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
-  # Generate digests for assets URLs.
+  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
+  # yet still be able to expire them through the digest params.
   config.assets.digest = true
-
-  # Version of your assets, change this if you want to expire all your assets.
-  config.assets.version = '1.0'
 
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -72,20 +75,17 @@ MakeyourlawsOrg::Application.configure do
   config.action_mailer.delivery_method = :mailhopper
   # defaults to -i -t. However, Mail::Sendmail actually puts recipients on the command line, so
   #  if -t gets them from the headers, it screws things up. Thus, no -t.
-  config.action_mailer.sendmail_settings = { arguments: '-i ' }
+  # config.action_mailer.sendmail_settings = { arguments: '-i ' }
 
-  # config.action_mailer.smtp_settings = {
-  #   :address => 'mail.makeyourlaws.org',
-  #   :port => 587,
-  #   :domain => 'makeyourlaws.org',
-  #   :authentication => :login,
-  #   :user_name => Keys.get("mail_user"),
-  #   :password => Keys.get("mail_password"),
-  #   :enable_starttls_auto => false
-  #   # FIXME: disabling TLS is a horrible but effective way to fix
-  #   #  OpenSSL::SSL::SSLError (hostname was not match with the server certificate)
-  #   # There has to be something we can do to make DreamHost's SSL certs not crap out.
-  # }
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp-relay.gmail.com',
+    :port => 587,
+    :domain => 'makeyourlaws.org',
+    :authentication => :login,
+    :user_name => 'no-reply@makeyourlaws.org',
+    :password => Keys.get("google_smtp_password"),
+    :enable_starttls_auto => true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -109,4 +109,7 @@ MakeyourlawsOrg::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   Paperclip.options[:command_path] = "/usr/bin/"
+
+  # Do not dump schema after migrations.
+  config.active_record.dump_schema_after_migration = false
 end

@@ -3,8 +3,10 @@
 <% cache do %>
 
 <div class="flash notice">
-    <%= link_to "Should PACs be allowed to receive contributions of intellectual property from foreign nationals' volunteer services?", fec_volunteer_ip_path %><br/><br/>
-	<%= link_to "Can you use Bitcoin to make political contributions? YES.", fec_bitcoin_path %>
+    <ul class="flush">
+        <li><%= link_to "Should the FEC prohibit contribution laundering?", fec_laundering_path %></li>
+        <li><%= link_to "Should the FEC amend its regulations in the wake of Citizens United?", fec_ravel_weintraub_path %></li>
+    </ul>
 </div>
 
 <h3>Make Your Laws is launching soon.</h3>
@@ -16,5 +18,14 @@
 <h3>Interested?</h3>
 
 <p>If you <%= link_to "create an account", signup_path %>, we'll give you early access to the beta version.</p>
+
+
+<h3>Want to contribute?</3>
+
+<ul>
+    <li>Make Your Laws PAC, Inc. (MYL PAC): <a href="https://bitpay.com/715630/donate">Bitcoin</a> ($100/yr max)</li>
+    <li>Make Your Laws Advocacy, Inc. (MYL C4): <a href="https://bitpay.com/985380/donate">Bitcoin</a></li>
+    <li>Make Your Laws, Inc. (MYL C3): <a href="https://bitpay.com/497391/donate">Bitcoin</li>
+</ul>
 
 <% end %>

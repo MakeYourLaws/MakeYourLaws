@@ -1,1 +1,1 @@
-ln -s ~/myl_sensitive/keys/* config/keys/
+ln -fs ~/myl_sensitive/MYLRECORDS/keys/* config/keys/
