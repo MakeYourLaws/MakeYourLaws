@@ -35,6 +35,7 @@ source 'https://rubygems.org' do
   #    /active_merchant/billing/gateways/paypal_adaptive_payments/ext.rb:7
   # Haven't diagnosed why. Works fine without.
 
+  # gem 'hashie_rails'  # see https://github.com/intridea/hashie/blob/master/UPGRADING.md
   gem 'hashie-forbidden_attributes'
   # moved from hashie-rails
   # see https://github.com/intridea/hashie/blob/master/UPGRADING.md
@@ -56,16 +57,16 @@ source 'https://rubygems.org' do
   gem 'resque-async-method-enhanced'
 
   gem 'newrelic_rpm'
-  gem 'airbrake'
+  # gem 'airbrake'
   # gem 'exception_notification', '>= 4.0.1' # deprecated for airbrake.io
   # gem "exception_logger", '>= 0.1.11' # currently incompatible w/ 3.1 :(
-  gem 'rubinius-rails_logger'#,
+  gem 'rubinius-rails_logger'
 
   gem 'rack-cache'
   gem 'rack-tor-tag'#, '>= 0.1'
   gem 'rack-attack'
 
-  gem 'mysql2', '~> 0.3.13' # currently required by ActiveRecord; see https://github.com/rails/rails/issues/21544
+  gem 'mysql2' #, '~> 0.3.13' # currently required by ActiveRecord; see https://github.com/rails/rails/issues/21544
   gem 'json'#, '>= 1.6.6'
   gem 'jbuilder'#, '>= 1.2' # JSON APIs. https://github.com/rails/jbuilder
 
@@ -131,7 +132,7 @@ source 'https://rubygems.org' do
 
   # Bundle the extra gems:
   # gem 'bj'
-  # gem 'nokogiri'
+  gem 'nokogiri', '>= 1.6.8' # >1.6.8 required to fix CVE-2015-8806 et al
   # gem 'sqlite3-ruby', :require => 'sqlite3'
   # gem 'aws-s3', :require => 'aws/s3'
 
@@ -193,8 +194,8 @@ source 'https://rubygems.org' do
   gem "rails_email_validator"#, '>= 0.1.4'
   gem "it"#, ">= 0.2.3"
 
-  gem 'execjs'#, '>= 1.3.0' # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', platforms: :ruby
+  # gem 'execjs'#, '>= 1.3.0' # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', platforms: :ruby
 
   gem 'uglifier'#, '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
   gem 'coffee-rails'#, '>= 4.0.0' # Use CoffeeScript for .js.coffee assets and views
