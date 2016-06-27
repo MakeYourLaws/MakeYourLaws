@@ -1,4 +1,4 @@
-<%= t "Bitcoin contributions to PACs" %>
+<%= t "Are PACs allowed to accept limited Bitcoin contributions? Yes." %>
 
 <% cache do %>
 
@@ -8,7 +8,7 @@
 
 <p class="c b">
 	<%= link_to "Our request", fec_bitcoin_aor_path, :target => 'blank' %> | <a href="#drafts">Drafts &amp; our response</a> | <a href="#docs">Official docs</a> | <%= link_to "Orgs taking BTC", fec_bitcoin_pacs_path %> | <%= link_to "Previous BTC AOR", fec_bitcoin_caf_path%>
-</p>
+ | <a href="http://www.fec.gov/pages/fecrecord/2014/june/ao2014-02.shtml">FEC Record summary</a></p>
 
 <p>Recently, the FEC <%= link_to "was asked to consider", fec_bitcoin_caf_path %> whether <a href="http://en.wikipedia.org/wiki/Bitcoin">Bitcoins</a> should be allowed in political contributions. Because the PAC requesting to use Bitcoins wasn't able to explain how they would know who made the contributions, the FEC ultimately deadlocked on their <a href="http://www.fec.gov/pages/brochures/ao.shtml" target="_blank">advisory opinion</a> request (AOR). In the meantime, other political committees are <%= link_to "already accepting Bitcoin", fec_bitcoin_pacs_path %>, without any guidelines for how to do so properly.</p>
 

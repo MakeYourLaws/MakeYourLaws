@@ -1,0 +1,40 @@
+Make Your Laws - Sai's testimony at FEC hearing on regulations post-McCutcheon
+Reg 2014-01 2015-02-11
+
+Sai: Thank you for allowing me to testify. I have very limited time, so I will be concise and fairly blunt.
+
+We made several specific suggestions in our comments, and I won't review most of them — but I would like to focus on one, which is the laundering of campaign contributions.
+
+This Commission deadlocked on the Conservative Action Fund PAC's request for processing Bitcoin contributions, and unanimously approved ours, in large part due to the issues of laundering present in that request. There are laws currently on the books - 2 U.S. Code (former) 441a(a)(8), 432, 434(c)(2) - which all clearly say that any donor - to an independent expenditure, a PAC, a candidate - must be disclosed.
+
+And the Court relied on that repeatedly, saying that if it goes through an earmark or conduit, it must be attributed. If it goes through a committee that the donor knows will support a given candidate, it must be attributed to that donor. However, right now a c4 can quite legally launder the identity of 49% of its donors, give that to a SuperPAC — which then says, "yeah, we got a million dollars from the c4". And then the c4 tells you to piss off if you ask them where that money came from.
+
+That's illegal. And this Commission's regulations do not adequately control for it.
+
+Similarly, this Commission has concerns over the evasion of individual contribution limits, and currently the regulations are premised on the notion that there will be some sort of explicit record of the donor's earmarking or control over a contribution. But, not to be overly cynical, that record is not going to exist with even a moderately sophisticated donor who wishes to launder their contribution through shell PACs.
+
+Instead, I would suggest the Commission needs to adopt objective, reasonable approaches to looking at the activity — and not specific, explicit agreements — in order to attribute money to a particular donor.
+
+Finally, as a side note, Commissioner Goodman: you raised concerns about regulation on the Internet of free speech. And in 2013, you wrote a very interesting article dealing with this. And I would like to point out just one segment, which is your focus on contributions of less than $200. Naturally such contributions are de minimis, but if you spend thousands of dollars — even if you put it on YouTube — you're still spending thousands of dollars to influence an election.
+
+Chair Ravel: Thank you very much sir. I appreciate your comments.
+
+Part 2
+
+Chair Ravel: Yes, sir.
+
+Sai: Thank you, Chair Ravel, for the additional time, and I will watch my lights.
+
+I would like to go over a couple things that I didn't have the time to address in three minutes, which are fairly straightforward.
+
+One is not quite as ... I suppose contentious or impressive as some of the other issues raised today, but as discussed in this Commission's technical website improvement forum, we have one proposal, which is on page 2 of our comments, which is that the Commission simply standardize the contributor information, so that the same contributor can be recognized if they submit with a middle initial, or a middle name... That should just get standardized, so that there's no question of who the same person is.
+
+Secondly, on 501(c)(4) identity laundering: this Commission reached a stipulated consent agreement with National Defense PAC in Carey, represented by Dan Backer — hardly a wilting willow. They agreed that maintaining a Carey account for independent expenditures was hardly a burden. And I would suggest to the Commission that this is the natural approach for a (c)(4). If a (c)(4) wishes to expend, and is permitted by law — though I don't think they are, but if they are — if they wish to expend 49% of the money for election communications or a contribution to a SuperPAC, they can maintain a Carey account. It's not that much of a burden; only contributions to the Carey account would need to have disclose... donors and so forth. They'd be allowed to do whatever speech they wish; it simply needs to be disclosed.
+
+Chair Ravel, you raised the question of who is pushing this issue of the internet restrictions. I would point the Commission to Conservative Action Fund's comments, which portray it exactly as has been described — and Commissioner Goodman, with all respect, I believe that your comments in the MUR were to that effect.
+
+I would obviously agree that small donors, low or no cost expenditures, should not be regulated by this Commission. And I would urge the Commission to consider what it did with our Bitcoin AOR. You previously deadlocked. With our AOR, you gave a unanimous approval — and I believe that this Commission can work together and reach consensus agreements on matters like Carey accounts.
+
+And finally, I suppose, I'd like to thank you for having me — and I'll see you tomorrow.
+
+Chair Ravel: Yes, thank you. It's a double header.

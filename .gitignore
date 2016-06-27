@@ -1,5 +1,5 @@
 .DS_Store
-.bundle
+Icon?
 db/*.sqlite3
 log/*.log
 tmp/
