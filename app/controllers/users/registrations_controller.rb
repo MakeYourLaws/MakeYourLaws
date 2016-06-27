@@ -1,8 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def new_from_id
     if session['devise.identity'] && identity = Identity.find(session['devise.identity'])
-      resource = build_resource(email: identity.email, name: identity.name,
-                                  login: identity.nickname)
+      resource = build_resource(email: identity.email, name: identity.name)
       resource.identities << identity
 
       track! 'signup from id', provider: identity.provider
