@@ -2,7 +2,7 @@ class Payments::Paypal::Notification < ActiveRecord::Base
   self.table_name = 'paypal_notifications' # use namespaced table
 
   # :transaction is now reserved by ActiveRecord
-  belongs_to :paypal_transaction, class: Payments::Paypal::Transaction
+  belongs_to :paypal_transaction, class_name: "Payments::Paypal::Transaction"
 
   def details
     @details ||= JSON.parse details_json

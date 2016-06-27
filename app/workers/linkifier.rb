@@ -21,6 +21,11 @@ class Linkifier
   # end
 
   def self.perform # args
-    Tweet.unlinked.find_each { |t| t.linkify! if t.status == 'created' }
+    Tweet.unlinked.find_each do |t|
+      if t.status == 'created'
+        t.update_attribute :status, 'linkifying'
+        t.linkify!
+      end
+    end
   end
 end
