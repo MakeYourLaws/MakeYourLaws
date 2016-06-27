@@ -10,5 +10,5 @@
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
 
-MakeyourlawsOrg::Application.config.secret_token = Keys.get 'cookie_secret'
-MakeyourlawsOrg::Application.config.secret_key_base = Keys.get 'cookie_crypt_secret'
+Rails.application.config.secret_token = Keys.get 'cookie_secret'
+Rails.application.config.secret_key_base = Keys.get 'cookie_crypt_secret'

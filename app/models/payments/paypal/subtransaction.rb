@@ -4,7 +4,7 @@ class Payments::Paypal::Subtransaction < ActiveRecord::Base
   has_paper_trail
 
   # :transaction is now reserved by ActiveRecord
-  belongs_to :paypal_transaction, class: Payments::Paypal::Transaction
+  belongs_to :paypal_transaction, class_name: "Payments::Paypal::Transaction"
   belongs_to :user
   has_many :transaction_notifications
 
