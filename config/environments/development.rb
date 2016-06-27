@@ -32,7 +32,7 @@ Rails.application.configure do
 
   # # Do not compress assets
   config.assets.compress = true # make assets faster when not working on them
-  config.serve_static_assets = true
+  config.serve_static_files = true
   config.assets.compile = true
 
   # Debug mode disables concatenation and preprocessing of assets.

@@ -1,0 +1,5 @@
+---
+BUNDLE_BIN: bin
+BUNDLE_BUILD__NOKOGIRI: "--use-system-libraries"
+BUNDLE_BUILD__FCGI: "--use-system-libraries"
+BUNDLE_BUILD__LIBV8: "--with-system-v8"

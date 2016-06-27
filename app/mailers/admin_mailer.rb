@@ -1,8 +1,7 @@
 class AdminMailer < ActionMailer::Base
   # include Resque::Mailer
 
-  admin_role = Role.where(name: 'admin').first
-  default to: -> { admin_role.users.select([:name, :email]).map { |u| "#{u.name} <#{u.email}>" } }
+  default to: -> { 'MYL Core <core@makeyourlaws.org>' }
 
   def dau date
     @date = date.to_date
