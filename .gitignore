@@ -14,3 +14,4 @@ db/data/
 !db/data/DATA_DUMPS_GO_HERE
 public/system
 vendor/cache/libv8*
+!vendor/cache/libv8*linux.gem
