@@ -1,7 +1,7 @@
 # Note: this is called from things where Rails is *not* yet loaded,
 #  which is why we can't use Rails.root
 module Keys
-  @keys_dir =  File.join File.dirname(__FILE__), '..', 'config', 'keys'
+  @keys_dir = File.join File.dirname(__FILE__), '..', 'config', 'keys'
   @keys_dir = File.join File.dirname(__FILE__), 'config', 'keys' unless Dir.exist?(@keys_dir)
 
   # Get the key for a given environment (falling back to the general one)

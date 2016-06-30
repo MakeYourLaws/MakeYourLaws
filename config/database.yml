@@ -1,6 +1,12 @@
 <% # sometimes it thinks we're in root rather than /config
   file =  File.join File.dirname(__FILE__), '..', 'lib', 'keys.rb'
   File.exists?(file) ? require(file) : require(File.join(File.dirname(__FILE__), 'lib', 'keys.rb'))
+  found_socket = [
+    '/var/lib/mysql/mysql.sock',
+    '/var/run/mysqld/mysqld.sock',
+    '/tmp/mysqld.sock',
+    '/tmp/mysql.sock',
+  ].detect { |socket| File.exist?(socket) }
 %>
 
 # MySQL.  Versions 4.1 and 5.0 are recommended.
@@ -16,18 +22,13 @@ basics: &basics
   encoding: utf8
   reconnect: false
   pool: 5
+  password: <%= Keys.get "database" %>
 
 development:
   <<: *basics
   database: myl_development
   username: myl_development
-  socket: <%= [
-      '/var/lib/mysql/mysql.sock',
-      '/var/run/mysqld/mysqld.sock',
-      '/tmp/mysqld.sock',
-      '/tmp/mysql.sock',
-    ].detect { |socket| File.exist?(socket) } %>
-  password: <%= Keys.get "database" %>
+  socket: <%= found_socket %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -35,24 +36,15 @@ development:
 test: &test
   <<: *basics
   username: travis
-  password: ''
   database: myl_test
   host: 127.0.0.1
-
-#  socket: <%= [
-#      '/var/lib/mysql/mysql.sock',
-#      '/var/run/mysqld/mysqld.sock',
-#      '/tmp/mysqld.sock',
-#      '/tmp/mysql.sock',
-#    ].detect { |socket| File.exist?(socket) } %>
+#  socket: <%= found_socket %>
 
 production:
   <<: *basics
   database: myl_production
   username: myl_production
-  password: <%= Keys.get "database" %>
   host: localhost
-
 
 cucumber:
   <<: *test

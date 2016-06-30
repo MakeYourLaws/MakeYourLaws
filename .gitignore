@@ -7,6 +7,7 @@ config/keys/*
 !config/keys/PASSWORDS_GO_HERE
 !config/keys/*.fake
 !config/keys/tor_hostname
+!config/keys/database.test
 .sass-cache/
 .project
 *.sql
