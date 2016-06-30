@@ -5,4 +5,5 @@
 require File.expand_path('../config/application', __FILE__)
 require File.expand_path('../lib/keys.rb', __FILE__)
 
-MakeyourlawsOrg::Application.load_tasks
+# MakeyourlawsOrg::Application.load_tasks
+Rails.application.load_tasks

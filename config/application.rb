@@ -58,9 +58,8 @@ module MakeyourlawsOrg
     config.i18n.enforce_available_locales = true
     config.i18n.default_locale = :en
 
-    # Rails 4.2.0+. Current coinbase & bitpay not yet compatible.
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    # config.active_record.raise_in_transactional_callbacks = true
+    config.active_record.raise_in_transactional_callbacks = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = 'utf-8'

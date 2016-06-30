@@ -9,12 +9,13 @@ source 'https://rubygems.org' do
   platform(:rbx) do
     gem 'rubysl'
     gem 'ffi'
-    gem 'psych'
+    # Use Psych as the YAML engine, instead of Syck, so serialized data can be read safely from different rubies (see http://git.io/uuLVag)
+    gem 'psych', '>= 2.0'
   end
 
   gem 'puma'
 
-  gem 'rails', '>= 4.2.1' #, '>= 4.0.1'
+  gem 'rails', '>= 4.2.6' #, '>= 4.0.1'
   gem 'rake'#, '>= 0.9.2.2'
   gem 'rack'#, '>= 1.4.1'
 
@@ -22,7 +23,7 @@ source 'https://rubygems.org' do
 
   group :doc do
     # bundle exec rake doc:rails generates the API under doc/api.
-    gem 'sdoc', require: false
+    gem 'sdoc', '>= 0.4.0', require: false
   end
 
   # gem 'hashie', '>= 3.2.0'
@@ -68,14 +69,18 @@ source 'https://rubygems.org' do
 
   gem 'mysql2' #, '~> 0.3.13' # currently required by ActiveRecord; see https://github.com/rails/rails/issues/21544
   gem 'json'#, '>= 1.6.6'
-  gem 'jbuilder'#, '>= 1.2' # JSON APIs. https://github.com/rails/jbuilder
 
-  gem 'bcrypt'#, '>= 3.0.1' # To use ActiveModel has_secure_password
+  # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+  gem 'jbuilder', '>= 2.0'
+
+  # Use ActiveModel has_secure_password
+  gem 'bcrypt', '>= 3.1.7'
 
   # Use unicorn as the web server
   # gem 'unicorn'
 
   group :development do
+    # Use Capistrano for deployment
     gem 'capistrano', require: false#, '>= 3.0.1'
     gem 'capistrano-rails', require: false
     gem 'capistrano-bundler', require: false
@@ -85,6 +90,7 @@ source 'https://rubygems.org' do
     gem 'capistrano-ci'
     gem 'term-ansicolor'
     platform(:mri) do # Ruby 2.0+ required.
+      # Call 'byebug' anywhere in the code to stop execution and get a debugger console
       gem 'byebug'
       gem 'pry-byebug'
     end
@@ -103,6 +109,8 @@ source 'https://rubygems.org' do
     gem 'pry-rescue'
     gem 'pry-stack_explorer'
 
+    # Access an IRB console on exception pages or by using <%= console %> in views
+    # gem 'web-console', '>= 2.0'
     gem "better_errors"
     gem "binding_of_caller"
   end
@@ -121,6 +129,7 @@ source 'https://rubygems.org' do
     gem 'rubocop', require: false
     gem 'bundler-audit', require: false
     gem 'rspec-rails'#, '~> 3.0.0.beta'
+    # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
     gem 'spring'
   end
 
@@ -194,19 +203,21 @@ source 'https://rubygems.org' do
   gem "rails_email_validator"#, '>= 0.1.4'
   gem "it"#, ">= 0.2.3"
 
-  # required for uglifier
+  gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
+  # required for uglifier:
   gem 'execjs'#, '>= 1.3.0' # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', '>= 0.12.2', platforms: :ruby
   gem 'libv8' #, '>= 5.1.281.59.1' # only v3 supported in current TRR. https://github.com/cowboyd/therubyracer/pull/348
 
-  gem 'uglifier'#, '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
-  gem 'coffee-rails'#, '>= 4.0.0' # Use CoffeeScript for .js.coffee assets and views
-  gem 'sass-rails'#, '>= 4.0.0' # Use SCSS for stylesheets
+  gem 'coffee-rails', '>= 4.1.0' # Use CoffeeScript for .js.coffee assets and views
+  gem 'sass-rails', '>= 5.0' # Use SCSS for stylesheets
 
+  # Use jquery as the JavaScript library
   gem 'jquery-rails'#, '>= 3.0.0'
   gem 'jquery-ui-rails'#, '>= 5.0.0'
   gem 'jquery-turbolinks'
-  gem 'turbolinks' # makes links load faster; see https://github.com/rails/turbolinks
+  # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+  gem 'turbolinks'
 
   # gem 'jquery_datepicker' # rails 4 incompatible 2013-06-29
   gem 'bettertabs'
