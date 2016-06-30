@@ -91,8 +91,6 @@ class ApplicationController < ActionController::Base
 
     # Modify them:
     # devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login_or_email) }
-    devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:email, :name, :password, :password_confirmation) # :login
-    end
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :name, :password, :password_confirmation]) # :login
   end
 end
