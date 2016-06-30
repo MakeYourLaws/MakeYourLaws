@@ -832,7 +832,7 @@ DEPENDENCIES
   activerecord-mysql-unsigned!
   amazon_flex_pay!
   awesome_print!
-  bcrypt!
+  bcrypt (>= 3.1.7)!
   better_errors!
   bettertabs!
   binding_of_caller!
@@ -846,7 +846,7 @@ DEPENDENCIES
   capistrano-rails!
   capistrano-rvm!
   codeclimate-test-reporter!
-  coffee-rails!
+  coffee-rails (>= 4.1.0)!
   coinbase (>= 2.2.1)!
   cucumber-rails!
   database_cleaner!
@@ -860,7 +860,7 @@ DEPENDENCIES
   groupdate!
   hashie-forbidden_attributes!
   it!
-  jbuilder!
+  jbuilder (>= 2.0)!
   jquery-rails!
   jquery-turbolinks!
   jquery-ui-rails!
@@ -895,13 +895,13 @@ DEPENDENCIES
   pry-rails!
   pry-rescue!
   pry-stack_explorer!
-  psych!
+  psych (>= 2.0)!
   puma!
   rack!
   rack-attack!
   rack-cache!
   rack-tor-tag!
-  rails (>= 4.2.1)!
+  rails (>= 4.2.6)!
   rails_best_practices!
   rails_email_validator!
   rake!
@@ -926,8 +926,8 @@ DEPENDENCIES
   rubocop!
   ruby-prof!
   rubysl!
-  sass-rails!
-  sdoc!
+  sass-rails (>= 5.0)!
+  sdoc (>= 0.4.0)!
   spring!
   sprockets!
   state_machine!
@@ -938,7 +938,7 @@ DEPENDENCIES
   therubyracer (>= 0.12.2)!
   turbolinks!
   twitter!
-  uglifier!
+  uglifier (>= 1.3.0)!
   uncoil!
   webrat!
 
