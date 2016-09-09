@@ -183,7 +183,7 @@ source 'https://rubygems.org' do
   gem 'em-http-request'
   # omniauth-coinbase depends on coinbase ~>2.0
 
-  gem "devise"#, ">= 3.1.1"
+  gem "devise"#, ">= 4.2.0"
   gem "devise-encryptable"#, ">= 0.1.1c"
   gem "omniauth"#, ">= 1.1.0"
   gem "omniauth-facebook"#, '>= 1.2.0'
