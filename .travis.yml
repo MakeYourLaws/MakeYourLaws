@@ -31,7 +31,8 @@ cache:
 os:
 - linux
 - osx
-sudo: false
+sudo: required
+dist: trusty
 notifications:
   slack:
     secure: x9EVEUQZ0o0Hc4Pxe8icBeNLuDHPPrBvcVnAUzR4d1ReztbsMeimJhPSZCQJ17wCq2+Z5y38lXdOrcSyHxzjEQkAI/PZpAcWzGVvaoL9e42vM56PsDNxKX8a80OhOD0hqFOErYNAR6gQqqEeuQjO+uPNPDRFL1IzcLRNA6abi+U=
