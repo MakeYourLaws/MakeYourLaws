@@ -9,9 +9,10 @@ source 'https://rubygems.org' do
   platform(:rbx) do
     gem 'rubysl'
     gem 'ffi'
-    # Use Psych as the YAML engine, instead of Syck, so serialized data can be read safely from different rubies (see http://git.io/uuLVag)
-    gem 'psych', '>= 2.0'
   end
+
+  # Use Psych as the YAML engine, instead of Syck, so serialized data can be read safely from different rubies (see http://git.io/uuLVag)
+  gem 'psych', '>= 2.0'
 
   gem 'puma'
 
