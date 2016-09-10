@@ -41,9 +41,9 @@ source 'https://rubygems.org' do
   # moved from hashie-rails
   # see https://github.com/intridea/hashie/blob/master/UPGRADING.md
 
-  gem 'redis-rails' # switching out for dalli/memcached
-  gem "redis-rack-cache"
-  gem 'redis-session-store'
+  gem 'redis-rails', '>= 5' # switching out for dalli/memcached
+#  gem "redis-rack-cache" # having issues in travis: https://travis-ci.org/MakeYourLaws/MakeYourLaws/jobs/158981389
+#  gem 'redis-session-store'
 
   gem "resque", require: "resque/server"
   gem 'resque_mailer'
