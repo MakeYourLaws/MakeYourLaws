@@ -25,7 +25,7 @@ Rails.application.configure do
   # config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_files = false # ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = false # ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Disabling Rails asset munging to hand it off to mod_pagespeed instead
   config.assets.compress = false # normally true

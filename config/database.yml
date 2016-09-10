@@ -37,6 +37,7 @@ test: &test
   <<: *basics
   username: travis
   database: myl_test
+  host: 127.0.0.1
 
 production:
   <<: *basics
