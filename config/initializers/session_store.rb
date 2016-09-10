@@ -6,7 +6,4 @@
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rails generate session_migration")
-Rails.application.config.session_store :redis_session_store, {
-  redis: { db: 2 },
-  expire_after: 1.day
-}
+Rails.application.config.session_store :redis_store, servers: { db: 2 }, expires_in: 1.day

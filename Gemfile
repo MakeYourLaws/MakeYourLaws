@@ -46,6 +46,7 @@ source 'https://rubygems.org' do
 #  gem 'redis-session-store'
 
   gem "resque", require: "resque/server"
+  gem 'sinatra', '>= 2.0.0.beta2' # required by resque; v1 has error https://github.com/sinatra/sinatra/issues/1055, v1.4.7 uses older version of Rack
   gem 'resque_mailer'
   gem 'resque-scheduler', require: 'resque/scheduler/server'
   gem 'resque-retry', require: ['resque-retry', 'resque-retry/server']
@@ -162,7 +163,7 @@ source 'https://rubygems.org' do
   gem 'state_machine'
 
   gem 'fech', :require => 'fech'#, '>= 1.0.2'
-  gem 'activerecord-mysql-unsigned'
+#  gem 'activerecord-mysql-unsigned' # doesn't support AR 5.0
 
   gem 'money'#, '>= 5.0.0'
   # FIXME: pending monetize bump: https://github.com/RubyMoney/money-rails/pull/331
