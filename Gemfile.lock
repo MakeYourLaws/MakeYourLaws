@@ -928,6 +928,3 @@ DEPENDENCIES
   uglifier (>= 1.3.0)!
   uncoil!
   webrat!
-
-BUNDLED WITH
-   1.12.5
