@@ -70,9 +70,6 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
-    bettertabs (1.4.2)
-      jquery-rails
-      rails (>= 3.1.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bitly (0.10.4)
@@ -829,7 +826,6 @@ DEPENDENCIES
   awesome_print!
   bcrypt (>= 3.1.7)!
   better_errors!
-  bettertabs!
   binding_of_caller!
   brakeman (>= 3.0.2)!
   bundler-audit!

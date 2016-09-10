@@ -222,7 +222,7 @@ source 'https://rubygems.org' do
   gem 'turbolinks'
 
   # gem 'jquery_datepicker' # rails 4 incompatible 2013-06-29
-  gem 'bettertabs'
+  # gem 'bettertabs' # breaks in rails 5
   gem 'phone'
 
   gem 'kramdown'

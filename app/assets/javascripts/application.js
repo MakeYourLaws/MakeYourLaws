@@ -15,7 +15,6 @@
 //= require jquery.turbolinks
 //= require turbolinks
 //= require jquery-ui
-//= require jquery.bettertabs.min
 //= require_tree .
 
 //// removed: rails.validations
