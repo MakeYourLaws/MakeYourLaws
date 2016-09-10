@@ -36,9 +36,9 @@ dist: trusty
 addons:
   apt:
     packages:
-    - mysql-server-5.7
-    - mysql-client-core-5.7
-    - mysql-client-5.7
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
 notifications:
   slack:
     secure: x9EVEUQZ0o0Hc4Pxe8icBeNLuDHPPrBvcVnAUzR4d1ReztbsMeimJhPSZCQJ17wCq2+Z5y38lXdOrcSyHxzjEQkAI/PZpAcWzGVvaoL9e42vM56PsDNxKX8a80OhOD0hqFOErYNAR6gQqqEeuQjO+uPNPDRFL1IzcLRNA6abi+U=
